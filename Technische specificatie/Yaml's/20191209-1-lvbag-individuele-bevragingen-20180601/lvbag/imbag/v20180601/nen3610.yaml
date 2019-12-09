@@ -1,0 +1,180 @@
+NEN3610IDWpl:
+  type: object
+  description: De identificatie van een voorkomen van een woonplaats object, conform de NEN3610 standaard.
+  required:
+  - lokaalID
+  - namespace
+  properties:
+    lokaalID:
+      description: 'Deze wordt gebruikt in de operation, bv. /woonplaatsen/0123. Waarde: 0001-9999, formaat: ^[0-9]{3}[1-9]\|[0-9]{2}[1-9][0-9]\|[0-9][1-9][0-9]{2}\|[1-9][0-9]{3}$.'
+      title: lokaalID
+      type: string
+      pattern: '^[0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]|[0-9][1-9][0-9]{2}|[1-9][0-9]{3}$'
+      example: 0123
+    namespace:
+      description: NL.IMBAG.Woonplaats
+      title: namespace
+      type: string
+      minLength: 1
+      example: NL.IMBAG.Woonplaats
+    versie:
+      description: De identificatie van een versie/voorkomen van een object. De versie wordt niet gebruikt bij verwijzingen naar een object (en naar een voorkomen van een object wordt in de BAG niet verwezen middels een versie).
+      type: string
+      title: versie
+      example: 4
+
+NEN3610IDNum:
+  type: object
+  description: De identificatie van een voorkomen van een nummeraanduiding object, conform de NEN3610 standaard.
+  required:
+  - lokaalID
+  - namespace
+  - versie
+  properties:
+    lokaalID:
+      description: Deze wordt gebruikt in de operation.
+      title: lokaalID
+      type: string
+      pattern: '^[0-9]{4}20[0-9]{10}$'
+      example: 1234200000000001
+    namespace:
+      description: NL.IMBAG.Nummeraanduiding
+      title: namespace
+      type: string
+      minLength: 1
+      example: NL.IMBAG.Nummeraanduiding
+    versie:
+      description: De identificatie van een versie/voorkomen van een object. De versie wordt niet gebruikt bij verwijzingen naar een object (en naar een voorkomen van een object wordt in de BAG niet verwezen middels een versie).
+      title: versie
+      type: string
+      example: 2
+
+NEN3610IDOpr:
+  description: De identificatie van een voorkomen van een openbare ruimte object, conform de NEN3610 standaard.
+  type: object
+  required:
+  - lokaalID
+  - namespace
+  - versie
+  properties:
+    lokaalID:
+      description: Deze wordt gebruikt in de operation.
+      title: lokaalID
+      type: string
+      pattern: '^[0-9]{4}30[0-9]{10}$'
+      example: 1234300000000001
+    namespace:
+      description: NL.IMBAG.Openbareruimte
+      title: namespace
+      type: string
+      minLength: 1
+      example: NL.IMBAG.Openbareruimte
+    versie:
+      description: De identificatie van een versie/voorkomen van een object. De versie wordt niet gebruikt bij verwijzingen naar een object (en naar een voorkomen van een object wordt in de BAG niet verwezen middels een versie).
+      title: versie
+      type: string
+      example: 3
+
+NEN3610IDVbo:
+  description: De identificatie van een voorkomen van een verblijfsobject, conform de NEN3610 standaard.
+  type: object
+  required:
+  - lokaalID
+  - namespace
+  - versie
+  properties:
+    lokaalID:
+      description: Deze wordt gebruikt in de operation.
+      title: lokaalID
+      type: string
+      pattern: '^[0-9]{4}01[0-9]{10}$'
+      example: 1234010000000001
+    namespace:
+      description: NL.IMBAG.Verblijfsobject
+      title: namespace
+      type: string
+      minLength: 1
+      example: NL.IMBAG.Verblijfsobject
+    versie:
+      description: De identificatie van een versie/voorkomen van een object. De versie wordt niet gebruikt bij verwijzingen naar een object (en naar een voorkomen van een object wordt in de BAG niet verwezen middels een versie).
+      title: versie
+      type: string
+      example: 1
+
+NEN3610IDLig:
+  description: De identificatie van een voorkomen van een ligplaats object, conform de NEN3610 standaard.
+  type: object
+  required:
+  - lokaalID
+  - namespace
+  - versie
+  properties:
+    lokaalID:
+      description: Deze wordt gebruikt in de operation.
+      title: lokaalID
+      type: string
+      pattern: '^[0-9]{4}02[0-9]{10}$'
+      example: 1234020000000001
+    namespace:
+      description: NL.IMBAG.Ligplaats
+      title: namespace
+      type: string
+      minLength: 1
+      example: NL.IMBAG.Ligplaats
+    versie:
+      description: De identificatie van een versie/voorkomen van een object. De versie wordt niet gebruikt bij verwijzingen naar een object (en naar een voorkomen van een object wordt in de BAG niet verwezen middels een versie).
+      title: versie
+      type: string
+      example: 2
+
+NEN3610IDSta:
+  description: De identificatie van een voorkomen van een standplaats object, conform de NEN3610 standaard.
+  type: object
+  required:
+  - lokaalID
+  - namespace
+  - versie
+  properties:
+    lokaalID:
+      description: Deze wordt gebruikt in de operation.
+      title: lokaalID
+      type: string
+      pattern: '^[0-9]{4}03[0-9]{10}$'
+      example: 1234030000000001
+    namespace:
+      description: NL.IMBAG.Standplaats
+      title: namespace
+      type: string
+      minLength: 1
+      example: NL.IMBAG.Standplaats
+    versie:
+      description: De identificatie van een versie/voorkomen van een object. De versie wordt niet gebruikt bij verwijzingen naar een object (en naar een voorkomen van een object wordt in de BAG niet verwezen middels een versie).
+      title: versie
+      type: string
+      example: 3
+
+NEN3610IDPnd:
+  description: De identificatie van een voorkomen van een pand object, conform de NEN3610 standaard.
+  type: object
+  required:
+  - lokaalID
+  - namespace
+  - versie
+  properties:
+    lokaalID:
+      description: Deze wordt gebruikt in de operation.
+      title: lokaalID
+      type: string
+      pattern: '^[0-9]{4}10[0-9]{10}$'
+      example: 1234100000000001
+    namespace:
+      description: NL.IMBAG.Pand
+      title: namespace
+      type: string
+      minLength: 1
+      example: NL.IMBAG.Pand
+    versie:
+      description: De identificatie van een versie/voorkomen van een object. De versie wordt niet gebruikt bij verwijzingen naar een object (en naar een voorkomen van een object wordt in de BAG niet verwezen middels een versie).
+      title: versie
+      type: string
+      example: 1

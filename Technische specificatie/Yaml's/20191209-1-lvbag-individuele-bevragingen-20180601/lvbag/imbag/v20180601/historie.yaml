@@ -1,0 +1,95 @@
+Voorkomen:
+  title: Voorkomen
+  type: object
+  required:
+    - tijdstipRegistratie
+    - versie
+    - beginGeldigheid
+    - tijdstipRegistratieLV
+  properties:
+    tijdstipRegistratie:
+      description: Het tijdstip waarop een versie van een BAG-object is geregistreerd in de registratie van bronhouder en daarmee authentiek wordt gemaakt. Dit tijdstip wordt vastgelegd in de tijdstipRegistratie.
+      title: tijdstipRegistratie
+      type: string
+      format: date-time
+      example: '2019-06-01T12:00:00.000'
+    versie:
+      description: De identificatie van een voorkomen van object.
+      title: versie
+      type: integer
+      example: 3
+    eindRegistratie:
+      description: Het tijdstip waarop een versie van een BAG-object is beëindigd in de registratie van bronhouder. Dit tijdstip wordt vastgelegd in de eindRegistratie.
+      title: eindRegistratie
+      type: string
+      format: date-time
+      example: '2019-06-01T12:00:00.000'
+    beginGeldigheid:
+      description: De datum waarop een versie van een BAG-object geldig is in de werkelijkheid conform de ingangsdatum in het brondocument. Dit tijdstip wordt vastgelegd in de beginGeldigheid. Als er geen expliciete ingangsdatum van geldigheid is opgenomen, wordt de datum van het brondocument overgenomen.
+      title: beginGeldigheid
+      type: string
+      format: date
+      example: '2019-06-01'
+    eindGeldigheid:
+      description: De datum waarop de periode van geldigheid van een versie van een BAG-object eindigt. Bijvoorbeeld als gevolg van de vaststelling van een nieuw brondocument. Wanneer er geen tijdstip is ingevuld, dan is de versie nog geldig. Dit tijdstip wordt vastgelegd in de eindGeldigheid.
+      title: eindGeldigheid
+      type: string
+      format: date
+      example: '2019-06-01'
+    tijdstipInactief:
+      description: Het tijdstip waarop een op dat moment toekomstig voorkomen door een bronhouder uit de geldige levenscylcus in de LV BAG is verwijderd.
+      title: tijdstipInactief
+      type: string
+      format: date-time
+      example: '2019-06-01T12:00:00.000'
+    tijdstipRegistratieLV:
+      description: Dit is het tijdstip waarop een versie van een BAG-object is opgenomen in de registratie van de landelijke voorziening. De gegevens komen daarmee beschikbaar voor afnemers. Dit tijdstip wordt vastgelegd in de tijdstipRegistratieLV.
+      title: tijdstipRegistratieLV
+      type: string
+      format: date-time
+      example: '2019-06-01T12:00:00.000'
+    tijdstipNietBAG:
+      description: Het tijdstip waarop een voorkomen door een synchronisatie bericht van een bronhouder is verwijderd uit de geldige levenscylcus in de registratie van de landelijke voorziening.
+      title: tijdstipNietBAG
+      type: string
+      format: date-time
+      example: '2019-06-01T12:00:00.000'
+
+HistorieInOnderzoek:
+  title: HistorieInOnderzoek
+  type: object
+  required:
+    - tijdstipRegistratie
+    - beginGeldigheid
+    - tijdstipRegistratieLV
+  properties:
+    tijdstipRegistratie:
+      description: Het tijdstip waarop een versie van een BAG-object is geregistreerd in de registratie van bronhouder en daarmee authentiek wordt gemaakt. Dit tijdstip wordt vastgelegd in de tijdstipRegistratie.
+      title: tijdstipRegistratie
+      type: string
+      format: date-time
+      example: '2019-06-01T12:00:00.000'
+    eindRegistratie:
+      description: Het tijdstip waarop een versie van een BAG-object is beëindigd in de registratie van bronhouder. Dit tijdstip wordt vastgelegd in de eindRegistratie.
+      title: eindRegistratie
+      type: string
+      format: date-time
+      example: '2019-06-01T12:00:00.000'
+    beginGeldigheid:
+      description: De datum waarop een versie van een BAG-object geldig is in de werkelijkheid conform de ingangsdatum in het brondocument. Dit tijdstip wordt vastgelegd in de beginGeldigheid. Als er geen expliciete ingangsdatum van geldigheid is opgenomen, wordt de datum van het brondocument overgenomen.
+      title: beginGeldigheid
+      type: string
+      format: date
+      example: '2019-06-01'
+    eindGeldigheid:
+      description: De datum waarop de periode van geldigheid van een versie van een BAG-object eindigt. Bijvoorbeeld als gevolg van de vaststelling van een nieuw brondocument. Wanneer er geen tijdstip is ingevuld, dan is de versie nog geldig. Dit tijdstip wordt vastgelegd in de eindGeldigheid.
+      title: eindGeldigheid
+      type: string
+      format: date
+      example: '2019-06-01'
+    tijdstipRegistratieLV:
+      description: Dit is het tijdstip waarop een versie van een BAG-object is opgenomen in de registratie van de landelijke voorziening. De gegevens komen daarmee beschikbaar voor afnemers. Dit tijdstip wordt vastgelegd in de tijdstipRegistratieLV.
+      title: tijdstipRegistratieLV
+      type: string
+      format: date-time
+      example: '2019-06-01T12:00:00.000'

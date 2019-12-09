@@ -1,0 +1,459 @@
+# WoonplaatsIO resource (inclusief inonderzoek en bronhouder informatie)
+WoonplaatsIO:
+  title: WoonplaatsIO (incl. in onderzoek en bronhouder informatie)
+  description: Woonplaats, aangevuld met een limitatieve opsomming van alle kenmerken van dit object die in onderzoek zijn(als metadata). Bij een normale vraag wordt aangegeven welke kenmerken en op dit moment in onderzoek zijn. Bij een tijdreisvraag wordt aangegeven welke gegevens er ooit in onderzoek zijn geweest. Bij een levenscyclus vraag wordt aangegeven welke gegevens er ooit in onderzoek zijn geweest.
+  type: object
+  required:
+    - woonplaats
+  properties:
+    woonplaats:
+      $ref: '../../../imbag/v20180601/woonplaats.yaml#/Woonplaats'
+    inonderzoek:
+      type: array
+      items:
+        $ref: '../../../imbag/v20180601/woonplaats.yaml#/KenmerkWoonplaatsInOnderzoek'
+      minItems: 0
+    # Gerelateerd objecten als embedded resource. Deze embedded resource is met expand=bronhouder op te vragen.
+    _embedded:
+      $ref: '#/Woonplaats_embedded'
+    _links:
+      $ref: '#/Woonplaats_links'
+
+Woonplaats_embedded:
+  type: object
+  properties:
+    bronhouder:
+      $ref: '#/Bronhouder'
+
+Woonplaats_links:
+  required:
+    - self
+  type: object
+  properties:
+    self:
+      $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+    # De standaard relatie richting is van openbare ruimte naar woonplaats. Voor andersom is een hulp link nodig.
+    openbareRuimten:
+      description: 'De gerelateerde openbare ruimtes die in de woonplaats liggen. Van elk gerelateerde openbare ruimte object: hiervan het voorkomen van woonplaats die gevonden wordt op basis van dezelfde tijdreisparameters als waarmee het woonplaats voorkomen gevonden is.'
+      $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+    bronhouder:
+      description: De gemeente waar de woonplaats onderdeel van uitmaakt.
+      $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+
+# Bronhouder resource
+Bronhouder:
+  title: Bronhouder
+  description: Een bronhouder is een gemeente of samenwerkingsverband van gemeenten en heeft een code en naam net als een gemeente.
+  allOf:
+    - $ref: '#/Gemeente'
+  
+Gemeente:
+  title: Gemeente
+  type: object
+  required:
+    - code
+  properties:
+    code:
+      description: Een officiele code die aan een gemeente is toegekend, ontleend is aan tabel 33 en zoals bijgehouden in de LVBAG. Dit gegeven is geen officieel BAG gegeven en wordt niet als kenmerk van het BAG object Woonplaats object bijgehouden. Het wordt als hulpgegven meegeleverd.
+      title: code
+      type: string
+      minLength: 4
+      maxLength: 4
+      pattern: '^[0-9]{4}$' #4 cijfers, met voorloopnullen.
+      example: '0518'
+    naam:
+      description: Een officiele naam die aan een gemeente is toegekend.
+      title: naam
+      type: string
+      minLength: 1
+      maxLength: 80
+      pattern: '^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*'
+      example: Gemeente Apeldoorn
+  discriminator:
+    propertyName: gemeente
+
+# OpenbareRuimteIO resource
+OpenbareRuimteIO:
+  title: OpenbareRuimte (incl. in onderzoek)
+  description: Openbare ruimte, aangevuld met een limitatieve opsomming van alle kenmerken van dit object die in onderzoek zijn(als metadata). Bij een normale vraag wordt aangegeven welke kenmerken en op dit moment in onderzoek zijn. Bij een tijdreisvraag wordt aangegeven welke gegevens er ooit in onderzoek zijn geweest. Bij een levenscyclus vraag wordt aangegeven welke gegevens er ooit in onderzoek zijn geweest.
+  type: object
+  required:
+    - openbareRuimte
+  properties:
+    openbareRuimte:
+      $ref: '../../../imbag/v20180601/openbareruimte.yaml#/OpenbareRuimte'
+    inonderzoek:
+      type: array
+      items:
+        $ref: '../../../imbag/v20180601/openbareruimte.yaml#/KenmerkOpenbareRuimteInOnderzoek'
+      minItems: 0
+    # Gerelateerd objecten als embedded resource. Deze embedded resource is met expand=woonplaatsen op te vragen.
+    _embedded:
+      $ref: '#/OpenbareRuimte_embedded'
+    # Gerelateerde objecten in de vorm van Links.
+    _links:
+      $ref: '#/OpenbareRuimte_links'
+
+OpenbareRuimte_embedded:
+  type: object
+  properties:
+    ligtInWoonplaats:
+      $ref: '#/WoonplaatsIO'
+
+OpenbareRuimte_links:
+  type: object
+  required:
+    - selff
+  properties:
+    self:
+      $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+    ligtInWoonplaats:
+      description: De gerelateerde woonplaats. 1 voorkomen van een openbare ruimte ligt altijd in 1 woonplaats.
+      $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+    #De standaard relatie richting is van nummeraanduiding naar openbare ruimte. Voor andersom is een hulp link nodig.
+    nummeraanduidingen:
+      description: 'De gerelateerde nummeraanduidingen die in de openbare ruimte liggen. Van elk gerelateerde nummeraanduiding object: hiervan het voorkomen van woonplaats die gevonden wordt op basis van dezelfde tijdreisparameters als waarmee het openbare ruimte voorkomen gevonden is.'
+      type: array
+      items:
+        $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+
+# NummeraanduidingIO resource
+NummeraanduidingIO:
+  title: Nummeraanduiding (incl. in onderzoek)
+  description: Nummeraanduiding, aangevuld met een limitatieve opsomming van alle kenmerken van dit object die in onderzoek zijn(als metadata). Bij een normale vraag wordt aangegeven welke kenmerken en op dit moment in onderzoek zijn. Bij een tijdreisvraag wordt aangegeven welke gegevens er ooit in onderzoek zijn geweest. Bij een levenscyclus vraag wordt aangegeven welke gegevens er ooit in onderzoek zijn geweest.
+  type: object
+  required:
+    - nummeraanduiding
+  properties:
+    nummeraanduiding:
+      $ref: '../../../imbag/v20180601/nummeraanduiding.yaml#/Nummeraanduiding'
+    inonderzoek:
+      type: array
+      items:
+        $ref: '../../../imbag/v20180601/nummeraanduiding.yaml#/KenmerkNummeraanduidingInOnderzoek'
+      minItems: 0
+    #Gerelateerd objecten als embedded resource. Deze embedded resource is met expand=woonplaatsen op te vragen.
+    _embedded:
+      $ref: '#/Nummeraanduiding_embedded'
+    #Gerelateerde objecten in de vorm van Links.
+    _links:
+      $ref: '#/Nummeraanduiding_links'
+
+Nummeraanduiding_embedded:
+  type: object
+  properties:
+    ligtInWoonplaats:
+      type: array
+      items:
+        $ref: '#/WoonplaatsIO'
+    ligtAanOpenbareRuimte:
+      type: array
+      items:
+        $ref: '#/OpenbareRuimteIO'
+
+Nummeraanduiding_links:
+  type: object
+  required:
+    - self
+  properties:
+    self:
+      $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+    ligtInwoonplaats:
+      description: De gerelateerde woonplaats. 1 voorkomen van een openbare ruimte ligt altijd in 1 woonplaats.
+      $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+    ligtAanOpenbareRuimte:
+      description: 'De gerelateerde openbare ruimte waaraan een nummeraanduiding ligt. Van elk gerelateerde openbare ruimte object: hiervan het voorkomen van openbare ruimte die gevonden wordt op basis van dezelfde tijdreisparameters als waarmee het nummeraanduiding voorkomen gevonden is.'
+      $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+    isHoofdadresVan:
+      description: 'Het gerelateerde adresseerbare object die deze nummeraanduiding als hoofdadres heeft (altijd 1). Van dit gerelateerd adresseerbaar object: hiervan het voorkomen van adresseerbaar object die gevonden wordt op basis van dezelfde tijdreisparameters als waarmee het nummeraanduiding voorkomen gevonden is.'
+      $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+    isNevenadresVan:
+      description: 'Het gerelateerde adresseerbare object die deze nummeraanduiding als nevenadres heeft (o of meer). Van dit gerelateerd adresseerbaar object: hiervan het voorkomen van adresseerbaar object die gevonden wordt op basis van dezelfde tijdreisparameters als waarmee het nummeraanduiding voorkomen gevonden is.'
+      type: array
+      items:
+        $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+
+# LigplaatsIO resource
+LigplaatsIO:
+  title: LigplaatsIO
+  description: Een verzameling van een Ligplaats en een lijst van alle bijbehorende inonderzoek informatie.
+  type: object
+  required:
+    - ligplaats
+  properties:
+    ligplaats:
+      $ref: '../../../imbag/v20180601/ligplaats.yaml#/Ligplaats'
+    inonderzoek:
+      type: array
+      items:
+        $ref: '../../../imbag/v20180601/ligplaats.yaml#/KenmerkLigplaatsInOnderzoek'
+      minItems: 0
+    #Gerelateerd objecten als embedded resource. Deze embedded resource is met expand=true op te vragen.
+    _embedded:
+      $ref: '#/Ligplaats_embedded'
+    #Gerelateerde objecten in de vorm van Links.
+    _links:
+      $ref: '#/Ligplaats_links'
+
+Ligplaats_embedded:
+  type: object
+  properties:
+    heeftAlsHoofdAdres:
+      $ref: '#/NummeraanduidingIO'
+    heeftAlsNevenAdres:
+      type: array
+      items:
+        $ref: '#/NummeraanduidingIO'
+
+Ligplaats_links:
+  type: object
+  required:
+    - self
+  properties:
+    self:
+      $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+    heeftAlsHoofdAdres:
+      description: 'De nummeraanduiding die dit adresseerbaarobject als hoofdadres heeft. Van deze gerelateerd nummeranduiding: hiervan het voorkomen van nummeraanduiding die gevonden wordt op basis van dezelfde tijdreisparameters als waarmee het adresseerbara object voorkomen gevonden is.'
+      $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+    heeftAlsNevenAdres:
+      description: 'De nummeraanduidingen die dit adresseerbaarobject als nevenadressen heeft. Van deze gerelateerd nummeranduiding: hiervan het voorkomen van nummeraanduiding die gevonden wordt op basis van dezelfde tijdreisparameters als waarmee het adresseerbara object voorkomen gevonden is.'
+      type: array
+      items:
+        $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+
+# StandplaatsIO resource
+StandplaatsIO:
+  title: StandplaatsIO
+  description: Een verzameling van een Standplaats en een lijst van alle bijbehorende inonderzoek informatie.
+  type: object
+  required:
+    - Standplaats
+  properties:
+    Standplaats:
+      $ref: '../../../imbag/v20180601/standplaats.yaml#/Standplaats'
+    inonderzoek:
+      type: array
+      items:
+        $ref: '../../../imbag/v20180601/standplaats.yaml#/KenmerkStandplaatsInOnderzoek'
+      minItems: 0
+    #Gerelateerd objecten als embedded resource. Deze embedded resource is met expand=woonplaatsen op te vragen.
+    _embedded:
+      $ref: '#/Standplaats_embedded'
+    #Gerelateerde objecten in de vorm van Links.
+    _links:
+      $ref: '#/Standplaats_links'
+
+Standplaats_embedded:
+  type: object
+  properties:
+    heeftAlsHoofdAdres:
+      $ref: '#/NummeraanduidingIO'
+    heeftAlsNevenAdres:
+      type: array
+      items:
+        $ref: '#/NummeraanduidingIO'
+
+Standplaats_links:
+  type: object
+  required:
+    - self
+  properties:
+    self:
+      $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+    heeftAlsHoofdAdres:
+      description: 'De nummeraanduiding die dit adresseerbaarobject als hoofdadres heeft. Van deze gerelateerd nummeranduiding: hiervan het voorkomen van nummeraanduiding die gevonden wordt op basis van dezelfde tijdreisparameters als waarmee het adresseerbara object voorkomen gevonden is.'
+      $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+    heeftAlsNevenAdres:
+      description: 'De nummeraanduidingen die dit adresseerbaarobject als nevenadressen heeft. Van deze gerelateerd nummeranduiding: hiervan het voorkomen van nummeraanduiding die gevonden wordt op basis van dezelfde tijdreisparameters als waarmee het adresseerbara object voorkomen gevonden is.'
+      type: array
+      items:
+        $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+
+# VerblijfsobjectIO resource
+VerblijfsobjectIO:
+  title: VerblijfsobjectIO
+  description: Een verzameling van een verblijfsobject en een lijst van alle bijbehorende inonderzoek informatie.
+  type: object
+  required:
+    - verblijfsobject
+  properties:
+    verblijfsobject:
+      $ref: '../../../imbag/v20180601/verblijfsobject.yaml#/Verblijfsobject'
+    inonderzoek:
+      type: array
+      items:
+        $ref: '../../../imbag/v20180601/verblijfsobject.yaml#/KenmerkVerblijfsobjectInOnderzoek'
+      minItems: 0
+    #Gerelateerd objecten als embedded resource. Deze embedded resource is met expand=woonplaatsen op te vragen.
+    _embedded:
+      $ref: '#/Verblijfsobject_embedded'
+    #Gerelateerde objecten in de vorm van Links.
+    _links:
+      $ref: '#/Verblijfsobject_links'
+
+Verblijfsobject_embedded:
+  type: object
+  properties:
+    heeftAlsHoofdAdres:
+      $ref: '#/NummeraanduidingIO'
+    heeftAlsNevenAdres:
+      type: array
+      items:
+        $ref: '#/NummeraanduidingIO'
+    maaktDeelUitVan:
+      type: array
+      items:
+        $ref: '#/PandIO'
+
+Verblijfsobject_links:
+  type: object
+  required:
+    - self
+  properties:
+    self:
+      $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+    heeftAlsHoofdAdres:
+      description: 'De nummeraanduiding die dit adresseerbaarobject als hoofdadres heeft. Van deze gerelateerd nummeranduiding: hiervan het voorkomen van nummeraanduiding die gevonden wordt op basis van dezelfde tijdreisparameters als waarmee het adresseerbara object voorkomen gevonden is.'
+      $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+    heeftAlsNevenAdres:
+      description: 'De nummeraanduidingen die dit adresseerbaarobject als nevenadressen heeft. Van deze gerelateerd nummeranduiding: hiervan het voorkomen van nummeraanduiding die gevonden wordt op basis van dezelfde tijdreisparameters als waarmee het adresseerbara object voorkomen gevonden is.'
+      type: array
+      items:
+        $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+    maaktDeelUitVan:
+      description: 'De panden (1 of meer) waarvan dit verlijfsobject deel uit maakt. Van deze panden: hiervan het voorkomen van pand die gevonden worden op basis van dezelfde tijdreisparameters als waarmee het verblijfsobject voorkomen gevonden is.'
+      type: array
+      items:
+        $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+
+# PandIO resource
+PandIO:
+  title: PandIO
+  description: Een Pand is de kleinste, bij de totstandkoming functioneel en bouwkundig-constructief zelfstandige eenheid die direct en duurzaam met de aarde is verbonden en betreedbaar en afsluitbaar is. Inclusief aanduiding of deze in onderzoek is
+  type: object
+  required:
+    - pand
+  properties:
+    pand:
+      $ref: '../../../imbag/v20180601/pand.yaml#/Pand'
+    inonderzoek:
+      type: array
+      items:
+        $ref: '../../../imbag/v20180601/pand.yaml#/KenmerkPandInOnderzoek'
+      minItems: 0
+    #Gerelateerde objecten in de vorm van Links.
+    _links:
+      $ref: '#/Pand_links'
+
+Pand_links:
+  type: object
+  required:
+    - self
+  properties:
+    self:
+      $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+    verblijfsobjecten:
+      description: 'De verblijfsobjecten die in dit pand liggen. Van elk gerelateerd verblijfsobject: hiervan het voorkomen van verblijfsobject die gevonden wordt op basis van dezelfde tijdreisparameters als waarmee het pand voorkomen gevonden is.'
+      type: array
+      items:
+        $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+
+Objectrelaties:
+  title: Objectrelaties
+  description: Dit object bevat een object structuur zoals deze gevonden is op basis van de zoekgegevens.
+  type: object
+  required:
+    - woonplaats
+    - openbareruimte
+    - hoofdadres
+    - adresseerbaarobject
+    - bronhouder
+  properties:
+    woonplaats:
+      $ref: '#/WoonplaatsIO'
+    openbareruimte:
+      $ref: '#/OpenbareRuimteIO'
+    hoofdadres:
+      $ref: '#/NummeraanduidingIO'
+    nevenadressen:
+      type: array
+      items:
+        $ref: '#/NummeraanduidingIO'
+    adresseerbaarobject:
+      $ref: '#/AdresseerbaarObjectIO'
+    panden:
+      type: array
+      items:
+        $ref: '#/PandIO'
+    bronhouder:
+      $ref: '#/Bronhouder'
+    # Gerelateerd objecten als embedded resource. Deze embedded resource is met expand=woonplaatsen op te vragen.
+    _embedded:
+      $ref: '#/Objectrelaties_embedded'
+    # Gerelateerde objecten in de vorm van Links.
+    _links:
+      $ref: '#/Objectrelaties_links'
+
+AdresseerbaarObjectIO:
+  title: AdresseerbaarObjectIO
+  oneOf:
+    - $ref: '#/LigplaatsIO'
+    - $ref: '#/StandplaatsIO'
+    - $ref: '#/VerblijfsobjectIO'
+
+Objectrelaties_embedded:
+  type: object
+  properties:
+    woonplaats:
+      $ref: '#/WoonplaatsIO'
+    openbareruimte:
+      $ref: '#/OpenbareRuimteIO'
+    heeftAlsHoofdAdres:
+      $ref: '#/NummeraanduidingIO'
+    heeftAlsNevenAdres:
+      type: array
+      items:
+        $ref: '#/NummeraanduidingIO'
+    ligplaats:
+      $ref: '#/LigplaatsIO'
+    standplaats:
+      $ref: '#/StandplaatsIO'
+    verblijfsobject:
+      $ref: '#/VerblijfsobjectIO'
+    panden:
+      type: array
+      items:
+        $ref: '#/PandIO'
+
+Objectrelaties_links:
+  type: object
+  required:
+    - self
+  properties:
+    self:
+      $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+    ligtInWoonplaats:
+      description: De gerelateerde woonplaats. 1 voorkomen van een openbare ruimte ligt altijd in 1 woonplaats.
+      $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+    openbareruimte:
+      description: 'De gerelateerde openbare ruimte waaraan een nummeraanduiding ligt. Van elk gerelateerde openbare ruimte object: hiervan het voorkomen van openbare ruimte die gevonden wordt op basis van dezelfde tijdreisparameters als waarmee het nummeraanduiding voorkomen gevonden is.'
+      $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+    heeftAlsHoofdAdres:
+      description: 'De nummeraanduiding die dit adresseerbaarobject als hoofdadres heeft. Van deze gerelateerd nummeranduiding: hiervan het voorkomen van nummeraanduiding die gevonden wordt op basis van dezelfde tijdreisparameters als waarmee het adresseerbara object voorkomen gevonden is.'
+      $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+    heeftAlsNevenAdres:
+      description: 'De nummeraanduidingen die dit adresseerbaarobject als nevenadressen heeft. Van deze gerelateerd nummeranduiding: hiervan het voorkomen van nummeraanduiding die gevonden wordt op basis van dezelfde tijdreisparameters als waarmee het adresseerbara object voorkomen gevonden is.'
+      type: array
+      items:
+        $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+    ligplaats:
+      $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+    standplaats:
+      $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+    verblijfsobject:
+      $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+    panden:
+      description: 'De panden (1 of meer) waarvan een verlijfsobject deel uit maakt. Van deze panden: hiervan het voorkomen van pand die gevonden worden op basis van dezelfde tijdreisparameters als waarmee het verblijfsobject voorkomen gevonden is.'
+      type: array
+      items:
+        $ref: '../../../../generiek/hallinks.yaml#/HalLink'

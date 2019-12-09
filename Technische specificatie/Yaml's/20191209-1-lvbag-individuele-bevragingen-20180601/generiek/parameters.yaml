@@ -1,0 +1,32 @@
+page:
+  description: Pagina nummer
+  name: page
+  in: query
+  required: false
+  schema:
+    type: integer
+    minimum: 1
+    default: 1
+
+pageSize:
+  name: pageSize
+  in: query
+  required: false
+  schema:
+    type: integer
+    enum:
+      - 10
+      - 20
+      - 50
+      - 100
+    default: 20
+
+expand:
+  in: query
+  name: expand
+  description: 'Hier kan aangegeven worden welke gerelateerde resources meegeladen moeten worden. Resources en velden van resources die gewenst zijn kunnen in de expand parameter kommagescheiden worden opgegeven. Specifieke velden van resource kunnen worden opgegeven door het opgeven van de resource-naam gevolgd door de veldnaam, met daartussen een punt. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Bevragingen-ingeschreven-personen/blob/master/features/expand.feature).'
+  required: false
+  schema:
+    type: string
+    example: 'kinderen, adressen.postcode, adressen.huisnummer'
+    

@@ -1,0 +1,197 @@
+# De HTTP responseodes die volgens de OpenAPI Specificatie v3 ondersteund moeten worden. 
+# Niet alle foutmeldingen zullen optreden bij iedere operaties. 
+'200':
+  description: OK.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+
+'201':
+  description: Created.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+
+'204':
+  description: No content.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+
+'304':
+  description: Not modified.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+
+'400':
+  description: Bad request.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+
+'401':
+  description: 'Unauthorized. Je hebt waarschijnlijk geen geldige `X-Api-Key` header meegestuurd.'
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+
+'403':
+  description: Forbidden. Je hebt geen rechten om deze URL te benaderen.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+
+'404':
+  description: Not found.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+
+'405':
+  description: Method not alowed.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+
+'406':
+  description: 'Not Acceptable. Je hebt waarschijnlijk een gewenst formaat met de `Accept` header verstuurd welke niet ondersteund wordt.'
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+
+'409':
+  description: Conflict.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+
+'410':
+  description: Gone.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+
+'412':
+  description: Precondition failed.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+
+'415':
+  description: Unsupported media type.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+
+'422':
+  description: Unprocessable entity.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+
+'429':
+  description: Too many requests.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+
+'500':
+  description: Internal server error.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+
+'503':
+  description: 'Service Unavailable. Er vindt mogelijk (gepland) onderhoud of een storing plaats.'
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+    Retry-After:
+      description: Tijdstip waarop verwacht is dat de service weer beschikbaar zal zijn.
+      x-example: 'Sun, 28 Nov 2017 16:41:41 GMT'
+      schema:
+        type: string
+        format: date-time
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+
+default:
+  description: Er is een onverwachte fout opgetreden.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'

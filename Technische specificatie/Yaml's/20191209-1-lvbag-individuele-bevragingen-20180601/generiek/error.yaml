@@ -1,0 +1,36 @@
+Error:
+  type: object
+  title: Error
+  required:
+    - detail
+    - instance
+    - status
+    - title
+    - type
+  properties:
+    detail:
+      description: Een gedetailleerde beschrijving van de HTTP status code.
+      type: string
+      example: Je hebt geen rechten om deze URL te benaderen. Bij 403 Forbidden.
+    instance:
+      description: URI van de aanroep die fout heeft veroorzaakt.
+      type: string
+      format: uri
+    status:
+      description: De HTTP status code.
+      type: integer
+      example: '200, 403, 401, 404 etc.'
+    title:
+      description: De titel behorende bij de HTTP status code.
+      type: string
+      example: 'OK, Forbidden, Unauthorized, Not Found etc.'
+    type:
+      description: URI naar een pagina met meer informatie over deze foutmelding voor de ontwikkelaar.
+      type: string
+      format: uri
+      default: about:blank
+      example: about:blank
+    code:
+      description: Systeem code die het type fout aangeeft.
+      type: string
+      minLength: 1

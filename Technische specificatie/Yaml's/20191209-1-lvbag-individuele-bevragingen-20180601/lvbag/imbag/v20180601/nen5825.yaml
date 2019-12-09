@@ -1,0 +1,15 @@
+# Definitie van een verkorte naam van een openbare ruimte
+VerkorteNaamOpenbareRuimte:
+  title: VerkorteNaamOpenbareRuimte
+  type: object
+  required:
+    - verkorteNaam
+  properties:
+    verkorteNaam:
+      description: De verkorte naam is een maximaal 24 karakters lange represntatie van de naam van een openbare ruimte.
+      title: verkorteNaam
+      type: string
+      minLength: 1
+      maxLength: 24
+      pattern: '^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*'
+      example: Pastoor van de Vondervoortstraat wordt Past vd Vondervoortstr

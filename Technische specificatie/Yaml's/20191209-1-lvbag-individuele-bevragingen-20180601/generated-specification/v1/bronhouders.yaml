@@ -1,0 +1,799 @@
+openapi: 3.0.0
+info:
+  title: IMBAG API - van de LVBAG
+  description: 'Dit is de BAG API van de landelijke voorziening BAG (LVBAG) voor het
+    informatiemodel IMBAG 2.0 en conform de API strategie 1.1 specificatie in OAS3.
+    Deze is vooral gericht op individuele bevragingen (op basis van de identificerende
+    gegevens van een object). <br/><br/> <font color=''red''>**LET OP: Deze specificatie
+    is een "work in progress"**, oftewel niet definitief.</font><br/><br/> Meer informatie
+    over BAG 2.0 is te vinden op: [Catalogus BAG 2.0](https://www.geobasisregistraties.nl/basisregistraties/adressen-en-gebouwen)
+    <br/> Meer informatie over Nederlandse API strategie is te vinden op: [API-Strategie](https://docs.geostandaarden.nl/api/API-Strategie)
+    - deze API volgt versie 1.1 van 20190213. <br/> Meer informatie over OAS3 specificatie
+    is te vinden op: [OAS](https://www.forumstandaardisatie.nl/standaard/openapi-specification)
+    <br/> Het standaard mediatype HAL (`application/hal+json`) wordt gebruikt. Dit
+    is een mediatype voor het weergeven van resources en hun relaties via hyperlinks.
+    <br/> <br/> Voor vragen, neem contact op met de BAG beheerder o.v.v. BAG API 2.0.
+    We zijn aan het kijken naar een geschikt medium hiervoor, mede ook om de API iteratief
+    te kunnen opstellen of doorontwikkelen samen met de community. Als de API iets
+    (nog) niet kan, wat u wel graag wilt, neem dan contact op. <br/> <br/> Een API-key
+    kan  verkregen worden door een e-mail te sturen naar: zie onderstaande contactgegevens
+    <font color=''blue''>send e-mail</font>.'
+  termsOfService: https://zakelijk.kadaster.nl/algemene-voorwaarden
+  contact:
+    name: Kadaster - Beheerder Landelijke Voorziening BAG
+    url: https://zakelijk.kadaster.nl/bag
+    email: bag@kadaster.nl
+  license:
+    name: European Union Public License, version 1.2 (EUPL-1.2)
+    url: https://eupl.eu/1.2/nl/
+  version: "0.1"
+servers:
+- url: https://api.test.kadaster.nl/lvbag/api/individuelebevragingen/v1
+  description: LVBAG - TEST
+- url: https://api.kadaster.nl/lvbag/api/individuelebevragingen/v1
+  description: LVBAG - PRODUCTIE
+security:
+- apiKeyBAG: []
+tags:
+- name: Bronhouder
+  description: Dit endpoint levert ��nn of meer bronhouder(s).
+paths:
+  /bronhouders:
+    get:
+      tags:
+      - Bronhouder
+      summary: Bevragen bronhouder, op basis van de object identificatie.
+      description: "\"Bevragen/raadplegen van een bronhouder, via de identificatie\
+        \ van een object. \n Geleverd wordt een bronhouder.\n ��n van de onderstaande\
+        \ parameters dient gespecificeerd te worden:<br/> \n Parameter woonplaatsIdentificatie\
+        \ bevat de 4 cijferige identificatie van een woonplaats object.<br/>\n Parameter\
+        \ openbareRuimteIdentificatie bevat de 16 cijferige identificatie van een\
+        \ openbare ruimte object.<br/>\n Parameter nummeraanduidingIdentificatie bevat\
+        \ de 16 cijferige identificatie van een nummeraanduiding object.<br/>\n Parameter\
+        \ ligplaatsIdentificatie bevat de 16 cijferige identificatie van een ligplaats.<br/>\n\
+        \ Parameter standplaatsIdentificatie bevat de 16 cijferige identificatie van\
+        \ een standplaats.<br/>\n Parameter verblijfsobjectIdentificatie bevat de\
+        \ 16 cijferige identificatie van een verblijfsobject.<br/>\n Parameter pandIdentificatie\
+        \ bevat de 16 cijferige identificatie van een pand.<br/>  \n Als geldigOp\
+        \ en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.<br/>\
+        \ \n De contentCrs in de header moet zijn epsg:28992\""
+      operationId: zoekBronhouder
+      parameters:
+      - name: woonplaatsIdentificatie
+        in: query
+        description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
+          woonplaats en 16 lang bij de andere objecten.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maxLength: 4
+          minLength: 4
+          pattern: '[0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]|[0-9][1-9][0-9]{2}|[1-9][0-9]{3}'
+          type: string
+          description: 'Deze wordt gebruikt in de operation, bv. /woonplaatsen/0123.
+            Waarde: 0001-9999, formaat: ^[0-9]{3}[1-9]\|[0-9]{2}[1-9][0-9]\|[0-9][1-9][0-9]{2}\|[1-9][0-9]{3}$.'
+          example: "150"
+      - name: openbareRuimteIdentificatie
+        in: query
+        description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
+          woonplaats en 16 lang bij de andere objecten.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maxLength: 16
+          minLength: 16
+          pattern: ^[0-9]{4}30[0-9]{10}$
+          type: string
+          example: "518300000000001"
+      - name: nummeraanduidingIdentificatie
+        in: query
+        description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
+          woonplaats en 16 lang bij de andere objecten.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maxLength: 16
+          minLength: 16
+          pattern: ^[0-9]{4}20[0-9]{10}$
+          type: string
+          example: "1234200000000001"
+      - name: ligplaatsIdentificatie
+        in: query
+        description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
+          woonplaats en 16 lang bij de andere objecten.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maxLength: 16
+          minLength: 16
+          pattern: ^[0-9]{4}02[0-9]{10}$
+          type: string
+          example: "1234020000000001"
+      - name: standplaatsIdentificatie
+        in: query
+        description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
+          woonplaats en 16 lang bij de andere objecten.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maxLength: 16
+          minLength: 16
+          pattern: ^[0-9]{4}03[0-9]{10}$
+          type: string
+          example: "1234030000000001"
+      - name: verblijfsobjectIdentificatie
+        in: query
+        description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
+          woonplaats en 16 lang bij de andere objecten.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maxLength: 16
+          minLength: 16
+          pattern: ^[0-9]{4}01[0-9]{10}$
+          type: string
+          example: "1234010000000001"
+      - name: pandIdentificatie
+        in: query
+        description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
+          woonplaats en 16 lang bij de andere objecten.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maxLength: 16
+          minLength: 16
+          pattern: ^[0-9]{4}10[0-9]{10}$
+          type: string
+          example: "1234100000000001"
+      - name: geldigOp
+        in: query
+        description: |
+          Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD'  Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date
+          example: 2019-06-01
+      - name: beschikbaarOp
+        in: query
+        description: |
+          Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'  Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date-time
+      - name: Content-Crs
+        in: header
+        description: CRS van de meegegeven geometrie.
+        required: false
+        schema:
+          type: string
+          default: epsg:28992
+          enum:
+          - epsg:28992
+      responses:
+        200:
+          description: Bevraging zoekBronhouder geslaagd
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+            warning:
+              $ref: '#/components/headers/warning'
+            X-Rate-Limit-Limit:
+              $ref: '#/components/headers/X_Rate_Limit_Limit'
+            X-Rate-Limit-Remaining:
+              $ref: '#/components/headers/X_Rate_Limit_Remaining'
+            X-Rate-Limit-Reset:
+              $ref: '#/components/headers/X_Rate_Limit_Reset'
+            Accept-Crs:
+              $ref: '#/components/headers/acceptCrs'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/Bronhouder'
+        204:
+          description: No content.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        400:
+          description: Bad request.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        401:
+          description: Unauthorized. Je hebt waarschijnlijk geen geldige `X-Api-Key`
+            header meegestuurd.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        403:
+          description: Forbidden. Je hebt geen rechten om deze URL te benaderen.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: Not found.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        405:
+          description: Method not alowed.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        406:
+          description: Not Acceptable. Je hebt waarschijnlijk een gewenst formaat
+            met de `Accept` header verstuurd welke niet ondersteund wordt.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        410:
+          description: Gone.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        412:
+          description: Precondition failed.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        429:
+          description: Too many requests.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal server error.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        503:
+          description: Service Unavailable. Er vindt mogelijk (gepland) onderhoud
+            of een storing plaats.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+            Retry-After:
+              description: Tijdstip waarop verwacht is dat de service weer beschikbaar
+                zal zijn.
+              schema:
+                type: string
+                format: date-time
+              x-example: Sun, 28 Nov 2017 16:41:41 GMT
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: Er is een onverwachte fout opgetreden.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - apiKeyBAG: []
+    post:
+      tags:
+      - Bronhouder
+      summary: bevragen 1 bronhouder, op basis van de geometrische locatie.
+      description: Bevragen/raadplegen van eenn bronhouder, via een geometrische lcoatie.  Geleverd
+        wordt een bronhouder. Als geldigOp en/of beschikbaarOp niet wordt opgegeven,
+        worden de actuele gegevens geleverd.  De contentCrs in de header moet zijn
+        epsg:28992
+      operationId: bronhouderGeometrie
+      parameters:
+      - name: geldigOp
+        in: query
+        description: |
+          Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD'  Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date
+          example: 2019-06-01
+      - name: beschikbaarOp
+        in: query
+        description: |
+          Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'  Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date-time
+      - name: Content-Crs
+        in: header
+        description: CRS van de meegegeven geometrie.
+        required: false
+        schema:
+          type: string
+          default: epsg:28992
+          enum:
+          - epsg:28992
+      requestBody:
+        description: Geometrisch punt waarvoor de bronhouder(s) bepaald moeten worden.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Point'
+        required: true
+      responses:
+        200:
+          description: Bevraging bronhouderGeometrie geslaagd
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+            warning:
+              $ref: '#/components/headers/warning'
+            X-Rate-Limit-Limit:
+              $ref: '#/components/headers/X_Rate_Limit_Limit'
+            X-Rate-Limit-Remaining:
+              $ref: '#/components/headers/X_Rate_Limit_Remaining'
+            X-Rate-Limit-Reset:
+              $ref: '#/components/headers/X_Rate_Limit_Reset'
+            Accept-Crs:
+              $ref: '#/components/headers/acceptCrs'
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Bronhouder'
+        204:
+          description: No content.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        400:
+          description: Bad request.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        401:
+          description: Unauthorized. Je hebt waarschijnlijk geen geldige `X-Api-Key`
+            header meegestuurd.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        403:
+          description: Forbidden. Je hebt geen rechten om deze URL te benaderen.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: Not found.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        405:
+          description: Method not alowed.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        406:
+          description: Not Acceptable. Je hebt waarschijnlijk een gewenst formaat
+            met de `Accept` header verstuurd welke niet ondersteund wordt.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        410:
+          description: Gone.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        412:
+          description: Precondition failed.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        429:
+          description: Too many requests.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal server error.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        503:
+          description: Service Unavailable. Er vindt mogelijk (gepland) onderhoud
+            of een storing plaats.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+            Retry-After:
+              description: Tijdstip waarop verwacht is dat de service weer beschikbaar
+                zal zijn.
+              schema:
+                type: string
+                format: date-time
+              x-example: Sun, 28 Nov 2017 16:41:41 GMT
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: Er is een onverwachte fout opgetreden.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - apiKeyBAG: []
+components:
+  schemas:
+    Bronhouder:
+      title: Bronhouder
+      description: Een bronhouder is een gemeente of samenwerkingsverband van gemeenten
+        en heeft een code en naam net als een gemeente.
+      allOf:
+      - $ref: '#/components/schemas/Gemeente'
+    Gemeente:
+      title: Gemeente
+      required:
+      - code
+      type: object
+      properties:
+        code:
+          title: code
+          maxLength: 4
+          minLength: 4
+          pattern: ^[0-9]{4}$
+          type: string
+          description: Een officiele code die aan een gemeente is toegekend, ontleend
+            is aan tabel 33 en zoals bijgehouden in de LVBAG. Dit gegeven is geen
+            officieel BAG gegeven en wordt niet als kenmerk van het BAG object Woonplaats
+            object bijgehouden. Het wordt als hulpgegven meegeleverd.
+          example: "0518"
+        naam:
+          title: naam
+          maxLength: 80
+          minLength: 1
+          pattern: ^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*
+          type: string
+          description: Een officiele naam die aan een gemeente is toegekend.
+          example: Gemeente Apeldoorn
+      discriminator:
+        propertyName: gemeente
+    Error:
+      title: Error
+      required:
+      - detail
+      - instance
+      - status
+      - title
+      - type
+      type: object
+      properties:
+        detail:
+          type: string
+          description: Een gedetailleerde beschrijving van de HTTP status code.
+          example: Je hebt geen rechten om deze URL te benaderen. Bij 403 Forbidden.
+        instance:
+          type: string
+          description: URI van de aanroep die fout heeft veroorzaakt.
+          format: uri
+        status:
+          type: integer
+          description: De HTTP status code.
+        title:
+          type: string
+          description: De titel behorende bij de HTTP status code.
+          example: OK, Forbidden, Unauthorized, Not Found etc.
+        type:
+          type: string
+          description: URI naar een pagina met meer informatie over deze foutmelding
+            voor de ontwikkelaar.
+          format: uri
+          example: about:blank
+          default: about:blank
+        code:
+          minLength: 1
+          type: string
+          description: Systeem code die het type fout aangeeft.
+    Point:
+      title: GeoJSON Point
+      required:
+      - coordinates
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Point
+        coordinates:
+          minItems: 2
+          type: array
+          items:
+            type: number
+        bbox:
+          minItems: 4
+          type: array
+          items:
+            type: number
+  parameters:
+    woonplaatsIdentificatie:
+      name: woonplaatsIdentificatie
+      in: query
+      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
+        woonplaats en 16 lang bij de andere objecten.
+      required: false
+      style: form
+      explode: true
+      schema:
+        maxLength: 4
+        minLength: 4
+        pattern: '[0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]|[0-9][1-9][0-9]{2}|[1-9][0-9]{3}'
+        type: string
+        description: 'Deze wordt gebruikt in de operation, bv. /woonplaatsen/0123.
+          Waarde: 0001-9999, formaat: ^[0-9]{3}[1-9]\|[0-9]{2}[1-9][0-9]\|[0-9][1-9][0-9]{2}\|[1-9][0-9]{3}$.'
+        example: "150"
+    openbareRuimteIdentificatie:
+      name: openbareRuimteIdentificatie
+      in: query
+      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
+        woonplaats en 16 lang bij de andere objecten.
+      required: false
+      style: form
+      explode: true
+      schema:
+        maxLength: 16
+        minLength: 16
+        pattern: ^[0-9]{4}30[0-9]{10}$
+        type: string
+        example: "518300000000001"
+    nummeraanduidingIdentificatie:
+      name: nummeraanduidingIdentificatie
+      in: query
+      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
+        woonplaats en 16 lang bij de andere objecten.
+      required: false
+      style: form
+      explode: true
+      schema:
+        maxLength: 16
+        minLength: 16
+        pattern: ^[0-9]{4}20[0-9]{10}$
+        type: string
+        example: "1234200000000001"
+    verblijfsobjectIdentificatie:
+      name: verblijfsobjectIdentificatie
+      in: query
+      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
+        woonplaats en 16 lang bij de andere objecten.
+      required: false
+      style: form
+      explode: true
+      schema:
+        maxLength: 16
+        minLength: 16
+        pattern: ^[0-9]{4}01[0-9]{10}$
+        type: string
+        example: "1234010000000001"
+    ligplaatsIdentificatie:
+      name: ligplaatsIdentificatie
+      in: query
+      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
+        woonplaats en 16 lang bij de andere objecten.
+      required: false
+      style: form
+      explode: true
+      schema:
+        maxLength: 16
+        minLength: 16
+        pattern: ^[0-9]{4}02[0-9]{10}$
+        type: string
+        example: "1234020000000001"
+    standplaatsIdentificatie:
+      name: standplaatsIdentificatie
+      in: query
+      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
+        woonplaats en 16 lang bij de andere objecten.
+      required: false
+      style: form
+      explode: true
+      schema:
+        maxLength: 16
+        minLength: 16
+        pattern: ^[0-9]{4}03[0-9]{10}$
+        type: string
+        example: "1234030000000001"
+    pandIdentificatie:
+      name: pandIdentificatie
+      in: query
+      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
+        woonplaats en 16 lang bij de andere objecten.
+      required: false
+      style: form
+      explode: true
+      schema:
+        maxLength: 16
+        minLength: 16
+        pattern: ^[0-9]{4}10[0-9]{10}$
+        type: string
+        example: "1234100000000001"
+    geldigOp:
+      name: geldigOp
+      in: query
+      description: |
+        Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD'  Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: string
+        format: date
+        example: 2019-06-01
+    beschikbaarOp:
+      name: beschikbaarOp
+      in: query
+      description: |
+        Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'  Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: string
+        format: date-time
+  headers:
+    api_version:
+      required: true
+      schema:
+        type: string
+        description: Geeft een specifieke API-versie aan in de context van een specifieke
+          aanroep.
+        example: 1.0.1
+    warning:
+      required: false
+      schema:
+        type: string
+        description: zie RFC 7234. In het geval een major versie wordt uitgefaseerd,
+          gebruiken we warn-code 299 ("Miscellaneous Persistent Warning") en het API
+          end-point (inclusief versienummer) als de warn-agent van de warning, gevolgd
+          door de warn-text met de human-readable waarschuwing
+        example: '299 https://service.../api/.../v1 "Deze versie van de API is verouderd
+          en zal uit dienst worden genomen op 2018-02-01. Raadpleeg voor meer informatie
+          hier de documentatie: https://omgevingswet.../api/.../v1".'
+    X_Rate_Limit_Limit:
+      required: true
+      schema:
+        type: integer
+        description: Aantal requesten dat is toegestaan per 5 minuten.
+    X_Rate_Limit_Remaining:
+      required: true
+      schema:
+        type: integer
+        description: Het resterende aantal requesten voordat de limiet wordt bereikt.
+    X_Rate_Limit_Reset:
+      required: true
+      schema:
+        type: integer
+        description: De datum en tijd waarop de limiet wordt geupdatein UNIX timestamp
+          format.
+        format: int64
+    acceptCrs:
+      description: Gewenste CRS van de co�rdinaten in de response.
+      required: false
+      schema:
+        type: string
+        description: CRS van de co�rdinaten in de response.
+        default: epsg:28992
+        enum:
+        - epsg:28992
+  securitySchemes:
+    apiKeyBAG:
+      type: apiKey
+      description: |
+        De API-key die je hebt gekregen dient bij elke request naar deze via de `X-Api-Key` request header meegestuurd te worden. Indien deze niet juist wordt meegestuurd, of het een ongeldige key betreft, zul je de foutmelding `403 Forbidden` terugkrijgen.
+      name: X-Api-Key
+      in: header
