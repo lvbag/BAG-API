@@ -1,10 +1,12 @@
-# API BAG Individuele Bevragingen *test omgeving*
+# API BAG Individuele Bevragingen *test omgeving*  
+  
+*bijgewerkt 23 december*
 
 **Aanwezige functionaliteit:**  
   
-Nummeraanduidingen (NUM) 
+Nummeraanduidingen (NUM)   
 *Actueel:*  
-https://api.test.kadaster.nl/lvbag/api/individuelebevragingen/v1/nummeraanduidingen/{NUM_ID}
+https://api.test.kadaster.nl/lvbag/api/individuelebevragingen/v1/nummeraanduidingen/{NUM_ID}  
 *Peildatum:*  
 https://api.test.kadaster.nl/lvbag/api/individuelebevragingen/v1/nummeraanduidingen/{NUM_ID}?geldigOp={datum}?beschikbaarOp={datumtijd}  
   
