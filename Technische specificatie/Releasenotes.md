@@ -1,5 +1,10 @@
 # API BAG Individuele Bevragingen *test omgeving*  
   
+*Releasenotes 31 december*  
+ngsjnsg  
+bgsbg  
+bfsbg
+  
 *bijgewerkt 23 december*
 
 **Aanwezige functionaliteit:**  
