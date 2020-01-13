@@ -5,7 +5,7 @@ https://api.test.kadaster.nl/lvbag/api/individuelebevragingen/v1
 
 Achter deze basis URL’s kunnen de volgende relatieve paden worden toegevoegd.  
 
-*Woonplaatsen*  
+*Woonplaatsen*  Beschikbaar in de testomgeving
 
 GET <basis URL>/woonplaatsen/{identificatie}  
 GET <basis URL>/woonplaatsen/{identificatie}/lvc  
@@ -13,21 +13,21 @@ GET <basis URL>/woonplaatsen
 POST <basis URL>/woonplaatsen
   
   
-*Verblijfsobjecten* 
+*Verblijfsobjecten* Beschikbaar in de testomgeving
 
 GET <basis URL>/verblijfsobjecten/{identificatie}  
 GET <basis URL>/verblijfsobjecten/{identificatie}/lvc  
 GET <basis URL>/verblijfsobjecten  
 POST <basis URL>/verblijfsobjecten  
 
-*Standplaatsen*  
+*Standplaatsen*  Beschikbaar in de testomgeving
 
 GET <basis URL>/standplaatsen/{identificatie}  
 GET <basis URL>/standplaatsen/{identificatie}/lvc  
 POST <basis URL>/standplaatsen  
 
   
-*Ligplaatsen*  
+*Ligplaatsen*  Beschikbaar in de testomgeving
 
 GET <basis URL>/ligplaatsen/{identificatie}  
 GET <basis URL>/ligplaatsen/{identificatie}/lvc  
@@ -48,7 +48,7 @@ GET <basis URL>/openbareruimten/{openbareRuimteIdentificatie}lvc
 GET <basis URL>/openbareruimten  
 
 
-*Nummeraanduidingen*  
+*Nummeraanduidingen*  Beschikbaar in de testomgeving
 
 GET <basis URL>/nummeraanduidingen/{nummeraanduidingIdentificatie}  
 GET <basis URL>/nummeraanduidingen/{nummeraanduidingIdentificatie}lvc  
