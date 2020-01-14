@@ -31,6 +31,7 @@ Verblijfsobject:
           type: array
           items:
             $ref: '#/Gebruiksdoel'
+          minItems: 1
         oppervlakte:
           title: oppervlakte
           type: integer
@@ -62,6 +63,7 @@ Verblijfsobject:
           type: array
           items:
             $ref: './nen3610.yaml#/NEN3610IDPnd'
+          minItems: 1
 
 KenmerkVerblijfsobjectInOnderzoek:
   title: KenmerkVerblijfsobjectInOnderzoek

@@ -47,7 +47,7 @@ security:
 tags:
   - 
     name: Bronhouder
-    description: 'Dit endpoint levert éénn of meer bronhouder(s).' 
+    description: 'Dit endpoint levert ï¿½ï¿½nn of meer bronhouder(s).' 
 
 paths:
 
@@ -138,7 +138,7 @@ paths:
       description: >-
         "Bevragen/raadplegen van een bronhouder, via de identificatie van een object. 
          Geleverd wordt een bronhouder.
-         Één van de onderstaande parameters dient gespecificeerd te worden:<br/> 
+         ï¿½ï¿½n van de onderstaande parameters dient gespecificeerd te worden:<br/> 
          Parameter woonplaatsIdentificatie bevat de 4 cijferige identificatie van een woonplaats object.<br/>
          Parameter openbareRuimteIdentificatie bevat de 16 cijferige identificatie van een openbare ruimte object.<br/>
          Parameter nummeraanduidingIdentificatie bevat de 16 cijferige identificatie van een nummeraanduiding object.<br/>

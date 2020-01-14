@@ -12,7 +12,7 @@ WoonplaatsIO:
       type: array
       items:
         $ref: '../../../imbag/v20180601/woonplaats.yaml#/KenmerkWoonplaatsInOnderzoek'
-      minItems: 0
+      minItems: 1
     # Gerelateerd objecten als embedded resource. Deze embedded resource is met expand=bronhouder op te vragen.
     _embedded:
       $ref: '#/Woonplaats_embedded'
@@ -86,7 +86,7 @@ OpenbareRuimteIO:
       type: array
       items:
         $ref: '../../../imbag/v20180601/openbareruimte.yaml#/KenmerkOpenbareRuimteInOnderzoek'
-      minItems: 0
+      minItems: 1
     # Gerelateerd objecten als embedded resource. Deze embedded resource is met expand=woonplaatsen op te vragen.
     _embedded:
       $ref: '#/OpenbareRuimte_embedded'
@@ -110,12 +110,13 @@ OpenbareRuimte_links:
     ligtInWoonplaats:
       description: De gerelateerde woonplaats. 1 voorkomen van een openbare ruimte ligt altijd in 1 woonplaats.
       $ref: '../../../../generiek/hallinks.yaml#/HalLink'
-    #De standaard relatie richting is van nummeraanduiding naar openbare ruimte. Voor andersom is een hulp link nodig.
+    # De standaard relatie richting is van nummeraanduiding naar openbare ruimte. Voor andersom is een hulp link nodig.
     nummeraanduidingen:
       description: 'De gerelateerde nummeraanduidingen die in de openbare ruimte liggen. Van elk gerelateerde nummeraanduiding object: hiervan het voorkomen van woonplaats die gevonden wordt op basis van dezelfde tijdreisparameters als waarmee het openbare ruimte voorkomen gevonden is.'
       type: array
       items:
         $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+      minItems: 1
 
 # NummeraanduidingIO resource
 NummeraanduidingIO:
@@ -131,7 +132,7 @@ NummeraanduidingIO:
       type: array
       items:
         $ref: '../../../imbag/v20180601/nummeraanduiding.yaml#/KenmerkNummeraanduidingInOnderzoek'
-      minItems: 0
+      minItems: 1
     #Gerelateerd objecten als embedded resource. Deze embedded resource is met expand=woonplaatsen op te vragen.
     _embedded:
       $ref: '#/Nummeraanduiding_embedded'
@@ -146,10 +147,12 @@ Nummeraanduiding_embedded:
       type: array
       items:
         $ref: '#/WoonplaatsIO'
+      minItems: 1
     ligtAanOpenbareRuimte:
       type: array
       items:
         $ref: '#/OpenbareRuimteIO'
+      minItems: 1
 
 Nummeraanduiding_links:
   type: object
@@ -172,6 +175,7 @@ Nummeraanduiding_links:
       type: array
       items:
         $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+      minItems: 1
 
 # LigplaatsIO resource
 LigplaatsIO:
@@ -187,7 +191,7 @@ LigplaatsIO:
       type: array
       items:
         $ref: '../../../imbag/v20180601/ligplaats.yaml#/KenmerkLigplaatsInOnderzoek'
-      minItems: 0
+      minItems: 1
     #Gerelateerd objecten als embedded resource. Deze embedded resource is met expand=true op te vragen.
     _embedded:
       $ref: '#/Ligplaats_embedded'
@@ -204,11 +208,13 @@ Ligplaats_embedded:
       type: array
       items:
         $ref: '#/NummeraanduidingIO'
+      minItems: 1
 
 Ligplaats_links:
   type: object
   required:
     - self
+    - heeftAlsHoofdAdres
   properties:
     self:
       $ref: '../../../../generiek/hallinks.yaml#/HalLink'
@@ -220,6 +226,7 @@ Ligplaats_links:
       type: array
       items:
         $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+      minItems: 1
 
 # StandplaatsIO resource
 StandplaatsIO:
@@ -235,7 +242,7 @@ StandplaatsIO:
       type: array
       items:
         $ref: '../../../imbag/v20180601/standplaats.yaml#/KenmerkStandplaatsInOnderzoek'
-      minItems: 0
+      minItems: 1
     #Gerelateerd objecten als embedded resource. Deze embedded resource is met expand=woonplaatsen op te vragen.
     _embedded:
       $ref: '#/Standplaats_embedded'
@@ -252,11 +259,13 @@ Standplaats_embedded:
       type: array
       items:
         $ref: '#/NummeraanduidingIO'
+      minItems: 1
 
 Standplaats_links:
   type: object
   required:
     - self
+    - heeftAlsHoofdAdres
   properties:
     self:
       $ref: '../../../../generiek/hallinks.yaml#/HalLink'
@@ -268,6 +277,7 @@ Standplaats_links:
       type: array
       items:
         $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+      minItems: 1
 
 # VerblijfsobjectIO resource
 VerblijfsobjectIO:
@@ -283,7 +293,7 @@ VerblijfsobjectIO:
       type: array
       items:
         $ref: '../../../imbag/v20180601/verblijfsobject.yaml#/KenmerkVerblijfsobjectInOnderzoek'
-      minItems: 0
+      minItems: 1
     #Gerelateerd objecten als embedded resource. Deze embedded resource is met expand=woonplaatsen op te vragen.
     _embedded:
       $ref: '#/Verblijfsobject_embedded'
@@ -300,15 +310,19 @@ Verblijfsobject_embedded:
       type: array
       items:
         $ref: '#/NummeraanduidingIO'
+      minItems: 1
     maaktDeelUitVan:
       type: array
       items:
         $ref: '#/PandIO'
+      minItems: 1
 
 Verblijfsobject_links:
   type: object
   required:
     - self
+    - heeftAlsNevenAdres
+    - maaktDeelUitVan
   properties:
     self:
       $ref: '../../../../generiek/hallinks.yaml#/HalLink'
@@ -320,11 +334,13 @@ Verblijfsobject_links:
       type: array
       items:
         $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+      minItems: 1
     maaktDeelUitVan:
       description: 'De panden (1 of meer) waarvan dit verlijfsobject deel uit maakt. Van deze panden: hiervan het voorkomen van pand die gevonden worden op basis van dezelfde tijdreisparameters als waarmee het verblijfsobject voorkomen gevonden is.'
       type: array
       items:
         $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+      minItems: 1
 
 # PandIO resource
 PandIO:
@@ -340,7 +356,7 @@ PandIO:
       type: array
       items:
         $ref: '../../../imbag/v20180601/pand.yaml#/KenmerkPandInOnderzoek'
-      minItems: 0
+      minItems: 1
     #Gerelateerde objecten in de vorm van Links.
     _links:
       $ref: '#/Pand_links'
@@ -357,6 +373,7 @@ Pand_links:
       type: array
       items:
         $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+      minItems: 1
 
 Objectrelaties:
   title: Objectrelaties
@@ -379,12 +396,14 @@ Objectrelaties:
       type: array
       items:
         $ref: '#/NummeraanduidingIO'
+      minItems: 1
     adresseerbaarobject:
       $ref: '#/AdresseerbaarObjectIO'
     panden:
       type: array
       items:
         $ref: '#/PandIO'
+      minItems: 1
     bronhouder:
       $ref: '#/Bronhouder'
     # Gerelateerd objecten als embedded resource. Deze embedded resource is met expand=woonplaatsen op te vragen.
@@ -414,6 +433,7 @@ Objectrelaties_embedded:
       type: array
       items:
         $ref: '#/NummeraanduidingIO'
+      minItems: 1
     ligplaats:
       $ref: '#/LigplaatsIO'
     standplaats:
@@ -424,6 +444,7 @@ Objectrelaties_embedded:
       type: array
       items:
         $ref: '#/PandIO'
+      minItems: 1
 
 Objectrelaties_links:
   type: object
@@ -446,6 +467,7 @@ Objectrelaties_links:
       type: array
       items:
         $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+      minItems: 1
     ligplaats:
       $ref: '../../../../generiek/hallinks.yaml#/HalLink'
     standplaats:
@@ -457,3 +479,4 @@ Objectrelaties_links:
       type: array
       items:
         $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+      minItems: 1

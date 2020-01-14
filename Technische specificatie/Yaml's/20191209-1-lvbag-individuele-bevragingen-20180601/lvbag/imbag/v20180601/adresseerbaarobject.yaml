@@ -11,6 +11,7 @@ AdresseerbaarObject:
       type: array
       items:
         $ref: './nen3610.yaml#/NEN3610IDNum'
+      minItems: 1
   discriminator:
     propertyName: adresseerbaarObjectType
 
