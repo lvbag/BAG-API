@@ -324,21 +324,21 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AdresKenmerkWoonplaatsInOnderzoek'
-          minItems: 0
+          minItems: 1
         openbareRuimte:
           $ref: '#/components/schemas/AdresOpenbareRuimte'
         onderzoekenOpenbareRuimte:
           type: array
           items:
             $ref: '#/components/schemas/AdresKenmerkOpenbareRuimteInOnderzoek'
-          minItems: 0
+          minItems: 1
         nummeraanduiding:
           $ref: '#/components/schemas/AdresNummeraanduiding'
         onderzoekenNummeraanduiding:
           type: array
           items:
             $ref: '#/components/schemas/AdresKenmerkNummeraanduidingInOnderzoek'
-          minItems: 0
+          minItems: 1
         adresseerbaarObject:
           $ref: '#/components/schemas/AdresAdresseerbaarObjectIO'
         bronhouder:
@@ -535,7 +535,7 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/AdresKenmerkLigplaatsInOnderzoek'
-              minItems: 0
+              minItems: 1
     
     AdresLigplaats:
       type: object
@@ -588,7 +588,7 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/AdresKenmerkStandplaatsInOnderzoek'
-              minItems: 0
+              minItems: 1
     
     AdresStandplaats:
       type: object
@@ -641,7 +641,7 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/AdresKenmerkVerblijfsobjectInOnderzoek'
-              minItems: 0
+              minItems: 1
     
     AdresVerblijfsobject:
       type: object
@@ -704,6 +704,7 @@ components:
           type: array 
           items: 
             $ref: 'resources.yaml#/NummeraanduidingIO'
+          minItems: 1
 
     Adresgegevens_links:
       type: object
@@ -727,4 +728,5 @@ components:
           type: array
           items:  
             $ref: '../../../../generiek/hallinks.yaml#/HalLink'
+          minItems: 1
             
