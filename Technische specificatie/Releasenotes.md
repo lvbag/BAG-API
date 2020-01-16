@@ -1,5 +1,20 @@
 # API BAG Individuele Bevragingen *test omgeving*  
+
+*Releasenotes 16 januari*  
   
+**Aanwezige functionaliteit**  
+
+Woonplaats (WPL)   
+ 
+Openbare ruimte (OPR)  
+
+Pand (PND)
+
+Ligplaats (LIG)  
+
+Standplaats (STA)  
+
+
 
 *Releasenotes 23 december*
 
