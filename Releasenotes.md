@@ -2,6 +2,8 @@
 
 *Releasenotes 16 januari*  
   
+Alle objecten zijn te bevragen in de test omgeving.
+  
 **Aanwezige functionaliteit**  
 
 Woonplaats (WPL)   
