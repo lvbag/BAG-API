@@ -34,14 +34,14 @@ GET <basis URL>/ligplaatsen/{identificatie}/lvc
 POST <basis URL>/ligplaatsen  
 
 
-*Panden*  
+*Panden*  Beschikbaar in de testomgeving
 
 GET <basis URL>/panden/{identificatie}  
 GET <basis URL>/panden/{identificatie}/lvc  
 POST <basis URL>/panden  
 
 
-*Openbare ruimten*  
+*Openbare ruimten*  Beschikbaar in de testomgeving
 
 GET <basis URL>/openbareruimten/{openbareRuimteIdentificatie}  
 GET <basis URL>/openbareruimten/{openbareRuimteIdentificatie}lvc  
