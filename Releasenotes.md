@@ -2,7 +2,7 @@
 
 *Releasenotes 16 januari*  
   
-Alle objecten zijn te bevragen in de test omgeving.
+Alle objecttypen zijn te bevragen in de test omgeving.
   
 **Aanwezige functionaliteit**  
 
@@ -15,7 +15,8 @@ Pand (PND)
 Ligplaats (LIG)  
 
 Standplaats (STA)  
-
+  
+  
 
 
 *Releasenotes 23 december*
