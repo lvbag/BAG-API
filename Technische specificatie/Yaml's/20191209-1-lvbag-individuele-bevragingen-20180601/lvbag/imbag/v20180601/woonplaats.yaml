@@ -24,7 +24,7 @@ Woonplaats:
       example: Apeldoorn
     geometrie:
       description: 'De tweedimensionale geometrische representatie van het vlak dat wordt gevormd door de omtrekken van een woonplaats.'
-      $ref: '../../../geometrie/geometrie.yaml#/components/schemas/VlakOfMultivlak'
+      $ref: './geometrie.yaml#/components/schemas/VlakOfMultivlak'
     status:
       description: 'De fase van de levenscyclus van een woonplaats, waarin de betreffende woonplaats zich bevindt.'
       $ref: '#/StatusWoonplaats'
@@ -66,8 +66,6 @@ KenmerkWoonplaatsInOnderzoek:
       description: 'Deze wordt gebruikt in de operation, bv. /woonplaatsen/0123. Waarde: 0001-9999.'
       title: identificatie van een woonplaats
       type: string
-      minLength: 4
-      maxLength: 4
       pattern: '[0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]|[0-9][1-9][0-9]{2}|[1-9][0-9]{3}'
       example: 0150
     inOnderzoek:
@@ -96,13 +94,13 @@ StatusWoonplaats:
   description: Een aanduiding van alle waarden die de status van een woonplaats kan aannemen.
   type: string
   enum:
-    - Woonplaats aangewezen
-    - Woonplaats ingetrokken
+    - 'Woonplaats aangewezen'
+    - 'Woonplaats ingetrokken'
 
 InOnderzoekWoonplaats:
   title: InOnderzoekWoonplaats
   type: string
   enum:
-    - naam
-    - geometrie
-    - status
+    - 'naam'
+    - 'geometrie'
+    - 'status'

@@ -29,7 +29,6 @@ NEN3610IDNum:
   required:
   - lokaalID
   - namespace
-  - versie
   properties:
     lokaalID:
       description: Deze wordt gebruikt in de operation.
@@ -55,7 +54,6 @@ NEN3610IDOpr:
   required:
   - lokaalID
   - namespace
-  - versie
   properties:
     lokaalID:
       description: Deze wordt gebruikt in de operation.
@@ -81,7 +79,6 @@ NEN3610IDVbo:
   required:
   - lokaalID
   - namespace
-  - versie
   properties:
     lokaalID:
       description: Deze wordt gebruikt in de operation.
@@ -107,7 +104,6 @@ NEN3610IDLig:
   required:
   - lokaalID
   - namespace
-  - versie
   properties:
     lokaalID:
       description: Deze wordt gebruikt in de operation.
@@ -133,7 +129,6 @@ NEN3610IDSta:
   required:
   - lokaalID
   - namespace
-  - versie
   properties:
     lokaalID:
       description: Deze wordt gebruikt in de operation.
@@ -159,7 +154,6 @@ NEN3610IDPnd:
   required:
   - lokaalID
   - namespace
-  - versie
   properties:
     lokaalID:
       description: Deze wordt gebruikt in de operation.

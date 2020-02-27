@@ -2,12 +2,25 @@ Error:
   type: object
   title: Error
   required:
-    - detail
-    - instance
     - status
     - title
     - type
+    - detail
+    - instance
   properties:
+    status:
+      description: De HTTP status code.
+      type: integer
+      example: '200, 401, 403, 404 etc.'
+    title:
+      description: De titel behorende bij de HTTP status code.
+      type: string
+      example: 'OK, Niet correct geauthenticeerd, U bent niet geautoriseerd voor deze operatie, Opgevraagde resource bestaat niet'
+    type:
+      description: URI naar een pagina met meer informatie over deze foutmelding voor de ontwikkelaar.
+      type: string
+      format: uri
+      example: 'https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html' 
     detail:
       description: Een gedetailleerde beschrijving van de HTTP status code.
       type: string
@@ -16,21 +29,42 @@ Error:
       description: URI van de aanroep die fout heeft veroorzaakt.
       type: string
       format: uri
-    status:
-      description: De HTTP status code.
-      type: integer
-      example: '200, 403, 401, 404 etc.'
-    title:
-      description: De titel behorende bij de HTTP status code.
-      type: string
-      example: 'OK, Forbidden, Unauthorized, Not Found etc.'
-    type:
-      description: URI naar een pagina met meer informatie over deze foutmelding voor de ontwikkelaar.
-      type: string
-      format: uri
-      default: about:blank
-      example: about:blank
     code:
       description: Systeem code die het type fout aangeeft.
       type: string
       minLength: 1
+    invalid-params:
+      type: array
+      items:
+        $ref: '#/InvalidParams'
+    
+InvalidParams:
+  type: object
+  title: InvalidParams
+  description:
+    "Wanneer de fout is veroorzaakt door fouten in requestparameters (of request body), wordt invalid-params gevuld met details over elke foute parameter.
+    Wanneer er fouten zitten op meerdere parameters, wordt er per validatiefout een invalid-params instantie opgenomen in het antwoord. Alle fouten worden dus teruggegeven.
+    Een gedetailleerde beschrijving hoe de onderstaande attributen ingevuld moeten worden staat op:
+    https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/master/features/foutafhandeling.feature"
+  required:
+    - name
+    - code
+    - reason
+  properties:
+    type:
+      description: 'Een url naar een beschrijving van de fout in de parameter. De hier gerefereeerde foutbeschrijving is specifieker dan type op het hoofdniveau van het bericht.'
+      type: string
+      format: uri
+    name:
+      description: 'De naam van de parameter waar de fout in zit.'
+      type: string
+      example: geldigOp
+    code:
+      description: 'Een vaste waarde afhankelijk van het soort fout.'
+      type: string
+      example: date
+    reason:
+      description: 'Een vaste omschrijving afhankelijk van het soort fout.'
+      type: string
+      example: 'Waarde is geen geldige datum.'
+      

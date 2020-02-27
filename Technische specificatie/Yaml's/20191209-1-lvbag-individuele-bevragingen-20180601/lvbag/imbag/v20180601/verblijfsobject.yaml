@@ -26,7 +26,7 @@ Verblijfsobject:
         identificatie:
           $ref: './nen3610.yaml#/NEN3610IDVbo'
         geometrie:
-          $ref: '../../../geometrie/geometrie.yaml#/components/schemas/PuntOfVlak'
+          $ref: './geometrie.yaml#/components/schemas/PuntOfVlak'
         gebruiksdoel:
           type: array
           items:
@@ -35,8 +35,6 @@ Verblijfsobject:
         oppervlakte:
           title: oppervlakte
           type: integer
-          minLength: 1
-          maxLength: 6
           pattern: '^[1-9][0-9]{0,5}$'
         status:
           $ref: '#/StatusVerblijfsobject'
@@ -81,8 +79,6 @@ KenmerkVerblijfsobjectInOnderzoek:
     identificatieVanVerblijfsobject:
       title: identificatie van verblijfsobject
       type: string
-      minLength: 16
-      maxLength: 16
       pattern: '^[0-9]{4}01[0-9]{10}$'
       example: 1234010000000001
     inOnderzoek:
@@ -110,39 +106,39 @@ Gebruiksdoel:
   title: Gebruiksdoel
   type: string
   enum:
-    - woonfunctie
-    - bijeenkomstfunctie
-    - celfunctie
-    - gezondheidszorgfunctie
-    - industriefunctie
-    - kantoorfunctie
-    - logiesfunctie
-    - onderwijsfunctie
-    - sportfunctie
-    - winkelfunctie
-    - overige gebruiksfunctie
+    - 'woonfunctie'
+    - 'bijeenkomstfunctie'
+    - 'celfunctie'
+    - 'gezondheidszorgfunctie'
+    - 'industriefunctie'
+    - 'kantoorfunctie'
+    - 'logiesfunctie'
+    - 'onderwijsfunctie'
+    - 'sportfunctie'
+    - 'winkelfunctie'
+    - 'overige gebruiksfunctie'
 
 StatusVerblijfsobject:
   title: StatusVerblijfsobject
   type: string
   enum:
-    - Verblijfsobject gevormd
-    - Niet gerealiseerd verblijfsobject
-    - Verblijfsobject in gebruik (niet ingemeten)
-    - Verblijfsobject in gebruik
-    - Verbouwing verblijfsobject
-    - Verblijfsobject ingetrokken
-    - Verblijfsobject buiten gebruik
-    - Verblijfsobject ten onrechte opgevoerd
+    - 'Verblijfsobject gevormd'
+    - 'Niet gerealiseerd verblijfsobject'
+    - 'Verblijfsobject in gebruik (niet ingemeten)'
+    - 'Verblijfsobject in gebruik'
+    - 'Verbouwing verblijfsobject'
+    - 'Verblijfsobject ingetrokken'
+    - 'Verblijfsobject buiten gebruik'
+    - 'Verblijfsobject ten onrechte opgevoerd'
 
 InOnderzoekVerblijfsobject:
   title: InOnderzoekVerblijfsobject
   type: string
   enum:
-    - geometrie
-    - gebruiksdoel
-    - oppervlakte
-    - status
-    - maakt deel uit van
-    - heeft als hoofdadres
-    - heeft als nevenadres
+    - 'geometrie'
+    - 'gebruiksdoel'
+    - 'oppervlakte'
+    - 'status'
+    - 'maakt deel uit van'
+    - 'heeft als hoofdadres'
+    - 'heeft als nevenadres'

@@ -1,38 +1,38 @@
 openapi: 3.0.0
 
-# Server specificatie 
+# Server specificatie
 servers:
-  - description: LVBAG - TEST 
+  - description: LVBAG - TEST
     url: https://api.test.kadaster.nl/lvbag/api/individuelebevragingen/v1
   - description: LVBAG - PRODUCTIE
     url: https://api.kadaster.nl/lvbag/api/individuelebevragingen/v1
-    
+
 # API specificatie - algemeen
 info:
-  title: IMBAG API - van de LVBAG 
-  description: "Dit is de BAG API van de landelijke voorziening BAG (LVBAG) voor het informatiemodel IMBAG 2.0 en conform de API strategie 1.1 specificatie in OAS3. Deze is vooral gericht op individuele bevragingen (op basis van de identificerende gegevens van een object). 
+  title: IMBAG API - van de LVBAG
+  description: "Dit is de BAG API van de landelijke voorziening BAG (LVBAG) voor het informatiemodel IMBAG 2.0 en conform de API strategie 1.1 specificatie in OAS3. Deze is vooral gericht op individuele bevragingen (op basis van de identificerende gegevens van een object).
     <br/><br/>
     <font color='red'>**LET OP: Deze specificatie is een \"work in progress\"**, oftewel niet definitief.</font><br/><br/>
     Meer informatie over BAG 2.0 is te vinden op: [Catalogus BAG 2.0](https://www.geobasisregistraties.nl/basisregistraties/adressen-en-gebouwen)
     <br/>
-    Meer informatie over Nederlandse API strategie is te vinden op: [API-Strategie](https://docs.geostandaarden.nl/api/API-Strategie) - deze API volgt versie 1.1 van 20190213. 
+    Meer informatie over Nederlandse API strategie is te vinden op: [API-Strategie](https://docs.geostandaarden.nl/api/API-Strategie) - deze API volgt versie 1.1 van 20190213.
     <br/>
-    Meer informatie over OAS3 specificatie is te vinden op: [OAS](https://www.forumstandaardisatie.nl/standaard/openapi-specification)  
+    Meer informatie over OAS3 specificatie is te vinden op: [OAS](https://www.forumstandaardisatie.nl/standaard/openapi-specification)
     <br/>
     Het standaard mediatype HAL (`application/hal+json`) wordt gebruikt. Dit is een mediatype voor het weergeven van resources en hun relaties via hyperlinks.
     <br/>
     <br/>
-    Voor vragen, neem contact op met de BAG beheerder o.v.v. BAG API 2.0. We zijn aan het kijken naar een geschikt medium hiervoor, mede ook om de API iteratief te kunnen opstellen of doorontwikkelen samen met de community. Als de API iets (nog) niet kan, wat u wel graag wilt, neem dan contact op. 
+    Voor vragen, neem contact op met de BAG beheerder o.v.v. BAG API 2.0. We zijn aan het kijken naar een geschikt medium hiervoor, mede ook om de API iteratief te kunnen opstellen of doorontwikkelen samen met de community. Als de API iets (nog) niet kan, wat u wel graag wilt, neem dan contact op.
     <br/>
     <br/>
-    Een API-key kan  verkregen worden door een e-mail te sturen naar: zie onderstaande contactgegevens <font color='blue'>send e-mail</font>." 
-    
+    Een API-key kan  verkregen worden door een e-mail te sturen naar: zie onderstaande contactgegevens <font color='blue'>send e-mail</font>."
+
   version: '0.1'
   # De versie wordt 1.0 als de API naar productie gaat.
   termsOfService: https://zakelijk.kadaster.nl/algemene-voorwaarden
   contact:
-    name: Kadaster - Beheerder Landelijke Voorziening BAG 
-    email: bag@kadaster.nl  
+    name: Kadaster - Beheerder Landelijke Voorziening BAG
+    email: bag@kadaster.nl
     url: https://zakelijk.kadaster.nl/bag
   license:
     name: European Union Public License, version 1.2 (EUPL-1.2)
@@ -41,13 +41,13 @@ info:
 security:
   - apiKeyBAG: []
   # Alle requests verwachten een (BAG) API key (niet per operation of end-point veschillend)
-  # Voor defintie van benoemde 'apiKeyBAG', zie security-schemes onderin. 
+  # Voor defintie van benoemde 'apiKeyBAG', zie security-schemes onderin.
 
-#+Functionele toelichting bij de operations/end-points als documentatie indeling. 
+#+Functionele toelichting bij de operations/end-points als documentatie indeling.
 tags:
-  - 
+  -
     name: Bronhouder
-    description: 'Dit endpoint levert ��nn of meer bronhouder(s).' 
+    description: 'Dit endpoint levert één of meer bronhouder(s).'
 
 paths:
 
@@ -55,7 +55,7 @@ paths:
   /bronhouders:
     post:
       requestBody:
-        description: Geometrisch punt waarvoor de bronhouder(s) bepaald moeten worden.        
+        description: Geometrisch punt waarvoor de bronhouder(s) bepaald moeten worden.
         required: true
         content:
           application/json:
@@ -65,18 +65,18 @@ paths:
         - apiKeyBAG: []
       tags:
         - Bronhouder
-      summary: 'bevragen 1 bronhouder, op basis van de geometrische locatie.'  
+      summary: 'bevragen 1 bronhouder, op basis van de geometrische locatie.'
       operationId: bronhouderGeometrie
       description: >-
-        Bevragen/raadplegen van eenn bronhouder, via een geometrische lcoatie. 
+        Bevragen/raadplegen van eenn bronhouder, via een geometrische lcoatie.
         Geleverd wordt een bronhouder.
-        Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd. 
+        Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.
         De contentCrs in de header moet zijn epsg:28992
-      parameters: 
+      parameters:
         - $ref: '#/components/parameters/geldigOp'
         - $ref: '#/components/parameters/beschikbaarOp'
         - $ref: '../../../../generiek/headers.yaml#/contentCrs'
-        
+
       # Antwoord bronhouderGeometrie
       responses:
         '200':
@@ -100,6 +100,7 @@ paths:
                 type: array
                 items:
                   $ref: './resources.yaml#/Bronhouder'
+                minItems: 1
         '204':
           $ref: '../../../../generiek/responses.yaml#/204'
         '400':
@@ -133,22 +134,22 @@ paths:
         - apiKeyBAG: []
       tags:
         - Bronhouder
-      summary: 'Bevragen bronhouder, op basis van de object identificatie.'  
+      summary: 'Bevragen bronhouder, op basis van de object identificatie.'
       operationId: zoekBronhouder
       description: >-
-        "Bevragen/raadplegen van een bronhouder, via de identificatie van een object. 
+        "Bevragen/raadplegen van een bronhouder, via de identificatie van een object.
          Geleverd wordt een bronhouder.
-         ��n van de onderstaande parameters dient gespecificeerd te worden:<br/> 
+         Één van de onderstaande parameters dient gespecificeerd te worden:<br/>
          Parameter woonplaatsIdentificatie bevat de 4 cijferige identificatie van een woonplaats object.<br/>
          Parameter openbareRuimteIdentificatie bevat de 16 cijferige identificatie van een openbare ruimte object.<br/>
          Parameter nummeraanduidingIdentificatie bevat de 16 cijferige identificatie van een nummeraanduiding object.<br/>
          Parameter ligplaatsIdentificatie bevat de 16 cijferige identificatie van een ligplaats.<br/>
          Parameter standplaatsIdentificatie bevat de 16 cijferige identificatie van een standplaats.<br/>
          Parameter verblijfsobjectIdentificatie bevat de 16 cijferige identificatie van een verblijfsobject.<br/>
-         Parameter pandIdentificatie bevat de 16 cijferige identificatie van een pand.<br/>  
-         Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.<br/> 
+         Parameter pandIdentificatie bevat de 16 cijferige identificatie van een pand.<br/>
+         Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.<br/>
          De contentCrs in de header moet zijn epsg:28992"
-      parameters: 
+      parameters:
         - $ref: '#/components/parameters/woonplaatsIdentificatie'
         - $ref: '#/components/parameters/openbareRuimteIdentificatie'
         - $ref: '#/components/parameters/nummeraanduidingIdentificatie'
@@ -159,7 +160,7 @@ paths:
         - $ref: '#/components/parameters/geldigOp'
         - $ref: '#/components/parameters/beschikbaarOp'
         - $ref: '../../../../generiek/headers.yaml#/contentCrs'
-        
+
       # Antwoord zoekBronhouder
       responses:
         '200':
@@ -179,9 +180,11 @@ paths:
               $ref: '../../../../generiek/headers.yaml#/acceptCrs'
           content:
             application/hal+json:
-              # 1 resource, niet een collectie, dus geen items en geen paginering.
               schema:
-                $ref: './resources.yaml#/Bronhouder'
+                type: array
+                items:
+                  $ref: './resources.yaml#/Bronhouder'
+                minItems: 1
         '204':
           $ref: '../../../../generiek/responses.yaml#/204'
         '400':
@@ -212,7 +215,7 @@ paths:
 components:
 
   securitySchemes:
-    apiKeyBAG: 
+    apiKeyBAG:
       type: apiKey
       name: X-Api-Key
       in: header
@@ -223,97 +226,83 @@ components:
         de foutmelding `403 Forbidden` terugkrijgen.
 
   parameters:
-    # Opsomming van path parameters - /{...} - specificatie bij operation zelf. 
-    
-    # Opsomming van request parameters - ?='...' parameters (by name) - specificatie bij operation zelf. 
+    # Opsomming van path parameters - /{...} - specificatie bij operation zelf.
+
+    # Opsomming van request parameters - ?='...' parameters (by name) - specificatie bij operation zelf.
     woonplaatsIdentificatie:
-      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een woonplaats en 16 lang bij de andere objecten. 
+      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een woonplaats en 16 lang bij de andere objecten.
       name: woonplaatsIdentificatie
       in: query
       required: false
       schema:
         description: 'Deze wordt gebruikt in de operation, bv. /woonplaatsen/0123. Waarde: 0001-9999, formaat: ^[0-9]{3}[1-9]\|[0-9]{2}[1-9][0-9]\|[0-9][1-9][0-9]{2}\|[1-9][0-9]{3}$.'
         type: string
-        minLength: 4
-        maxLength: 4
         pattern: '[0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]|[0-9][1-9][0-9]{2}|[1-9][0-9]{3}'
         example: 0150
 
     openbareRuimteIdentificatie:
-      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een woonplaats en 16 lang bij de andere objecten. 
+      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een woonplaats en 16 lang bij de andere objecten.
       name: openbareRuimteIdentificatie
       in: query
       required: false
       schema:
         type: string
-        minLength: 16
-        maxLength: 16
         pattern: '^[0-9]{4}30[0-9]{10}$'
         example: 0518300000000001
 
     nummeraanduidingIdentificatie:
-      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een woonplaats en 16 lang bij de andere objecten. 
+      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een woonplaats en 16 lang bij de andere objecten.
       name: nummeraanduidingIdentificatie
       in: query
       required: false
       schema:
         type: string
-        minLength: 16
-        maxLength: 16
         pattern: '^[0-9]{4}20[0-9]{10}$'
         example: 1234200000000001
 
     verblijfsobjectIdentificatie:
-      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een woonplaats en 16 lang bij de andere objecten. 
+      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een woonplaats en 16 lang bij de andere objecten.
       name: verblijfsobjectIdentificatie
       in: query
       required: false
       schema:
         type: string
-        minLength: 16
-        maxLength: 16
         pattern: '^[0-9]{4}01[0-9]{10}$'
         example: 1234010000000001
 
     ligplaatsIdentificatie:
-      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een woonplaats en 16 lang bij de andere objecten. 
+      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een woonplaats en 16 lang bij de andere objecten.
       name: ligplaatsIdentificatie
       in: query
       required: false
       schema:
         type: string
-        minLength: 16
-        maxLength: 16
         pattern: '^[0-9]{4}02[0-9]{10}$'
         example: 1234020000000001
 
     standplaatsIdentificatie:
-      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een woonplaats en 16 lang bij de andere objecten. 
+      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een woonplaats en 16 lang bij de andere objecten.
       name: standplaatsIdentificatie
       in: query
       required: false
       schema:
         type: string
-        minLength: 16
-        maxLength: 16
         pattern: '^[0-9]{4}03[0-9]{10}$'
         example: 1234030000000001
 
     pandIdentificatie:
-      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een woonplaats en 16 lang bij de andere objecten. 
+      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een woonplaats en 16 lang bij de andere objecten.
       name: pandIdentificatie
       in: query
       required: false
       schema:
         type: string
-        minLength: 16
-        maxLength: 16
         pattern: '^[0-9]{4}10[0-9]{10}$'
         example: 1234100000000001
 
     geldigOp:
-      description: > 
-        Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD' 
+      description: >
+        Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD'
         Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
       name: geldigOp
       in: query
@@ -325,12 +314,14 @@ components:
 
     beschikbaarOp:
       description: >
-        Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss' 
+        Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'
+        Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'.
+        Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'.
         Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
       name: beschikbaarOp
       in: query
       required: false
       schema:
         type: string
-        format: date-time 
+        format: date-time
         example: '2019-06-01T12:00:00.000'

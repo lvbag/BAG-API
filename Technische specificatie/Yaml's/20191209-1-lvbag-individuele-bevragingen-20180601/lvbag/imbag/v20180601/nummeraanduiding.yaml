@@ -20,30 +20,24 @@ Nummeraanduiding:
       description: Een door of namens het gemeentebestuur ten aanzien van een adresseerbaar object toegekende nummering.
       title: huisnummer
       type: integer
-      minLength: 1
-      maxLength: 5
       pattern: '^[1-9][0-9]{0,4}$'
       example: 12
     huisletter:
       description: Een door of namens het gemeentebestuur ten aanzien van een adresseerbaar object toegekende toevoeging aan een huisnummer in de vorm van een alfanumeriek teken.
       title: huisletter
       type: string
-      maxLength: 1
       pattern: '^[a-zA-Z]{1}$'
       example: A
     huisnummertoevoeging:
       description: Een door of namens het gemeentebestuur ten aanzien van een adresseerbaar object toegekende nadere toevoeging aan een huisnummer of een combinatie van huisnummer en huisletter.
       title: huisnummer toevoeging
       type: string
-      minLength: 1
-      maxLength: 4
       pattern: '^[0-9a-zA-Z]{1,4}$'
       example: bis
     postcode:
       title: postcode
       description: De door PostNL vastgestelde code behorende bij een bepaalde combinatie van een straatnaam en een huisnummer.
       type: string
-      maxLength: 6
       pattern: '^[1-9]{1}[0-9]{3}[A-Z]{2}$'
       example: 7500AA
     typeAdresseerbaarObject:
@@ -92,8 +86,6 @@ KenmerkNummeraanduidingInOnderzoek:
       description: De unieke aanduiding van een nummeraanduiding.
       title: identificatie van nummeraanduiding
       type: string
-      minLength: 16
-      maxLength: 16
       pattern: '^[0-9]{4}20[0-9]{10}$'
       example: 1234200000000001
     inOnderzoek:
@@ -121,11 +113,11 @@ InOnderzoekNummeraanduiding:
   title: InOnderzoekNummeraanduiding
   type: string
   enum:
-    - huisnummer
-    - huisletter
-    - huisnummertoevoeging
-    - postcode
-    - type adresseerbaar object
-    - status
-    - ligt in
-    - ligt aan
+    - 'huisnummer'
+    - 'huisletter'
+    - 'huisnummertoevoeging'
+    - 'postcode'
+    - 'type adresseerbaar object'
+    - 'status'
+    - 'ligt in'
+    - 'ligt aan'

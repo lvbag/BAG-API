@@ -128,6 +128,7 @@ paths:
                 type: array
                 items:
                   $ref: './resources.yaml#/Objectrelaties'
+                minItems: 1
         '204':
           $ref: '../../../../generiek/responses.yaml#/204'
         '400':
@@ -223,9 +224,8 @@ paths:
               schema:
                 type: array
                 items:
-                  type: array
-                  items:
-                    $ref: './resources.yaml#/Objectrelaties'
+                  $ref: './resources.yaml#/Objectrelaties'
+                minItems: 1
         '204':
           $ref: '../../../../generiek/responses.yaml#/204'
         '400':
@@ -276,8 +276,6 @@ components:
       required: false
       schema:
         type: string
-        minLength: 16
-        maxLength: 16
         pattern: '^[0-9]{4}20[0-9]{10}$'
         example: 1234200000000001
 
@@ -289,8 +287,6 @@ components:
       schema:
         title: identificatie van adresseerbaar object
         type: string
-        minLength: 16
-        maxLength: 16
         pattern: '^[0-9]{4}(01|02|03)[0-9]{10}$'
         example: 1234010000000001
 
@@ -315,7 +311,8 @@ components:
         type: string
         minLength: 1
         maxLength: 80
-        example: 'Laan van Westenenk 701' 
+        pattern: '^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*'
+        example: 'Laan van Westenenk' 
 
     postcode:
       description: Postcode behorende bij een nummeraanduiding. 
@@ -324,7 +321,6 @@ components:
       required: false
       schema:
         type: string
-        maxLength: 6
         pattern: '^[1-9]{1}[0-9]{3}[A-Z]{2}$'
         example: 7500AA
 
@@ -335,8 +331,6 @@ components:
       required: false
       schema:
         type: integer
-        minLength: 1
-        maxLength: 5
         pattern: '^[1-9][0-9]{0,4}$'
         example: 12
 
@@ -347,8 +341,6 @@ components:
       required: false
       schema:
         type: integer
-        minLength: 1
-        maxLength: 5
         pattern: '^[0-9a-zA-Z]{1,4}$'
         example: bis
 
@@ -359,7 +351,6 @@ components:
       required: false
       schema:
         type: string
-        maxLength: 1
         pattern: '^[a-zA-Z]{1}$'
         example: A
 
@@ -381,9 +372,13 @@ components:
       required: false
       description: >
         Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss' 
+        Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'.
+        Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. 
         Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
       schema:
         type: string
+        format: date-time 
+        example: '2019-06-01T12:00:00.000'
         
     exacteMatch:
       description: >-

@@ -23,7 +23,7 @@ OpenbareRuimte:
       type: string
       minLength: 1
       maxLength: 80
-      example: 'Laan van Westenenk 701'
+      example: 'Laan van Westenenk'
     type:
       description: De aard van de als zodanig benoemde openbare ruimte.
       $ref: '#/TypeOpenbareRuimte'
@@ -73,8 +73,6 @@ KenmerkOpenbareRuimteInOnderzoek:
       title: identificatie van openbare ruimte
       description: De unieke aanduiding van een openbare ruimte.
       type: string
-      minLength: 16
-      maxLength: 16
       pattern: '^[0-9]{4}30[0-9]{10}$'
       example: 0518300000000001
     inOnderzoek:
@@ -103,19 +101,19 @@ TypeOpenbareRuimte:
   description: Een codering van de verschillende waarden die de typering van een openbare ruimte kan aannemen.
   type: string
   enum:
-    - Weg
-    - Water
-    - Spoorbaan
-    - Terrein
-    - Kunstwerk
-    - Landschappelijk gebied
-    - Administratief gebied
+    - 'Weg'
+    - 'Water'
+    - 'Spoorbaan'
+    - 'Terrein'
+    - 'Kunstwerk'
+    - 'Landschappelijk gebied'
+    - 'Administratief gebied'
 
 InOnderzoekOpenbareRuimte:
   title: InOnderzoekOpenbareRuimte
   type: string
   enum:
-    - naam
-    - type
-    - status
-    - gerelateerde woonplaats
+    - 'naam'
+    - 'type'
+    - 'status'
+    - 'gerelateerde woonplaats'

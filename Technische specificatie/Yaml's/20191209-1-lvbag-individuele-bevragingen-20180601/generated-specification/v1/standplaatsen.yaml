@@ -36,7 +36,7 @@ security:
 - apiKeyBAG: []
 tags:
 - name: Standplaats
-  description: Dit endpoint levert ��n of meer (voorkomens van) standplaats(en), met
+  description: Dit endpoint levert één of meer (voorkomens van) standplaats(en), met
     embedded resources en links.
 paths:
   /standplaatsen/{identificatie}:
@@ -44,15 +44,15 @@ paths:
       tags:
       - Standplaats
       summary: bevragen 1 standplaats, op basis van de standplaats identificatie.
-      description: Bevragen/raadplegen van ��n bronhouder, via de identificatie van
-        de standplaats.  Geleverd wordt een standplaats.  Parameter identificatie
-        bevat de 16 cijferige identificatie van een standplaats. Als geldigOp en/of
-        beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.  Als
-        expand=heeftAlsHoofdAdres dan wordt de nummeraanduiding van het hoofdadres
-        als geneste resource geleverd.   Als expand=heeftAlsNevenAdres dan worden
-        de nummeraanduidingen van de nevenadressen als geneste resources geleverd.   Als
-        expand=true dan worden alle gerelateerde objecten als geneste resources geleverd.
-        De contentCrs in de header moet zijn epsg:28992
+      description: Bevragen/raadplegen van één bronhouder, via de identificatie van
+        de standplaats. Geleverd wordt een standplaats. Parameter identificatie bevat
+        de 16 cijferige identificatie van een standplaats. Als geldigOp en/of beschikbaarOp
+        niet wordt opgegeven, worden de actuele gegevens geleverd. Als expand=heeftAlsHoofdAdres
+        dan wordt de nummeraanduiding van het hoofdadres als geneste resource geleverd.
+        Als expand=heeftAlsNevenAdres dan worden de nummeraanduidingen van de nevenadressen
+        als geneste resources geleverd. Als expand=true dan worden alle gerelateerde
+        objecten als geneste resources geleverd. De contentCrs in de header moet zijn
+        epsg:28992
       operationId: standplaatsIdentificatie
       parameters:
       - name: identificatie
@@ -63,16 +63,13 @@ paths:
         style: simple
         explode: false
         schema:
-          maxLength: 16
-          minLength: 16
           pattern: ^[0-9]{4}03[0-9]{10}$
           type: string
           example: "1234030000000001"
       - name: geldigOp
         in: query
-        description: "Filtert op objecten die geldig zijn op de opgegeven datum `JJJJ-MM-DD`\
-          \ Deze parameters komen uit de API strategie, het hoofdstuk tijdreizen.\
-          \ \n"
+        description: |
+          Filtert op objecten die geldig zijn op de opgegeven datum `JJJJ-MM-DD` Deze parameters komen uit de API strategie, het hoofdstuk tijdreizen.
         required: false
         style: form
         explode: true
@@ -83,14 +80,13 @@ paths:
       - name: beschikbaarOp
         in: query
         description: |
-          Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'  Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
+          Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss' Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
         required: false
         style: form
         explode: true
         schema:
           type: string
           format: date-time
-        example: 2019-06-01T12:00:00.000
       - name: expand
         in: query
         description: Hier kan aangegeven worden welke gerelateerde resources meegeladen
@@ -132,7 +128,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/StandplaatsIO'
         204:
-          description: No content.
+          description: No content
           headers:
             api-version:
               $ref: '#/components/headers/api_version'
@@ -140,8 +136,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 204
+                title: Geen inhoud
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.2.5
+                  204 No Content
+                detail: The server has fulfilled the request but does not need to
+                  return an entity-body, and might want to return updated metainformation.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: noContent
         400:
-          description: Bad request.
+          description: Bad request
           headers:
             api-version:
               $ref: '#/components/headers/api_version'
@@ -149,6 +154,20 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 400
+                title: Ten minste één parameter moet worden opgegeven.
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.1
+                  400 Bad Request
+                detail: The request could not be understood by the server due to malformed
+                  syntax. The client SHOULD NOT repeat the request without modification.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: paramsRequired
+                invalid-params:
+                - type: https://www.vng.nl/realisatie/api/validaties/integer
+                  name: verblijfplaats_huisnummer
+                  code: integer
+                  reason: Waarde is geen geldige integer.
         401:
           description: Unauthorized. Je hebt waarschijnlijk geen geldige `X-Api-Key`
             header meegestuurd.
@@ -159,6 +178,16 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 401
+                title: Niet correct geauthenticeerd.
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.2
+                  401 Unauthorized
+                detail: The request requires user authentication. The response MUST
+                  include a WWW-Authenticate header field (section 14.47) containing
+                  a challenge applicable to the requested resource.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: authentication
         403:
           description: Forbidden. Je hebt geen rechten om deze URL te benaderen.
           headers:
@@ -168,6 +197,15 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 403
+                title: U bent niet geautoriseerd voor deze operatie.
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.4
+                  403 Forbidden
+                detail: The server understood the request, but is refusing to fulfill
+                  it.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: autorisation
         404:
           description: Not found.
           headers:
@@ -177,6 +215,14 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 404
+                title: Opgevraagde resource bestaat niet.
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.5
+                  404 Not Found
+                detail: The server has not found anything matching the Request-URI.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: notFound
         405:
           description: Method not alowed.
           headers:
@@ -186,6 +232,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 405
+                title: Methode niet toegestaan
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.6
+                  405 Method Not Allowed
+                detail: The method specified in the Request-Line is not allowed for
+                  the resource identified by the Request-URI. The response MUST include
+                  an Allow header containing a list of valid methods for the requested
+                  resource.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: methodNotAllowed
         406:
           description: Not Acceptable. Je hebt waarschijnlijk een gewenst formaat
             met de `Accept` header verstuurd welke niet ondersteund wordt.
@@ -196,6 +253,16 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 406
+                title: Gevraagde contenttype wordt niet ondersteund.
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.7
+                  406 Not Acceptable
+                detail: The resource identified by the request is only capable of
+                  generating response entities which have content characteristics
+                  not acceptable according to thr accept headers sent in the request
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: notAcceptable
         410:
           description: Gone.
           headers:
@@ -205,6 +272,15 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 410
+                title: Verdwenen
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.11
+                  410 Gone
+                detail: The request could not be completed due to a conflict with
+                  the current state of the resource
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: gone
         412:
           description: Precondition failed.
           headers:
@@ -214,6 +290,15 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 412
+                title: Niet voldaan aan vooraf gestelde voorwaarde
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.13
+                  412 Precondition Failed
+                detail: The precondition given in one or more of the request-header
+                  fields evaluated to false when it was tested on the server.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: preconditionFailed
         429:
           description: Too many requests.
           headers:
@@ -223,6 +308,14 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 429
+                title: Te veel verzoeken
+                type: https://tools.ietf.org/html/rfc6585
+                detail: The user has sent too many requests in a given amount of time
+                  (rate limiting).
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: tooManyRequests
         500:
           description: Internal server error.
           headers:
@@ -232,6 +325,15 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 500
+                title: Interne server fout.
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.5.1
+                  500 Internal server error
+                detail: The server encountered an unexpected condition which prevented
+                  it from fulfilling the request.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: serverError
         503:
           description: Service Unavailable. Er vindt mogelijk (gepland) onderhoud
             of een storing plaats.
@@ -249,6 +351,15 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 503
+                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.5.4
+                  503 Service Unavailable
+                detail: The service is currently unable to handle the request due
+                  to a temporary overloading or maintenance of the server.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: notAvailable
         default:
           description: Er is een onverwachte fout opgetreden.
           headers:
@@ -266,15 +377,15 @@ paths:
       - Standplaats
       summary: bevragen levenscyclus van een standplaats, op basis van de identificatie.
       description: Bevragen/raadplegen van de levenscyclus van een standplaats, via
-        de identificatie van de standplaats.  Geleverd wordt een standplaats levenscyclus.  Parameter
-        identificatie bevat de 16 cijferige identificatie van een standplaats object.
-        Parameter geheleLvc bevat een indicatie dat de gehele levenscyclus (inclusief
-        voorkomens die uit de geldige levenscyclus zijn verwijderd) zijn gewenst.
-        Als deze parameter wordt weggelaten (default) wordt alleen de geledige levenscyclus
-        geretourneerd.  Als expand=heeftAlsHoofdAdres dan wordt de nummeraanduiding
-        van het hoofdadres als geneste resource geleverd.   Als expand=heeftAlsNevenAdres
+        de identificatie van de standplaats. Geleverd wordt een standplaats levenscyclus.
+        Parameter identificatie bevat de 16 cijferige identificatie van een standplaats
+        object. Parameter geheleLvc bevat een indicatie dat de gehele levenscyclus
+        (inclusief voorkomens die uit de geldige levenscyclus zijn verwijderd) zijn
+        gewenst. Als deze parameter wordt weggelaten (default) wordt alleen de geledige
+        levenscyclus geretourneerd. Als expand=heeftAlsHoofdAdres dan wordt de nummeraanduiding
+        van het hoofdadres als geneste resource geleverd. Als expand=heeftAlsNevenAdres
         dan worden de nummeraanduidingen van de nevenadressen als geneste resources
-        geleverd.   Als expand=true dan worden alle gerelateerde objecten als geneste
+        geleverd. Als expand=true dan worden alle gerelateerde objecten als geneste
         resources geleverd. De contentCrs in de header moet zijn epsg:28992
       operationId: standplaatsLvcIdentificatie
       parameters:
@@ -286,8 +397,6 @@ paths:
         style: simple
         explode: false
         schema:
-          maxLength: 16
-          minLength: 16
           pattern: ^[0-9]{4}03[0-9]{10}$
           type: string
           example: "1234030000000001"
@@ -341,11 +450,12 @@ paths:
           content:
             application/hal+json:
               schema:
+                minItems: 1
                 type: array
                 items:
                   $ref: '#/components/schemas/StandplaatsIO'
         204:
-          description: No content.
+          description: No content
           headers:
             api-version:
               $ref: '#/components/headers/api_version'
@@ -353,8 +463,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 204
+                title: Geen inhoud
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.2.5
+                  204 No Content
+                detail: The server has fulfilled the request but does not need to
+                  return an entity-body, and might want to return updated metainformation.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: noContent
         400:
-          description: Bad request.
+          description: Bad request
           headers:
             api-version:
               $ref: '#/components/headers/api_version'
@@ -362,6 +481,20 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 400
+                title: Ten minste één parameter moet worden opgegeven.
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.1
+                  400 Bad Request
+                detail: The request could not be understood by the server due to malformed
+                  syntax. The client SHOULD NOT repeat the request without modification.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: paramsRequired
+                invalid-params:
+                - type: https://www.vng.nl/realisatie/api/validaties/integer
+                  name: verblijfplaats_huisnummer
+                  code: integer
+                  reason: Waarde is geen geldige integer.
         401:
           description: Unauthorized. Je hebt waarschijnlijk geen geldige `X-Api-Key`
             header meegestuurd.
@@ -372,6 +505,16 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 401
+                title: Niet correct geauthenticeerd.
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.2
+                  401 Unauthorized
+                detail: The request requires user authentication. The response MUST
+                  include a WWW-Authenticate header field (section 14.47) containing
+                  a challenge applicable to the requested resource.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: authentication
         403:
           description: Forbidden. Je hebt geen rechten om deze URL te benaderen.
           headers:
@@ -381,6 +524,15 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 403
+                title: U bent niet geautoriseerd voor deze operatie.
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.4
+                  403 Forbidden
+                detail: The server understood the request, but is refusing to fulfill
+                  it.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: autorisation
         404:
           description: Not found.
           headers:
@@ -390,6 +542,14 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 404
+                title: Opgevraagde resource bestaat niet.
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.5
+                  404 Not Found
+                detail: The server has not found anything matching the Request-URI.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: notFound
         405:
           description: Method not alowed.
           headers:
@@ -399,6 +559,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 405
+                title: Methode niet toegestaan
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.6
+                  405 Method Not Allowed
+                detail: The method specified in the Request-Line is not allowed for
+                  the resource identified by the Request-URI. The response MUST include
+                  an Allow header containing a list of valid methods for the requested
+                  resource.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: methodNotAllowed
         406:
           description: Not Acceptable. Je hebt waarschijnlijk een gewenst formaat
             met de `Accept` header verstuurd welke niet ondersteund wordt.
@@ -409,6 +580,16 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 406
+                title: Gevraagde contenttype wordt niet ondersteund.
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.7
+                  406 Not Acceptable
+                detail: The resource identified by the request is only capable of
+                  generating response entities which have content characteristics
+                  not acceptable according to thr accept headers sent in the request
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: notAcceptable
         410:
           description: Gone.
           headers:
@@ -418,6 +599,15 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 410
+                title: Verdwenen
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.11
+                  410 Gone
+                detail: The request could not be completed due to a conflict with
+                  the current state of the resource
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: gone
         412:
           description: Precondition failed.
           headers:
@@ -427,6 +617,15 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 412
+                title: Niet voldaan aan vooraf gestelde voorwaarde
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.13
+                  412 Precondition Failed
+                detail: The precondition given in one or more of the request-header
+                  fields evaluated to false when it was tested on the server.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: preconditionFailed
         429:
           description: Too many requests.
           headers:
@@ -436,6 +635,14 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 429
+                title: Te veel verzoeken
+                type: https://tools.ietf.org/html/rfc6585
+                detail: The user has sent too many requests in a given amount of time
+                  (rate limiting).
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: tooManyRequests
         500:
           description: Internal server error.
           headers:
@@ -445,6 +652,15 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 500
+                title: Interne server fout.
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.5.1
+                  500 Internal server error
+                detail: The server encountered an unexpected condition which prevented
+                  it from fulfilling the request.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: serverError
         503:
           description: Service Unavailable. Er vindt mogelijk (gepland) onderhoud
             of een storing plaats.
@@ -462,6 +678,15 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 503
+                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.5.4
+                  503 Service Unavailable
+                detail: The service is currently unable to handle the request due
+                  to a temporary overloading or maintenance of the server.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: notAvailable
         default:
           description: Er is een onverwachte fout opgetreden.
           headers:
@@ -478,21 +703,20 @@ paths:
       tags:
       - Standplaats
       summary: bevragen 1 standplaats, op basis van een geometrische locatie.
-      description: Bevragen/raadplegen van ��n bronhouder, via de identificatie van
-        de standplaats.  Geleverd wordt een standplaats.  Als geldigOp en/of beschikbaarOp
-        niet wordt opgegeven, worden de actuele gegevens geleverd.  Als expand=heeftAlsHoofdAdres
-        dan wordt de nummeraanduiding van het hoofdadres als geneste resource geleverd.   Als
-        expand=heeftAlsNevenAdres dan worden de nummeraanduidingen van de nevenadressen
-        als geneste resources geleverd.   Als expand=true dan worden alle gerelateerde
+      description: Bevragen/raadplegen van één bronhouder, via de identificatie van
+        de standplaats. Geleverd wordt een standplaats. Als geldigOp en/of beschikbaarOp
+        niet wordt opgegeven, worden de actuele gegevens geleverd. Als expand=heeftAlsHoofdAdres
+        dan wordt de nummeraanduiding van het hoofdadres als geneste resource geleverd.
+        Als expand=heeftAlsNevenAdres dan worden de nummeraanduidingen van de nevenadressen
+        als geneste resources geleverd. Als expand=true dan worden alle gerelateerde
         objecten als geneste resources geleverd. De contentCrs in de header moet zijn
         epsg:28992
       operationId: standplaatsGeometrie
       parameters:
       - name: geldigOp
         in: query
-        description: "Filtert op objecten die geldig zijn op de opgegeven datum `JJJJ-MM-DD`\
-          \ Deze parameters komen uit de API strategie, het hoofdstuk tijdreizen.\
-          \ \n"
+        description: |
+          Filtert op objecten die geldig zijn op de opgegeven datum `JJJJ-MM-DD` Deze parameters komen uit de API strategie, het hoofdstuk tijdreizen.
         required: false
         style: form
         explode: true
@@ -503,14 +727,13 @@ paths:
       - name: beschikbaarOp
         in: query
         description: |
-          Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'  Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
+          Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss' Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
         required: false
         style: form
         explode: true
         schema:
           type: string
           format: date-time
-        example: 2019-06-01T12:00:00.000
       - name: expand
         in: query
         description: Hier kan aangegeven worden welke gerelateerde resources meegeladen
@@ -557,11 +780,12 @@ paths:
           content:
             application/hal+json:
               schema:
+                minItems: 1
                 type: array
                 items:
                   $ref: '#/components/schemas/StandplaatsIO'
         204:
-          description: No content.
+          description: No content
           headers:
             api-version:
               $ref: '#/components/headers/api_version'
@@ -569,8 +793,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 204
+                title: Geen inhoud
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.2.5
+                  204 No Content
+                detail: The server has fulfilled the request but does not need to
+                  return an entity-body, and might want to return updated metainformation.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: noContent
         400:
-          description: Bad request.
+          description: Bad request
           headers:
             api-version:
               $ref: '#/components/headers/api_version'
@@ -578,6 +811,20 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 400
+                title: Ten minste één parameter moet worden opgegeven.
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.1
+                  400 Bad Request
+                detail: The request could not be understood by the server due to malformed
+                  syntax. The client SHOULD NOT repeat the request without modification.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: paramsRequired
+                invalid-params:
+                - type: https://www.vng.nl/realisatie/api/validaties/integer
+                  name: verblijfplaats_huisnummer
+                  code: integer
+                  reason: Waarde is geen geldige integer.
         401:
           description: Unauthorized. Je hebt waarschijnlijk geen geldige `X-Api-Key`
             header meegestuurd.
@@ -588,6 +835,16 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 401
+                title: Niet correct geauthenticeerd.
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.2
+                  401 Unauthorized
+                detail: The request requires user authentication. The response MUST
+                  include a WWW-Authenticate header field (section 14.47) containing
+                  a challenge applicable to the requested resource.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: authentication
         403:
           description: Forbidden. Je hebt geen rechten om deze URL te benaderen.
           headers:
@@ -597,6 +854,15 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 403
+                title: U bent niet geautoriseerd voor deze operatie.
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.4
+                  403 Forbidden
+                detail: The server understood the request, but is refusing to fulfill
+                  it.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: autorisation
         404:
           description: Not found.
           headers:
@@ -606,6 +872,14 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 404
+                title: Opgevraagde resource bestaat niet.
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.5
+                  404 Not Found
+                detail: The server has not found anything matching the Request-URI.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: notFound
         405:
           description: Method not alowed.
           headers:
@@ -615,6 +889,17 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 405
+                title: Methode niet toegestaan
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.6
+                  405 Method Not Allowed
+                detail: The method specified in the Request-Line is not allowed for
+                  the resource identified by the Request-URI. The response MUST include
+                  an Allow header containing a list of valid methods for the requested
+                  resource.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: methodNotAllowed
         406:
           description: Not Acceptable. Je hebt waarschijnlijk een gewenst formaat
             met de `Accept` header verstuurd welke niet ondersteund wordt.
@@ -625,6 +910,16 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 406
+                title: Gevraagde contenttype wordt niet ondersteund.
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.7
+                  406 Not Acceptable
+                detail: The resource identified by the request is only capable of
+                  generating response entities which have content characteristics
+                  not acceptable according to thr accept headers sent in the request
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: notAcceptable
         410:
           description: Gone.
           headers:
@@ -634,6 +929,15 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 410
+                title: Verdwenen
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.11
+                  410 Gone
+                detail: The request could not be completed due to a conflict with
+                  the current state of the resource
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: gone
         412:
           description: Precondition failed.
           headers:
@@ -643,6 +947,15 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 412
+                title: Niet voldaan aan vooraf gestelde voorwaarde
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.13
+                  412 Precondition Failed
+                detail: The precondition given in one or more of the request-header
+                  fields evaluated to false when it was tested on the server.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: preconditionFailed
         429:
           description: Too many requests.
           headers:
@@ -652,6 +965,14 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 429
+                title: Te veel verzoeken
+                type: https://tools.ietf.org/html/rfc6585
+                detail: The user has sent too many requests in a given amount of time
+                  (rate limiting).
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: tooManyRequests
         500:
           description: Internal server error.
           headers:
@@ -661,6 +982,15 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 500
+                title: Interne server fout.
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.5.1
+                  500 Internal server error
+                detail: The server encountered an unexpected condition which prevented
+                  it from fulfilling the request.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: serverError
         503:
           description: Service Unavailable. Er vindt mogelijk (gepland) onderhoud
             of een storing plaats.
@@ -678,6 +1008,15 @@ paths:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Error'
+              example:
+                status: 503
+                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.5.4
+                  503 Service Unavailable
+                detail: The service is currently unable to handle the request due
+                  to a temporary overloading or maintenance of the server.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: notAvailable
         default:
           description: Er is een onverwachte fout opgetreden.
           headers:
@@ -694,13 +1033,13 @@ components:
     StandplaatsIO:
       title: StandplaatsIO
       required:
-      - Standplaats
+      - standplaats
       type: object
       properties:
-        Standplaats:
+        standplaats:
           $ref: '#/components/schemas/Standplaats'
         inonderzoek:
-          minItems: 0
+          minItems: 1
           type: array
           items:
             $ref: '#/components/schemas/KenmerkStandplaatsInOnderzoek'
@@ -716,6 +1055,7 @@ components:
         heeftAlsHoofdAdres:
           $ref: '#/components/schemas/NummeraanduidingIO'
         heeftAlsNevenAdres:
+          minItems: 1
           type: array
           items:
             $ref: '#/components/schemas/NummeraanduidingIO'
@@ -728,7 +1068,7 @@ components:
         nummeraanduiding:
           $ref: '#/components/schemas/Nummeraanduiding'
         inonderzoek:
-          minItems: 0
+          minItems: 1
           type: array
           items:
             $ref: '#/components/schemas/KenmerkNummeraanduidingInOnderzoek'
@@ -746,10 +1086,12 @@ components:
       type: object
       properties:
         ligtInWoonplaats:
+          minItems: 1
           type: array
           items:
             $ref: '#/components/schemas/WoonplaatsIO'
         ligtAanOpenbareRuimte:
+          minItems: 1
           type: array
           items:
             $ref: '#/components/schemas/OpenbareRuimteIO'
@@ -762,7 +1104,7 @@ components:
         woonplaats:
           $ref: '#/components/schemas/Woonplaats'
         inonderzoek:
-          minItems: 0
+          minItems: 1
           type: array
           items:
             $ref: '#/components/schemas/KenmerkWoonplaatsInOnderzoek'
@@ -779,30 +1121,25 @@ components:
     Woonplaats_embedded:
       type: object
       properties:
-        bronhouder:
-          $ref: '#/components/schemas/Bronhouder'
+        bronhouders:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/Bronhouder'
     Bronhouder:
       title: Bronhouder
-      description: Een bronhouder is een gemeente of samenwerkingsverband van gemeenten
-        en heeft een code en naam net als een gemeente.
-      allOf:
-      - $ref: '#/components/schemas/Gemeente'
-    Gemeente:
-      title: Gemeente
       required:
       - code
       type: object
       properties:
         code:
           title: code
-          maxLength: 4
-          minLength: 4
           pattern: ^[0-9]{4}$
           type: string
-          description: Een officiele code die aan een gemeente is toegekend, ontleend
+          description: Een officiële code die aan een gemeente is toegekend, ontleend
             is aan tabel 33 en zoals bijgehouden in de LVBAG. Dit gegeven is geen
             officieel BAG gegeven en wordt niet als kenmerk van het BAG object Woonplaats
-            object bijgehouden. Het wordt als hulpgegven meegeleverd.
+            object bijgehouden. Het wordt als hulpgegeven meegeleverd.
           example: "0518"
         naam:
           title: naam
@@ -810,10 +1147,10 @@ components:
           minLength: 1
           pattern: ^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*
           type: string
-          description: Een officiele naam die aan een gemeente is toegekend.
+          description: Een officiële naam die aan een gemeente is toegekend.
           example: Gemeente Apeldoorn
-      discriminator:
-        propertyName: gemeente
+      description: Een bronhouder is een gemeente of samenwerkingsverband van gemeenten
+        en heeft een code en naam net als een gemeente.
     Woonplaats_links:
       required:
       - self
@@ -821,10 +1158,12 @@ components:
       properties:
         self:
           $ref: '#/components/schemas/HalLink'
-        openbareRuimten:
-          $ref: '#/components/schemas/HalLink'
-        bronhouder:
-          $ref: '#/components/schemas/HalLink'
+        bronhouders:
+          minItems: 1
+          type: array
+          description: De gemeente(n) waar de woonplaats onderdeel van uitmaakt.
+          items:
+            $ref: '#/components/schemas/HalLink'
     OpenbareRuimteIO:
       title: OpenbareRuimte (incl. in onderzoek)
       required:
@@ -834,7 +1173,7 @@ components:
         openbareRuimte:
           $ref: '#/components/schemas/OpenbareRuimte'
         inonderzoek:
-          minItems: 0
+          minItems: 1
           type: array
           items:
             $ref: '#/components/schemas/KenmerkOpenbareRuimteInOnderzoek'
@@ -855,7 +1194,7 @@ components:
           $ref: '#/components/schemas/WoonplaatsIO'
     OpenbareRuimte_links:
       required:
-      - selff
+      - self
       type: object
       properties:
         self:
@@ -863,6 +1202,7 @@ components:
         ligtInWoonplaats:
           $ref: '#/components/schemas/HalLink'
         nummeraanduidingen:
+          minItems: 1
           type: array
           description: 'De gerelateerde nummeraanduidingen die in de openbare ruimte
             liggen. Van elk gerelateerde nummeraanduiding object: hiervan het voorkomen
@@ -881,19 +1221,9 @@ components:
           $ref: '#/components/schemas/HalLink'
         ligtAanOpenbareRuimte:
           $ref: '#/components/schemas/HalLink'
-        isHoofdadresVan:
-          $ref: '#/components/schemas/HalLink'
-        isNevenadresVan:
-          type: array
-          description: 'Het gerelateerde adresseerbare object die deze nummeraanduiding
-            als nevenadres heeft (o of meer). Van dit gerelateerd adresseerbaar object:
-            hiervan het voorkomen van adresseerbaar object die gevonden wordt op basis
-            van dezelfde tijdreisparameters als waarmee het nummeraanduiding voorkomen
-            gevonden is.'
-          items:
-            $ref: '#/components/schemas/HalLink'
     Standplaats_links:
       required:
+      - heeftAlsHoofdAdres
       - self
       type: object
       properties:
@@ -902,6 +1232,7 @@ components:
         heeftAlsHoofdAdres:
           $ref: '#/components/schemas/HalLink'
         heeftAlsNevenAdres:
+          minItems: 1
           type: array
           description: 'De nummeraanduidingen die dit adresseerbaarobject als nevenadressen
             heeft. Van deze gerelateerd nummeranduiding: hiervan het voorkomen van
@@ -919,6 +1250,20 @@ components:
       - type
       type: object
       properties:
+        status:
+          type: integer
+          description: De HTTP status code.
+        title:
+          type: string
+          description: De titel behorende bij de HTTP status code.
+          example: OK, Niet correct geauthenticeerd, U bent niet geautoriseerd voor
+            deze operatie, Opgevraagde resource bestaat niet
+        type:
+          type: string
+          description: URI naar een pagina met meer informatie over deze foutmelding
+            voor de ontwikkelaar.
+          format: uri
+          example: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
         detail:
           type: string
           description: Een gedetailleerde beschrijving van de HTTP status code.
@@ -927,45 +1272,105 @@ components:
           type: string
           description: URI van de aanroep die fout heeft veroorzaakt.
           format: uri
-        status:
-          type: integer
-          description: De HTTP status code.
-        title:
-          type: string
-          description: De titel behorende bij de HTTP status code.
-          example: OK, Forbidden, Unauthorized, Not Found etc.
-        type:
-          type: string
-          description: URI naar een pagina met meer informatie over deze foutmelding
-            voor de ontwikkelaar.
-          format: uri
-          example: about:blank
-          default: about:blank
         code:
           minLength: 1
           type: string
           description: Systeem code die het type fout aangeeft.
-    Point:
-      title: GeoJSON Point
+        invalid-params:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvalidParams'
+    InvalidParams:
+      title: InvalidParams
       required:
-      - coordinates
-      - type
+      - code
+      - name
+      - reason
       type: object
       properties:
         type:
           type: string
-          enum:
-          - Point
-        coordinates:
-          minItems: 2
-          type: array
-          items:
-            type: number
+          description: Een url naar een beschrijving van de fout in de parameter.
+            De hier gerefereeerde foutbeschrijving is specifieker dan type op het
+            hoofdniveau van het bericht.
+          format: uri
+        name:
+          type: string
+          description: De naam van de parameter waar de fout in zit.
+          example: geldigOp
+        code:
+          type: string
+          description: Een vaste waarde afhankelijk van het soort fout.
+          example: date
+        reason:
+          type: string
+          description: Een vaste omschrijving afhankelijk van het soort fout.
+          example: Waarde is geen geldige datum.
+      description: 'Wanneer de fout is veroorzaakt door fouten in requestparameters
+        (of request body), wordt invalid-params gevuld met details over elke foute
+        parameter. Wanneer er fouten zitten op meerdere parameters, wordt er per validatiefout
+        een invalid-params instantie opgenomen in het antwoord. Alle fouten worden
+        dus teruggegeven. Een gedetailleerde beschrijving hoe de onderstaande attributen
+        ingevuld moeten worden staat op: https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/master/features/foutafhandeling.feature'
+    Point:
+      title: GeoJSON Point
+      example:
+        type: Point
+        dimensions: geometry-3D
+      allOf:
+      - $ref: '#/components/schemas/GeoJsonGeometry'
+      - required:
+        - coordinates
+        type: object
+        properties:
+          coordinates:
+            $ref: '#/components/schemas/Coordinate'
+    GeoJsonGeometry:
+      title: GeoJSON Geometry
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/GeometryTypes'
+        dimensions:
+          $ref: '#/components/schemas/GeometryDimensions'
         bbox:
           minItems: 4
           type: array
           items:
             type: number
+      description: Geometrie in GeoJSON formaat (RFC 7946).
+      externalDocs:
+        description: RFC 7946 - The GeoJSON Format
+        url: https://tools.ietf.org/html/rfc7946
+      discriminator:
+        propertyName: type
+    GeometryTypes:
+      title: GeoJSON GeometryTypes
+      type: string
+      description: De mogelijke geometrie types.
+      enum:
+      - Point
+      - LineString
+      - Polygon
+      - MultiPoint
+      - MultiLineString
+      - MultiPolygon
+    GeometryDimensions:
+      type: string
+      description: De geometrie dimensie.
+      enum:
+      - geometry-2D
+      - geometry-3D
+    Coordinate:
+      title: Coordinate
+      maxItems: 2
+      minItems: 3
+      type: array
+      description: Een coordinate kan 2D of 3D zijn.
+      items:
+        type: number
     Standplaats:
       title: Standplaats
       description: Een Standplaats is een door het bevoegde gemeentelijke orgaan als
@@ -1028,8 +1433,6 @@ components:
           $ref: '#/components/schemas/InOnderzoekStandplaats'
         identificatieVanStandplaats:
           title: identificatie van standplaats
-          maxLength: 16
-          minLength: 16
           pattern: ^[0-9]{4}03[0-9]{10}$
           type: string
           example: "1234030000000001"
@@ -1079,8 +1482,6 @@ components:
           $ref: '#/components/schemas/NEN3610IDNum'
         huisnummer:
           title: huisnummer
-          maxLength: 5
-          minLength: 1
           pattern: ^[1-9][0-9]{0,4}$
           type: integer
           description: Een door of namens het gemeentebestuur ten aanzien van een
@@ -1088,7 +1489,6 @@ components:
           example: 12
         huisletter:
           title: huisletter
-          maxLength: 1
           pattern: ^[a-zA-Z]{1}$
           type: string
           description: Een door of namens het gemeentebestuur ten aanzien van een
@@ -1097,8 +1497,6 @@ components:
           example: A
         huisnummertoevoeging:
           title: huisnummer toevoeging
-          maxLength: 4
-          minLength: 1
           pattern: ^[0-9a-zA-Z]{1,4}$
           type: string
           description: Een door of namens het gemeentebestuur ten aanzien van een
@@ -1107,7 +1505,6 @@ components:
           example: bis
         postcode:
           title: postcode
-          maxLength: 6
           pattern: ^[1-9]{1}[0-9]{3}[A-Z]{2}$
           type: string
           description: De door PostNL vastgestelde code behorende bij een bepaalde
@@ -1160,8 +1557,6 @@ components:
           $ref: '#/components/schemas/InOnderzoekNummeraanduiding'
         identificatieVanNummeraanduiding:
           title: identificatie van nummeraanduiding
-          maxLength: 16
-          minLength: 16
           pattern: ^[0-9]{4}20[0-9]{10}$
           type: string
           description: De unieke aanduiding van een nummeraanduiding.
@@ -1276,8 +1671,6 @@ components:
           $ref: '#/components/schemas/InOnderzoekWoonplaats'
         identificatieVanWoonplaats:
           title: identificatie van een woonplaats
-          maxLength: 4
-          minLength: 4
           pattern: '[0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]|[0-9][1-9][0-9]{2}|[1-9][0-9]{3}'
           type: string
           description: 'Deze wordt gebruikt in de operation, bv. /woonplaatsen/0123.
@@ -1347,7 +1740,7 @@ components:
           type: string
           description: Een naam die aan een openbare ruimte is toegekend in een daartoe
             strekkend formeel gemeentelijk besluit.
-          example: Laan van Westenenk 701
+          example: Laan van Westenenk
         type:
           $ref: '#/components/schemas/TypeOpenbareRuimte'
         status:
@@ -1410,8 +1803,6 @@ components:
           $ref: '#/components/schemas/InOnderzoekOpenbareRuimte'
         identificatieVanOpenbareRuimte:
           title: identificatie van openbare ruimte
-          maxLength: 16
-          minLength: 16
           pattern: ^[0-9]{4}30[0-9]{10}$
           type: string
           description: De unieke aanduiding van een openbare ruimte.
@@ -1453,6 +1844,7 @@ components:
         heeftAlsHoofdAdres:
           $ref: '#/components/schemas/NEN3610IDNum'
         heeftAlsNevenAdres:
+          minItems: 1
           type: array
           items:
             $ref: '#/components/schemas/NEN3610IDNum'
@@ -1463,7 +1855,6 @@ components:
       required:
       - lokaalID
       - namespace
-      - versie
       type: object
       properties:
         lokaalID:
@@ -1494,33 +1885,28 @@ components:
       - Plaats aangewezen
       - Plaats ingetrokken
     Surface:
-      $ref: '#/components/schemas/Polygon'
+      title: Surface
+      example:
+        type: Polygon
+      allOf:
+      - $ref: '#/components/schemas/Polygon'
     Polygon:
       title: GeoJSON Polygon
-      required:
-      - coordinates
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - Polygon
-        coordinates:
-          type: array
-          items:
-            minItems: 4
+      example:
+        type: Polygon
+      allOf:
+      - $ref: '#/components/schemas/GeoJsonGeometry'
+      - required:
+        - coordinates
+        type: object
+        properties:
+          coordinates:
             type: array
             items:
-              minItems: 2
+              minItems: 3
               type: array
               items:
-                type: number
-        bbox:
-          minItems: 4
-          type: array
-          items:
-            type: number
+                $ref: '#/components/schemas/Coordinate'
     Indicatie:
       title: Indicatie
       type: string
@@ -1648,7 +2034,6 @@ components:
       required:
       - lokaalID
       - namespace
-      - versie
       type: object
       properties:
         lokaalID:
@@ -1720,7 +2105,6 @@ components:
       required:
       - lokaalID
       - namespace
-      - versie
       type: object
       properties:
         lokaalID:
@@ -1746,39 +2130,15 @@ components:
         conform de NEN3610 standaard.
     VlakOfMultivlak:
       title: VlakOfMultivlak
-      oneOf:
-      - $ref: '#/components/schemas/Surface'
-      - $ref: '#/components/schemas/MultiSurface'
-    MultiSurface:
-      $ref: '#/components/schemas/MultiPolygon'
-    MultiPolygon:
-      title: GeoJSON MultiPolygon
-      required:
-      - coordinates
-      - type
       type: object
       properties:
-        type:
-          type: string
-          enum:
-          - MultiPolygon
-        coordinates:
-          type: array
-          items:
-            type: array
-            items:
-              minItems: 4
-              type: array
-              items:
-                minItems: 2
-                type: array
-                items:
-                  type: number
-        bbox:
-          minItems: 4
-          type: array
-          items:
-            type: number
+        vlak:
+          $ref: '#/components/schemas/Surface'
+        multivlak:
+          $ref: '#/components/schemas/MultiSurface'
+      description: Een samengesteld geometriegegevenstype waarbij wordt afgedwongen
+        dat voor de geometrie een keuze gemaakt moet worden tussen een vlak (GM_Surface)
+        of een multivlak (GM_MultiSurface).
     VerkorteNaamOpenbareRuimte:
       title: VerkorteNaamOpenbareRuimte
       required:
@@ -1794,6 +2154,31 @@ components:
           description: De verkorte naam is een maximaal 24 karakters lange represntatie
             van de naam van een openbare ruimte.
           example: Pastoor van de Vondervoortstraat wordt Past vd Vondervoortstr
+    MultiSurface:
+      title: MultiSurface
+      example:
+        type: MultiPolygon
+      allOf:
+      - $ref: '#/components/schemas/MultiPolygon'
+    MultiPolygon:
+      title: GeoJSON MultiPolygon
+      example:
+        type: MultiPolygon
+      allOf:
+      - $ref: '#/components/schemas/GeoJsonGeometry'
+      - required:
+        - coordinates
+        type: object
+        properties:
+          coordinates:
+            minItems: 2
+            type: array
+            items:
+              type: array
+              items:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Coordinate'
   parameters:
     identificatie:
       name: identificatie
@@ -1804,16 +2189,14 @@ components:
       style: simple
       explode: false
       schema:
-        maxLength: 16
-        minLength: 16
         pattern: ^[0-9]{4}03[0-9]{10}$
         type: string
         example: "1234030000000001"
     geldigOp:
       name: geldigOp
       in: query
-      description: "Filtert op objecten die geldig zijn op de opgegeven datum `JJJJ-MM-DD`\
-        \ Deze parameters komen uit de API strategie, het hoofdstuk tijdreizen. \n"
+      description: |
+        Filtert op objecten die geldig zijn op de opgegeven datum `JJJJ-MM-DD` Deze parameters komen uit de API strategie, het hoofdstuk tijdreizen.
       required: false
       style: form
       explode: true
@@ -1825,14 +2208,13 @@ components:
       name: beschikbaarOp
       in: query
       description: |
-        Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'  Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
+        Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss' Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
       required: false
       style: form
       explode: true
       schema:
         type: string
         format: date-time
-      example: 2019-06-01T12:00:00.000
     geheleLvc:
       name: geheleLvc
       in: query
@@ -1882,11 +2264,11 @@ components:
           format.
         format: int64
     acceptCrs:
-      description: Gewenste CRS van de co�rdinaten in de response.
+      description: Gewenste CRS van de coördinaten in de response.
       required: false
       schema:
         type: string
-        description: CRS van de co�rdinaten in de response.
+        description: CRS van de coördinaten in de response.
         default: epsg:28992
         enum:
         - epsg:28992

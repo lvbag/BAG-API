@@ -1,39 +1,39 @@
 ﻿openapi: 3.0.0
 
-# Server specificatie 
+# Server specificatie
 servers:
-  - description: LVBAG - TEST 
+  - description: LVBAG - TEST
     url: https://api.test.kadaster.nl/lvbag/api/individuelebevragingen/v1
   - description: LVBAG - PRODUCTIE
     url: https://api.kadaster.nl/lvbag/api/individuelebevragingen/v1
-    
+
 # API specificatie - algemeen
 info:
-  title: IMBAG API - van de LVBAG 
+  title: IMBAG API - van de LVBAG
   description: >-
-    "Dit is de BAG API van de landelijke voorziening BAG (LVBAG) voor het informatiemodel IMBAG 2.0 en conform de API strategie 1.1 specificatie in OAS3. Deze is vooral gericht op individuele bevragingen (op basis van de identificerende gegevens van een object). 
+    "Dit is de BAG API van de landelijke voorziening BAG (LVBAG) voor het informatiemodel IMBAG 2.0 en conform de API strategie 1.1 specificatie in OAS3. Deze is vooral gericht op individuele bevragingen (op basis van de identificerende gegevens van een object).
     <br/><br/>
     <font color='red'>**LET OP: Deze specificatie is een \"work in progress\"**, oftewel niet definitief.</font><br/><br/>
     Meer informatie over BAG 2.0 is te vinden op: [Catalogus BAG 2.0](https://www.geobasisregistraties.nl/basisregistraties/adressen-en-gebouwen)
     <br/>
-    Meer informatie over Nederlandse API strategie is te vinden op: [API-Strategie](https://docs.geostandaarden.nl/api/API-Strategie) - deze API volgt versie 1.1 van 20190213. 
+    Meer informatie over Nederlandse API strategie is te vinden op: [API-Strategie](https://docs.geostandaarden.nl/api/API-Strategie) - deze API volgt versie 1.1 van 20190213.
     <br/>
-    Meer informatie over OAS3 specificatie is te vinden op: [OAS](https://www.forumstandaardisatie.nl/standaard/openapi-specification)  
+    Meer informatie over OAS3 specificatie is te vinden op: [OAS](https://www.forumstandaardisatie.nl/standaard/openapi-specification)
     <br/>
     Het standaard mediatype HAL (`application/hal+json`) wordt gebruikt. Dit is een mediatype voor het weergeven van resources en hun relaties via hyperlinks.
     <br/>
     <br/>
-    Voor vragen, neem contact op met de BAG beheerder o.v.v. BAG API 2.0. We zijn aan het kijken naar een geschikt medium hiervoor, mede ook om de API iteratief te kunnen opstellen of doorontwikkelen samen met de community. Als de API iets (nog) niet kan, wat u wel graag wilt, neem dan contact op. 
+    Voor vragen, neem contact op met de BAG beheerder o.v.v. BAG API 2.0. We zijn aan het kijken naar een geschikt medium hiervoor, mede ook om de API iteratief te kunnen opstellen of doorontwikkelen samen met de community. Als de API iets (nog) niet kan, wat u wel graag wilt, neem dan contact op.
     <br/>
     <br/>
-    Een API-key kan  verkregen worden door een e-mail te sturen naar: zie onderstaande contactgegevens <font color='blue'>send e-mail</font>." 
-    
+    Een API-key kan  verkregen worden door een e-mail te sturen naar: zie onderstaande contactgegevens <font color='blue'>send e-mail</font>."
+
   version: '0.1'
   # De versie wordt 1.0 als de API naar productie gaat.
   termsOfService: https://zakelijk.kadaster.nl/algemene-voorwaarden
   contact:
-    name: Kadaster - Beheerder Landelijke Voorziening BAG 
-    email: bag@kadaster.nl  
+    name: Kadaster - Beheerder Landelijke Voorziening BAG
+    email: bag@kadaster.nl
     url: https://zakelijk.kadaster.nl/bag
   license:
     name: European Union Public License, version 1.2 (EUPL-1.2)
@@ -42,13 +42,13 @@ info:
 security:
   - apiKeyBAG: []
   # Alle requests verwachten een (BAG) API key (niet per operation of end-point veschillend)
-  # Voor defintie van benoemde 'apiKeyBAG', zie security-schemes onderin. 
+  # Voor defintie van benoemde 'apiKeyBAG', zie security-schemes onderin.
 
-#+Functionele toelichting bij de operations/end-points als documentatie indeling. 
+#+Functionele toelichting bij de operations/end-points als documentatie indeling.
 tags:
-  - 
+  -
     name: Adresgegevens
-    description: 'Dit endpoint levert één of meer (voorkomens van) adres(sen), met embedded resources en links.' 
+    description: 'Dit endpoint levert één of meer (voorkomens van) adres(sen), met embedded resources en links.'
 
 paths:
 
@@ -58,54 +58,53 @@ paths:
       security:
         - apiKeyBAG: []
       operationId: zoekAdresgegevens
-      tags: 
+      tags:
         - Adresgegevens
-      summary: Bevragen 1 adres op basis van verschillende combinaties van parameters. 
+      summary: Bevragen 1 adres op basis van verschillende combinaties van parameters.
       description: >-
         "De volgende (combinaties van) parameters worden ondersteund:
         <ol>
-        <li>Bevragen/raadplegen één adres, via de identificatie van een nummeraanduiding. 
+        <li>Bevragen/raadplegen één adres, via de identificatie van een nummeraanduiding.
            Geleverd worden adresgegevens bestaande uit een selectie van informatie uit woonplaats, openbare ruimte, nummeraanduiding, adresseerbare objecten en bronhouder informatie.
            Parameter nummeraanduidingIdentificatie bevat de 16 cijferige identificatie van een nummeraanduiding object.</li>
-        <li>Bevragen/raadplegen van adresgegevens via postcode en huisnummer. 
+        <li>Bevragen/raadplegen van adresgegevens via postcode en huisnummer.
            Geleverd wordt een lijst van adresgegven bestaande uit een selectie van informatie uit woonplaats, openbare ruimte, nummeraanduiding, adresseerbare objecten en bronhouder informatie.
            Parameter postcode bevat de postcode van een nummeraanduiding object.
            Parameter huisnummer bevat het huisnummer van hetzelfde nummeraanduiding object.
            Parameter huisnummertoevoeging (optioneel) bevat de huisnummertoevoeging van hetzelfde nummeraanduiding object.
            Parameter huisletter (optioneel) bevat de huisletter van een nummeraanduiding object.
-           Het opgeven van alleen een postcode en huisnummer levert mogelijk meerdere nummeraanduidingen op (bv. bij 3, 3A en 3B in dezelfde straat). 
+           Het opgeven van alleen een postcode en huisnummer levert mogelijk meerdere nummeraanduidingen op (bv. bij 3, 3A en 3B in dezelfde straat).
            Met de exacteMatch parameter kan worden aangegeven dat alleen het object dat exact overeenkomt met de opgegeven parameters, geretourneerd moet worden.
-           Het opgeven van exacteMatch is geen garantie dat er maar 1 object wordt geretourneerd. 
+           Het opgeven van exacteMatch is geen garantie dat er maar 1 object wordt geretourneerd.
            Bv. bij een straat met huisnummers 3, 3A en 3Abis, 3B en 3Bbis, als er wordt gezocht met huisnummer 3 en toevoeging 'bis' en exacteMatch=true zijn er meerdere resultaten.
            Deze worden alle geretourneerd.</li>
-        <li>Bevragen/raadplegen van adresgegevens, via de identificatie van een adresseerbaarobject identificatie. 
+        <li>Bevragen/raadplegen van adresgegevens, via de identificatie van een adresseerbaarobject identificatie.
            Geleverd worden adresgegevens bestaande uit een selectie van informatie uit woonplaats, openbare ruimte, nummeraanduiding, adresseerbare objecten en bronhouder informatie.
            Parameter adresseerbaarObjectIdentificatie bevat de 16 cijferige identificatie van een ligplaats, standplaats of verblijfsobject.</li>
-        <li>Bevragen/raadplegen van adresgegevens via woonplaats naam, openbare ruimte naam, huisnummer en optioneel huisnummertoevoeging en huisletter. 
+        <li>Bevragen/raadplegen van adresgegevens via woonplaats naam, openbare ruimte naam, huisnummer en optioneel huisnummertoevoeging en huisletter.
            Geleverd wordt een lijst van adresgegevens bestaande uit een selectie van informatie uit woonplaats, openbare ruimte, nummeraanduiding, adresseerbare objecten en bronhouder informatie.
            Het opgeven van alleen een postcode en huisnummer levert niet altijd een exacte match met één nummeraanduiding object in geval van huisnummertoevoegingen en huisletters.
-           Als er geen huisnummertoevoegingen of huisletters van toepassing zijn op de objecten of als de uisnummertoevoeging en huisletter worden opgegeven bij objecten waar deze van toepasing zijn, 
-           dan wordt er in de lijst één object geretourneerd. 
+           Als er geen huisnummertoevoegingen of huisletters van toepassing zijn op de objecten of als de uisnummertoevoeging en huisletter worden opgegeven bij objecten waar deze van toepasing zijn,
+           dan wordt er in de lijst één object geretourneerd.
            Parameter woonplaatsNaam bevat de naam van een woonplaats object.
            Parameter openbareRuimteNaam bevat de naam van een openbare ruimte object.
            Parameter huisnummer bevat het huisnummer van hetzelfde nummeraanduiding object.
            Parameter huisnummertoevoeging (optioneel) bevat de huisnummertoevoeging van hetzelfde nummeraanduiding object.
            Parameter huisletter (optioneel) bevat de huisletter van een nummeraanduiding object.
-           Het opgeven van alleen een postcode en huisnummer levert mogelijk meerdere nummeraanduidingen op (bv. bij 3, 3A en 3B in dezelfde straat). 
+           Het opgeven van alleen een postcode en huisnummer levert mogelijk meerdere nummeraanduidingen op (bv. bij 3, 3A en 3B in dezelfde straat).
            Met de exacteMatch parameter kan worden aangegeven dat alleen het object dat exact overeenkomt met de opgegeven parameters, geretourneerd moet worden.
-           Het opgeven van exacteMatch is geen garantie dat er maar 1 object wordt geretourneerd. 
+           Het opgeven van exacteMatch is geen garantie dat er maar 1 object wordt geretourneerd.
            Bv. bij een straat met huisnummers 3, 3A en 3Abis, 3B en 3Bbis, als er wordt gezocht met huisnummer 3 en toevoeging 'bis' en exacteMatch=true zijn er meerdere resultaten.
            Deze worden alle geretourneerd.</li>
         </ol>
-        Bij alle bovenstaande combinaties kunnen eveneens de volgende parameters worden gebruikt:<br/>     
-        Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.<br/> 
-        Als expand=heeftAlsHoofdAdres dan wordt de nummeraanduiding van het hoofdadres als geneste resource geleverd.<br/>  
-        Als expand=heeftAlsNevenAdres dan worden de nummeraanduidingen van de nevenadressen als geneste resources geleverd.<br/>  
-        Als expand=ligtInWoonplaats dan wordt de woonplaats als geneste resource geleverd.<br/>  
-        Als expand=ligtAanOpenbareRuimte dan wordt de openbare ruimte als geneste resource geleverd.<br/>  
+        Bij alle bovenstaande combinaties kunnen eveneens de volgende parameters worden gebruikt:<br/>
+        Als expand=heeftAlsHoofdAdres dan wordt de nummeraanduiding van het hoofdadres als geneste resource geleverd.<br/>
+        Als expand=heeftAlsNevenAdres dan worden de nummeraanduidingen van de nevenadressen als geneste resources geleverd.<br/>
+        Als expand=ligtInWoonplaats dan wordt de woonplaats als geneste resource geleverd.<br/>
+        Als expand=ligtAanOpenbareRuimte dan wordt de openbare ruimte als geneste resource geleverd.<br/>
         Als expand=true dan worden alle gerelateerde objecten als geneste resources geleverd.<br/>
         De contentCrs in de header moet zijn epsg:28992"
-      parameters: 
+      parameters:
         - $ref: '#/components/parameters/nummeraanduidingIdentificatie'
         - $ref: '#/components/parameters/postcode'
         - $ref: '#/components/parameters/huisnummer'
@@ -117,7 +116,7 @@ paths:
         - $ref: '#/components/parameters/openbareRuimteNaam'
         - $ref: '../../../../generiek/parameters.yaml#/expand'
         - $ref: '../../../../generiek/headers.yaml#/contentCrs'
-      
+
       # Antwoord zoekAdresgegevens
       responses:
         '200':
@@ -141,6 +140,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Adresgegevens'
+                minItems: 1
         '204':
           $ref: '../../../../generiek/responses.yaml#/204'
         '400':
@@ -171,104 +171,94 @@ paths:
 components:
 
   securitySchemes:
-    apiKeyBAG: 
+    apiKeyBAG:
       type: apiKey
       name: X-Api-Key
       in: header
       description: >
-        De API-key die je hebt gekregen dient bij elke request 
+        De API-key die je hebt gekregen dient bij elke request
         via de `X-Api-Key` request header meegestuurd te worden. Indien deze
         niet juist wordt meegestuurd, of het een ongeldige key betreft, zul je
         de foutmelding `403 Forbidden` terugkrijgen.
 
   parameters:
-    # Opsomming van path parameters - /{...} - specificatie bij operation zelf. 
-    
-    # Opsomming van request parameters - ?='...' parameters (by name) - specificatie bij operation zelf. 
+    # Opsomming van path parameters - /{...} - specificatie bij operation zelf.
+
+    # Opsomming van request parameters - ?='...' parameters (by name) - specificatie bij operation zelf.
     nummeraanduidingIdentificatie:
-      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een woonplaats en 16 lang bij de andere objecten. 
+      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een woonplaats en 16 lang bij de andere objecten.
       name: nummeraanduidingIdentificatie
       in: query
       required: false
       schema:
         type: string
-        minLength: 16
-        maxLength: 16
         pattern: '^[0-9]{4}20[0-9]{10}$'
         example: 1234200000000001
-    
+
     adresseerbaarObjectIdentificatie:
-      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een woonplaats en 16 lang bij de andere objecten. 
+      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een woonplaats en 16 lang bij de andere objecten.
       name: adresseerbaarObjectIdentificatie
       in: query
       required: false
       schema:
         title: identificatie van adresseerbaar object
         type: string
-        minLength: 16
-        maxLength: 16
         pattern: '^[0-9]{4}(01|02|03)[0-9]{10}$'
         example: 1234010000000001
 
     postcode:
-      description: Postcode behorende bij een nummeraanduiding. 
+      description: Postcode behorende bij een nummeraanduiding.
       name: postcode
       in: query
       required: false
       schema:
         type: string
-        maxLength: 6
         pattern: '^[1-9]{1}[0-9]{3}[A-Z]{2}$'
         example: 7500AA
 
     huisnummer:
-      description: Huisnummer behorende bij een nummeraanduiding. 
+      description: Huisnummer behorende bij een nummeraanduiding.
       name: huisnummer
       in: query
       required: false
       schema:
         type: integer
-        minLength: 1
-        maxLength: 5
         pattern: '^[1-9][0-9]{0,4}$'
         example: 12
 
     huisnummertoevoeging:
-      description: Huisnummertoevoeging behorende bij een nummeraanduiding. 
+      description: Huisnummertoevoeging behorende bij een nummeraanduiding.
       name: huisnummertoevoeging
       in: query
       required: false
       schema:
         type: integer
-        minLength: 1
-        maxLength: 5
         pattern: '^[0-9a-zA-Z]{1,4}$'
         example: bis
 
     huisletter:
-      description: Huisletter behorende bij een nummeraanduiding. 
+      description: Huisletter behorende bij een nummeraanduiding.
       name: huisletter
       in: query
       required: false
       schema:
         type: string
-        maxLength: 1
         pattern: '^[a-zA-Z]{1}$'
         example: A
 
     exacteMatch:
       description: >-
-        "Indicatie of de nummeraanduiding gegevens een exacte match moeten opleveren. 
-        Dit houdt in, dat als de zoek opdracht met de opgegeven parameters meerdere resultaten oplevert, 
-        alleen het resultaat dat exact overeenkomt met deze parameters wordt geretourneerd. 
-        Bv. gevraagd wordt postcode: 1234AA en huisnummer: 3, geen huisletter en geen huisnummertoevoeging. 
+        "Indicatie of de nummeraanduiding gegevens een exacte match moeten opleveren.
+        Dit houdt in, dat als de zoek opdracht met de opgegeven parameters meerdere resultaten oplevert,
+        alleen het resultaat dat exact overeenkomt met deze parameters wordt geretourneerd.
+        Bv. gevraagd wordt postcode: 1234AA en huisnummer: 3, geen huisletter en geen huisnummertoevoeging.
         Gegeven een straat met postcode 1234AA en huisnummer 3, 3A en 3B, levert als resultaten alle 3 de adressen op.
         Wordt exacteMatch=true opgegeven, dan wordt alleen nummeraanduiding met postcode 1234AA en huisnummer 3 geretourneeerd.
         Als er ondanks dat exacteMatch=true is opgegeven nog steeds meerdere zoekresultaten zijn, dan wordt toch een lijst met meerdere resultaten geretourneerd.
         Bv. gevraagd wordt postcode 1234AA, huisnummer 3 en toevoeging bis en geen huisletter.
         Gegeven een straat met postcode 1234AA en huisnummers 3, 3A en 3Abis, 3B en 3Bbis, levert als resultaten 3Abis en 3Bbis op.
         Wordt exacteMatch=true opgegeven, dan blijven er nog steeds twee resultaten over.
-        De default waarde is false." 
+        De default waarde is false."
       name: exacteMatch
       in: query
       required: false
@@ -276,9 +266,9 @@ components:
         type: boolean
         example: true of false
         default: false
-        
+
     woonplaatsNaam:
-      description: Naam van een woonplaats. 
+      description: Naam van een woonplaats.
       name: woonplaatsNaam
       in: query
       required: true
@@ -290,7 +280,7 @@ components:
         example: Apeldoorn
 
     openbareRuimteNaam:
-      description: Naam van een openbare ruimte. 
+      description: Naam van een openbare ruimte.
       name: openbareRuimteNaam
       in: query
       required: true
@@ -298,7 +288,8 @@ components:
         type: string
         minLength: 1
         maxLength: 80
-        example: 'Laan van Westenenk 701' 
+        pattern: '^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*'
+        example: 'Laan van Westenenk'
 
   schemas:
 
@@ -316,7 +307,7 @@ components:
         - openbareRuimte
         - nummeraanduiding
         - adresseerbaarObject
-        - bronhouder
+        - bronhouders
       properties:
         woonplaats:
           $ref: '#/components/schemas/AdresWoonplaats'
@@ -341,8 +332,11 @@ components:
           minItems: 1
         adresseerbaarObject:
           $ref: '#/components/schemas/AdresAdresseerbaarObjectIO'
-        bronhouder:
-          $ref: 'resources.yaml#/Bronhouder'
+        bronhouders:
+          type: array
+          items:
+            $ref: 'resources.yaml#/Bronhouder'
+          minItems: 1
         # Gerelateerd objecten als embedded resource. Deze embedded resource is met expand=woonplaatsen op te vragen.
         _embedded:
           $ref: '#/components/schemas/Adresgegevens_embedded'
@@ -350,7 +344,7 @@ components:
         _links:
           $ref: '#/components/schemas/Adresgegevens_links'
 
-    # Woonplaats object t.b.v. adres, hierin komen niet alle woonplaats attributen in voor, die volgens IMBAG 2.0 odnerdeel uitmaken van een Woonplaats object   
+    # Woonplaats object t.b.v. adres, hierin komen niet alle woonplaats attributen in voor, die volgens IMBAG 2.0 odnerdeel uitmaken van een Woonplaats object
     AdresWoonplaats:
       type: object
       title: AdresWoonplaats
@@ -392,9 +386,9 @@ components:
       title: AdresInOnderzoekWoonplaats
       type: string
       enum:
-        - naam
-    
-    # Openbare ruimte object t.b.v. adres, hierin komen niet alle attributen voor, die volgens IMBAG 2.0 odnerdeel uitmaken van een OpenbareRuimte object   
+        - 'naam'
+
+    # Openbare ruimte object t.b.v. adres, hierin komen niet alle attributen voor, die volgens IMBAG 2.0 odnerdeel uitmaken van een OpenbareRuimte object
     AdresOpenbareRuimte:
       type: object
       title: AdresOpenbareRuimte
@@ -413,12 +407,12 @@ components:
           type: string
           minLength: 1
           maxLength: 80
-          example: 'Laan van Westenenk 701' 
+          example: 'Laan van Westenenk'
         verkorteNaam:
           $ref: '../../../imbag/v20180601/nen5825.yaml#/VerkorteNaamOpenbareRuimte'
         geconstateerd:
           $ref: '../../../imbag/v20180601/datatypes.yaml#/Indicatie'
-        #Gerelateerd object (eigenaar van het kenmerk c.q. de relatie bevat de identificatie van het gerelateerde object)  
+        #Gerelateerd object (eigenaar van het kenmerk c.q. de relatie bevat de identificatie van het gerelateerde object)
         ligtIn:
           description: Een openbare ruimte ligt in een woonplaats.
           $ref: '../../../imbag/v20180601/nen3610.yaml#/NEN3610IDWpl'
@@ -436,10 +430,10 @@ components:
       title: AdresInOnderzoekOpenbareRuimte
       type: string
       enum:
-        - naam
-        - gerelateerde woonplaats
+        - 'naam'
+        - 'gerelateerde woonplaats'
 
-    # Nummeraanduiding t.b.v. adres, omdat hierin niet alle nummeraanduiding attributen voorkomen, die volgens IMBAG 2.0 odnerdeel uitmaken van een nummeraanduiding   
+    # Nummeraanduiding t.b.v. adres, omdat hierin niet alle nummeraanduiding attributen voorkomen, die volgens IMBAG 2.0 odnerdeel uitmaken van een nummeraanduiding
     AdresNummeraanduiding:
       type: object
       title: AdresNummeraanduiding
@@ -457,30 +451,24 @@ components:
           description: Een door of namens het gemeentebestuur ten aanzien van een adresseerbaar object toegekende nummering.
           title: huisnummer
           type: integer
-          minLength: 1
-          maxLength: 5
           pattern: '^[1-9][0-9]{0,4}$'
           example: 12
         huisletter:
           description: Een door of namens het gemeentebestuur ten aanzien van een adresseerbaar object toegekende toevoeging aan een huisnummer in de vorm van een alfanumeriek teken.
           title: huisletter
           type: string
-          maxLength: 1
           pattern: '^[a-zA-Z]{1}$'
           example: A
         huisnummertoevoeging:
           description: Een door of namens het gemeentebestuur ten aanzien van een adresseerbaar object toegekende nadere toevoeging aan een huisnummer of een combinatie van huisnummer en huisletter.
           title: huisnummertoevoeging
           type: string
-          minLength: 1
-          maxLength: 4
           pattern: '^[0-9a-zA-Z]{1,4}$'
           example: bis
         postcode:
           title: postcode
           description: De door PostNL vastgestelde code behorende bij een bepaalde combinatie van een straatnaam en een huisnummer.
           type: string
-          maxLength: 6
           pattern: '^[1-9]{1}[0-9]{3}[A-Z]{2}$'
           example: 7500AA
         typeAdresseerbaarObject:
@@ -491,7 +479,7 @@ components:
           $ref: '../../../imbag/v20180601/nen3610.yaml#/NEN3610IDWpl'
         ligtAan:
           $ref: '../../../imbag/v20180601/nen3610.yaml#/NEN3610IDOpr'
-          
+
     AdresKenmerkNummeraanduidingInOnderzoek:
       title: AdresKenmerkNummeraanduidingInOnderzoek
       type: object
@@ -505,13 +493,13 @@ components:
       title: AdresInOnderzoekNummeraanduiding
       type: string
       enum:
-        - huisnummer
-        - huisletter
-        - huisnummertoevoeging
-        - postcode
-        - type adresseerbaar object
-        - ligt in
-        - ligt aan
+        - 'huisnummer'
+        - 'huisletter'
+        - 'huisnummertoevoeging'
+        - 'postcode'
+        - 'type adresseerbaar object'
+        - 'ligt in'
+        - 'ligt aan'
 
     AdresAdresseerbaarObjectIO:
       title: AdresAdresseerbaarObjectIO
@@ -520,7 +508,7 @@ components:
         - $ref: '#/components/schemas/AdresStandplaatsIO'
         - $ref: '#/components/schemas/AdresVerblijfsobjectIO'
 
-    # Ligplaats t.b.v. adres, omdat hierin niet alle Ligplaats attributen voorkomen, die volgens IMBAG 2.0 odnerdeel uitmaken van een ligplaats   
+    # Ligplaats t.b.v. adres, omdat hierin niet alle Ligplaats attributen voorkomen, die volgens IMBAG 2.0 odnerdeel uitmaken van een ligplaats
     AdresLigplaatsIO:
       title: AdresLigplaatsIO
       allOf:
@@ -536,7 +524,7 @@ components:
               items:
                 $ref: '#/components/schemas/AdresKenmerkLigplaatsInOnderzoek'
               minItems: 1
-    
+
     AdresLigplaats:
       type: object
       title: AdresLigplaats
@@ -571,9 +559,9 @@ components:
       title: InOnderzoekLigplaats
       type: string
       enum:
-        - geometrie
+        - 'geometrie'
 
-    # Standplaats t.b.v. adres, omdat hierin niet alle Standplaats attributen voorkomen, die volgens IMBAG 2.0 odnerdeel uitmaken van een standplaats   
+    # Standplaats t.b.v. adres, omdat hierin niet alle Standplaats attributen voorkomen, die volgens IMBAG 2.0 odnerdeel uitmaken van een standplaats
     AdresStandplaatsIO:
       title: AdresStandplaatsIO
       allOf:
@@ -589,7 +577,7 @@ components:
               items:
                 $ref: '#/components/schemas/AdresKenmerkStandplaatsInOnderzoek'
               minItems: 1
-    
+
     AdresStandplaats:
       type: object
       title: AdresStandplaats
@@ -624,9 +612,9 @@ components:
       title: AdresInOnderzoekStandplaats
       type: string
       enum:
-        - geometrie
+        - 'geometrie'
 
-    # Verblijfsobject t.b.v. adres, omdat hierin niet alle verblijfsobject attributen voorkomen, die volgens IMBAG 2.0 odnerdeel uitmaken van een verblijsfobject   
+    # Verblijfsobject t.b.v. adres, omdat hierin niet alle verblijfsobject attributen voorkomen, die volgens IMBAG 2.0 odnerdeel uitmaken van een verblijsfobject
     AdresVerblijfsobjectIO:
       title: AdresVerblijfsobjectIO
       allOf:
@@ -642,7 +630,7 @@ components:
               items:
                 $ref: '#/components/schemas/AdresKenmerkVerblijfsobjectInOnderzoek'
               minItems: 1
-    
+
     AdresVerblijfsobject:
       type: object
       title: AdresVerblijfsobject
@@ -662,18 +650,16 @@ components:
           type: integer
           example: 3
         geometrie:
-          $ref: '../../../../geometrie/geometrie.yaml#/components/schemas/PuntOfVlak'
+          $ref: '../../../imbag/v20180601/geometrie.yaml#/components/schemas/PuntOfVlak'
         gebruiksdoel:
           $ref: '../../../imbag/v20180601/verblijfsobject.yaml#/Gebruiksdoel'
         oppervlakte:
           title: oppervlakte
           type: integer
-          minLength: 1
-          maxLength: 6
           pattern: '^[1-9][0-9]{0,5}$'
         geconstateerd:
           $ref: '../../../imbag/v20180601/datatypes.yaml#/Indicatie'
-          
+
     AdresKenmerkVerblijfsobjectInOnderzoek:
       title: AdresKenmerkVerblijfsobjectInOnderzoek
       type: object
@@ -687,22 +673,22 @@ components:
       title: AdresInOnderzoekVerblijfsobject
       type: string
       enum:
-        - geometrie
-        - gebruiksdoel
-        - oppervlakte
+        - 'geometrie'
+        - 'gebruiksdoel'
+        - 'oppervlakte'
 
     Adresgegevens_embedded:
-      type: object 
-      properties: 
-        ligtInWoonplaats: 
+      type: object
+      properties:
+        ligtInWoonplaats:
           $ref: 'resources.yaml#/WoonplaatsIO'
-        ligtAanOpenbareRuimte: 
+        ligtAanOpenbareRuimte:
           $ref: 'resources.yaml#/OpenbareRuimteIO'
         heeftAlsHoofdAdres:
           $ref: 'resources.yaml#/NummeraanduidingIO'
-        heeftAlsNevenAdres: 
-          type: array 
-          items: 
+        heeftAlsNevenAdres:
+          type: array
+          items:
             $ref: 'resources.yaml#/NummeraanduidingIO'
           minItems: 1
 
@@ -723,10 +709,9 @@ components:
           description: 'De nummeraanduiding die dit adresseerbaarobject als hoofdadres heeft. Van deze gerelateerd nummeranduiding: hiervan het voorkomen van nummeraanduiding die gevonden wordt op basis van dezelfde tijdreisparameters als waarmee het adresseerbara object voorkomen gevonden is.'
           $ref: '../../../../generiek/hallinks.yaml#/HalLink'
         heeftAlsNevenAdres:
-          title: heeftAlsNevenAdres     
+          title: heeftAlsNevenAdres
           description: 'De nummeraanduidingen die dit adresseerbaarobject als nevenadressen heeft. Van deze gerelateerd nummeranduiding: hiervan het voorkomen van nummeraanduiding die gevonden wordt op basis van dezelfde tijdreisparameters als waarmee het adresseerbara object voorkomen gevonden is.'
           type: array
-          items:  
+          items:
             $ref: '../../../../generiek/hallinks.yaml#/HalLink'
           minItems: 1
-            

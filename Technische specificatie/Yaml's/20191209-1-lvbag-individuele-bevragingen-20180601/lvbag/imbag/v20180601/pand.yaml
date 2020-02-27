@@ -23,7 +23,6 @@ Pand:
       title: Oorspronkelijk bouwjaar
       description: 'De aanduiding van het jaar waarin een pand oorspronkelijk als bouwkundig gereed is of zal worden opgeleverd. Bij het initieel opvoeren van een PAND wordt door de gemeente een reële inschatting gemaakt van het waarschijnlijke bouwjaar van het PAND. Bij het bouwkundig gereed opleveren van het PAND wordt deze waarde in voorkomende gevallen aangepast. Indien in latere jaren wijzigingen aan een pand worden aangebracht, leidt dit niet tot wijziging van het bouwjaar.'
       type: string
-      minLength: 4
       maxLength: 4
       pattern: '-?([1-9][0-9]{3,}|0[0-9]{3})(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?'
       example: 1972
@@ -66,8 +65,6 @@ KenmerkPandInOnderzoek:
     identificatieVanPand:
       title: identificatie van pand
       type: string
-      minLength: 16
-      maxLength: 16
       pattern: '^[0-9]{4}10[0-9]{10}$'
       example: 1234100000000001
     inOnderzoek:
@@ -96,21 +93,21 @@ StatusPand:
   description: Een codering van de verschillende waarden die de status van een pand kan aannemen.
   type: string
   enum:
-    - Bouwvergunning verleend
-    - Niet gerealiseerd pand
-    - Bouw gestart
-    - Pand in gebruik (niet ingemeten)
-    - Pand in gebruik
-    - Verbouwing pand
-    - Sloopvergunning verleend
-    - Pand gesloopt
-    - Pand buiten gebruik
-    - Pand ten onrechte opgevoerd
+    - 'Bouwvergunning verleend'
+    - 'Niet gerealiseerd pand'
+    - 'Bouw gestart'
+    - 'Pand in gebruik (niet ingemeten)'
+    - 'Pand in gebruik'
+    - 'Verbouwing pand'
+    - 'Sloopvergunning verleend'
+    - 'Pand gesloopt'
+    - 'Pand buiten gebruik'
+    - 'Pand ten onrechte opgevoerd'
 
 InOnderzoekPand:
-  title: InOnderzoePand
+  title: InOnderzoekPand
   type: string
   enum:
-    - geometrie
-    - oorspronkelijk bouwjaar
-    - status
+    - 'geometrie'
+    - 'oorspronkelijk bouwjaar'
+    - 'status'

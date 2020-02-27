@@ -1,192 +1,166 @@
 components:
   schemas:
-    PuntOfVlak:
-      title: PuntOfVlak
-      oneOf:
-        - $ref: '#/components/schemas/Point'
-        - $ref: '#/components/schemas/Surface'
-    
-    VlakOfMultivlak:
-      title: VlakOfMultivlak
-      oneOf:
-        - $ref: '#/components/schemas/Surface' 
-        - $ref: '#/components/schemas/MultiSurface'
-        
+    Coordinate:
+      title: Coordinate
+      description: Een coordinate kan 2D of 3D zijn.
+      type: array
+      maxItems: 2
+      minItems: 3
+      items:
+        type: number
+
     GeoJsonGeometry:
       title: GeoJSON Geometry
       description: Geometrie in GeoJSON formaat (RFC 7946).
       externalDocs:
         description: RFC 7946 - The GeoJSON Format
         url: https://tools.ietf.org/html/rfc7946
-      oneOf:
-        - $ref: '#/components/schemas/Point'
-        - $ref: '#/components/schemas/MultiPoint'
-        - $ref: '#/components/schemas/Polygon'
-        - $ref: '#/components/schemas/Surface'
-        - $ref: '#/components/schemas/MultiPolygon'
-        - $ref: '#/components/schemas/MultiSurface'
-        - $ref: '#/components/schemas/MultiLineString'
-        - $ref: '#/components/schemas/LineString'
-    
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/GeometryTypes'
+        dimensions:
+          $ref: '#/components/schemas/GeometryDimensions'
+        bbox:
+          type: array
+          minItems: 4
+          items:
+            type: number
+      discriminator:
+        propertyName: type
+
     Point:
       title: GeoJSON Point
-      type: object
-      required:
-        - type
-        - coordinates
-      properties:
-        type:
-          type: string
-          enum:
-            - Point
-        coordinates:
-          type: array
-          minItems: 2
-          items:
-            type: number
-        bbox:
-          type: array
-          minItems: 4
-          items:
-            type: number
-    
-    MultiPoint:
-      title: GeoJSON MultiPoint
-      type: object
-      required:
-        - type
-        - coordinates
-      properties:
-        type:
-          type: string
-          enum:
-            - MultiPoint
-        coordinates:
-          type: array
-          items:
-            type: array
-            minItems: 2
-            items:
-              type: number
-        bbox:
-          type: array
-          minItems: 4
-          items:
-            type: number
-    
-    Surface:
-      $ref: '#/components/schemas/Polygon'
-    
-    Polygon:
-      title: GeoJSON Polygon
-      type: object
-      required:
-        - type
-        - coordinates
-      properties:
-        type:
-          type: string
-          enum:
-            - Polygon
-        coordinates:
-          type: array
-          items:
-            type: array
-            minItems: 4
-            items:
-              type: array
-              minItems: 2
-              items:
-                type: number
-        bbox:
-          type: array
-          minItems: 4
-          items:
-            type: number
-    
-    MultiSurface:
-      $ref: '#/components/schemas/MultiPolygon'
-    
-    MultiPolygon:
-      title: GeoJSON MultiPolygon
-      type: object
-      required:
-        - type
-        - coordinates
-      properties:
-        type:
-          type: string
-          enum:
-            - MultiPolygon
-        coordinates:
-          type: array
-          items:
-            type: array
-            items:
-              type: array
-              minItems: 4
-              items:
-                type: array
-                minItems: 2
-                items:
-                  type: number
-        bbox:
-          type: array
-          minItems: 4
-          items:
-            type: number
-    
-    Curve:
-      $ref: '#/components/schemas/LineString'
-    
+      allOf:
+        - $ref: '#/components/schemas/GeoJsonGeometry'
+        - type: object
+          properties:
+            coordinates:
+              $ref: '#/components/schemas/Coordinate'
+          required:
+            - coordinates
+      example:
+        type: 'Point'
+        dimensions: 'geometry-3D'
+
     LineString:
       title: GeoJSON LineString
-      type: object
-      required:
-        - type
-        - coordinates
-      properties:
-        type:
-          type: string
-          enum:
-            - LineString
-        coordinates:
-          type: array
-          minItems: 2
-          items:
-            type: array
-            minItems: 2
-            items:
-              type: number
-        bbox:
-          type: array
-          minItems: 4
-          items:
-            type: number
-    
-    MultiLineString:
-      title: GeoJSON MultiLineString
-      type: object
-      required:
-        - type
-        - coordinates
-      properties:
-        type:
-          type: string
-          enum:
-            - MultiLineString
-        coordinates:
-          type: array
-          items:
-            type: array
-            minItems: 2
-            items:
+      allOf:
+        - $ref: '#/components/schemas/GeoJsonGeometry'
+        - type: object
+          properties:
+            coordinates:
+              items:
+                $ref: '#/components/schemas/Coordinate'
+              type: array
+          required:
+            - coordinates
+      example:
+        type: 'LineString'
+
+    Polygon:
+      title: GeoJSON Polygon
+      allOf:
+        - $ref: '#/components/schemas/GeoJsonGeometry'
+        - type: object
+          properties:
+            coordinates:
+              items:
+                type: array
+                minItems: 3
+                items:
+                  type: array
+                  $ref: '#/components/schemas/Coordinate'
+          required:
+            - coordinates
+      example:
+        type: 'Polygon'
+
+    MultiPoint:
+      title: GeoJSON MultiPoint
+      allOf:
+        - $ref: '#/components/schemas/GeoJsonGeometry'
+        - type: object
+          properties:
+            coordinates:
               type: array
               minItems: 2
               items:
-                type: number
-        bbox:
-          type: array
-          minItems: 4
-          items:
-            type: number
+                $ref: '#/components/schemas/Coordinate'
+          required:
+            - coordinates
+      example:
+        type: 'MultiPoint'
+
+    MultiLineString:
+      title: GeoJSON MultiLineString
+      allOf:
+        - $ref: '#/components/schemas/GeoJsonGeometry'
+        - type: object
+          properties:
+            coordinates:
+              type: array
+              items:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Coordinate'
+          required:
+            - coordinates
+      example:
+        type: 'MultiLineString'
+
+    MultiPolygon:
+      title: GeoJSON MultiPolygon
+      allOf:
+        - $ref: '#/components/schemas/GeoJsonGeometry'
+        - type: object
+          properties:
+            coordinates:
+              minItems: 2
+              type: array
+              items:
+                type: array
+                items:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Coordinate'
+          required:
+            - coordinates
+      example:
+        type: 'MultiPolygon'
+
+    GeometryDimensions:
+      type: string
+      description: De geometrie dimensie.
+      enum:
+        - 'geometry-2D'
+        - 'geometry-3D'
+
+    GeometryTypes:
+      title: GeoJSON GeometryTypes
+      type: string
+      description: De mogelijke geometrie types.
+      enum:
+        - Point
+        - LineString
+        - Polygon
+        - MultiPoint
+        - MultiLineString
+        - MultiPolygon
+
+#=== Speciale BAG objecten ===
+    Surface:
+      title: Surface
+      allOf:
+        - $ref: '#/components/schemas/Polygon'
+      example:
+        type: 'Polygon'
+
+    MultiSurface:
+      title: MultiSurface
+      allOf:
+        - $ref: '#/components/schemas/MultiPolygon'
+      example:
+        type: 'MultiPolygon'

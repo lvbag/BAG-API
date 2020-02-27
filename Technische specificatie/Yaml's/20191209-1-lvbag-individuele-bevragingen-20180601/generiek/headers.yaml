@@ -68,9 +68,9 @@ acceptCrs:
   name: Accept-Crs
   in: header
   required: false
-  description: Gewenste CRS van de coördinaten in de response.
+  description: Gewenste CRS van de coÃ¶rdinaten in de response.
   schema:
-    description: 'CRS van de coördinaten in de response.'
+    description: 'CRS van de coÃ¶rdinaten in de response.'
     type: string
     enum:
       - epsg:28992

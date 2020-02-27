@@ -61,8 +61,6 @@ KenmerkLigplaatsInOnderzoek:
     identificatieVanLigplaats:
       title: identificatie van ligplaats
       type: string
-      minLength: 16
-      maxLength: 16
       pattern: '^[0-9]{4}02[0-9]{10}$'
       example: 1234020000000001
     inOnderzoek:
@@ -90,7 +88,7 @@ InOnderzoekLigplaats:
   title: InOnderzoekLigplaats
   type: string
   enum:
-    - geometrie
-    - status
-    - heeft als hoofdadres
-    - heeft als nevenadres
+    - 'geometrie'
+    - 'status'
+    - 'heeft als hoofdadres'
+    - 'heeft als nevenadres'

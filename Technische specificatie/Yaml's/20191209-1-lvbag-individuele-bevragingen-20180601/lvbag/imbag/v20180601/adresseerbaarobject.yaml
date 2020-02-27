@@ -20,6 +20,6 @@ TypeAdresseerbaarObject:
   description: De aard van een als zodanig benoemde Nummeraanduiding.
   type: string
   enum:
-    - Verblijfsobject
-    - Standplaats
-    - Ligplaats
+    - 'Verblijfsobject'
+    - 'Standplaats'
+    - 'Ligplaats'

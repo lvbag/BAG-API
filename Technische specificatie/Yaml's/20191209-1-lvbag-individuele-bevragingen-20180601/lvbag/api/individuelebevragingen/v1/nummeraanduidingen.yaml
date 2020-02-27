@@ -47,7 +47,7 @@ security:
 tags:
   - 
     name: Nummeraanduiding
-    description: Dit endpoint levert één of meer (voorkomens van) nummeraanduiding(en), met embedded resources en links. 
+    description: Dit endpoint levert Ã©Ã©n of meer (voorkomens van) nummeraanduiding(en), met embedded resources en links.
 
 paths:
 
@@ -61,7 +61,7 @@ paths:
         - Nummeraanduiding
       summary: bevragen 1 nummeraanduiding op basis van de identificatie. 
       description: >-
-        Bevragen/raadplegen één nummeraanduiding, via de identificatie van een nummeraanduiding. 
+        Bevragen/raadplegen Ã©Ã©n nummeraanduiding, via de identificatie van een nummeraanduiding.
         Geleverd wordt een voorkomen van enn nummeraanduiding met (indien gevraagd) embedded de woonplaats waar de nummeraanduiding in ligt en de openbare ruimte waar de nummeraanduiding aan ligt. 
         Parameter nummeraanduidingIdentificatie bevat de 16 cijferige identificatie van een nummeraanduiding object.
         Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd. 
@@ -138,7 +138,7 @@ paths:
         "De volgende (combinaties van) parameters worden ondersteund:<br/>
         <ol>
         <li>Bevragen/raadplegen van eenn adres via postcode en huisnummer (evt. met huisletter en huisnummertoevoeging). 
-           Geleverd wordt een (lijst van) voorkomens van één of meer nummeraanduidingen met (indien gevraagd) embedded de woonplaats waar de nummeraanduiding in ligt en de openbare ruimte waar de nummeraanduiding aan ligt. 
+           Geleverd wordt een (lijst van) voorkomens van Ã©Ã©n of meer nummeraanduidingen met (indien gevraagd) embedded de woonplaats waar de nummeraanduiding in ligt en de openbare ruimte waar de nummeraanduiding aan ligt.
            Parameter postcode bevat de postcode van een nummeraanduiding object.
            Parameter huisnummer bevat het huisnummer van hetzelfde nummeraanduiding object.
            Parameter huisnummertoevoeging (optioneel) bevat de huisnummertoevoeging van hetzelfde nummeraanduiding object.
@@ -149,7 +149,7 @@ paths:
            Bv. bij een straat met huisnummers 3, 3A en 3Abis, 3B en 3Bbis, als er wordt gezocht met huisnummer 3 en toevoeging 'bis' en exacteMatch=true zijn er meerdere resultaten.
            Deze worden alle geretourneerd.</li>
         <li>Bevragen/raadplegen van eenn adres via woonplaats naam, openbare ruimte naam, huisnummer en optioneel huisnummertoevoeging en huisletter. 
-           Geleverd wordt een (lijst van) voorkomens van één of meer nummeraanduidingen met (indien gevraagd) embedded de woonplaats waar de nummeraanduiding in ligt en de openbare ruimte waar de nummeraanduiding aan ligt. 
+           Geleverd wordt een (lijst van) voorkomens van Ã©Ã©n of meer nummeraanduidingen met (indien gevraagd) embedded de woonplaats waar de nummeraanduiding in ligt en de openbare ruimte waar de nummeraanduiding aan ligt.
            Parameter woonplaatsNaam bevat de naam van een woonplaats object.
            Parameter openbareRuimteNaam bevat de naam van een openbare ruimte object.
            Parameter huisnummer bevat het huisnummer van hetzelfde nummeraanduiding object.
@@ -220,6 +220,7 @@ paths:
                         type: array
                         items:
                           $ref: './resources.yaml#/NummeraanduidingIO'
+                        minItems: 1
                   _links:
                     $ref: '../../../../generiek/hallinks.yaml#/HalPaginationLinks'
         '204':
@@ -257,9 +258,9 @@ paths:
       operationId: nummeraanduidingLvcIdentificatie
       tags: 
         - Nummeraanduiding
-      summary: bevragen levenscyclus van 1 nummeraanduiding op basis van de identificatie. 
+      summary: bevragen levenscyclus van 1 nummeraanduiding op basis van de identificatie.
       description: >-
-        Bevragen/raadplegen levenscyclus van één nummeraanduiding, via de identificatie van een nummeraanduiding. 
+        Bevragen/raadplegen levenscyclus van Ã©Ã©n nummeraanduiding, via de identificatie van een nummeraanduiding.
         Geleverd worden de voorkomens van een nummeraanduiding die de levenscyclus vormen, met embedded de idntificaties van woonplaats waar de nummeraanduiding in ligt en de openbare ruimte waar de nummeraanduiding aan ligt. 
         Parameter identificatie.lokaalID bevat de 16 cijferige identificatie van een nummeraanduiding object.
         Parameter geheleLvc bevat een indicatie dat de gehele levenscyclus (inclusief voorkomens die uit de geldige levenscyclus zijn verwijderd) zijn gewenst. Als deze parameter wordt weggelaten (default) wordt alleen de geledige levenscyclus geretourneerd. 
@@ -296,6 +297,7 @@ paths:
                 type: array
                 items:
                   $ref: './resources.yaml#/NummeraanduidingIO'
+                minItems: 1
         '204':
           $ref: '../../../../generiek/responses.yaml#/204'
         '400':
@@ -345,8 +347,6 @@ components:
       required: true
       schema:
         type: string
-        minLength: 16
-        maxLength: 16
         pattern: '^[0-9]{4}20[0-9]{10}$'
         example: 1234200000000001
 
@@ -358,7 +358,6 @@ components:
       required: false
       schema:
         type: string
-        maxLength: 6
         pattern: '^[1-9]{1}[0-9]{3}[A-Z]{2}$'
         example: 7500AA
 
@@ -369,8 +368,6 @@ components:
       required: false
       schema:
         type: integer
-        minLength: 1
-        maxLength: 5
         pattern: '^[1-9][0-9]{0,4}$'
         example: 12
 
@@ -381,8 +378,6 @@ components:
       required: false
       schema:
         type: string
-        minLength: 16
-        maxLength: 16
         pattern: '^[0-9]{4}30[0-9]{10}$'
         example: 0518300000000001
     
@@ -407,7 +402,8 @@ components:
         type: string
         minLength: 1
         maxLength: 80
-        example: 'Laan van Westenenk 701' 
+        pattern: '^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*'
+        example: 'Laan van Westenenk' 
 
     geldigOp:
       description: > 
@@ -424,6 +420,8 @@ components:
     beschikbaarOp:
       description: >
         Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss' 
+        Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'.
+        Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'.
         Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
       name: beschikbaarOp
       in: query
@@ -431,7 +429,7 @@ components:
       schema:
         type: string
         format: date-time 
-      example: '2019-06-01T12:00:00.000'
+        example: '2019-06-01T12:00:00.000'
 
     huisnummertoevoeging:
       description: Huisnummertoevoeging behorende bij een nummeraanduiding. 
@@ -440,8 +438,6 @@ components:
       required: false
       schema:
         type: integer
-        minLength: 1
-        maxLength: 5
         pattern: '^[0-9a-zA-Z]{1,4}$'
         example: bis
 
@@ -452,7 +448,6 @@ components:
       required: false
       schema:
         type: string
-        maxLength: 1
         pattern: '^[a-zA-Z]{1}$'
         example: A
 
