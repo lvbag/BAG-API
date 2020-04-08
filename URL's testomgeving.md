@@ -1,6 +1,6 @@
 __Basis URL voor de test omgeving__  
 
-https://api.test.kadaster.nl/lvbag/api/individuelebevragingen/v1
+https://api.acceptatie.kadaster.nl/lvbag/api/individuelebevragingen/v1
 
 
 Achter deze basis URL’s kunnen de volgende relatieve paden worden toegevoegd.  
