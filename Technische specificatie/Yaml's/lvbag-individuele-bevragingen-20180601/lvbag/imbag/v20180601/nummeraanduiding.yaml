@@ -1,0 +1,123 @@
+# Openbare ruinmte t.b.v. adres.
+Nummeraanduiding:
+  type: object
+  title: Nummeraanduiding
+  description: Een Nummeraanduiding is een door het bevoegde gemeentelijke orgaan als zodanig toegekende aanduiding van een verblijfsobject, een standplaats of een ligplaats.
+  required:
+    - identificatie
+    - huisnummer
+    - typeAdresseerbaarObject
+    - status
+    - geconstateerd
+    - documentdatum
+    - documentnummer
+    - voorkomen
+    - ligtAan
+  properties:
+    identificatie:
+      $ref: './nen3610.yaml#/NEN3610IDNum'
+    huisnummer:
+      description: Een door of namens het gemeentebestuur ten aanzien van een adresseerbaar object toegekende nummering.
+      title: huisnummer
+      type: integer
+      pattern: '^[1-9][0-9]{0,4}$'
+      example: '12'
+    huisletter:
+      description: Een door of namens het gemeentebestuur ten aanzien van een adresseerbaar object toegekende toevoeging aan een huisnummer in de vorm van een alfanumeriek teken.
+      title: huisletter
+      type: string
+      pattern: '^[a-zA-Z]{1}$'
+      example: 'A'
+    huisnummertoevoeging:
+      description: Een door of namens het gemeentebestuur ten aanzien van een adresseerbaar object toegekende nadere toevoeging aan een huisnummer of een combinatie van huisnummer en huisletter.
+      title: huisnummer toevoeging
+      type: string
+      pattern: '^[0-9a-zA-Z]{1,4}$'
+      example: bis
+    postcode:
+      title: postcode
+      description: De door PostNL vastgestelde code behorende bij een bepaalde combinatie van een straatnaam en een huisnummer.
+      type: string
+      pattern: '^[1-9]{1}[0-9]{3}[A-Z]{2}$'
+      example: '7500AA'
+    typeAdresseerbaarObject:
+      $ref: './adresseerbaarobject.yaml#/TypeAdresseerbaarObject'
+    status:
+      $ref: './datatypes.yaml#/StatusNaamgeving'
+    geconstateerd:
+      description: 'Een aanduiding waarmee kan worden aangegeven dat een object in de registratie is opgenomen als gevolg van een feitelijke constatering, zonder dat er op het moment van opname sprake was van een regulier brondocument voor deze opname.'
+      $ref: './datatypes.yaml#/Indicatie'
+    documentdatum:
+      description: 'De datum waarop het brondocument is vastgesteld, op basis waarvan een opname, mutatie of een verwijdering van gegevens ten aanzien van een object heeft plaatsgevonden.'
+      title: documentdatum
+      type: string
+      format: date
+      example: '2019-08-14'
+    documentnummer:
+      description: De unieke aanduiding van het brondocument op basis waarvan een opname, mutatie of een verwijdering van gegevens ten aanzien van een woonplaats heeft plaatsgevonden, binnen een gemeente. Alle karakters uit de MES-1 karakterset zijn toegstaan.
+      title: Documentnummer
+      type: string
+      minLength: 1
+      maxLength: 40
+      pattern: '^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*'
+      example: 'AV-2019-08-19-00, Z/18/027505/150305, PVB.0965.19.0043'
+    voorkomen:
+      $ref: './historie.yaml#/Voorkomen'
+    ligtIn:
+      description: Een nummeraanduiding ligt in een woonplaats.
+      $ref: './nen3610.yaml#/NEN3610IDWpl'
+    ligtAan:
+      description: Een nummeraanduiding ligt aan een openbare ruimte.
+      $ref: './nen3610.yaml#/NEN3610IDOpr'
+
+KenmerkNummeraanduidingInOnderzoek:
+  description: Limitatieve opsomming van alle kenmerken van dit object die in onderzoek zijn op dit moment, of van alle kenmerken die ooit in onderzoek zijn geweest als er een tijdreisvraag is gesteld of een vraag naar de levenscyclus.
+  title: KenmerkNummeraanduidingInOnderzoek
+  type: object
+  required:
+    - kenmerk
+    - identificatieVanNummeraanduiding
+    - inOnderzoek
+    - historie
+  properties:
+    kenmerk:
+      $ref: '#/InOnderzoekNummeraanduiding'
+    identificatieVanNummeraanduiding:
+      description: De unieke aanduiding van een nummeraanduiding.
+      title: identificatie van nummeraanduiding
+      type: string
+      pattern: '^[0-9]{4}20[0-9]{10}$'
+      example: '1234200000000001'
+    inOnderzoek:
+      $ref: './datatypes.yaml#/Indicatie'
+    historie:
+      $ref: './historie.yaml#/HistorieInOnderzoek'
+    documentdatum:
+      description: De datum van het document waarin de grondslag van het onderzoek wordt vastgelegd. Dit wordt vastgelegd in het attribuut documentdatum.
+      title: documentdatum
+      type: string
+      format: date
+      example: '2019-08-14'
+    documentnummer:
+      description: Het nummer van het document waarin de grondslag van het onderzoek wordt vastgelegd. Dit wordt vastgelegd in het attribuut documentnummer.
+      title: Documentnummer
+      type: string
+      minLength: 1
+      maxLength: 40
+      pattern: '^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*'
+      example: 'AV-2019-08-19-00, Z/18/027505/150305, PVB.0965.19.0043'
+
+#Informatiemodel - Datatypen
+
+InOnderzoekNummeraanduiding:
+  title: InOnderzoekNummeraanduiding
+  type: string
+  enum:
+    - 'huisnummer'
+    - 'huisletter'
+    - 'huisnummertoevoeging'
+    - 'postcode'
+    - 'type adresseerbaar object'
+    - 'status'
+    - 'ligt in'
+    - 'ligt aan'
