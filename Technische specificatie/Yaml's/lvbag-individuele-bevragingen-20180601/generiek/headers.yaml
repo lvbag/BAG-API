@@ -1,0 +1,77 @@
+api_version:
+  required: true
+  schema:
+    description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep.'
+    type: string
+    example: 1.0.1
+
+warning:
+  required: false
+  schema:
+    description: 'zie RFC 7234. In het geval een major versie wordt uitgefaseerd, gebruiken we warn-code 299 ("Miscellaneous Persistent Warning") en het API end-point (inclusief versienummer) als de warn-agent van de warning, gevolgd door de warn-text met de human-readable waarschuwing'
+    type: string
+    example: '299 https://service.../api/.../v1 "Deze versie van de API is verouderd en zal uit dienst worden genomen op 2018-02-01. Raadpleeg voor meer informatie hier de documentatie: https://omgevingswet.../api/.../v1".'
+
+X_Pagination_Page:
+  required: true
+  schema:
+    description: Huidige pagina.
+    type: integer
+    example: 3
+
+X_Pagination_Limit:
+  required: true
+  schema:
+    description: Aantal resultaten per pagina.
+    type: integer
+    example: 20
+
+X_Rate_Limit_Limit:
+  required: true
+  schema:
+    description: Aantal requesten dat is toegestaan per 5 minuten.
+    type: integer
+
+X_Rate_Limit_Remaining:
+  required: true
+  schema:
+    description: Het resterende aantal requesten voordat de limiet wordt bereikt.
+    type: integer
+
+X_Rate_Limit_Reset:
+  required: true
+  schema:
+    description: De datum en tijd waarop de limiet wordt geupdatein UNIX timestamp format.
+    format: int64
+    type: integer
+
+contentType:
+  name: Content-Type
+  in: header
+  required: false
+  description: Media type van het request.
+  schema:
+    type: string
+
+contentCrs:
+  name: Content-Crs
+  in: header
+  required: false
+  description: CRS van de meegegeven geometrie.
+  schema:
+    type: string
+    enum:
+      - epsg:28992
+    default: epsg:28992
+
+acceptCrs:
+  name: Accept-Crs
+  in: header
+  required: false
+  description: Gewenste CRS van de coördinaten in de response.
+  schema:
+    description: 'CRS van de coördinaten in de response.'
+    type: string
+    enum:
+      - epsg:28992
+    default: epsg:28992

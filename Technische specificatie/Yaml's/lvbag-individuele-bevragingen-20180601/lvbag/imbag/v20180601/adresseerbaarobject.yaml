@@ -1,0 +1,25 @@
+AdresseerbaarObject:
+  title: AdresseerbaarObject
+  description: Abstract type adresseerbaar object
+  type: object
+  required:
+    - heeftAlsHoofdAdres
+  properties:
+    heeftAlsHoofdAdres:
+      $ref: './nen3610.yaml#/NEN3610IDNum'
+    heeftAlsNevenAdres:
+      type: array
+      items:
+        $ref: './nen3610.yaml#/NEN3610IDNum'
+      minItems: 1
+  discriminator:
+    propertyName: adresseerbaarObjectType
+
+TypeAdresseerbaarObject:
+  title: TypeAdresseerbaarObject
+  description: De aard van een als zodanig benoemde Nummeraanduiding.
+  type: string
+  enum:
+    - 'Verblijfsobject'
+    - 'Standplaats'
+    - 'Ligplaats'
