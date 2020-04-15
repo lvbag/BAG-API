@@ -5,5 +5,5 @@ Gedurende de ontwikkeling van de BAG API's is dit het platform waar de API docum
 De geplaatste documentatie is in bewerking en wordt op basis van feedback samengevoegd tot een definitieve versie.
 
 __Documentatie__  
-* Technische specificaties van het verblijfsobjecten in [Swagger](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/20191209-1-lvbag-individuele-bevragingen-20180601/generated-specification/v1/verblijfsobjecten.yaml)
+* Technische specificaties van het verblijfsobjecten in [Swagger](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v1/verblijfsobjecten.yaml)
 
