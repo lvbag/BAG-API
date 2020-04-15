@@ -1,0 +1,360 @@
+openapi: 3.0.0
+
+# Server specificatie
+servers:
+  - description: LVBAG - TEST
+    url: https://api.test.kadaster.nl/lvbag/api/individuelebevragingen/v1
+  - description: LVBAG - ACCEPTATIE
+    url: https://api.acceptatie.kadaster.nl/lvbag/api/individuelebevragingen/v1
+  - description: LVBAG - PRODUCTIE
+    url: https://api.kadaster.nl/lvbag/api/individuelebevragingen/v1
+
+# API specificatie - algemeen
+info:
+  title: IMBAG API - van de LVBAG
+  description: "Dit is de BAG API van de landelijke voorziening BAG (LVBAG) voor het informatiemodel IMBAG 2.0 en conform de API strategie 1.1 specificatie in OAS3. Deze is vooral gericht op individuele bevragingen (op basis van de identificerende gegevens van een object).
+    <br/><br/>
+    <font color='red'>**LET OP: Deze specificatie is een \"work in progress\"**, oftewel niet definitief.</font><br/><br/>
+    Meer informatie over BAG 2.0 is te vinden op: [Catalogus BAG 2.0](https://www.geobasisregistraties.nl/basisregistraties/adressen-en-gebouwen)
+    <br/>
+    Meer informatie over Nederlandse API strategie is te vinden op: [API-Strategie](https://docs.geostandaarden.nl/api/API-Strategie) - deze API volgt versie 1.1 van 20190213.
+    <br/>
+    Meer informatie over OAS3 specificatie is te vinden op: [OAS](https://www.forumstandaardisatie.nl/standaard/openapi-specification)
+    <br/>
+    Het standaard mediatype HAL (`application/hal+json`) wordt gebruikt. Dit is een mediatype voor het weergeven van resources en hun relaties via hyperlinks.
+    <br/>
+    <br/>
+    Voor vragen, neem contact op met de BAG beheerder o.v.v. BAG API 2.0. We zijn aan het kijken naar een geschikt medium hiervoor, mede ook om de API iteratief te kunnen opstellen of doorontwikkelen samen met de community. Als de API iets (nog) niet kan, wat u wel graag wilt, neem dan contact op.
+    <br/>
+    <br/>
+    Een API-key kan  verkregen worden door een e-mail te sturen naar: zie onderstaande contactgegevens <font color='blue'>send e-mail</font>."
+
+  version: '0.1'
+  # De versie wordt 1.0 als de API naar productie gaat.
+  termsOfService: https://zakelijk.kadaster.nl/algemene-voorwaarden
+  contact:
+    name: Kadaster - Beheerder Landelijke Voorziening BAG
+    email: bag@kadaster.nl
+    url: https://zakelijk.kadaster.nl/bag
+  license:
+    name: European Union Public License, version 1.2 (EUPL-1.2)
+    url: https://eupl.eu/1.2/nl/
+
+security:
+  - apiKeyBAG: []
+  # Alle requests verwachten een (BAG) API key (niet per operation of end-point veschillend)
+  # Voor defintie van benoemde 'apiKeyBAG', zie security-schemes onderin.
+
+#+Functionele toelichting bij de operations/end-points als documentatie indeling.
+tags:
+  -
+    name: Standplaats
+    description: Dit endpoint levert één of meer (voorkomens van) standplaats(en), met embedded resources en links.
+
+paths:
+
+  # Vraag standplaatsIdentificatie
+  /standplaatsen/{identificatie}:
+    get:
+      security:
+        - apiKeyBAG: []
+      tags:
+        - Standplaats
+      summary: bevragen 1 standplaats, op basis van de standplaats identificatie.
+      operationId: standplaatsIdentificatie
+      description: >-
+        Bevragen/raadplegen van één bronhouder, via de identificatie van de standplaats.
+        Geleverd wordt een standplaats.
+        Parameter identificatie bevat de 16 cijferige identificatie van een standplaats.
+        Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.
+        Als expand=heeftAlsHoofdAdres dan wordt de nummeraanduiding van het hoofdadres als geneste resource geleverd.
+        Als expand=heeftAlsNevenAdres dan worden de nummeraanduidingen van de nevenadressen als geneste resources geleverd.
+        Als expand=true dan worden alle gerelateerde objecten als geneste resources geleverd.
+        De contentCrs in de header moet zijn epsg:28992
+      parameters:
+        - $ref: '#/components/parameters/identificatie'
+        - $ref: '#/components/parameters/geldigOp'
+        - $ref: '#/components/parameters/beschikbaarOp'
+        - $ref: '../../../../generiek/parameters.yaml#/expand'
+        - $ref: '../../../../generiek/headers.yaml#/contentCrs'
+
+      # Antwoord standplaatsIdentificatie
+      responses:
+        '200':
+          description: Bevraging standplaatsIdentificatie geslaagd
+          headers:
+            api-version:
+              $ref: '../../../../generiek/headers.yaml#/api_version'
+            warning:
+              $ref: '../../../../generiek/headers.yaml#/warning'
+            X-Rate-Limit-Limit:
+              $ref: '../../../../generiek/headers.yaml#/X_Rate_Limit_Limit'
+            X-Rate-Limit-Remaining:
+              $ref: '../../../../generiek/headers.yaml#/X_Rate_Limit_Remaining'
+            X-Rate-Limit-Reset:
+              $ref: '../../../../generiek/headers.yaml#/X_Rate_Limit_Reset'
+            Accept-Crs:
+              $ref: '../../../../generiek/headers.yaml#/acceptCrs'
+          content:
+            application/hal+json:
+              # 1 resource, niet een collectie, dus geen items en geen paginering.
+              schema:
+                $ref: './resources.yaml#/StandplaatsIO'
+        '204':
+          $ref: '../../../../generiek/responses.yaml#/204'
+        '400':
+          $ref: '../../../../generiek/responses.yaml#/400'
+        '401':
+          $ref: '../../../../generiek/responses.yaml#/401'
+        '403':
+          $ref: '../../../../generiek/responses.yaml#/403'
+        '404':
+          $ref: '../../../../generiek/responses.yaml#/404'
+        '405':
+          $ref: '../../../../generiek/responses.yaml#/405'
+        '406':
+          $ref: '../../../../generiek/responses.yaml#/406'
+        '410':
+          $ref: '../../../../generiek/responses.yaml#/410'
+        '412':
+          $ref: '../../../../generiek/responses.yaml#/412'
+        '415':
+          $ref: '../../../../generiek/responses.yaml#/415'
+        '422':
+          $ref: '../../../../generiek/responses.yaml#/422'
+        '429':
+          $ref: '../../../../generiek/responses.yaml#/429'
+        '500':
+          $ref: '../../../../generiek/responses.yaml#/500'
+        '503':
+          $ref: '../../../../generiek/responses.yaml#/503'
+        default:
+          $ref: '../../../../generiek/responses.yaml#/default'
+
+  # standplaatsLvcIdentificatie
+  /standplaatsen/{identificatie}/lvc:
+    get:
+      security:
+        - apiKeyBAG: []
+      tags:
+        - Standplaats
+      summary: bevragen levenscyclus van een standplaats, op basis van de identificatie.
+      operationId: standplaatsLvcIdentificatie
+      description: >-
+        Bevragen/raadplegen van de levenscyclus van een standplaats, via de identificatie van de standplaats.
+        Geleverd wordt een standplaats levenscyclus.
+        Parameter identificatie bevat de 16 cijferige identificatie van een standplaats object.
+        Parameter geheleLvc bevat een indicatie dat de gehele levenscyclus (inclusief voorkomens die uit de geldige levenscyclus zijn verwijderd) zijn gewenst. Als deze parameter wordt weggelaten (default) wordt alleen de geledige levenscyclus geretourneerd.
+        Als expand=heeftAlsHoofdAdres dan wordt de nummeraanduiding van het hoofdadres als geneste resource geleverd.
+        Als expand=heeftAlsNevenAdres dan worden de nummeraanduidingen van de nevenadressen als geneste resources geleverd.
+        Als expand=true dan worden alle gerelateerde objecten als geneste resources geleverd.
+        De contentCrs in de header moet zijn epsg:28992
+      parameters:
+        - $ref: '#/components/parameters/identificatie'
+        - $ref: '#/components/parameters/geheleLvc'
+        - $ref: '../../../../generiek/parameters.yaml#/expand'
+        - $ref: '../../../../generiek/headers.yaml#/contentCrs'
+
+      # Antwoord standplaatsLvcIdentificatie
+      responses:
+        '200':
+          description: Bevraging standplaatsLvcIdentificatie geslaagd
+          headers:
+            api-version:
+              $ref: '../../../../generiek/headers.yaml#/api_version'
+            warning:
+              $ref: '../../../../generiek/headers.yaml#/warning'
+            X-Rate-Limit-Limit:
+              $ref: '../../../../generiek/headers.yaml#/X_Rate_Limit_Limit'
+            X-Rate-Limit-Remaining:
+              $ref: '../../../../generiek/headers.yaml#/X_Rate_Limit_Remaining'
+            X-Rate-Limit-Reset:
+              $ref: '../../../../generiek/headers.yaml#/X_Rate_Limit_Reset'
+            Accept-Crs:
+              $ref: '../../../../generiek/headers.yaml#/acceptCrs'
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: './resources.yaml#/StandplaatsIO'
+                minItems: 1
+        '204':
+          $ref: '../../../../generiek/responses.yaml#/204'
+        '400':
+          $ref: '../../../../generiek/responses.yaml#/400'
+        '401':
+          $ref: '../../../../generiek/responses.yaml#/401'
+        '403':
+          $ref: '../../../../generiek/responses.yaml#/403'
+        '404':
+          $ref: '../../../../generiek/responses.yaml#/404'
+        '405':
+          $ref: '../../../../generiek/responses.yaml#/405'
+        '406':
+          $ref: '../../../../generiek/responses.yaml#/406'
+        '410':
+          $ref: '../../../../generiek/responses.yaml#/410'
+        '412':
+          $ref: '../../../../generiek/responses.yaml#/412'
+        '415':
+          $ref: '../../../../generiek/responses.yaml#/415'
+        '422':
+          $ref: '../../../../generiek/responses.yaml#/422'
+        '429':
+          $ref: '../../../../generiek/responses.yaml#/429'
+        '500':
+          $ref: '../../../../generiek/responses.yaml#/500'
+        '503':
+          $ref: '../../../../generiek/responses.yaml#/503'
+        default:
+          $ref: '../../../../generiek/responses.yaml#/default'
+
+  # standplaatsGeometrie
+  /standplaatsen:
+    post:
+      requestBody:
+        description: Geometrisch punt waarop de standplaatsen bepaald moeten worden.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../../../../geometrie/geometrie.yaml#/components/schemas/Point'
+      security:
+        - apiKeyBAG: []
+      tags:
+        - Standplaats
+      summary: bevragen 1 standplaats, op basis van een geometrische locatie.
+      operationId: standplaatsGeometrie
+      description: >-
+        Bevragen/raadplegen van één bronhouder, via de identificatie van de standplaats.
+        Geleverd wordt een standplaats.
+        Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.
+        Als expand=heeftAlsHoofdAdres dan wordt de nummeraanduiding van het hoofdadres als geneste resource geleverd.
+        Als expand=heeftAlsNevenAdres dan worden de nummeraanduidingen van de nevenadressen als geneste resources geleverd.
+        Als expand=true dan worden alle gerelateerde objecten als geneste resources geleverd.
+        De contentCrs in de header moet zijn epsg:28992
+      parameters:
+        - $ref: '#/components/parameters/geldigOp'
+        - $ref: '#/components/parameters/beschikbaarOp'
+        - $ref: '../../../../generiek/parameters.yaml#/expand'
+        - $ref: '../../../../generiek/headers.yaml#/contentCrs'
+
+      # Antwoord standplaatsGeometrie
+      responses:
+        '200':
+          description: Bevraging standplaatsGeometrie geslaagd
+          headers:
+            api-version:
+              $ref: '../../../../generiek/headers.yaml#/api_version'
+            warning:
+              $ref: '../../../../generiek/headers.yaml#/warning'
+            X-Rate-Limit-Limit:
+              $ref: '../../../../generiek/headers.yaml#/X_Rate_Limit_Limit'
+            X-Rate-Limit-Remaining:
+              $ref: '../../../../generiek/headers.yaml#/X_Rate_Limit_Remaining'
+            X-Rate-Limit-Reset:
+              $ref: '../../../../generiek/headers.yaml#/X_Rate_Limit_Reset'
+            Accept-Crs:
+              $ref: '../../../../generiek/headers.yaml#/acceptCrs'
+          content:
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: './resources.yaml#/StandplaatsIO'
+                minItems: 1
+        '204':
+          $ref: '../../../../generiek/responses.yaml#/204'
+        '400':
+          $ref: '../../../../generiek/responses.yaml#/400'
+        '401':
+          $ref: '../../../../generiek/responses.yaml#/401'
+        '403':
+          $ref: '../../../../generiek/responses.yaml#/403'
+        '404':
+          $ref: '../../../../generiek/responses.yaml#/404'
+        '405':
+          $ref: '../../../../generiek/responses.yaml#/405'
+        '406':
+          $ref: '../../../../generiek/responses.yaml#/406'
+        '410':
+          $ref: '../../../../generiek/responses.yaml#/410'
+        '412':
+          $ref: '../../../../generiek/responses.yaml#/412'
+        '415':
+          $ref: '../../../../generiek/responses.yaml#/415'
+        '422':
+          $ref: '../../../../generiek/responses.yaml#/422'
+        '429':
+          $ref: '../../../../generiek/responses.yaml#/429'
+        '500':
+          $ref: '../../../../generiek/responses.yaml#/500'
+        '503':
+          $ref: '../../../../generiek/responses.yaml#/503'
+        default:
+          $ref: '../../../../generiek/responses.yaml#/default'
+
+components:
+
+  securitySchemes:
+    apiKeyBAG:
+      type: apiKey
+      name: X-Api-Key
+      in: header
+      description: >
+        De API-key die je hebt gekregen dient bij elke request via de 
+        `X-Api-Key` request header meegestuurd te worden. Indien deze 
+        niet juist wordt meegestuurd, of het een ongeldige key betreft, 
+        zul je de foutmelding `403 Forbidden` terugkrijgen.
+
+  parameters:
+    # Opsomming van path parameters - /{...} - specificatie bij operation zelf.
+    identificatie:
+      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een woonplaats en 16 lang bij de andere objecten.
+      name: identificatie
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: '^[0-9]{4}03[0-9]{10}$'
+        example: '1234030000000001'
+
+    # Opsomming van request parameters - ?='...' parameters (by name) - specificatie bij operation zelf.
+    geldigOp:
+      name: geldigOp
+      in: query
+      example: '2019-04-01'
+      required: false
+      description: >
+        Filtert op objecten die geldig zijn op de opgegeven datum `JJJJ-MM-DD`
+        Deze parameters komen uit de API strategie, het hoofdstuk tijdreizen.
+      schema:
+        type: string
+        format: date
+
+    beschikbaarOp:
+      description: >
+        Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'
+        Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'.
+        Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'.
+        Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
+      name: beschikbaarOp
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+        example: '2019-06-01T12:00:00.000'
+
+    geheleLvc:
+      description: >
+        Filtert naast geldige voorkomens ook de voorkomens die uit de geldige levenscyclus van het object zijn verwijderd.
+        Als deze parameter wordt weggelaten worden alleen geldige voorkomens geretourneerd (default is false).
+      name: geheleLvc
+      in: query
+      required: false
+      schema:
+        type: boolean
+        default: false
+        example: 'true of false'
