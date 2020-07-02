@@ -3,17 +3,20 @@ AdresseerbaarObject:
   description: Abstract type adresseerbaar object
   type: object
   required:
+    - type
     - heeftAlsHoofdAdres
   properties:
     heeftAlsHoofdAdres:
-      $ref: './nen3610.yaml#/NEN3610IDNum'
+      $ref: './nummeraanduiding.yaml#/NummeraanduidingIdentificatie'
     heeftAlsNevenAdres:
       type: array
       items:
-        $ref: './nen3610.yaml#/NEN3610IDNum'
+        $ref: './nummeraanduiding.yaml#/NummeraanduidingIdentificatie'
       minItems: 1
+    type:
+      $ref: '#/TypeAdresseerbaarObject'
   discriminator:
-    propertyName: adresseerbaarObjectType
+    propertyName: type
 
 TypeAdresseerbaarObject:
   title: TypeAdresseerbaarObject

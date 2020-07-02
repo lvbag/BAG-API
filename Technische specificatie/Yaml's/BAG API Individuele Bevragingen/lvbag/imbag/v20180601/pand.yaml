@@ -5,6 +5,7 @@ Pand:
   description: Een Pand is de kleinste, bij de totstandkoming functioneel en bouwkundig-constructief zelfstandige eenheid die direct en duurzaam met de aarde is verbonden en betreedbaar en afsluitbaar is.
   required:
     - identificatie
+    - domein
     - geometrie
     - oorspronkelijkBouwjaar
     - status
@@ -15,9 +16,15 @@ Pand:
   properties:
     identificatie:
       description: 'De unieke aanduiding van een pand. Elk pand waarvan gegevens zijn opgenomen in de BAG wordt uniek aangeduid door middel van een identificatiecode.'
-      $ref: './nen3610.yaml#/NEN3610IDPnd'
+      $ref: '#/PandIdentificatie'
+    domein:
+      description: NL.IMBAG.Pand
+      title: domein
+      type: string
+      minLength: 1
+      example: 'NL.IMBAG.Pand'
     geometrie:
-      description: 'De minimaal tweedimensionale geometrische representatie van het bovenzicht van de omtrekken van een pand.'
+      description: 'De minimaal tweedimensionale geometrische representatie van het bovenaanzicht van de omtrekken van een pand.'
       $ref: '../../../geometrie/geometrie.yaml#/components/schemas/Surface'
     oorspronkelijkBouwjaar:
       title: Oorspronkelijk bouwjaar
@@ -25,7 +32,7 @@ Pand:
       type: string
       maxLength: 4
       pattern: '-?([1-9][0-9]{3,}|0[0-9]{3})(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?'
-      example: '1972'
+      example: '1991'
     status:
       description: 'Een codering van de verschillende waarden die de status van een pand kan aannemen.'
       $ref: '#/StatusPand'
@@ -37,17 +44,26 @@ Pand:
       title: documentdatum
       type: string
       format: date
-      example: '2019-08-14'
+      example: '2009-05-12'
     documentnummer:
-      description: De unieke aanduiding van het brondocument op basis waarvan een opname, mutatie of een verwijdering van gegevens ten aanzien van een woonplaats heeft plaatsgevonden, binnen een gemeente. Alle karakters uit de MES-1 karakterset zijn toegstaan.
+      description: De unieke aanduiding van het brondocument op basis waarvan een opname, mutatie of een verwijdering van gegevens ten aanzien van een woonplaats heeft plaatsgevonden, binnen een gemeente. Alle karakters uit de MES-1 karakterset zijn toegestaan.
       title: Documentnummer
       type: string
       minLength: 1
       maxLength: 40
       pattern: '^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*'
-      example: 'AV-2019-08-19-00, Z/18/027505/150305, PVB.0965.19.0043'
+      example: '09.BW.0273'
     voorkomen:
       $ref: './historie.yaml#/Voorkomen'
+
+PandIdentificatie:   
+  description: Deze wordt gebruikt in de operation.
+  title: identificatie
+  type: string
+  minLength: 16
+  maxLength: 16
+  pattern: '^[0-9]{4}10[0-9]{10}$'
+  example: '0226100000008856'
 
 KenmerkPandInOnderzoek:
   title: KenmerkPandInOnderzoek
@@ -63,10 +79,7 @@ KenmerkPandInOnderzoek:
     kenmerk:
       $ref: '#/InOnderzoekPand'
     identificatieVanPand:
-      title: identificatie van pand
-      type: string
-      pattern: '^[0-9]{4}10[0-9]{10}$'
-      example: '1234100000000001'
+      $ref: '#/PandIdentificatie'
     inOnderzoek:
       $ref: './datatypes.yaml#/Indicatie'
     historie:
@@ -84,7 +97,7 @@ KenmerkPandInOnderzoek:
       minLength: 1
       maxLength: 40
       pattern: '^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*'
-      example: 'AV-2019-08-19-00, Z/18/027505/150305, PVB.0965.19.0043'
+      example: 'AV-2019-08-19-00'
 
 #Informatiemodel - Datatypen
 

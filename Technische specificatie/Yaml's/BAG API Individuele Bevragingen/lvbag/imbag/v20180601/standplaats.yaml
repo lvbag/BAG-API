@@ -12,6 +12,7 @@ Standplaats:
     - type: object
       required:
         - identificatie
+        - domein
         - status
         - geometrie
         - geconstateerd
@@ -20,7 +21,13 @@ Standplaats:
         - voorkomen
       properties:
         identificatie:
-          $ref: './nen3610.yaml#/NEN3610IDSta'
+          $ref: '#/StandplaatsIdentificatie'
+        domein:
+          description: NL.IMBAG.Standplaats
+          title: domein
+          type: string
+          minLength: 1
+          example: 'NL.IMBAG.Standplaats'
         status:
           $ref: './datatypes.yaml#/StatusPlaats'
         geometrie:
@@ -33,17 +40,26 @@ Standplaats:
           title: documentdatum
           type: string
           format: date
-          example: '2019-08-14'
+          example: '2011-10-05'
         documentnummer:
-          description: De unieke aanduiding van het brondocument op basis waarvan een opname, mutatie of een verwijdering van gegevens ten aanzien van een woonplaats heeft plaatsgevonden, binnen een gemeente. Alle karakters uit de MES-1 karakterset zijn toegstaan.
+          description: De unieke aanduiding van het brondocument op basis waarvan een opname, mutatie of een verwijdering van gegevens ten aanzien van een woonplaats heeft plaatsgevonden, binnen een gemeente. Alle karakters uit de MES-1 karakterset zijn toegestaan.
           title: Documentnummer
           type: string
           minLength: 1
           maxLength: 40
           pattern: '^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*'
-          example: 'AV-2019-08-19-00, Z/18/027505/150305, PVB.0965.19.0043'
+          example: 'AVGEL05102011-09'
         voorkomen:
           $ref: './historie.yaml#/Voorkomen'
+
+StandplaatsIdentificatie:
+  description: Deze wordt gebruikt in de operation.
+  title: identificatie
+  type: string
+  minLength: 16
+  maxLength: 16
+  pattern: '^[0-9]{4}03[0-9]{10}$'
+  example: '0797030000056834'
 
 KenmerkStandplaatsInOnderzoek:
   title: KenmerkStandplaatsInOnderzoek
@@ -59,10 +75,7 @@ KenmerkStandplaatsInOnderzoek:
     kenmerk:
       $ref: '#/InOnderzoekStandplaats'
     identificatieVanStandplaats:
-      title: identificatie van standplaats
-      type: string
-      pattern: '^[0-9]{4}03[0-9]{10}$'
-      example: '1234030000000001'
+      $ref: '#/StandplaatsIdentificatie'
     inOnderzoek:
       $ref: './datatypes.yaml#/Indicatie'
     historie:
@@ -80,7 +93,7 @@ KenmerkStandplaatsInOnderzoek:
       minLength: 1
       maxLength: 40
       pattern: '^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*'
-      example: 'AV-2019-08-19-00, Z/18/027505/150305, PVB.0965.19.0043'
+      example: 'AV-2019-08-19-00'
 
 #Informatiemodel - Datatypen
 

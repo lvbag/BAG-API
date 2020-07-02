@@ -13,65 +13,69 @@ warning:
     example: '299 https://service.../api/.../v1 "Deze versie van de API is verouderd en zal uit dienst worden genomen op 2018-02-01. Raadpleeg voor meer informatie hier de documentatie: https://omgevingswet.../api/.../v1".'
 
 X_Pagination_Page:
-  required: true
+  required: false
   schema:
     description: Huidige pagina.
     type: integer
     example: 3
 
 X_Pagination_Limit:
-  required: true
+  required: false
   schema:
     description: Aantal resultaten per pagina.
     type: integer
     example: 20
 
 X_Rate_Limit_Limit:
-  required: true
+  required: false
   schema:
-    description: Aantal requesten dat is toegestaan per 5 minuten.
+    description: Aantal requests dat is toegestaan per 5 minuten.
     type: integer
 
 X_Rate_Limit_Remaining:
-  required: true
+  required: false
   schema:
-    description: Het resterende aantal requesten voordat de limiet wordt bereikt.
+    description: Het resterende aantal requests voordat de limiet wordt bereikt.
     type: integer
 
 X_Rate_Limit_Reset:
-  required: true
+  required: false
   schema:
-    description: De datum en tijd waarop de limiet wordt geupdatein UNIX timestamp format.
+    description: De datum en tijd waarop de limiet wordt geupdate in UNIX timestamp format.
     format: int64
     type: integer
 
 contentType:
-  name: Content-Type
-  in: header
   required: false
   description: Media type van het request.
   schema:
     type: string
 
 contentCrs:
-  name: Content-Crs
-  in: header
   required: false
   description: CRS van de meegegeven geometrie.
   schema:
     type: string
     enum:
+#      - epsg:4326 wordt nog niet ondersteund
+#      - epsg:3857 wordt nog niet ondersteund
+#      - epsg:4258 wordt nog niet ondersteund
       - epsg:28992
-    default: epsg:28992
+# Default weglaten i.v.m. breaking change als de default anders wordt bij het uitbreiden van CRS ondersteuning. 
+# Zodra WGS84 ondersteund wordt, moet dat de default zijn.
+#    default: epsg:28992 
 
 acceptCrs:
-  name: Accept-Crs
-  in: header
   required: false
   description: Gewenste CRS van de coördinaten in de response.
   schema:
     description: 'CRS van de coördinaten in de response.'
     type: string
     enum:
-      - epsg:28992
-    default: epsg:28992
+#      - epsg:4326 wordt nog niet ondersteund
+#      - epsg:3857 wordt nog niet ondersteund
+#      - epsg:4258 wordt nog niet ondersteund
+      - epsg:28992 
+# Default weglaten i.v.m. breaking change als de default anders wordt bij het uitbreiden van CRS ondersteuning. 
+# Zodra WGS84 ondersteund wordt, moet dat de default zijn.
+#    default: epsg:28992 

@@ -1,4 +1,4 @@
-# De HTTP responseodes die volgens de OpenAPI Specificatie v3 ondersteund moeten worden. 
+# De HTTP responsecodes die volgens de OpenAPI Specificatie v3 ondersteund moeten worden. 
 # Niet alle foutmeldingen zullen optreden bij iedere operaties. 
 '200':
   description: OK
@@ -47,7 +47,7 @@
         status: 204
         title: Geen inhoud
         type: 'https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.2.5 204 No Content'
-        detail: The server has fulfilled the request but does not need to return an entity-body, and might want to return updated metainformation.
+        detail: The server has fulfilled the request but does not need to return an entity-body, and might want to return updated meta-information.
         instance: 'https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde'
         code: noContent
 
@@ -163,6 +163,8 @@
   headers:
     api-version:
       $ref: './headers.yaml#/api_version'
+    acceptCrs: 
+      $ref: './headers.yaml#/acceptCrs'
   content:
     application/problem+json:
       schema:
@@ -171,7 +173,7 @@
         status: 406
         title: Gevraagde contenttype wordt niet ondersteund.
         type: 'https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.7 406 Not Acceptable'
-        detail: The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to thr accept headers sent in the request
+        detail: The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request
         instance: 'https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde'
         code: notAcceptable
 
@@ -317,7 +319,7 @@
     api-version:
       $ref: './headers.yaml#/api_version'
     Retry-After:
-      description: Tijdstip waarop verwacht is dat de service weer beschikbaar zal zijn.
+      description: Tijdstip waarop verwacht wordt dat de service weer beschikbaar zal zijn.
       x-example: 'Sun, 28 Nov 2017 16:41:41 GMT'
       schema:
         type: string

@@ -1,60 +1,67 @@
-Href:
-  type: string
-  format: uri
-  example: 'datapunt.voorbeeldgemeente.nl/api/resourcename/123456789'
-
-HalLink:
-  description: HAL link
-  type: object
-  properties:
-    href:
-      $ref: '#/Href'
-
-HalCollectionLinks:
-  type: object
-  properties:
-    self:
+components:
+  schemas:
+    Href:
+      type: string
+      example: 'datapunt.voorbeeldgemeente.nl/api/{major-versie}/resourcenaam/{resource-identificatie}'
+    
+    HalLink:
+      description: 'Het Link Object zoals gespecificeerd in https://tools.ietf.org/html/draft-kelly-json-hal-08#section-5'
       type: object
-      description: 'uri van de api aanroep die tot dit resultaat heeft geleid'
+      required:
+        - href
       properties:
         href:
-          $ref: '#/Href'
+          $ref: '#/components/schemas/Href'
+        templated:
+          type: boolean
+        title:
+         description: 'Voor mens leesbaar label bij de link'
+         type: string
 
-HalPaginationLinks:
-  allOf:
-    - $ref: '#/HalCollectionLinks'
-    - type: object
+    HalCollectionLinks:
+      type: object
       properties:
-        first:
-          type: object
-          description: uri voor het opvragen van de eerste pagina van deze collectie
+        self:
+          $ref: '#/components/schemas/HalLink'
+
+    HalPaginationLinks:
+      allOf:
+        - $ref: '#/components/schemas/HalCollectionLinks'
+        - type: object
           properties:
-            href:
-              type: string
-              format: uri
-              example: 'https://datapunt.voorbeeldgemeente.nl/api/resourcenaam?page=1'
-            title:
-              type: string
-              example: Eerste pagina
-        previous:
-          type: object
-          description: uri voor het opvragen van de vorige pagina van deze collectie
-          properties:
-            href:
-              type: string
-              format: uri
-              example: 'https://datapunt.voorbeeldgemeente.nl/api/resourcenaam?page=3'
-            title:
-              type: string
-              example: Vorige pagina
-        next:
-          type: object
-          description: uri voor het opvragen van de volgende pagina van deze collectie
-          properties:
-            href:
-              type: string
-              format: uri
-              example: 'https://datapunt.voorbeeldgemeente.nl/api/resourcenaam?page=5'
-            title:
-              type: string
-              example: Volgende pagina
+            first:
+              type: object
+              description: 'uri voor het opvragen van de eerste pagina van deze collectie'
+              properties:
+                href:
+                  type: string
+                  example: 'https://datapunt.voorbeeldgemeente.nl/api/{major-versie}/resourcenaam?page=1'
+                templated:
+                  type: boolean
+                title:
+                  type: string
+                  example: 'Eerste pagina'
+            previous:
+              type: object
+              description: uri voor het opvragen van de vorige pagina van deze collectie
+              properties:
+                href:
+                  type: string
+                  example: 'https://datapunt.voorbeeldgemeente.nl/api/{major-versie}/resourcenaam?page=3'
+                templated:
+                  type: boolean
+                title:
+                  type: string
+                  example: 'Vorige pagina'
+            next:
+              type: object
+              description: uri voor het opvragen van de volgende pagina van deze collectie
+              properties:
+                href:
+                  type: string
+                  example: 'https://datapunt.voorbeeldgemeente.nl/api/{major-versie}/resourcenaam?page=5'
+                templated:
+                  type: boolean
+                title:
+                  type: string
+                  example: 'Volgende pagina'

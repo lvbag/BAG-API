@@ -8,18 +8,18 @@ Voorkomen:
     - tijdstipRegistratieLV
   properties:
     tijdstipRegistratie:
-      description: Het tijdstip waarop een versie van een BAG-object is geregistreerd in de registratie van bronhouder en daarmee authentiek wordt gemaakt. Dit tijdstip wordt vastgelegd in de tijdstipRegistratie.
+      description: Het tijdstip waarop een versie van een BAG-object is geregistreerd in de registratie van een bronhouder en daarmee authentiek wordt gemaakt. Dit tijdstip wordt vastgelegd in de tijdstipRegistratie.
       title: tijdstipRegistratie
       type: string
       format: date-time
       example: '2019-06-01T12:00:00.000'
     versie:
-      description: De identificatie van een voorkomen van object.
+      description: De identificatie van een voorkomen van een object.
       title: versie
       type: integer
       example: '3'
     eindRegistratie:
-      description: Het tijdstip waarop een versie van een BAG-object is beëindigd in de registratie van bronhouder. Dit tijdstip wordt vastgelegd in de eindRegistratie.
+      description: Het tijdstip waarop een versie van een BAG-object is beëindigd in de registratie van een bronhouder. Dit tijdstip wordt vastgelegd in de eindRegistratie.
       title: eindRegistratie
       type: string
       format: date-time
@@ -64,13 +64,13 @@ HistorieInOnderzoek:
     - tijdstipRegistratieLV
   properties:
     tijdstipRegistratie:
-      description: Het tijdstip waarop een versie van een BAG-object is geregistreerd in de registratie van bronhouder en daarmee authentiek wordt gemaakt. Dit tijdstip wordt vastgelegd in de tijdstipRegistratie.
+      description: Het tijdstip waarop een versie van een BAG-object is geregistreerd in de registratie van een bronhouder en daarmee authentiek wordt gemaakt. Dit tijdstip wordt vastgelegd in de tijdstipRegistratie.
       title: tijdstipRegistratie
       type: string
       format: date-time
       example: '2019-06-01T12:00:00.000'
     eindRegistratie:
-      description: Het tijdstip waarop een versie van een BAG-object is beëindigd in de registratie van bronhouder. Dit tijdstip wordt vastgelegd in de eindRegistratie.
+      description: Het tijdstip waarop een versie van een BAG-object is beëindigd in de registratie van een bronhouder. Dit tijdstip wordt vastgelegd in de eindRegistratie.
       title: eindRegistratie
       type: string
       format: date-time

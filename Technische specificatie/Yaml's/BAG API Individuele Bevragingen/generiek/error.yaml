@@ -11,20 +11,20 @@ Error:
     status:
       description: De HTTP status code.
       type: integer
-      example: '200, 401, 403, 404 etc.'
+      example: '401'
     title:
       description: De titel behorende bij de HTTP status code.
       type: string
-      example: 'OK, Niet correct geauthenticeerd, U bent niet geautoriseerd voor deze operatie, Opgevraagde resource bestaat niet'
+      example: 'Niet correct geauthenticeerd'
     type:
       description: URI naar een pagina met meer informatie over deze foutmelding voor de ontwikkelaar.
       type: string
       format: uri
-      example: 'https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html' 
+      example: 'https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.2 401 Unauthorized' 
     detail:
       description: Een gedetailleerde beschrijving van de HTTP status code.
       type: string
-      example: Je hebt geen rechten om deze URL te benaderen. Bij 403 Forbidden.
+      example: Het verzoek vereist gebruikers authenticatie.
     instance:
       description: URI van de aanroep die fout heeft veroorzaakt.
       type: string
@@ -52,7 +52,7 @@ InvalidParams:
     - reason
   properties:
     type:
-      description: 'Een url naar een beschrijving van de fout in de parameter. De hier gerefereeerde foutbeschrijving is specifieker dan type op het hoofdniveau van het bericht.'
+      description: 'Een url naar een beschrijving van de fout in de parameter. De hier gerefereerde foutbeschrijving is specifieker dan type op het hoofdniveau van het bericht.'
       type: string
       format: uri
     name:

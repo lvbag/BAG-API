@@ -19,7 +19,3 @@ components:
           $ref: '../../../geometrie/geometrie.yaml#/components/schemas/Surface'
         multivlak:
           $ref: '../../../geometrie/geometrie.yaml#/components/schemas/MultiSurface'
-
-
-
-

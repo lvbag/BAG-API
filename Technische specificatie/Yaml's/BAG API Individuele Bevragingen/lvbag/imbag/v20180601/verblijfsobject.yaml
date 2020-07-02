@@ -13,8 +13,9 @@ Verblijfsobject:
     - type: object
       required:
         - identificatie
+        - domein
         - geometrie
-        - gebruiksdoel
+        - gebruiksdoelen
         - oppervlakte
         - status
         - geconstateerd
@@ -24,10 +25,16 @@ Verblijfsobject:
         - maaktDeelUitVan
       properties:
         identificatie:
-          $ref: './nen3610.yaml#/NEN3610IDVbo'
+          $ref: '#/VerblijfsobjectIdentificatie'
+        domein:
+          description: NL.IMBAG.Verblijfsobject
+          title: domein
+          type: string
+          minLength: 1
+          example: 'NL.IMBAG.Verblijfsobject'
         geometrie:
           $ref: './geometrie.yaml#/components/schemas/PuntOfVlak'
-        gebruiksdoel:
+        gebruiksdoelen:
           type: array
           items:
             $ref: '#/Gebruiksdoel'
@@ -36,6 +43,7 @@ Verblijfsobject:
           title: oppervlakte
           type: integer
           pattern: '^[1-9][0-9]{0,5}$'
+          example: 205
         status:
           $ref: '#/StatusVerblijfsobject'
         geconstateerd:
@@ -46,22 +54,31 @@ Verblijfsobject:
           title: documentdatum
           type: string
           format: date
-          example: '2019-08-14'
+          example: '2019-11-22'
         documentnummer:
-          description: De unieke aanduiding van het brondocument op basis waarvan een opname, mutatie of een verwijdering van gegevens ten aanzien van een woonplaats heeft plaatsgevonden, binnen een gemeente. Alle karakters uit de MES-1 karakterset zijn toegstaan.
+          description: De unieke aanduiding van het brondocument op basis waarvan een opname, mutatie of een verwijdering van gegevens ten aanzien van een woonplaats heeft plaatsgevonden, binnen een gemeente. Alle karakters uit de MES-1 karakterset zijn toegestaan.
           title: Documentnummer
           type: string
           minLength: 1
           maxLength: 40
           pattern: '^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*'
-          example: 'AV-2019-08-19-00, Z/18/027505/150305, PVB.0965.19.0043'
+          example: '19SZ2048'
         voorkomen:
           $ref: './historie.yaml#/Voorkomen'
         maaktDeelUitVan:
           type: array
           items:
-            $ref: './nen3610.yaml#/NEN3610IDPnd'
+            $ref: './pand.yaml#/PandIdentificatie'
           minItems: 1
+
+VerblijfsobjectIdentificatie:
+  description: Deze wordt gebruikt in de operation.
+  title: identificatie
+  type: string
+  minLength: 16
+  maxLength: 16
+  pattern: '^[0-9]{4}01[0-9]{10}$'
+  example: '0226010000038820'
 
 KenmerkVerblijfsobjectInOnderzoek:
   title: KenmerkVerblijfsobjectInOnderzoek
@@ -77,10 +94,7 @@ KenmerkVerblijfsobjectInOnderzoek:
     kenmerk:
       $ref: '#/InOnderzoekVerblijfsobject'
     identificatieVanVerblijfsobject:
-      title: identificatie van verblijfsobject
-      type: string
-      pattern: '^[0-9]{4}01[0-9]{10}$'
-      example: '1234010000000001'
+      $ref: '#/VerblijfsobjectIdentificatie'
     inOnderzoek:
       $ref: './datatypes.yaml#/Indicatie'
     historie:
@@ -98,7 +112,7 @@ KenmerkVerblijfsobjectInOnderzoek:
       minLength: 1
       maxLength: 40
       pattern: '^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*'
-      example: 'AV-2019-08-19-00, Z/18/027505/150305, PVB.0965.19.0043'
+      example: 'AV-2019-08-19-00'
 
 #Informatiemodel - Datatypen
 
