@@ -9,30 +9,31 @@ servers:
 
 # API specificatie - algemeen
 info:
-  title: IMBAG API - van de LVBAG
-  description: "Dit is de BAG API van de landelijke voorziening BAG (LVBAG) voor het informatiemodel IMBAG 2.0 en conform de API strategie 1.1 specificatie in OAS3. Deze is vooral gericht op individuele bevragingen (op basis van de identificerende gegevens van een object).
-    <br/><br/>
-    Meer informatie over BAG 2.0 is te vinden op: [Catalogus BAG 2.0](https://www.geobasisregistraties.nl/basisregistraties/adressen-en-gebouwen)
+  title: BAG API Individuele Bevragingen - van de LVBAG
+  description: >-
+    Dit is de [BAG API](https://zakelijk.kadaster.nl/-/bag-api) Individuele Bevragingen van de Landelijke Voorziening Basisregistratie Adressen en Gebouwen (LVBAG). 
     <br/>
-    Meer informatie over Nederlandse API strategie is te vinden op: [API-Strategie](https://docs.geostandaarden.nl/api/API-Strategie) - deze API volgt versie 1.1 van 20190213.
+    Meer informatie over de Basisregistratie Adressen en Gebouwen is te vinden op de website van het [Ministerie van Binnenlandse Zaken en Koninkrijksrelaties](https://www.geobasisregistraties.nl/basisregistraties/adressen-en-gebouwen) en [Kadaster](https://zakelijk.kadaster.nl/bag).
     <br/>
-    Meer informatie over OAS3 specificatie is te vinden op: [OAS](https://www.forumstandaardisatie.nl/standaard/openapi-specification)
+    <br/>
+    De BAG API levert informatie conform de [BAG Catalogus 2018](https://www.geobasisregistraties.nl/documenten/publicatie/2018/03/12/catalogus-2018) en het informatiemodel IMBAG 2.0.
+    De API specificatie volgt de [Nederlandse API-Strategie](https://docs.geostandaarden.nl/api/API-Strategie) specificatie versie van 20200204 en is opgesteld in [OpenAPI Specificatie](https://www.forumstandaardisatie.nl/standaard/openapi-specification) (OAS) v3. 
     <br/>
     Het standaard mediatype HAL (`application/hal+json`) wordt gebruikt. Dit is een mediatype voor het weergeven van resources en hun relaties via hyperlinks.
     <br/>
     <br/>
-    Voor vragen, neem contact op met de BAG beheerder o.v.v. BAG API 2.0. We zijn aan het kijken naar een geschikt medium hiervoor, mede ook om de API iteratief te kunnen opstellen of doorontwikkelen samen met de community. Als de API iets (nog) niet kan, wat u wel graag wilt, neem dan contact op.
+    Deze API is vooral gericht op individuele bevragingen (op basis van de identificerende gegevens van een object).
+    Om gebruik te kunnen maken van de BAG API is een API key nodig, deze kan verkregen worden door het [aanvraagformulier](https://formulieren.kadaster.nl/aanvragen_bag_api_key_productieomgeving) in te vullen.
     <br/>
     <br/>
-    Een API-key kan verkregen worden door een e-mail te sturen naar: zie onderstaande contactgegevens <font color='blue'>send e-mail</font>."
+    Voor vragen, neem contact op met de LVBAG beheerder o.v.v. BAG API 2.0. We zijn aan het kijken naar een geschikt medium hiervoor, mede ook om de API iteratief te kunnen opstellen of doorontwikkelen samen met de community. Als de API iets (nog) niet kan, wat u wel graag wilt, neem dan contact op.
 
   # Gebruikte versienotatie: x.y.z voor major, minor en patch releases. 
   # De major versie komt overeen met de major versie in de api-info.yaml.
   version: '2.0.0'
   termsOfService: https://zakelijk.kadaster.nl/algemene-voorwaarden
   contact:
-    name: Kadaster - Beheerder Landelijke Voorziening BAG
-    email: bag@kadaster.nl
+    name: Kadaster - Beheerder LVBAG
     url: https://zakelijk.kadaster.nl/bag
   license:
     name: European Union Public License, version 1.2 (EUPL-1.2)
@@ -252,7 +253,7 @@ paths:
         Geleverd wordt een bronhouder voorkomen.
         Parameter identificatie bevat de 4 cijferige identificatie van een bronhouder object.
         Parameter versie bevat de versie van een voorkomen van een bronhouder.
-        Parameter timestampRegistratieLv bevat een timestamp van het tijdstip van registratie van het voorkomen in de LV BAG>
+        Parameter timestampRegistratieLv bevat een timestamp van het tijdstip van registratie van het voorkomen in de LV BAG.
       parameters:
         - $ref: '#/components/parameters/identificatie'
         - $ref: '#/components/parameters/versie'
