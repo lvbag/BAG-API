@@ -9,10 +9,9 @@ In deze versie van de LV BAG Individuele Bevragingen API is de volgende function
 - Het opvragen van de OpenAPI Specificatie (v3) m.b.t. standplaatsen via de URI: https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/standplaatsen.yaml
 
 ### Known issues:
-- Bij de woonplaatsen endpoints is ondersteuning van de foutmeldingen 204, 410, 415, 422, 429 nog niet geïmplementeerd, specificaties kunnen op dit vlak nog wijzigen
+- Bij de endpoints is ondersteuning van de foutmeldingen 204, 410, 415, 422, 429 nog niet geïmplementeerd, specificaties kunnen op dit vlak nog wijzigen
 - Zoeken van een bronhouder, op basis van de geometrische locatie (punt), evt. i.c.m. tijdreisparameters: geldigOp en beschikbaarOp, is nog niet (volledig) geïmplementeerd
 - Zoeken van een bronhouder, op basis van de object identificatie, evt. i.c.m. tijdreisparameters: geldigOp en beschikbaarOp, is nog niet (volledig) geïmplementeerd voor objecten anders dan woonplaatsen (openbareruimte, nummeraanduiding, ligplaats, standplaats, verblijfsobject en pand)
-- Bij de bronhouders endpoints is ondersteuning van de foutmeldingen 204, 410, 415, 422, 429 nog niet geïmplementeerd, specificaties kunnen op dit vlak nog wijzigen
 
 ### Disclaimer
 Overige BAG Individuele Bevragingen API endpoints kunnen beschikbaar zijn. Deze zijn echter nog niet (volledig) geïmplementeerd, getest en om die reden nog niet formeel vrijgegeven.
