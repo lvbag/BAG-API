@@ -72,7 +72,7 @@ Nummeraanduiding:
     voorkomen:
       $ref: './historie.yaml#/Voorkomen'
     ligtIn:
-      description: Een nummeraanduiding ligt in een woonplaats.
+      description: 'Een nummeraanduiding ligt in een woonplaats en ligt aan een openbare ruimte. Als een object in een andere woonplaats ligt dan de openbare ruimte waaraan de nummeraanduiding ligt, dan wordt hier de identificatie van de woonplaats ingevuld waar de nummeraanduiding in ligt. In alle andere gevallen wordt de identificatie van de woonplaats ingevuld waar de openbare ruimte in ligt.'
       $ref: './woonplaats.yaml#/WoonplaatsIdentificatie'
     ligtAan:
       description: Een nummeraanduiding ligt aan een openbare ruimte.

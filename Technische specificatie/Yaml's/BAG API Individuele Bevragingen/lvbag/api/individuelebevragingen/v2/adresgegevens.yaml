@@ -131,30 +131,22 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/AdresgegevensHalCollection'
-        '204':
-          $ref: '../../../../generiek/responses.yaml#/204'
         '400':
           $ref: '../../../../generiek/responses.yaml#/400'
         '401':
           $ref: '../../../../generiek/responses.yaml#/401'
         '403':
           $ref: '../../../../generiek/responses.yaml#/403'
-        '404':
-          $ref: '../../../../generiek/responses.yaml#/404'
+        '405':
+          $ref: '../../../../generiek/responses.yaml#/405'
         '406':
           $ref: '../../../../generiek/responses.yaml#/406'
-        '410':
-          $ref: '../../../../generiek/responses.yaml#/410'
         '412':
           $ref: '../../../../generiek/responses.yaml#/412'
-        '415':
-          $ref: '../../../../generiek/responses.yaml#/415'
-        '422':
-          $ref: '../../../../generiek/responses.yaml#/422'
-        '429':
-          $ref: '../../../../generiek/responses.yaml#/429'
         '500':
           $ref: '../../../../generiek/responses.yaml#/500'
+        '503':
+          $ref: '../../../../generiek/responses.yaml#/503'
         default:
           $ref: '../../../../generiek/responses.yaml#/default'
 

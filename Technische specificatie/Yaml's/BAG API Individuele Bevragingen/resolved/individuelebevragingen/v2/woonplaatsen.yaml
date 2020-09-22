@@ -70,7 +70,7 @@ paths:
       - name: geldigOp
         in: query
         description: |
-          Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD' Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
+          Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD' Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
         required: false
         style: form
         explode: true
@@ -81,7 +81,7 @@ paths:
       - name: beschikbaarOp
         in: query
         description: |
-          Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'. Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
+          Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'. Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
         required: false
         style: form
         explode: true
@@ -121,24 +121,6 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/WoonplaatsIOHal'
-        204:
-          description: No content
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                status: 204
-                title: Geen inhoud
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.2.5
-                  204 No Content
-                detail: The server has fulfilled the request but does not need to
-                  return an entity-body, and might want to return updated meta-information.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: noContent
         400:
           description: Bad request
           headers:
@@ -217,6 +199,26 @@ paths:
                 detail: The server has not found anything matching the Request-URI.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notFound
+        405:
+          description: Method not allowed.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 405
+                title: Methode niet toegestaan
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.6
+                  405 Method Not Allowed
+                detail: The method specified in the Request-Line is not allowed for
+                  the resource identified by the Request-URI. The response MUST include
+                  an Allow header containing a list of valid methods for the requested
+                  resource.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: methodNotAllowed
         406:
           description: Not Acceptable. Je hebt waarschijnlijk een gewenst formaat
             met de `Accept` header verstuurd welke niet ondersteund wordt.
@@ -239,24 +241,6 @@ paths:
                   not acceptable according to the accept headers sent in the request
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notAcceptable
-        410:
-          description: Gone.
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                status: 410
-                title: Verdwenen
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.11
-                  410 Gone
-                detail: The request could not be completed due to a conflict with
-                  the current state of the resource
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: gone
         412:
           description: Precondition failed.
           headers:
@@ -275,60 +259,6 @@ paths:
                   fields evaluated to false when it was tested on the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: preconditionFailed
-        415:
-          description: Unsupported media type.
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                status: 415
-                title: Media-type niet ondersteund
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.16
-                  415 Unsupported Media Type
-                detail: The server is refusing the request because the entity of the
-                  request is in a format not supported by the requested resource for
-                  the requested method.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: unsupported
-        422:
-          description: Unprocessable entity.
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                status: 422
-                title: Aanvraag kan niet verwerkt worden
-                type: https://tools.ietf.org/html/rfc4918#section-11.2
-                detail: The server understands the content type of the request entity
-                  and the syntax of the request entity is correct but was unable to
-                  process the contained instructions.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: unprocessableEntity
-        429:
-          description: Too many requests.
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                status: 429
-                title: Te veel verzoeken
-                type: https://tools.ietf.org/html/rfc6585
-                detail: The user has sent too many requests in a given amount of time
-                  (rate limiting).
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: tooManyRequests
         500:
           description: Internal server error.
           headers:
@@ -347,6 +277,32 @@ paths:
                   it from fulfilling the request.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: serverError
+        503:
+          description: Service Unavailable. Er vindt mogelijk (gepland) onderhoud
+            of een storing plaats.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+            Retry-After:
+              description: Tijdstip waarop verwacht wordt dat de service weer beschikbaar
+                zal zijn.
+              schema:
+                type: string
+                format: date-time
+              x-example: Sun, 28 Nov 2017 16:41:41 GMT
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 503
+                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.5.4
+                  503 Service Unavailable
+                detail: The service is currently unable to handle the request due
+                  to a temporary overloading or maintenance of the server.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: notAvailable
         default:
           description: Er is een onverwachte fout opgetreden.
           headers:
@@ -432,24 +388,6 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/WoonplaatsIOLvcHalCollection'
-        204:
-          description: No content
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                status: 204
-                title: Geen inhoud
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.2.5
-                  204 No Content
-                detail: The server has fulfilled the request but does not need to
-                  return an entity-body, and might want to return updated meta-information.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: noContent
         400:
           description: Bad request
           headers:
@@ -528,6 +466,26 @@ paths:
                 detail: The server has not found anything matching the Request-URI.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notFound
+        405:
+          description: Method not allowed.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 405
+                title: Methode niet toegestaan
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.6
+                  405 Method Not Allowed
+                detail: The method specified in the Request-Line is not allowed for
+                  the resource identified by the Request-URI. The response MUST include
+                  an Allow header containing a list of valid methods for the requested
+                  resource.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: methodNotAllowed
         406:
           description: Not Acceptable. Je hebt waarschijnlijk een gewenst formaat
             met de `Accept` header verstuurd welke niet ondersteund wordt.
@@ -550,24 +508,6 @@ paths:
                   not acceptable according to the accept headers sent in the request
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notAcceptable
-        410:
-          description: Gone.
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                status: 410
-                title: Verdwenen
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.11
-                  410 Gone
-                detail: The request could not be completed due to a conflict with
-                  the current state of the resource
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: gone
         412:
           description: Precondition failed.
           headers:
@@ -586,60 +526,6 @@ paths:
                   fields evaluated to false when it was tested on the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: preconditionFailed
-        415:
-          description: Unsupported media type.
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                status: 415
-                title: Media-type niet ondersteund
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.16
-                  415 Unsupported Media Type
-                detail: The server is refusing the request because the entity of the
-                  request is in a format not supported by the requested resource for
-                  the requested method.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: unsupported
-        422:
-          description: Unprocessable entity.
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                status: 422
-                title: Aanvraag kan niet verwerkt worden
-                type: https://tools.ietf.org/html/rfc4918#section-11.2
-                detail: The server understands the content type of the request entity
-                  and the syntax of the request entity is correct but was unable to
-                  process the contained instructions.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: unprocessableEntity
-        429:
-          description: Too many requests.
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                status: 429
-                title: Te veel verzoeken
-                type: https://tools.ietf.org/html/rfc6585
-                detail: The user has sent too many requests in a given amount of time
-                  (rate limiting).
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: tooManyRequests
         500:
           description: Internal server error.
           headers:
@@ -658,6 +544,32 @@ paths:
                   it from fulfilling the request.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: serverError
+        503:
+          description: Service Unavailable. Er vindt mogelijk (gepland) onderhoud
+            of een storing plaats.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+            Retry-After:
+              description: Tijdstip waarop verwacht wordt dat de service weer beschikbaar
+                zal zijn.
+              schema:
+                type: string
+                format: date-time
+              x-example: Sun, 28 Nov 2017 16:41:41 GMT
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 503
+                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.5.4
+                  503 Service Unavailable
+                detail: The service is currently unable to handle the request due
+                  to a temporary overloading or maintenance of the server.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: notAvailable
         default:
           description: Er is een onverwachte fout opgetreden.
           headers:
@@ -698,7 +610,7 @@ paths:
       - name: geldigOp
         in: query
         description: |
-          Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD' Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
+          Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD' Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
         required: false
         style: form
         explode: true
@@ -709,7 +621,7 @@ paths:
       - name: beschikbaarOp
         in: query
         description: |
-          Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'. Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
+          Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'. Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
         required: false
         style: form
         explode: true
@@ -749,24 +661,6 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/WoonplaatsIOHalCollection'
-        204:
-          description: No content
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                status: 204
-                title: Geen inhoud
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.2.5
-                  204 No Content
-                detail: The server has fulfilled the request but does not need to
-                  return an entity-body, and might want to return updated meta-information.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: noContent
         400:
           description: Bad request
           headers:
@@ -828,8 +722,8 @@ paths:
                   it.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
-        404:
-          description: Not found.
+        405:
+          description: Method not allowed.
           headers:
             api-version:
               $ref: '#/components/headers/api_version'
@@ -838,13 +732,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
-                status: 404
-                title: Opgevraagde resource bestaat niet.
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.5
-                  404 Not Found
-                detail: The server has not found anything matching the Request-URI.
+                status: 405
+                title: Methode niet toegestaan
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.6
+                  405 Method Not Allowed
+                detail: The method specified in the Request-Line is not allowed for
+                  the resource identified by the Request-URI. The response MUST include
+                  an Allow header containing a list of valid methods for the requested
+                  resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: notFound
+                code: methodNotAllowed
         406:
           description: Not Acceptable. Je hebt waarschijnlijk een gewenst formaat
             met de `Accept` header verstuurd welke niet ondersteund wordt.
@@ -867,24 +764,6 @@ paths:
                   not acceptable according to the accept headers sent in the request
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notAcceptable
-        410:
-          description: Gone.
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                status: 410
-                title: Verdwenen
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.11
-                  410 Gone
-                detail: The request could not be completed due to a conflict with
-                  the current state of the resource
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: gone
         412:
           description: Precondition failed.
           headers:
@@ -903,60 +782,6 @@ paths:
                   fields evaluated to false when it was tested on the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: preconditionFailed
-        415:
-          description: Unsupported media type.
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                status: 415
-                title: Media-type niet ondersteund
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.16
-                  415 Unsupported Media Type
-                detail: The server is refusing the request because the entity of the
-                  request is in a format not supported by the requested resource for
-                  the requested method.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: unsupported
-        422:
-          description: Unprocessable entity.
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                status: 422
-                title: Aanvraag kan niet verwerkt worden
-                type: https://tools.ietf.org/html/rfc4918#section-11.2
-                detail: The server understands the content type of the request entity
-                  and the syntax of the request entity is correct but was unable to
-                  process the contained instructions.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: unprocessableEntity
-        429:
-          description: Too many requests.
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                status: 429
-                title: Te veel verzoeken
-                type: https://tools.ietf.org/html/rfc6585
-                detail: The user has sent too many requests in a given amount of time
-                  (rate limiting).
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: tooManyRequests
         500:
           description: Internal server error.
           headers:
@@ -975,6 +800,32 @@ paths:
                   it from fulfilling the request.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: serverError
+        503:
+          description: Service Unavailable. Er vindt mogelijk (gepland) onderhoud
+            of een storing plaats.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+            Retry-After:
+              description: Tijdstip waarop verwacht wordt dat de service weer beschikbaar
+                zal zijn.
+              schema:
+                type: string
+                format: date-time
+              x-example: Sun, 28 Nov 2017 16:41:41 GMT
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 503
+                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.5.4
+                  503 Service Unavailable
+                detail: The service is currently unable to handle the request due
+                  to a temporary overloading or maintenance of the server.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: notAvailable
         default:
           description: Er is een onverwachte fout opgetreden.
           headers:
@@ -1001,7 +852,7 @@ paths:
       - name: geldigOp
         in: query
         description: |
-          Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD' Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
+          Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD' Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
         required: false
         style: form
         explode: true
@@ -1012,7 +863,7 @@ paths:
       - name: beschikbaarOp
         in: query
         description: |
-          Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'. Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
+          Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'. Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
         required: false
         style: form
         explode: true
@@ -1067,24 +918,6 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/WoonplaatsIOHalCollection'
-        204:
-          description: No content
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                status: 204
-                title: Geen inhoud
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.2.5
-                  204 No Content
-                detail: The server has fulfilled the request but does not need to
-                  return an entity-body, and might want to return updated meta-information.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: noContent
         400:
           description: Bad request
           headers:
@@ -1146,8 +979,8 @@ paths:
                   it.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
-        404:
-          description: Not found.
+        405:
+          description: Method not allowed.
           headers:
             api-version:
               $ref: '#/components/headers/api_version'
@@ -1156,13 +989,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
               example:
-                status: 404
-                title: Opgevraagde resource bestaat niet.
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.5
-                  404 Not Found
-                detail: The server has not found anything matching the Request-URI.
+                status: 405
+                title: Methode niet toegestaan
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.6
+                  405 Method Not Allowed
+                detail: The method specified in the Request-Line is not allowed for
+                  the resource identified by the Request-URI. The response MUST include
+                  an Allow header containing a list of valid methods for the requested
+                  resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: notFound
+                code: methodNotAllowed
         406:
           description: Not Acceptable. Je hebt waarschijnlijk een gewenst formaat
             met de `Accept` header verstuurd welke niet ondersteund wordt.
@@ -1185,24 +1021,6 @@ paths:
                   not acceptable according to the accept headers sent in the request
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notAcceptable
-        410:
-          description: Gone.
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                status: 410
-                title: Verdwenen
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.11
-                  410 Gone
-                detail: The request could not be completed due to a conflict with
-                  the current state of the resource
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: gone
         412:
           description: Precondition failed.
           headers:
@@ -1240,41 +1058,6 @@ paths:
                   the requested method.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: unsupported
-        422:
-          description: Unprocessable entity.
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                status: 422
-                title: Aanvraag kan niet verwerkt worden
-                type: https://tools.ietf.org/html/rfc4918#section-11.2
-                detail: The server understands the content type of the request entity
-                  and the syntax of the request entity is correct but was unable to
-                  process the contained instructions.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: unprocessableEntity
-        429:
-          description: Too many requests.
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                status: 429
-                title: Te veel verzoeken
-                type: https://tools.ietf.org/html/rfc6585
-                detail: The user has sent too many requests in a given amount of time
-                  (rate limiting).
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: tooManyRequests
         500:
           description: Internal server error.
           headers:
@@ -1293,6 +1076,32 @@ paths:
                   it from fulfilling the request.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: serverError
+        503:
+          description: Service Unavailable. Er vindt mogelijk (gepland) onderhoud
+            of een storing plaats.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+            Retry-After:
+              description: Tijdstip waarop verwacht wordt dat de service weer beschikbaar
+                zal zijn.
+              schema:
+                type: string
+                format: date-time
+              x-example: Sun, 28 Nov 2017 16:41:41 GMT
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 503
+                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.5.4
+                  503 Service Unavailable
+                detail: The service is currently unable to handle the request due
+                  to a temporary overloading or maintenance of the server.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: notAvailable
         default:
           description: Er is een onverwachte fout opgetreden.
           headers:
@@ -1389,24 +1198,6 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/WoonplaatsIOHal'
-        204:
-          description: No content
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                status: 204
-                title: Geen inhoud
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.2.5
-                  204 No Content
-                detail: The server has fulfilled the request but does not need to
-                  return an entity-body, and might want to return updated meta-information.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: noContent
         400:
           description: Bad request
           headers:
@@ -1485,6 +1276,26 @@ paths:
                 detail: The server has not found anything matching the Request-URI.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notFound
+        405:
+          description: Method not allowed.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 405
+                title: Methode niet toegestaan
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.6
+                  405 Method Not Allowed
+                detail: The method specified in the Request-Line is not allowed for
+                  the resource identified by the Request-URI. The response MUST include
+                  an Allow header containing a list of valid methods for the requested
+                  resource.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: methodNotAllowed
         406:
           description: Not Acceptable. Je hebt waarschijnlijk een gewenst formaat
             met de `Accept` header verstuurd welke niet ondersteund wordt.
@@ -1507,24 +1318,6 @@ paths:
                   not acceptable according to the accept headers sent in the request
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notAcceptable
-        410:
-          description: Gone.
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                status: 410
-                title: Verdwenen
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.11
-                  410 Gone
-                detail: The request could not be completed due to a conflict with
-                  the current state of the resource
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: gone
         412:
           description: Precondition failed.
           headers:
@@ -1543,60 +1336,6 @@ paths:
                   fields evaluated to false when it was tested on the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: preconditionFailed
-        415:
-          description: Unsupported media type.
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                status: 415
-                title: Media-type niet ondersteund
-                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.16
-                  415 Unsupported Media Type
-                detail: The server is refusing the request because the entity of the
-                  request is in a format not supported by the requested resource for
-                  the requested method.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: unsupported
-        422:
-          description: Unprocessable entity.
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                status: 422
-                title: Aanvraag kan niet verwerkt worden
-                type: https://tools.ietf.org/html/rfc4918#section-11.2
-                detail: The server understands the content type of the request entity
-                  and the syntax of the request entity is correct but was unable to
-                  process the contained instructions.
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: unprocessableEntity
-        429:
-          description: Too many requests.
-          headers:
-            api-version:
-              $ref: '#/components/headers/api_version'
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                status: 429
-                title: Te veel verzoeken
-                type: https://tools.ietf.org/html/rfc6585
-                detail: The user has sent too many requests in a given amount of time
-                  (rate limiting).
-                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
-                code: tooManyRequests
         500:
           description: Internal server error.
           headers:
@@ -1615,6 +1354,32 @@ paths:
                   it from fulfilling the request.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: serverError
+        503:
+          description: Service Unavailable. Er vindt mogelijk (gepland) onderhoud
+            of een storing plaats.
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+            Retry-After:
+              description: Tijdstip waarop verwacht wordt dat de service weer beschikbaar
+                zal zijn.
+              schema:
+                type: string
+                format: date-time
+              x-example: Sun, 28 Nov 2017 16:41:41 GMT
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 503
+                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.5.4
+                  503 Service Unavailable
+                detail: The service is currently unable to handle the request due
+                  to a temporary overloading or maintenance of the server.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: notAvailable
         default:
           description: Er is een onverwachte fout opgetreden.
           headers:
@@ -2199,7 +1964,7 @@ components:
       name: geldigOp
       in: query
       description: |
-        Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD' Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
+        Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD' Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
       required: false
       style: form
       explode: true
@@ -2211,7 +1976,7 @@ components:
       name: beschikbaarOp
       in: query
       description: |
-        Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'. Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
+        Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'. Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
       required: false
       style: form
       explode: true
