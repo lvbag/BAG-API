@@ -220,15 +220,10 @@ Nummeraanduiding_embedded:
   type: object
   properties:
     ligtInWoonplaats:
-      type: array
-      items:
-        $ref: '#/WoonplaatsIOHal'
-      minItems: 1
+      description: 'Een nummeraanduiding ligt in een woonplaats en ligt aan een openbare ruimte. Als een object in een andere woonplaats ligt dan de openbare ruimte waaraan de nummeraanduiding ligt, dan kan hier de woonplaats worden genest waar de nummeraanduiding in ligt. In alle andere gevallen kan hier de woonplaats worden genest waar de openbare ruimte in ligt.'
+      $ref: '#/WoonplaatsIOHal'
     ligtAanOpenbareRuimte:
-      type: array
-      items:
-        $ref: '#/OpenbareRuimteIOHal'
-      minItems: 1
+      $ref: '#/OpenbareRuimteIOHal'
 
 Nummeraanduiding_links:
   type: object
@@ -237,9 +232,8 @@ Nummeraanduiding_links:
   properties:
     self:
       $ref: '../../../../generiek/hallinks.yaml#/components/schemas/HalLink'
-    ligtInwoonplaats:
-      # Todo beschrijving aanpassen
-      description: De gerelateerde woonplaats. 1 voorkomen van een openbare ruimte ligt altijd in 1 woonplaats.
+    ligtInWoonplaats:
+      description: 'Een nummeraanduiding ligt in een woonplaats en ligt aan een openbare ruimte. Als een object in een andere woonplaats ligt dan de openbare ruimte waaraan de nummeraanduiding ligt, dan wordt hier verwezen naar de woonplaats waar de nummeraanduiding in ligt. In alle andere gevallen wordt hier verwezen naar de woonplaats waar de openbare ruimte in ligt.'
       $ref: '../../../../generiek/hallinks.yaml#/components/schemas/HalLink'
     ligtAanOpenbareRuimte:
       description: 'De gerelateerde openbare ruimte waaraan een nummeraanduiding ligt. Van elk gerelateerde openbare ruimte object: hiervan het voorkomen van openbare ruimte die gevonden wordt op basis van dezelfde tijdreisparameters als waarmee het nummeraanduiding voorkomen gevonden is.'

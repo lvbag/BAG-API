@@ -72,7 +72,6 @@ paths:
         - $ref: '#/components/parameters/geldigOp'
         - $ref: '#/components/parameters/beschikbaarOp'
         - $ref: '../../../../generiek/parameters.yaml#/expand'
-        - $ref: '../../../../generiek/parameters.yaml#/acceptCrs'
       
       # Antwoord openbareruimtenIdentificatie
       responses:
@@ -83,15 +82,11 @@ paths:
               $ref: '../../../../generiek/headers.yaml#/api_version'
             warning:
               $ref: '../../../../generiek/headers.yaml#/warning'
-            Content-Crs:
-              $ref: '../../../../generiek/headers.yaml#/contentCrs'
           content:
             application/hal+json:
               # 1 resource, niet een collectie, dus geen items en geen paginering.
               schema:
                 $ref: './resources.yaml#/OpenbareRuimteIOHal'
-        '204':
-          $ref: '../../../../generiek/responses.yaml#/204'
         '400':
           $ref: '../../../../generiek/responses.yaml#/400'
         '401':
@@ -100,20 +95,14 @@ paths:
           $ref: '../../../../generiek/responses.yaml#/403'
         '404':
           $ref: '../../../../generiek/responses.yaml#/404'
+        '405':
+          $ref: '../../../../generiek/responses.yaml#/405'
         '406':
           $ref: '../../../../generiek/responses.yaml#/406'
-        '410':
-          $ref: '../../../../generiek/responses.yaml#/410'
-        '412':
-          $ref: '../../../../generiek/responses.yaml#/412'
-        '415':
-          $ref: '../../../../generiek/responses.yaml#/415'
-        '422':
-          $ref: '../../../../generiek/responses.yaml#/422'
-        '429':
-          $ref: '../../../../generiek/responses.yaml#/429'
         '500':
           $ref: '../../../../generiek/responses.yaml#/500'
+        '503':
+          $ref: '../../../../generiek/responses.yaml#/503'
         default:
           $ref: '../../../../generiek/responses.yaml#/default'
 
@@ -136,7 +125,6 @@ paths:
         - $ref: '#/components/parameters/openbareRuimteIdentificatie'
         - $ref: '#/components/parameters/geheleLvc'
         - $ref: '../../../../generiek/parameters.yaml#/expand'
-        - $ref: '../../../../generiek/parameters.yaml#/acceptCrs'
       
       # Antwoord openbareruimteLvcIdentificatie
       responses:
@@ -147,14 +135,10 @@ paths:
               $ref: '../../../../generiek/headers.yaml#/api_version'
             warning:
               $ref: '../../../../generiek/headers.yaml#/warning'
-            Content-Crs:
-              $ref: '../../../../generiek/headers.yaml#/contentCrs'
           content:
             application/hal+json:
               schema:
                 $ref: './resources.yaml#/OpenbareRuimteIOLvcHalCollection'
-        '204':
-          $ref: '../../../../generiek/responses.yaml#/204'
         '400':
           $ref: '../../../../generiek/responses.yaml#/400'
         '401':
@@ -163,20 +147,14 @@ paths:
           $ref: '../../../../generiek/responses.yaml#/403'
         '404':
           $ref: '../../../../generiek/responses.yaml#/404'
+        '405':
+          $ref: '../../../../generiek/responses.yaml#/405'
         '406':
           $ref: '../../../../generiek/responses.yaml#/406'
-        '410':
-          $ref: '../../../../generiek/responses.yaml#/410'
-        '412':
-          $ref: '../../../../generiek/responses.yaml#/412'
-        '415':
-          $ref: '../../../../generiek/responses.yaml#/415'
-        '422':
-          $ref: '../../../../generiek/responses.yaml#/422'
-        '429':
-          $ref: '../../../../generiek/responses.yaml#/429'
         '500':
           $ref: '../../../../generiek/responses.yaml#/500'
+        '503':
+          $ref: '../../../../generiek/responses.yaml#/503'
         default:
           $ref: '../../../../generiek/responses.yaml#/default'
 
@@ -218,7 +196,6 @@ paths:
         - $ref: '../../../../generiek/parameters.yaml#/page'
         - $ref: '../../../../generiek/parameters.yaml#/pageSize'
         - $ref: '../../../../generiek/parameters.yaml#/expand'
-        - $ref: '../../../../generiek/parameters.yaml#/acceptCrs'
       
       # Antwoord zoekOpenbareRuimten
       responses:
@@ -233,36 +210,24 @@ paths:
               $ref: '../../../../generiek/headers.yaml#/X_Pagination_Page'
             X-Pagination-Limit:
               $ref: '../../../../generiek/headers.yaml#/X_Pagination_Limit'
-            Content-Crs:
-              $ref: '../../../../generiek/headers.yaml#/contentCrs'
           content:
             application/hal+json:
               schema:
                 $ref: './resources.yaml#/OpenbareRuimteIOHalCollection'
-        '204':
-          $ref: '../../../../generiek/responses.yaml#/204'
         '400':
           $ref: '../../../../generiek/responses.yaml#/400'
         '401':
           $ref: '../../../../generiek/responses.yaml#/401'
         '403':
           $ref: '../../../../generiek/responses.yaml#/403'
-        '404':
-          $ref: '../../../../generiek/responses.yaml#/404'
+        '405':
+          $ref: '../../../../generiek/responses.yaml#/405'
         '406':
           $ref: '../../../../generiek/responses.yaml#/406'
-        '410':
-          $ref: '../../../../generiek/responses.yaml#/410'
-        '412':
-          $ref: '../../../../generiek/responses.yaml#/412'
-        '415':
-          $ref: '../../../../generiek/responses.yaml#/415'
-        '422':
-          $ref: '../../../../generiek/responses.yaml#/422'
-        '429':
-          $ref: '../../../../generiek/responses.yaml#/429'
         '500':
           $ref: '../../../../generiek/responses.yaml#/500'
+        '503':
+          $ref: '../../../../generiek/responses.yaml#/503'
         default:
           $ref: '../../../../generiek/responses.yaml#/default'
 
@@ -286,7 +251,6 @@ paths:
         - $ref: '#/components/parameters/versie'
         - $ref: '#/components/parameters/timestampRegistratieLv'
         - $ref: '../../../../generiek/parameters.yaml#/expand'
-        - $ref: '../../../../generiek/parameters.yaml#/acceptCrs'
 
       # Antwoord openbareruimteIdentificatieVoorkomen
       responses:
@@ -297,14 +261,10 @@ paths:
               $ref: '../../../../generiek/headers.yaml#/api_version'
             warning:
               $ref: '../../../../generiek/headers.yaml#/warning'
-            Content-Crs:
-              $ref: '../../../../generiek/headers.yaml#/contentCrs'
           content:
             application/hal+json:
               schema:
                 $ref: './resources.yaml#/OpenbareRuimteIOHal'
-        '204':
-          $ref: '../../../../generiek/responses.yaml#/204'
         '400':
           $ref: '../../../../generiek/responses.yaml#/400'
         '401':
@@ -313,20 +273,14 @@ paths:
           $ref: '../../../../generiek/responses.yaml#/403'
         '404':
           $ref: '../../../../generiek/responses.yaml#/404'
+        '405':
+          $ref: '../../../../generiek/responses.yaml#/405'
         '406':
           $ref: '../../../../generiek/responses.yaml#/406'
-        '410':
-          $ref: '../../../../generiek/responses.yaml#/410'
-        '412':
-          $ref: '../../../../generiek/responses.yaml#/412'
-        '415':
-          $ref: '../../../../generiek/responses.yaml#/415'
-        '422':
-          $ref: '../../../../generiek/responses.yaml#/422'
-        '429':
-          $ref: '../../../../generiek/responses.yaml#/429'
         '500':
           $ref: '../../../../generiek/responses.yaml#/500'
+        '503':
+          $ref: '../../../../generiek/responses.yaml#/503'
         default:
           $ref: '../../../../generiek/responses.yaml#/default'
 
@@ -413,7 +367,7 @@ components:
     geldigOp:
       description: > 
         Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD' 
-        Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
+        Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
       name: geldigOp
       in: query
       required: false
@@ -427,7 +381,7 @@ components:
         Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss' 
         Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'.
         Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'.
-        Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
+        Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
       name: beschikbaarOp
       in: query
       required: false
