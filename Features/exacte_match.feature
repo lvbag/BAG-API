@@ -11,7 +11,7 @@ Wanneer de combinatie van postcode, huisnummer en optioneel huisletter en/of hui
 
 De default waarde van de exacteMatch parameter is false. Als deze niet wordt opgegeven zullen de resultaten niet exact overeenkomen met de opgegeven parameters en zal het resultaat meerdere objecten bevatten.
 
-Abstract scenario: 
+Abstract scenario: standaard gedrag
 	Gegeven een straat met postcode 1234AA en 3 objecten met huisnummer en huisletter combinaties: 3, 3A en 3B.
 	Als er wordt gezocht met postcode: 1234AA 
 	en huisnummer: 3
@@ -28,7 +28,7 @@ Abstract scenario:
 	en exacteMatch=true
 	dan bevat het resultaat alleen het object met postcode 1234AA en huisnummer 3. 
 
-Abstract scenario: geen exacte match ondanks exacteMat=true	
+Abstract scenario: geen exacte match ondanks exacteMatch=true	
 	Gegeven een straat met postcode 1234AA en 5 objecten met huisnummer, huisletter en huisnummertoevoeging combinaties: 3, 3A en 3Abis, 3B en 3Bbis.
 	Als er wordt gezocht met postcode 1234AA
 	en huisnummer 3 
