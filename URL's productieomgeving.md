@@ -18,7 +18,7 @@ Voor elk van de zeven objecttypen zijn de volgende aanvullingen mogelijk;
 /identificatie  
 /  
 ```/identificatie/lvc```  
-/identificatie/versie/timestampRegistratieLv  
+```/identificatie/versie/timestampRegistratieLv```  
   
 Bijvoorbeeld als met de API alle gegevens van de nummeraanduiding met BAG ID 0200200000075716 opgehaald wenst te worden dan is de juist url om dit te bevragen;  
   
