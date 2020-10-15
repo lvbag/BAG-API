@@ -15,7 +15,18 @@ Voor tijdreisvragen endpoints:
  - geldig op en beschikbaar op in vraag = geldig op en beschikbaar op in links van gerelateerde objecten
 
  Paginering of andere query parameters zijn bij gerelateerde links niet van toepassing, die zijn alleen van toepassing voor self link
+ 
+ Voor endpoints die collecties opleveren:
+  opbouw self link van de collectie:
+  Er wordt exact overgenomen wat er door een client is opgegeven.
+  Geeft een client meer parameters op dan worden die exact overgenomen.
+  Geeft een client bepaalde parameters niet op en wordt een default gebruikt dan komen die niet in de self link terug.
 
+  opbouw self link embedded resource
+  De self links in de embedded resources verwijzen naar het specifieke voorkomen het object
+
+  opbouw gerelateerde link in embedded resource
+  De link naar gerelateerde objecten verwijzen naar voorkomens van het gerelateerde object
 
    Scenario: Er wordt een nummeraanduiding opgevraagd op het tijdreisvraagendpoint nummeraanduidingen
       Er wordt geen geldigOp of beschikbaarOp of andere querieparameter opgegeven
@@ -46,20 +57,8 @@ Voor tijdreisvragen endpoints:
                "href": "http://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/openbareruimten/<openbareRuimteIdentificatie>?geldigOp=<Datum>&beschikbaarOp=<DatumTijd van request>"
                }
 
-Voor levenscyclus endpoints:
- opbouw self link van de collectie:
-  Er wordt exact overgenomen wat er door een client is opgegeven.
-  Geeft een client meer parameters op dan worden die exact overgenomen.
-  Geeft een client bepaalde parameters niet op en wordt een default gebruikt dan komen die niet in de self link terug.
 
- opbouw self link embedded resource
-  De self links in de embedded resources verwijzen naar het specifieke voorkomen het object
-
- opbouw gerelateerde link in embedded resource
-  De link naar gerelateerde objecten verwijzen naar voorkomens van het gerelateerde object
-
-
-  Scenario: er wordt een woonplaats opgevraagd op het levenscyclusendpoint woonplaatsen
+  Scenario: er wordt een woonplaats opgevraagd op het levenscyclusendpoint woonplaatsen (levert collectie)
      En er wordt expand = true opgegeven
      Dan bevat het antwoord:
      "_links": {
