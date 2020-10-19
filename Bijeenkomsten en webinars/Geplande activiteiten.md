@@ -7,7 +7,11 @@ _01 juli_
 
 De documentatie van deze bijeenkomst is terug te vinden in de map 01 juli 2020.  
 
+_12 oktober_  
+
+De documentatie van deze bijeenkomst is terug te vinden in de map 12 oktober 2020.  
+
 _Geplande activiteiten_
   
-In het najaar worden nieuwe webinars georganiseerd. Meer informatie hierover volgt.
+Meer informatie volgt.
 
