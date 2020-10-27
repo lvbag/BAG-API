@@ -68,8 +68,8 @@ Functionaliteit: Automatisch laden van sub-resources
 
     Als een BAG object wordt geraadpleegd met expand=true en de resource heeft geen relaties met sub resources (bv. een pand)
     Dan levert dit de resource
-	En wordt _embedded niet teruggegeven
-	En wordt _links.self teruggegeven
+    En wordt _embedded niet teruggegeven
+    En wordt _links.self teruggegeven
 
   Scenario: Expand met incorrecte resource
     Als een BAG object wordt geraadpleegd met expand=resourcebestaatniet
