@@ -16,11 +16,11 @@ Functionaliteit: Automatisch laden van sub-resources
   - openbare ruimte
   - woonplaats
   
-  "eager loading" wordt mogelijk gemaakt voor de volgende sub-resource van een adresseerbaar object:
+  "eager loading" wordt mogelijk gemaakt voor de volgende sub-resource van een adresseerbaar object (ligplaats, standplaats of verblijfsobject):
   - nummeraanduiding (hoofdadres)
   - nummeraanduiding (nevenadressen)
   
-  "eager loading" wordt mogelijk gemaakt voor de volgende sub-resource van een verblijfsobject:
+  "eager loading" wordt mogelijk gemaakt voor de volgende sub-resource van een verblijfsobject, dit als extensie op "eager loading" van hoofd- en nevenadressen zoals hierboven beschreven):
   - pand
 
   Deze gelinkte resources kunnen direct bij de gezochte of geraadpleegde resource worden meegeladen. Hiervoor gebruikt men de parameter expand.
@@ -36,7 +36,7 @@ Functionaliteit: Automatisch laden van sub-resources
   Dit wordt gedaan door de gewenste resources als een komma's gescheiden lijst te specificeren, bijvoorbeeld: expand=ligtInWoonplaats,ligtAanOpenbareRuimte.
 
   De dot-notatie wordt niet ondersteund. Het is dus niet mogelijk om specifieke velden van resources te selecteren, bijvoorbeeld expand=ligtInWoonplaats.woonplaats.naam.
-  Omdat geen specifieke velden van de resource worden aangegeven, wordt de gehele resource opgenomen.
+  In dat geval wordt de subresource (ligtInWoonplaats) in zijn geheel (maar zonder _embedded) teruggegeven.
 
   Het mee laden van gelinkte resources wordt tot één niveau diep ondersteund. Dit betekent dat er geen gelinkte resources van gelinkte resources kunnen worden meegeladen. 
 
