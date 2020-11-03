@@ -11,7 +11,7 @@ Parameter Huidig werkt als een filter.
 Bij toepassing van de paramater wordt als defaultwaarde 'nee' gebruikt.
 Dan worden alle objecten teruggegeven.
 
-Bij toepassing van de parameter huidig worden geen objecten teruggeven waarvan de statussen een van de volgende is:
+Bij toepassing van de parameter huidig of wanneer een enpoint alleen huidige gegevens levert, dan worden geen objecten teruggeven waarvan de statussen een van de volgende is:
 * naamgeving ingetrokken
 * woonplaats ingetrokken
 * plaats ingetrokken
