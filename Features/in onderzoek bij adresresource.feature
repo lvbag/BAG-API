@@ -26,8 +26,8 @@ Functionaliteit: In onderzoek bij Adresresource
       | Nummeraanduiding | Huisnummertoevoeging                     | huisnummertoevoeging   | Mogelijk is ten onrechte een huisnummertoevoeging toegekend, ontbreekt de huisnummertoevoeging ten onrechte, of is een verkeerde huisnummertoevoeging toegekend. |
       | Nummeraanduiding | Postcode                                 | postcode               | Mogelijk is ten onrechte een postcode toegekend, ontbreekt de postcode ten onrechte, of is een verkeerde postcode toegekend. |
       | Nummeraanduiding | Status                                   | nummeraanduidingStatus | Adres bestaat mogelijk niet (meer), omdat de nummeraanduiding mogelijk niet (meer) bestaat. |
-      | Nummeraanduiding | Ligt in (gerelateerde woonplaats)        | nummeraanduidingLigtIn | Mogelijk is de verkeerde woonplaats gebruikt. Het adres moet verwijzen naar de woonplaats waarin het adres fysiek ligt. |
-      | Nummeraanduiding | Ligt aan (gerelateerde openbare ruimte)  | nummeraanduidingligtAan| Mogelijk is de verkeerde openbare ruimte gebruikt. Het adres moet verwijzen naar de openbare ruimte waaraan het adres ligt. |
+      | Nummeraanduiding | Ligt in (gerelateerde woonplaats)        | nummeraanduidingLigtIn | Mogelijk verkeerde woonplaats gebruikt. Het adres moet verwijzen naar de woonplaats waarin het adres fysiek ligt. |
+      | Nummeraanduiding | Ligt aan (gerelateerde openbare ruimte)  | nummeraanduidingligtAan| Mogelijk verkeerde openbare ruimte gebruikt. Het adres moet verwijzen naar de openbare ruimte waaraan het adres ligt. |
 
 
     Scenario: In onderzoek wordt ook geleverd wanneer het gegeven geen waarde heeft
