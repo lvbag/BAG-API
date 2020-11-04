@@ -5,7 +5,7 @@ Functionaliteit: In onderzoek bij Adresresource
   In de resource Adres worden de attributen teruggegeven die in onderzoek zijn. 
   Bij deze resource wordt in onderzoek alleen gegeven voor de attributen die relevant zijn voor een Adres.
   Dit betekent dat er van de objecten, woonplaats, openbare ruimte en nummeraanduiding, die in vereenvoudigde vorm gezamenlijk de afgeleide resource Adres vormen, attributen in onderzoek kunnen zijn die niet geleverd worden bij de resource Adres. Om te weten welke attributen van een object in onderzoek zijn, moet de resource van het object worden geraadpleegd.
-   Voor een extra toelichting op in onderzoek zie de [Praktijkhandleiding BAG](https://imbag.github.io/praktijkhandleiding/artikelen/wat-is-de-inhoudelijke-betekenis-van-de-verschillende-soorten-in-onderzoek).
+   Voor een extra toelichting op in onderzoek zie kunt u het artikel hierover in de praktijkhandleiding BAG raadplegen. (https://imbag.github.io/praktijkhandleiding/artikelen/wat-is-de-inhoudelijke-betekenis-van-de-verschillende-soorten-in-onderzoek).
 
   Abstract Scenario: In onderzoek wordt gevuld op basis van in onderzoek staan van gegevens in de registratie
     Gegeven in object <Objecttype> is gegeven <Attribuut in de BAG> in onderzoek
