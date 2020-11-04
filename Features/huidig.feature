@@ -2,7 +2,7 @@
 
 In het dagelijks gebruik van gegevens zijn soms alleen huidige gegevens nodig.
 Huidig betekent dat het object actueel is en geen eindstatus heeft.
-Voor een toelichting zie de [Praktijkhandleiding BAG](https://imbag.github.io/praktijkhandleiding/artikelen/wat-is-het-verschil-tussen-actieve-voorkomens-actuele-voorkomens-en-huidige-voorkomens).
+Voor een toelichting kunt u het artikel hierover in de Praktijkhandleiding BAG raadplegen. (https://imbag.github.io/praktijkhandleiding/artikelen/wat-is-het-verschil-tussen-actieve-voorkomens-actuele-voorkomens-en-huidige-voorkomens).
 
 Enkele endpoints leveren alleen huidige gegevens.
 Bij enkele endpoints wordt de mogelijkheid geboden om met de parameter 'Huidig' alleen huidige objecten op te vragen
