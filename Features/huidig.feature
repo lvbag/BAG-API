@@ -24,11 +24,11 @@ dan worden alleen actuele objecten terugggeven waarvan de status NIET een van de
 * pand ten onrechte opgevoerd
 
 #### Scenario:
-**Gegeven** een pand met verblijfsobjecten waaronder verblijfsobjecten met een eindstatus, (niet gerealiseerd verblijfsobject, of verblijfsobject ingetrokken of verblijfsobject ten onrechte opgevoerd)<br />
-**Wanneer** ik de API bevraag met parameter 'huidig'<br />
-**Dan** bevat de response de verblijfsobjecten met een eindstatus niet en de verblijfsobjecten met de overige statussen (Verblijfsobject in gebruik, (niet ingemeten), Verblijfsobject in gebruik, Verblijfsobject buiten gebruik, tverbouwing verblijfsobject) wel
+Gegeven een pand met verblijfsobjecten waaronder verblijfsobjecten met een eindstatus, (niet gerealiseerd verblijfsobject, of verblijfsobject ingetrokken of verblijfsobject ten onrechte opgevoerd)
+Wanneer de  API wordt bevraagd met parameter 'huidig'
+Dan bevat de response de verblijfsobjecten met een eindstatus niet en de verblijfsobjecten met de overige statussen (Verblijfsobject in gebruik, (niet ingemeten), Verblijfsobject in gebruik, Verblijfsobject buiten gebruik, tverbouwing verblijfsobject) wel
 
 #### Scenario:
-**Gegeven** een pand met een eindstatus<br />
-**Wanneer** op het endpoint verblijfsobjecten de verblijfsobjecten in dat pand worden opgevraagd<br />
-**Dan** volgt een foutmelding.
+Gegeven een pand met een eindstatus
+Wanneer op het endpoint verblijfsobjecten de verblijfsobjecten in dat pand worden opgevraagd met de parameter 'huidig'
+Dan volgt een 404 foutmelding dat het pand niet gevonden kan worden.
