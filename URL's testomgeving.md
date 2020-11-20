@@ -77,4 +77,8 @@ GET <basis URL>/info
 *Adressen*  
 
 GET <basis URL>/adressen  
-POST <basis URL>/adressen
+POST <basis URL>/adressen  
+    
+*Adressen/zoek*  
+  
+GET <basisurl>/adressen/zoek
