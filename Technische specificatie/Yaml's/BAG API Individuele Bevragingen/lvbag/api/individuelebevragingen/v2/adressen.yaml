@@ -1,0 +1,606 @@
+openapi: 3.0.0
+
+# Server specificatie
+servers:
+  - description: LVBAG - ACCEPTATIE
+    url: https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2
+  - description: LVBAG - PRODUCTIE
+    url: https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2
+
+# API specificatie - algemeen
+info:
+  title: BAG API Individuele Bevragingen - van de LVBAG
+  description: >-
+    Dit is de [BAG API](https://zakelijk.kadaster.nl/-/bag-api) Individuele Bevragingen van de Landelijke Voorziening Basisregistratie Adressen en Gebouwen (LVBAG). 
+    <br/>
+    Meer informatie over de Basisregistratie Adressen en Gebouwen is te vinden op de website van het [Ministerie van Binnenlandse Zaken en Koninkrijksrelaties](https://www.geobasisregistraties.nl/basisregistraties/adressen-en-gebouwen) en [Kadaster](https://zakelijk.kadaster.nl/bag).
+    <br/>
+    <br/>
+    De BAG API levert informatie conform de [BAG Catalogus 2018](https://www.geobasisregistraties.nl/documenten/publicatie/2018/03/12/catalogus-2018) en het informatiemodel IMBAG 2.0.
+    De API specificatie volgt de [Nederlandse API-Strategie](https://docs.geostandaarden.nl/api/API-Strategie) specificatie versie van 20200204 en is opgesteld in [OpenAPI Specificatie](https://www.forumstandaardisatie.nl/standaard/openapi-specification) (OAS) v3. 
+    <br/>
+    Het standaard mediatype HAL (`application/hal+json`) wordt gebruikt. Dit is een mediatype voor het weergeven van resources en hun relaties via hyperlinks.
+    <br/>
+    <br/>
+    Deze API is vooral gericht op individuele bevragingen (op basis van de identificerende gegevens van een object).
+    Om gebruik te kunnen maken van de BAG API is een API key nodig, deze kan verkregen worden door het [aanvraagformulier](https://formulieren.kadaster.nl/aanvragen_bag_api_key_productieomgeving) in te vullen.
+    <br/>
+    <br/>
+    Voor vragen, neem contact op met de LVBAG beheerder o.v.v. BAG API 2.0. We zijn aan het kijken naar een geschikt medium hiervoor, mede ook om de API iteratief te kunnen opstellen of doorontwikkelen samen met de community. 
+    Als de API iets (nog) niet kan, wat u wel graag wilt, neem dan contact op.
+
+  # Gebruikte versienotatie: x.y.z voor major, minor en patch releases. 
+  # De major versie komt overeen met de major versie in de api-info.yaml.
+  version: '2.0.0'
+  termsOfService: https://zakelijk.kadaster.nl/algemene-voorwaarden
+  contact:
+    name: Kadaster - Beheerder LVBAG
+    url: https://zakelijk.kadaster.nl/bag
+  license:
+    name: European Union Public License, version 1.2 (EUPL-1.2)
+    url: https://eupl.eu/1.2/nl/
+
+security:
+  - apiKeyBAG: []
+  # Alle requests verwachten een (BAG) API key (niet per operation of end-point verschillend)
+  # Voor definitie van benoemde 'apiKeyBAG', zie security-schemes onderin.
+
+#+Functionele toelichting bij de operations/end-points als documentatie indeling.
+tags:
+  -
+    name: Adres
+    description: 'Deze services leveren één of meer huidige adressen, met embedded resources en links. Huidig betekent dat het adres actueel is en geen eind status heeft. Voor een toelichting zie de [Praktijkhandleiding BAG](https://imbag.github.io/praktijkhandleiding/artikelen/wat-is-het-verschil-tussen-actieve-voorkomens-actuele-voorkomens-en-huidige-voorkomens).'
+
+paths:
+
+  # Zoek adressen
+  /adressen/zoek:
+    get:
+      security:
+        - apiKeyBAG: []
+      operationId: zoek
+      tags:
+        - Adres
+      summary: Zoeken van huidige adressen
+      description: >- 
+        Zoeken van huidige adressen met postcode, woonplaats, straatnaam, huisnummer, huisletter, huisnummertoevoeging. 
+        Een adres kan worden gevonden door de zoekresultaatidentificatie uit het antwoord als parameter mee te geven in get /adressen.
+        Voor paginering, zie: [functionele specificatie paginering](https://github.com/lvbag/BAG-API/blob/master/Features/paginering.feature).
+      parameters:
+        - $ref: '#/components/parameters/zoek'
+        - $ref: '../../../../generiek/parameters.yaml#/page'
+        - $ref: '../../../../generiek/parameters.yaml#/pageSize'
+      responses:
+        '200':
+          description: "Zoek adres geslaagd"
+          headers:
+            api-version:
+              $ref: '../../../../generiek/headers.yaml#/api_version'
+            warning:
+              $ref: '../../../../generiek/headers.yaml#/warning'
+            X-Pagination-Page:
+              $ref: '../../../../generiek/headers.yaml#/X_Pagination_Page'
+            X-Pagination-Limit:
+              $ref: '../../../../generiek/headers.yaml#/X_Pagination_Limit'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/ZoekResultaatHalCollection'
+        '400':
+          $ref: '../../../../generiek/responses.yaml#/400'
+        '401':
+          $ref: '../../../../generiek/responses.yaml#/401'
+        '403':
+          $ref: '../../../../generiek/responses.yaml#/403'
+        '500':
+          $ref: '../../../../generiek/responses.yaml#/500'
+        '503':
+          $ref: '../../../../generiek/responses.yaml#/503'
+        default:
+          $ref: '../../../../generiek/responses.yaml#/default'
+
+  /adressen:
+    get:
+      security:
+        - apiKeyBAG: []
+      operationId: bevraagAdressen
+      tags:
+        - Adres
+      summary: Bevragen van huidige adressen met een (combinatie van) zoek parameters. 
+      description: >-
+        De volgende bevragingen worden ondersteund:
+        <ol>
+          <li>
+            Bevragen van één huidig adres met de identificatie van een zoekresultaat verkregen via /adressen/zoek.
+          </li>
+          <li>
+            Bevragen van één of meer huidige adressen met postcode, huisnummer en optioneel huisnummertoevoeging en huisletter.
+            Parameter exacteMatch kan worden toegepast.
+          </li>
+          <li>
+            Bevragen van één of meer huidige adressen met de identificatie van een adresseerbaar object.
+          </li>
+          <li>
+            Bevragen van één of meer huidige adressen met woonplaats naam, openbare ruimte naam, huisnummer en optioneel huisnummertoevoeging en/of huisletter.
+            Parameter exacteMatch kan worden toegepast.
+          </li>
+          <li>
+            Bevragen van één of meer huidige adressen met de identificatie van een pand.
+            Expand wordt niet ondersteund.
+          </li>
+        </ol>
+        Bij de bovenstaande bevragingen kunnen eveneens de volgende parameters worden gebruikt (tenzij anders vermeld):<br/>
+        Als expand=nummeraanduiding, openbareRuimte, woonplaats (of een combinatie daarvan) of als expand=true, dan worden de gevraagde of alle gerelateerde resources als geneste resource geleverd.
+        Voor paginering, zie: [functionele specificatie paginering](https://github.com/lvbag/BAG-API/blob/master/Features/paginering.feature).
+      parameters:
+        - $ref: '#/components/parameters/zoekresultaatIdentificatie'
+        - $ref: '#/components/parameters/postcode'
+        - $ref: '#/components/parameters/huisnummer'
+        - $ref: '#/components/parameters/huisnummertoevoeging'
+        - $ref: '#/components/parameters/huisletter'
+        - $ref: '#/components/parameters/exacteMatch'
+        - $ref: '#/components/parameters/adresseerbaarObjectIdentificatie'
+        - $ref: '#/components/parameters/woonplaatsNaam'
+        - $ref: '#/components/parameters/openbareRuimteNaam'
+        - $ref: '#/components/parameters/pandIdentificatie'
+        - $ref: '../../../../generiek/parameters.yaml#/expand'
+        - $ref: '../../../../generiek/parameters.yaml#/page'
+        - $ref: '../../../../generiek/parameters.yaml#/pageSize'
+      responses:
+        '200':
+          description: bevraagAdressen geslaagd
+          headers:
+            api-version:
+              $ref: '../../../../generiek/headers.yaml#/api_version'
+            warning:
+              $ref: '../../../../generiek/headers.yaml#/warning'
+            X-Pagination-Page:
+              $ref: '../../../../generiek/headers.yaml#/X_Pagination_Page'
+            X-Pagination-Limit:
+              $ref: '../../../../generiek/headers.yaml#/X_Pagination_Limit'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/AdresIOHalCollection'
+        '400':
+          $ref: '../../../../generiek/responses.yaml#/400'
+        '401':
+          $ref: '../../../../generiek/responses.yaml#/401'
+        '403':
+          $ref: '../../../../generiek/responses.yaml#/403'
+        '406':
+          $ref: '../../../../generiek/responses.yaml#/406'
+        '412':
+          $ref: '../../../../generiek/responses.yaml#/412'
+        '500':
+          $ref: '../../../../generiek/responses.yaml#/500'
+        '503':
+          $ref: '../../../../generiek/responses.yaml#/503'
+        default:
+          $ref: '../../../../generiek/responses.yaml#/default'
+
+  /adressen/{nummeraanduidingIdentificatie}:
+    get:
+      security:
+        - apiKeyBAG: []
+      operationId: bevraagAdressenMetNumId
+      tags:
+        - Adres
+      summary: Bevragen van een huidig adres met de identificatie van een nummeraanduiding.
+      description: >-
+        Bevragen van een huidig adres met de identificatie van een nummeraanduiding.
+        Als expand=nummeraanduiding, openbareRuimte, woonplaats (of een combinatie daarvan) of als expand=true, dan worden de gevraagde of alle gerelateerde resources als geneste resource geleverd.
+      parameters:
+        - $ref: '#/components/parameters/nummeraanduidingIdentificatie'
+        - $ref: '../../../../generiek/parameters.yaml#/expand'
+      responses:
+        '200':
+          description: bevraagAdressenMetNumId geslaagd
+          headers:
+            api-version:
+              $ref: '../../../../generiek/headers.yaml#/api_version'
+            warning:
+              $ref: '../../../../generiek/headers.yaml#/warning'
+            X-Pagination-Page:
+              $ref: '../../../../generiek/headers.yaml#/X_Pagination_Page'
+            X-Pagination-Limit:
+              $ref: '../../../../generiek/headers.yaml#/X_Pagination_Limit'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/AdresIOHal'
+        '400':
+          $ref: '../../../../generiek/responses.yaml#/400'
+        '401':
+          $ref: '../../../../generiek/responses.yaml#/401'
+        '403':
+          $ref: '../../../../generiek/responses.yaml#/403'
+        '404':
+          $ref: '../../../../generiek/responses.yaml#/404'
+        '406':
+          $ref: '../../../../generiek/responses.yaml#/406'
+        '412':
+          $ref: '../../../../generiek/responses.yaml#/412'
+        '500':
+          $ref: '../../../../generiek/responses.yaml#/500'
+        '503':
+          $ref: '../../../../generiek/responses.yaml#/503'
+        default:
+          $ref: '../../../../generiek/responses.yaml#/default'
+
+components:
+
+  securitySchemes:
+    apiKeyBAG:
+      type: apiKey
+      name: X-Api-Key
+      in: header
+      description: >
+        De API-key die je hebt gekregen dient bij elke request via de
+        `X-Api-Key` request header meegestuurd te worden. Indien deze
+        niet juist wordt meegestuurd, of het een ongeldige key betreft,
+        zul je de foutmelding `403 Forbidden` terugkrijgen.
+
+  parameters:
+    # Opsomming van path parameters - /{...} - specificatie bij operation zelf.
+    nummeraanduidingIdentificatie:
+      description: 'Identificatie van een nummeraanduiding uit de BAG. Deze is 16 cijfers lang.'
+      name: nummeraanduidingIdentificatie
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: '^[0-9]{16}$'
+        example: '0226200000038923'
+
+    # Opsomming van request parameters - ?='...' parameters (by name) - specificatie bij operation zelf.
+    zoek:
+      description: 'Zoekterm op postcode, woonplaats, straatnaam, huisnummer, huisletter, huisnummertoevoeging'
+      name: zoek
+      in: query
+      required: true
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 255
+
+    zoekresultaatIdentificatie:
+      description: 'De identificatie van een gekozen zoekresultaat uit de zoekResultatenHalCollectie verkregen bij een GET /adressen/zoek'
+      name: zoekresultaatIdentificatie
+      in: query
+      required: false
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 255
+
+    adresseerbaarObjectIdentificatie:
+      description: Identificatie van een adresseerbaar object (ligplaats, standplaats of verblijfsobject) uit de BAG.
+      name: adresseerbaarObjectIdentificatie
+      in: query
+      required: false
+      schema:
+        title: identificatie van adresseerbaar object
+        type: string
+        pattern: '^[0-9]{4}(01|02|03)[0-9]{10}$'
+        example: '0226010000038820'
+
+    postcode:
+      description: Postcode behorende bij een nummeraanduiding.
+      name: postcode
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: '^[1-9]{1}[0-9]{3}[A-Z]{2}$'
+        example: '6922KZ'
+
+    huisnummer:
+      description: Huisnummer behorende bij een nummeraanduiding.
+      name: huisnummer
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 99999
+        example: '1'
+
+    huisnummertoevoeging:
+      description: Huisnummertoevoeging behorende bij een nummeraanduiding.
+      name: huisnummertoevoeging
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: '^[0-9a-zA-Z]{1,4}$'
+        example: 'bis'
+
+    huisletter:
+      description: Huisletter behorende bij een nummeraanduiding.
+      name: huisletter
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: '^[a-zA-Z]{1}$'
+        example: 'A'
+
+    exacteMatch:
+      description: >-
+        "Een indicatie of de resultaten van een zoekoperatie exact overeen moeten komen met de zoekcriteria, zie [functionele specificatie exacte match](https://github.com/lvbag/BAG-API/blob/master/Features/exacte_match.feature)."
+      name: exacteMatch
+      in: query
+      required: false
+      schema:
+        type: boolean
+        example: 'true'
+        default: false
+
+    woonplaatsNaam:
+      description: Naam van een woonplaats.
+      name: woonplaatsNaam
+      in: query
+      required: false
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 80
+        pattern: '^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*'
+        example: 'Duiven'
+
+    openbareRuimteNaam:
+      description: Naam van een openbare ruimte.
+      name: openbareRuimteNaam
+      in: query
+      required: false
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 80
+        pattern: '^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*'
+        example: 'Laan van de landinrichtingscommissie Duiven-Westervoort'
+
+    pandIdentificatie:
+      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een woonplaats en 16 lang bij de andere objecten.
+      name: pandIdentificatie
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: '^[0-9]{4}10[0-9]{10}$'
+        example: '0226100000008856'
+
+  schemas:
+
+    ZoekResultaat:
+      type: object
+      description: 'Resultaat van een zoekoperatie dat je kunt gebruiken om een adres te vinden met /adressen'
+      required:
+        - identificatie
+      properties:
+        omschrijving:
+          description: Omschrijving van het zoekresultaat
+          type: string
+        identificatie:
+          description: Identificatie van het zoekresultaat
+          type: string
+
+    ZoekResultaatHal:
+      allOf:
+        - $ref: '#/components/schemas/ZoekResultaat'
+        - properties:
+            _links:
+              $ref: '#/components/schemas/ZoekResultaat_links'
+
+    ZoekResultaat_links:
+      type: object
+      properties:
+        adres:
+          $ref: '../../../../generiek/hallinks.yaml#/components/schemas/HalLink'
+
+    ZoekResultaatHalCollection:
+      type: object
+      description: Resultaten als lijst
+      properties:
+        _links:
+          $ref: '../../../../generiek/hallinks.yaml#/components/schemas/HalPaginationLinks'
+        _embedded:
+          type: object
+          properties:
+            zoekresultaten:
+              type: array
+              items:
+                $ref: '#/components/schemas/ZoekResultaatHal'
+
+    Adres:
+      type: object
+      description: 'Door het bevoegde gemeentelijke orgaan aan een verblijfsobject, een standplaats of een ligplaats toegekende benaming, bestaande uit een combinatie van de naam van een openbare ruimte, een nummeraanduiding en de naam van een woonplaats.'
+      required:
+        - openbareRuimteNaam
+        - kortNaam
+        - huisnummer
+        - woonplaatsNaam
+        - nummeraanduidingIdentificatie
+        - openbareRuimteIdentificatie
+        - woonplaatsIdentificatie
+      properties:
+        openbareRuimteNaam:
+          title: openbare ruimte naam
+          description: 'Een naam die aan een openbare ruimte is toegekend in een daartoe strekkend formeel gemeentelijk besluit.'
+          type: string
+          minLength: 1
+          maxLength: 80
+          pattern: '^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*'
+          example: 'Laan van de landinrichtingscommissie Duiven-Westervoort'
+        korteNaam:
+          title: korteNaam
+          description: 'De officiële openbare ruimte naam als deze niet langer is dan 24 tekens of de volgens de NEN5825 verkorte naam van maximaal 24 tekens.'
+          type: string
+          minLength: 1
+          maxLength: 24
+          pattern: '^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*'
+          example: 'Ln vd l D-Westervoort'
+        huisnummer:
+          title: huisnummer
+          description: 'Een door of namens het gemeentebestuur ten aanzien van een adresseerbaar object toegekende nummering.'
+          type: integer
+          minimum: 1
+          maximum: 99999
+          example: '1'
+        huisletter:
+          title: huisletter
+          description: 'Een door of namens het gemeentebestuur ten aanzien van een adresseerbaar object toegekende toevoeging aan een huisnummer in de vorm van een alfanumeriek teken.'
+          type: string
+          pattern: '^[a-zA-Z]{1}$'
+          example: 'A'
+        huisnummertoevoeging:
+          title: huisnummer toevoeging
+          description: 'Een door of namens het gemeentebestuur ten aanzien van een adresseerbaar object toegekende nadere toevoeging aan een huisnummer of een combinatie van huisnummer en huisletter.'
+          type: string
+          pattern: '^[0-9a-zA-Z]{1,4}$'
+          example: 'bis'
+        postcode:
+          title: postcode
+          description: 'De door PostNL vastgestelde code behorende bij een bepaalde combinatie van een straatnaam en een huisnummer.'
+          type: string
+          pattern: '^[1-9]{1}[0-9]{3}[A-Z]{2}$'
+          example: '6922KZ'
+        woonplaatsNaam:
+          title: woonplaats naam
+          description: 'De benaming van een door het gemeentebestuur aangewezen woonplaats.'
+          type: string
+          minLength: 1
+          maxLength: 80
+          pattern: '^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*'
+          example: 'Duiven'
+        nummeraanduidingIdentificatie:
+          $ref: '../../../imbag/v20180601/nummeraanduiding.yaml#/NummeraanduidingIdentificatie'
+          description: 'Fungeert ook als identificatie van het adres.'
+        openbareRuimteIdentificatie:
+          $ref: '../../../imbag/v20180601/openbareruimte.yaml#/OpenbareRuimteIdentificatie'
+        woonplaatsIdentificatie:
+          $ref: '../../../imbag/v20180601/woonplaats.yaml#/WoonplaatsIdentificatie'
+        adresseerbaarObjectIdentificatie:
+          $ref: '../../../imbag/v20180601/adresseerbaarobject.yaml#/AdresseerbaarObjectIdentificatie'
+        pandIdentificaties:
+          description: "Identificatie(s) van het pand of de panden waar het verblijfsobject deel van uit maakt."
+          type: array
+          items:
+            $ref: '../../../imbag/v20180601/pand.yaml#/PandIdentificatie'
+        indicatieNevenadres:
+          description: 'Indicatie dat dit adres een nevenadres is van een adresseerbaar object. Het adres is een hoofdadres als deze indicatie niet wordt meegeleverd.'
+          type: boolean
+
+    AdresIO:
+      allOf:
+        - $ref: '#/components/schemas/Adres'
+        - properties:
+            geconstateerd:
+              $ref: '#/components/schemas/Geconstateerd'
+            inonderzoek:
+              $ref: '#/components/schemas/AdresInOnderzoek'
+              description: 'Bij het controleren of een property in onderzoek is kan het zijn dat er meerdere indicaties voor een property opgenomen zijn. In dat geval zijn er meerdere indicaties waarvan de naam begint met de property-naam.'
+
+    AdresInOnderzoek:
+      type: object
+      description: 'Wanneer hier een property is opgenomen met de waarde true, dan is de waarde van het gelijknamige property in de resource in onderzoek. De juistheid van dit gegeven wordt op dit moment onderzocht. Onder property toelichting wordt toegelicht wat er mogelijk onjuist is aan het betreffende gegeven.'
+      properties:
+        openbareRuimteNaam:
+          type: boolean
+        korteNaam:
+          type: boolean
+        huisnummer:
+          type: boolean
+        huisletter:
+          type: boolean
+        huisnummertoevoeging:
+          type: boolean
+        postcode:
+          type: boolean
+        woonplaatsNaam:
+          type: boolean
+        openbareRuimteLigtIn:
+          description: 'Als de nummeraanduidingLigtIn false is (deze is niet in onderzoek) en de openbareRuimteLigtIn is true (deze is wel in onderzoek) maar is gerelateerd aan een andere woonplaats dan de nummeraanduiding, 
+          dan wordt de boolean hier niet gezet. Deze is dan niet relevant omdat dan de woonplaats wordt gebruikt die gerelateerd is aan de nummeraanduiding.'
+          type: boolean
+        openbareRuimteStatus:
+          type: boolean
+        nummeraanduidingLigtIn:
+          type: boolean
+        nummeraanduidingligtAan:
+          type: boolean
+        nummeraanduidingStatus:
+          type: boolean
+        toelichting:
+          type: array
+          items:
+            type: string
+            example: 'Geometrie of woonplaatsgrens is in onderzoek, waardoor gaten of overlappingen ontstaan in de registratie van woonplaatsen. 
+              Gevolg kan zijn dat een object in een verkeerde woonplaats, in twee woonplaatsen, of in geen enkele woonplaats ligt.'
+
+    Geconstateerd:
+      type: object
+      description: 'Wanneer hier een property is opgenomen met de waarde true, dan is de aan het adres gerelateerde gelijknamige resource geconstateerd. Geconstateerd is een aanduiding waarmee kan worden aangegeven dat een object in de registratie is opgenomen als gevolg van een feitelijke constatering, zonder dat er op het moment van opname sprake was van een regulier brondocument voor deze opname.'
+      properties:
+        woonplaats:
+          type: boolean
+        openbareRuimte:
+          type: boolean
+        nummeraanduiding:
+          type: boolean
+
+    AdresIOHal:
+      allOf:
+      - $ref: '#/components/schemas/AdresIO'
+      - properties:
+          _embedded:
+            $ref: '#/components/schemas/AdresIO_embedded'
+          _links:
+            $ref: '#/components/schemas/AdresIO_links'
+
+    AdresIO_links:
+      type: object
+      properties:
+        self:
+          $ref: '../../../../generiek/hallinks.yaml#/components/schemas/HalLink'
+        openbareRuimte:
+          $ref: '../../../../generiek/hallinks.yaml#/components/schemas/HalLink'
+          description: 'De aan het adres gerelateerde openbare ruimte.'
+        nummeraanduiding:
+          $ref: '../../../../generiek/hallinks.yaml#/components/schemas/HalLink'
+          description: 'De aan het adres gerelateerde nummeraanduiding. Het (boolean) attribuut nevenaders van Adres geeft aan of het hier een hoofd- of nevenadres betreft.'
+        woonplaats:
+          $ref: '../../../../generiek/hallinks.yaml#/components/schemas/HalLink'
+          description: 'De aan het adres gerelateerde woonplaats.'
+        adresseerbaarObject:
+          $ref: '../../../../generiek/hallinks.yaml#/components/schemas/HalLink'
+          description: 'De aan het adres gerelateerde ligplaats, standplaats of verblijfsobject.'
+        panden:
+          description: 'Het/de aan het adres gerelateerde pand(en).'
+          type: array
+          items:
+            $ref: '../../../../generiek/hallinks.yaml#/components/schemas/HalLink'
+
+    AdresIO_embedded:
+      type: object
+      properties:
+        openbareRuimte:
+          $ref: './resources.yaml#/OpenbareRuimteIOHal'
+        nummeraanduiding:
+          $ref: './resources.yaml#/NummeraanduidingIOHal'
+        woonplaats:
+          $ref: './resources.yaml#/WoonplaatsIOHal'
+
+    AdresIOHalCollection:
+      type: object
+      properties:
+        _links:
+          $ref: '../../../../generiek/hallinks.yaml#/components/schemas/HalPaginationLinks'
+        _embedded:
+          type: object
+          properties:
+            adressen:
+              type: array
+              items:
+                $ref: '#/components/schemas/AdresIOHal'

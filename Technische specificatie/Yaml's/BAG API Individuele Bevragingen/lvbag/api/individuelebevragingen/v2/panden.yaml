@@ -59,12 +59,10 @@ paths:
         - apiKeyBAG: []
       tags:
         - Pand
-      summary: bevragen 1 pand, op basis van de identificatie.
+      summary: bevragen van een pand met de identificatie van een pand.
       operationId: pandIdentificatie
       description: >-
-        Bevragen/raadplegen van een voorkomen van een pand, via de identificatie van het pand.
-        Geleverd wordt een pand.
-        Parameter identificatie bevat de 16 cijferige identificatie van een pand.
+        Bevragen/raadplegen van een voorkomen van een pand met de identificatie van het pand.
         Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.
       parameters:
         - $ref: '#/components/parameters/identificatie'
@@ -116,14 +114,10 @@ paths:
         - apiKeyBAG: []
       tags:
         - Pand
-      summary: bevragen levenscyclus van een pand, op basis van de identificatie.
+      summary: bevragen levenscyclus van een pand met de identificatie van een pand.
       operationId: pandLvcIdentificatie
       description: >-
-        Bevragen/raadplegen van de levenscyclus van een pand, via de identificatie van het pand.
-        Geleverd wordt een pand levenscyclus.
-        Parameter identificatie bevat de 16 cijferige identificatie van een pand.
-        Parameter geheleLvc bevat een indicatie dat de gehele levenscyclus (inclusief voorkomens die uit de geldige levenscyclus zijn verwijderd) zijn gewenst. Als deze parameter wordt weggelaten (default) wordt alleen de geldige levenscyclus geretourneerd.
-        De contentCrs in de header moet zijn epsg:28992
+        Bevragen/raadplegen van de levenscyclus van een pand met de identificatie van een pand.
       parameters:
         - $ref: '#/components/parameters/identificatie'
         - $ref: '#/components/parameters/geheleLvc'
@@ -179,13 +173,11 @@ paths:
         - apiKeyBAG: []
       tags:
         - Pand
-      summary: bevragen 1 pand, op basis van de geometrische locatie.
+      summary: bevragen panden met een geometrische locatie.
       operationId: pandGeometrie
       description: >-
-        Bevragen/raadplegen van een voorkomen van een pand, via de geometrische lcoatie van het pand.
-        Geleverd wordt een pand.
+        Bevragen/raadplegen van een voorkomen van één of meer panden met de geometrische lcoatie van het pand.
         Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.
-        De contentCrs in de header moet zijn epsg:28992
       parameters:
         - $ref: '#/components/parameters/geldigOp'
         - $ref: '#/components/parameters/beschikbaarOp'
@@ -234,14 +226,10 @@ paths:
         - apiKeyBAG: []
       tags:
         - Pand
-      summary: bevragen voorkomen van een pand, op basis van de identificatie van een pand en de identificatie van een voorkomen, bestaande uit een versie en een timestamp van het tijdstip van registratie in de LV BAG.
+      summary: bevragen voorkomen van een pand met de identificatie van een pand en de identificatie van een voorkomen, bestaande uit een versie en een timestamp van het tijdstip van registratie in de LV BAG.
       operationId: pandIdentificatieVoorkomen 
       description: >-
-        Bevragen/raadplegen van een voorkomen van een pand, via de identificatie van een pand en de identificatie van een voorkomen, bestaande uit een versie en een timestamp van het tijdstip van registratie in de LV BAG.
-        Geleverd wordt een pand voorkomen.
-        Parameter identificatie bevat de 16 cijferige identificatie van een pand.
-        Parameter versie bevat de versie van een voorkomen van een pand.
-        Parameter timestampRegistratieLv bevat een timestamp van het tijdstip van registratie van het voorkomen in de LV BAG>
+        Bevragen/raadplegen van een voorkomen van een pand met de identificatie van een pand en de identificatie van een voorkomen, bestaande uit een versie en een timestamp van het tijdstip van registratie in de LV BAG.
       parameters:
         - $ref: '#/components/parameters/identificatie'
         - $ref: '#/components/parameters/versie'
@@ -336,7 +324,7 @@ components:
       required: false
       description: >
         Filtert op objecten die geldig zijn op de opgegeven datum `JJJJ-MM-DD`
-        Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling).
+        Deze parameters komen uit de API strategie, het hoofdstuk tijdreizen.
       schema:
         type: string
         format: date
@@ -346,19 +334,20 @@ components:
       in: query
       required: false
       description: >
-        Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'
-        Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'.
+        Filtert op objecten die beschikbaar zijn op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'
+        Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden conform ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'.
         Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'.
-        Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
+        Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
       schema:
         type: string
         format: date-time
         example: '2019-06-01T12:00:00.000'
 
     geheleLvc:
-      description: >
+      description: >-
         Filtert naast geldige voorkomens ook de voorkomens die uit de geldige levenscyclus van het object zijn verwijderd.
         Als deze parameter wordt weggelaten worden alleen geldige voorkomens geretourneerd (default is false).
+        Voor een toelichting zie de [Praktijkhandleiding BAG](https://imbag.github.io/praktijkhandleiding/artikelen/wat-is-het-verschil-tussen-actieve-voorkomens-actuele-voorkomens-en-huidige-voorkomens).
       name: geheleLvc
       in: query
       required: false

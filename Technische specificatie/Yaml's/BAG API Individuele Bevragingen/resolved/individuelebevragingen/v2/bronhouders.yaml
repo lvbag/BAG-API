@@ -42,12 +42,10 @@ paths:
     get:
       tags:
       - Bronhouder
-      summary: Bevragen bronhouder, op basis van de bronhouder identificatie (gemeentecode).
-      description: |-
-        "Bevragen/raadplegen van een bronhouder, via de identificatie van een bronhouder (gemeentecode).
-         Geleverd wordt een bronhouder.
-         Parameter identificatie bevat de 4 cijferige identificatie van een bronhouder (gemeentecode).
-         Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd."
+      summary: Bevragen bronhouder met de bronhouder identificatie (gemeentecode).
+      description: Bevragen/raadplegen van een bronhouder met de identificatie van
+        een bronhouder (gemeentecode). Als geldigOp en/of beschikbaarOp niet wordt
+        opgegeven, worden de actuele gegevens geleverd.
       operationId: bevragenBronhouder
       parameters:
       - name: identificatie
@@ -64,7 +62,7 @@ paths:
       - name: geldigOp
         in: query
         description: |
-          Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD' Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
+          Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD' Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
         required: false
         style: form
         explode: true
@@ -75,7 +73,7 @@ paths:
       - name: beschikbaarOp
         in: query
         description: |
-          Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss' Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
+          Filtert op objecten die beschikbaar zijn op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss' Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden conform ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
         required: false
         style: form
         explode: true
@@ -83,7 +81,7 @@ paths:
           type: string
           format: date-time
       responses:
-        200:
+        "200":
           description: Bevraging bronhouder geslaagd
           headers:
             api-version:
@@ -94,7 +92,7 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/BronhouderHal'
-        400:
+        "400":
           description: Bad request
           headers:
             api-version:
@@ -117,7 +115,7 @@ paths:
                   name: verblijfplaats_huisnummer
                   code: integer
                   reason: Waarde is geen geldige integer.
-        401:
+        "401":
           description: Unauthorized. Je hebt waarschijnlijk geen geldige `X-Api-Key`
             header meegestuurd.
           headers:
@@ -137,7 +135,7 @@ paths:
                   a challenge applicable to the requested resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: authentication
-        403:
+        "403":
           description: Forbidden. Je hebt geen rechten om deze URL te benaderen.
           headers:
             api-version:
@@ -155,7 +153,7 @@ paths:
                   it.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
-        404:
+        "404":
           description: Not found.
           headers:
             api-version:
@@ -172,7 +170,7 @@ paths:
                 detail: The server has not found anything matching the Request-URI.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notFound
-        405:
+        "405":
           description: Method not allowed.
           headers:
             api-version:
@@ -192,7 +190,7 @@ paths:
                   resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: methodNotAllowed
-        500:
+        "500":
           description: Internal server error.
           headers:
             api-version:
@@ -210,7 +208,7 @@ paths:
                   it from fulfilling the request.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: serverError
-        503:
+        "503":
           description: Service Unavailable. Er vindt mogelijk (gepland) onderhoud
             of een storing plaats.
           headers:
@@ -251,19 +249,12 @@ paths:
     get:
       tags:
       - Bronhouder
-      summary: Bevragen bronhouder, op basis van de object identificatie.
-      description: |-
-        "Bevragen/raadplegen van een bronhouder, via de identificatie van een object.
-         Geleverd wordt een bronhouder.
-         Één van de onderstaande parameters dient gespecificeerd te worden:<br/>
-         Parameter woonplaatsIdentificatie bevat de 4 cijferige identificatie van een woonplaats object.<br/>
-         Parameter openbareRuimteIdentificatie bevat de 16 cijferige identificatie van een openbare ruimte object.<br/>
-         Parameter nummeraanduidingIdentificatie bevat de 16 cijferige identificatie van een nummeraanduiding object.<br/>
-         Parameter ligplaatsIdentificatie bevat de 16 cijferige identificatie van een ligplaats.<br/>
-         Parameter standplaatsIdentificatie bevat de 16 cijferige identificatie van een standplaats.<br/>
-         Parameter verblijfsobjectIdentificatie bevat de 16 cijferige identificatie van een verblijfsobject.<br/>
-         Parameter pandIdentificatie bevat de 16 cijferige identificatie van een pand.<br/>
-         Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd."
+      summary: Bevragen bronhouder met een object identificatie.
+      description: 'Bevragen/raadplegen van een bronhouder met de identificatie van
+        een object. De identificatie van één van de objecten: woonplaats, openbare
+        ruimte, nummeraanduiding, ligplaats, standplaats, verblijfsobject of pand
+        dient gespecificeerd te worden:<br/> Als geldigOp en/of beschikbaarOp niet
+        wordt opgegeven, worden de actuele gegevens geleverd.'
       operationId: zoekBronhouder
       parameters:
       - name: woonplaatsIdentificatie
@@ -348,7 +339,7 @@ paths:
       - name: geldigOp
         in: query
         description: |
-          Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD' Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
+          Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD' Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
         required: false
         style: form
         explode: true
@@ -359,7 +350,7 @@ paths:
       - name: beschikbaarOp
         in: query
         description: |
-          Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss' Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
+          Filtert op objecten die beschikbaar zijn op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss' Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden conform ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
         required: false
         style: form
         explode: true
@@ -367,7 +358,7 @@ paths:
           type: string
           format: date-time
       responses:
-        200:
+        "200":
           description: Bevraging zoekBronhouder geslaagd
           headers:
             api-version:
@@ -378,7 +369,7 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/BronhouderHalCollection'
-        400:
+        "400":
           description: Bad request
           headers:
             api-version:
@@ -401,7 +392,7 @@ paths:
                   name: verblijfplaats_huisnummer
                   code: integer
                   reason: Waarde is geen geldige integer.
-        401:
+        "401":
           description: Unauthorized. Je hebt waarschijnlijk geen geldige `X-Api-Key`
             header meegestuurd.
           headers:
@@ -421,7 +412,7 @@ paths:
                   a challenge applicable to the requested resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: authentication
-        403:
+        "403":
           description: Forbidden. Je hebt geen rechten om deze URL te benaderen.
           headers:
             api-version:
@@ -439,7 +430,7 @@ paths:
                   it.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
-        405:
+        "405":
           description: Method not allowed.
           headers:
             api-version:
@@ -459,7 +450,7 @@ paths:
                   resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: methodNotAllowed
-        406:
+        "406":
           description: Not Acceptable. Je hebt waarschijnlijk een gewenst formaat
             met de `Accept` header verstuurd welke niet ondersteund wordt.
           headers:
@@ -481,7 +472,7 @@ paths:
                   not acceptable according to the accept headers sent in the request
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notAcceptable
-        500:
+        "500":
           description: Internal server error.
           headers:
             api-version:
@@ -499,7 +490,7 @@ paths:
                   it from fulfilling the request.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: serverError
-        503:
+        "503":
           description: Service Unavailable. Er vindt mogelijk (gepland) onderhoud
             of een storing plaats.
           headers:
@@ -548,7 +539,7 @@ paths:
       - name: geldigOp
         in: query
         description: |
-          Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD' Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
+          Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD' Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
         required: false
         style: form
         explode: true
@@ -559,7 +550,7 @@ paths:
       - name: beschikbaarOp
         in: query
         description: |
-          Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss' Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
+          Filtert op objecten die beschikbaar zijn op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss' Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden conform ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
         required: false
         style: form
         explode: true
@@ -576,11 +567,11 @@ paths:
           - epsg:28992
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de coördinaten in de response.
+        description: Gewenste CRS van de co�rdinaten in de response.
         required: false
         schema:
           type: string
-          description: CRS van de coördinaten in de response.
+          description: CRS van de co�rdinaten in de response.
           enum:
           - epsg:28992
       requestBody:
@@ -591,7 +582,7 @@ paths:
               $ref: '#/components/schemas/Point'
         required: true
       responses:
-        200:
+        "200":
           description: Bevraging bronhouderGeometrie geslaagd
           headers:
             api-version:
@@ -602,7 +593,7 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/BronhouderHalCollection'
-        400:
+        "400":
           description: Bad request
           headers:
             api-version:
@@ -625,7 +616,7 @@ paths:
                   name: verblijfplaats_huisnummer
                   code: integer
                   reason: Waarde is geen geldige integer.
-        401:
+        "401":
           description: Unauthorized. Je hebt waarschijnlijk geen geldige `X-Api-Key`
             header meegestuurd.
           headers:
@@ -645,7 +636,7 @@ paths:
                   a challenge applicable to the requested resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: authentication
-        403:
+        "403":
           description: Forbidden. Je hebt geen rechten om deze URL te benaderen.
           headers:
             api-version:
@@ -663,7 +654,7 @@ paths:
                   it.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
-        405:
+        "405":
           description: Method not allowed.
           headers:
             api-version:
@@ -683,7 +674,7 @@ paths:
                   resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: methodNotAllowed
-        406:
+        "406":
           description: Not Acceptable. Je hebt waarschijnlijk een gewenst formaat
             met de `Accept` header verstuurd welke niet ondersteund wordt.
           headers:
@@ -705,7 +696,7 @@ paths:
                   not acceptable according to the accept headers sent in the request
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notAcceptable
-        412:
+        "412":
           description: Precondition failed.
           headers:
             api-version:
@@ -723,7 +714,7 @@ paths:
                   fields evaluated to false when it was tested on the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: preconditionFailed
-        415:
+        "415":
           description: Unsupported media type.
           headers:
             api-version:
@@ -742,7 +733,7 @@ paths:
                   the requested method.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: unsupported
-        500:
+        "500":
           description: Internal server error.
           headers:
             api-version:
@@ -760,7 +751,7 @@ paths:
                   it from fulfilling the request.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: serverError
-        503:
+        "503":
           description: Service Unavailable. Er vindt mogelijk (gepland) onderhoud
             of een storing plaats.
           headers:
@@ -801,17 +792,13 @@ paths:
     get:
       tags:
       - Bronhouder
-      summary: bevragen voorkomen van een bronhouder, op basis van de identificatie
-        van een bronhouder en de identificatie van een voorkomen, bestaande uit een
-        versie en een timestamp van het tijdstip van registratie in de LV BAG.
-      description: Bevragen/raadplegen van een voorkomen van een bronhouder, via de
+      summary: bevragen voorkomen van een bronhouder met de identificatie van een
+        bronhouder en de identificatie van een voorkomen, bestaande uit een versie
+        en een timestamp van het tijdstip van registratie in de LV BAG.
+      description: Bevragen/raadplegen van een voorkomen van een bronhouder met de
         identificatie van een bronhouder en de identificatie van een voorkomen, bestaande
         uit een versie en een timestamp van het tijdstip van registratie in de LV
-        BAG. Geleverd wordt een bronhouder voorkomen. Parameter identificatie bevat
-        de 4 cijferige identificatie van een bronhouder object. Parameter versie bevat
-        de versie van een voorkomen van een bronhouder. Parameter timestampRegistratieLv
-        bevat een timestamp van het tijdstip van registratie van het voorkomen in
-        de LV BAG.
+        BAG.
       operationId: bronhouderIdentificatieVoorkomen
       parameters:
       - name: identificatie
@@ -845,7 +832,7 @@ paths:
           type: string
           example: "1530403860000"
       responses:
-        200:
+        "200":
           description: Bevraging bronhouderIdentificatieVoorkomen geslaagd
           headers:
             api-version:
@@ -856,7 +843,7 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/BronhouderHal'
-        400:
+        "400":
           description: Bad request
           headers:
             api-version:
@@ -879,7 +866,7 @@ paths:
                   name: verblijfplaats_huisnummer
                   code: integer
                   reason: Waarde is geen geldige integer.
-        401:
+        "401":
           description: Unauthorized. Je hebt waarschijnlijk geen geldige `X-Api-Key`
             header meegestuurd.
           headers:
@@ -899,7 +886,7 @@ paths:
                   a challenge applicable to the requested resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: authentication
-        403:
+        "403":
           description: Forbidden. Je hebt geen rechten om deze URL te benaderen.
           headers:
             api-version:
@@ -917,7 +904,7 @@ paths:
                   it.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
-        404:
+        "404":
           description: Not found.
           headers:
             api-version:
@@ -934,7 +921,7 @@ paths:
                 detail: The server has not found anything matching the Request-URI.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notFound
-        405:
+        "405":
           description: Method not allowed.
           headers:
             api-version:
@@ -954,7 +941,7 @@ paths:
                   resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: methodNotAllowed
-        406:
+        "406":
           description: Not Acceptable. Je hebt waarschijnlijk een gewenst formaat
             met de `Accept` header verstuurd welke niet ondersteund wordt.
           headers:
@@ -976,7 +963,7 @@ paths:
                   not acceptable according to the accept headers sent in the request
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notAcceptable
-        500:
+        "500":
           description: Internal server error.
           headers:
             api-version:
@@ -994,7 +981,7 @@ paths:
                   it from fulfilling the request.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: serverError
-        503:
+        "503":
           description: Service Unavailable. Er vindt mogelijk (gepland) onderhoud
             of een storing plaats.
           headers:
@@ -1193,7 +1180,7 @@ components:
       description: Het Link Object zoals gespecificeerd in https://tools.ietf.org/html/draft-kelly-json-hal-08#section-5
     Href:
       type: string
-      example: datapunt.voorbeeldgemeente.nl/api/{major-versie}/resourcenaam/{resource-identificatie}
+      example: https://{base-uri}/{dienst}/{apinaam}/{major-versie}/resourcenaam/{resource-identificatie}
     HalCollectionLinks:
       type: object
       properties:
@@ -1323,7 +1310,7 @@ components:
       name: geldigOp
       in: query
       description: |
-        Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD' Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
+        Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD' Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
       required: false
       style: form
       explode: true
@@ -1335,7 +1322,7 @@ components:
       name: beschikbaarOp
       in: query
       description: |
-        Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss' Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
+        Filtert op objecten die beschikbaar zijn op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss' Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden conform ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
       required: false
       style: form
       explode: true

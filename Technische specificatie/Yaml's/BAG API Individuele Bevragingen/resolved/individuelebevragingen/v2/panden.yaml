@@ -43,11 +43,10 @@ paths:
     get:
       tags:
       - Pand
-      summary: bevragen 1 pand, op basis van de identificatie.
-      description: Bevragen/raadplegen van een voorkomen van een pand, via de identificatie
-        van het pand. Geleverd wordt een pand. Parameter identificatie bevat de 16
-        cijferige identificatie van een pand. Als geldigOp en/of beschikbaarOp niet
-        wordt opgegeven, worden de actuele gegevens geleverd.
+      summary: bevragen van een pand met de identificatie van een pand.
+      description: Bevragen/raadplegen van een voorkomen van een pand met de identificatie
+        van het pand. Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden
+        de actuele gegevens geleverd.
       operationId: pandIdentificatie
       parameters:
       - name: identificatie
@@ -64,7 +63,7 @@ paths:
       - name: geldigOp
         in: query
         description: |
-          Filtert op objecten die geldig zijn op de opgegeven datum `JJJJ-MM-DD` Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling).
+          Filtert op objecten die geldig zijn op de opgegeven datum `JJJJ-MM-DD` Deze parameters komen uit de API strategie, het hoofdstuk tijdreizen.
         required: false
         style: form
         explode: true
@@ -75,7 +74,7 @@ paths:
       - name: beschikbaarOp
         in: query
         description: |
-          Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss' Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
+          Filtert op objecten die beschikbaar zijn op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss' Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden conform ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
         required: false
         style: form
         explode: true
@@ -84,15 +83,15 @@ paths:
           format: date-time
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de coördinaten in de response.
+        description: Gewenste CRS van de co�rdinaten in de response.
         required: false
         schema:
           type: string
-          description: CRS van de coördinaten in de response.
+          description: CRS van de co�rdinaten in de response.
           enum:
           - epsg:28992
       responses:
-        200:
+        "200":
           description: Bevraging pandIdentificatie geslaagd
           headers:
             api-version:
@@ -105,7 +104,7 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/PandIOHal'
-        400:
+        "400":
           description: Bad request
           headers:
             api-version:
@@ -128,7 +127,7 @@ paths:
                   name: verblijfplaats_huisnummer
                   code: integer
                   reason: Waarde is geen geldige integer.
-        401:
+        "401":
           description: Unauthorized. Je hebt waarschijnlijk geen geldige `X-Api-Key`
             header meegestuurd.
           headers:
@@ -148,7 +147,7 @@ paths:
                   a challenge applicable to the requested resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: authentication
-        403:
+        "403":
           description: Forbidden. Je hebt geen rechten om deze URL te benaderen.
           headers:
             api-version:
@@ -166,7 +165,7 @@ paths:
                   it.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
-        404:
+        "404":
           description: Not found.
           headers:
             api-version:
@@ -183,7 +182,7 @@ paths:
                 detail: The server has not found anything matching the Request-URI.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notFound
-        405:
+        "405":
           description: Method not allowed.
           headers:
             api-version:
@@ -203,7 +202,7 @@ paths:
                   resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: methodNotAllowed
-        406:
+        "406":
           description: Not Acceptable. Je hebt waarschijnlijk een gewenst formaat
             met de `Accept` header verstuurd welke niet ondersteund wordt.
           headers:
@@ -225,7 +224,7 @@ paths:
                   not acceptable according to the accept headers sent in the request
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notAcceptable
-        412:
+        "412":
           description: Precondition failed.
           headers:
             api-version:
@@ -243,7 +242,7 @@ paths:
                   fields evaluated to false when it was tested on the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: preconditionFailed
-        500:
+        "500":
           description: Internal server error.
           headers:
             api-version:
@@ -261,7 +260,7 @@ paths:
                   it from fulfilling the request.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: serverError
-        503:
+        "503":
           description: Service Unavailable. Er vindt mogelijk (gepland) onderhoud
             of een storing plaats.
           headers:
@@ -302,14 +301,9 @@ paths:
     get:
       tags:
       - Pand
-      summary: bevragen levenscyclus van een pand, op basis van de identificatie.
-      description: Bevragen/raadplegen van de levenscyclus van een pand, via de identificatie
-        van het pand. Geleverd wordt een pand levenscyclus. Parameter identificatie
-        bevat de 16 cijferige identificatie van een pand. Parameter geheleLvc bevat
-        een indicatie dat de gehele levenscyclus (inclusief voorkomens die uit de
-        geldige levenscyclus zijn verwijderd) zijn gewenst. Als deze parameter wordt
-        weggelaten (default) wordt alleen de geldige levenscyclus geretourneerd. De
-        contentCrs in de header moet zijn epsg:28992
+      summary: bevragen levenscyclus van een pand met de identificatie van een pand.
+      description: Bevragen/raadplegen van de levenscyclus van een pand met de identificatie
+        van een pand.
       operationId: pandLvcIdentificatie
       parameters:
       - name: identificatie
@@ -325,8 +319,10 @@ paths:
           example: "0226100000008856"
       - name: geheleLvc
         in: query
-        description: |
-          Filtert naast geldige voorkomens ook de voorkomens die uit de geldige levenscyclus van het object zijn verwijderd. Als deze parameter wordt weggelaten worden alleen geldige voorkomens geretourneerd (default is false).
+        description: Filtert naast geldige voorkomens ook de voorkomens die uit de
+          geldige levenscyclus van het object zijn verwijderd. Als deze parameter
+          wordt weggelaten worden alleen geldige voorkomens geretourneerd (default
+          is false). Voor een toelichting zie de [Praktijkhandleiding BAG](https://imbag.github.io/praktijkhandleiding/artikelen/wat-is-het-verschil-tussen-actieve-voorkomens-actuele-voorkomens-en-huidige-voorkomens).
         required: false
         style: form
         explode: true
@@ -336,15 +332,15 @@ paths:
           default: false
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de coördinaten in de response.
+        description: Gewenste CRS van de co�rdinaten in de response.
         required: false
         schema:
           type: string
-          description: CRS van de coördinaten in de response.
+          description: CRS van de co�rdinaten in de response.
           enum:
           - epsg:28992
       responses:
-        200:
+        "200":
           description: Bevraging pandLvcIdentificatie geslaagd
           headers:
             api-version:
@@ -357,7 +353,7 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/PandIOLvcHalCollection'
-        400:
+        "400":
           description: Bad request
           headers:
             api-version:
@@ -380,7 +376,7 @@ paths:
                   name: verblijfplaats_huisnummer
                   code: integer
                   reason: Waarde is geen geldige integer.
-        401:
+        "401":
           description: Unauthorized. Je hebt waarschijnlijk geen geldige `X-Api-Key`
             header meegestuurd.
           headers:
@@ -400,7 +396,7 @@ paths:
                   a challenge applicable to the requested resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: authentication
-        403:
+        "403":
           description: Forbidden. Je hebt geen rechten om deze URL te benaderen.
           headers:
             api-version:
@@ -418,7 +414,7 @@ paths:
                   it.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
-        404:
+        "404":
           description: Not found.
           headers:
             api-version:
@@ -435,7 +431,7 @@ paths:
                 detail: The server has not found anything matching the Request-URI.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notFound
-        405:
+        "405":
           description: Method not allowed.
           headers:
             api-version:
@@ -455,7 +451,7 @@ paths:
                   resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: methodNotAllowed
-        406:
+        "406":
           description: Not Acceptable. Je hebt waarschijnlijk een gewenst formaat
             met de `Accept` header verstuurd welke niet ondersteund wordt.
           headers:
@@ -477,7 +473,7 @@ paths:
                   not acceptable according to the accept headers sent in the request
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notAcceptable
-        412:
+        "412":
           description: Precondition failed.
           headers:
             api-version:
@@ -495,7 +491,7 @@ paths:
                   fields evaluated to false when it was tested on the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: preconditionFailed
-        500:
+        "500":
           description: Internal server error.
           headers:
             api-version:
@@ -513,7 +509,7 @@ paths:
                   it from fulfilling the request.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: serverError
-        503:
+        "503":
           description: Service Unavailable. Er vindt mogelijk (gepland) onderhoud
             of een storing plaats.
           headers:
@@ -554,17 +550,16 @@ paths:
     post:
       tags:
       - Pand
-      summary: bevragen 1 pand, op basis van de geometrische locatie.
-      description: Bevragen/raadplegen van een voorkomen van een pand, via de geometrische
-        lcoatie van het pand. Geleverd wordt een pand. Als geldigOp en/of beschikbaarOp
-        niet wordt opgegeven, worden de actuele gegevens geleverd. De contentCrs in
-        de header moet zijn epsg:28992
+      summary: bevragen panden met een geometrische locatie.
+      description: Bevragen/raadplegen van een voorkomen van één of meer panden met
+        de geometrische lcoatie van het pand. Als geldigOp en/of beschikbaarOp niet
+        wordt opgegeven, worden de actuele gegevens geleverd.
       operationId: pandGeometrie
       parameters:
       - name: geldigOp
         in: query
         description: |
-          Filtert op objecten die geldig zijn op de opgegeven datum `JJJJ-MM-DD` Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling).
+          Filtert op objecten die geldig zijn op de opgegeven datum `JJJJ-MM-DD` Deze parameters komen uit de API strategie, het hoofdstuk tijdreizen.
         required: false
         style: form
         explode: true
@@ -575,7 +570,7 @@ paths:
       - name: beschikbaarOp
         in: query
         description: |
-          Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss' Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
+          Filtert op objecten die beschikbaar zijn op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss' Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden conform ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
         required: false
         style: form
         explode: true
@@ -592,11 +587,11 @@ paths:
           - epsg:28992
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de coördinaten in de response.
+        description: Gewenste CRS van de co�rdinaten in de response.
         required: false
         schema:
           type: string
-          description: CRS van de coördinaten in de response.
+          description: CRS van de co�rdinaten in de response.
           enum:
           - epsg:28992
       requestBody:
@@ -607,7 +602,7 @@ paths:
               $ref: '#/components/schemas/Point'
         required: true
       responses:
-        200:
+        "200":
           description: Bevraging pandGeometrie geslaagd
           headers:
             api-version:
@@ -620,7 +615,7 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/PandIOHalCollection'
-        400:
+        "400":
           description: Bad request
           headers:
             api-version:
@@ -643,7 +638,7 @@ paths:
                   name: verblijfplaats_huisnummer
                   code: integer
                   reason: Waarde is geen geldige integer.
-        401:
+        "401":
           description: Unauthorized. Je hebt waarschijnlijk geen geldige `X-Api-Key`
             header meegestuurd.
           headers:
@@ -663,7 +658,7 @@ paths:
                   a challenge applicable to the requested resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: authentication
-        403:
+        "403":
           description: Forbidden. Je hebt geen rechten om deze URL te benaderen.
           headers:
             api-version:
@@ -681,7 +676,7 @@ paths:
                   it.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
-        405:
+        "405":
           description: Method not allowed.
           headers:
             api-version:
@@ -701,7 +696,7 @@ paths:
                   resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: methodNotAllowed
-        406:
+        "406":
           description: Not Acceptable. Je hebt waarschijnlijk een gewenst formaat
             met de `Accept` header verstuurd welke niet ondersteund wordt.
           headers:
@@ -723,7 +718,7 @@ paths:
                   not acceptable according to the accept headers sent in the request
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notAcceptable
-        412:
+        "412":
           description: Precondition failed.
           headers:
             api-version:
@@ -741,7 +736,7 @@ paths:
                   fields evaluated to false when it was tested on the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: preconditionFailed
-        415:
+        "415":
           description: Unsupported media type.
           headers:
             api-version:
@@ -760,7 +755,7 @@ paths:
                   the requested method.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: unsupported
-        500:
+        "500":
           description: Internal server error.
           headers:
             api-version:
@@ -778,7 +773,7 @@ paths:
                   it from fulfilling the request.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: serverError
-        503:
+        "503":
           description: Service Unavailable. Er vindt mogelijk (gepland) onderhoud
             of een storing plaats.
           headers:
@@ -819,16 +814,12 @@ paths:
     get:
       tags:
       - Pand
-      summary: bevragen voorkomen van een pand, op basis van de identificatie van
-        een pand en de identificatie van een voorkomen, bestaande uit een versie en
-        een timestamp van het tijdstip van registratie in de LV BAG.
-      description: Bevragen/raadplegen van een voorkomen van een pand, via de identificatie
+      summary: bevragen voorkomen van een pand met de identificatie van een pand en
+        de identificatie van een voorkomen, bestaande uit een versie en een timestamp
+        van het tijdstip van registratie in de LV BAG.
+      description: Bevragen/raadplegen van een voorkomen van een pand met de identificatie
         van een pand en de identificatie van een voorkomen, bestaande uit een versie
-        en een timestamp van het tijdstip van registratie in de LV BAG. Geleverd wordt
-        een pand voorkomen. Parameter identificatie bevat de 16 cijferige identificatie
-        van een pand. Parameter versie bevat de versie van een voorkomen van een pand.
-        Parameter timestampRegistratieLv bevat een timestamp van het tijdstip van
-        registratie van het voorkomen in de LV BAG>
+        en een timestamp van het tijdstip van registratie in de LV BAG.
       operationId: pandIdentificatieVoorkomen
       parameters:
       - name: identificatie
@@ -873,15 +864,15 @@ paths:
           type: string
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de coördinaten in de response.
+        description: Gewenste CRS van de co�rdinaten in de response.
         required: false
         schema:
           type: string
-          description: CRS van de coördinaten in de response.
+          description: CRS van de co�rdinaten in de response.
           enum:
           - epsg:28992
       responses:
-        200:
+        "200":
           description: Bevraging pandIdentificatieVoorkomen geslaagd
           headers:
             api-version:
@@ -894,7 +885,7 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/PandIOHal'
-        400:
+        "400":
           description: Bad request
           headers:
             api-version:
@@ -917,7 +908,7 @@ paths:
                   name: verblijfplaats_huisnummer
                   code: integer
                   reason: Waarde is geen geldige integer.
-        401:
+        "401":
           description: Unauthorized. Je hebt waarschijnlijk geen geldige `X-Api-Key`
             header meegestuurd.
           headers:
@@ -937,7 +928,7 @@ paths:
                   a challenge applicable to the requested resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: authentication
-        403:
+        "403":
           description: Forbidden. Je hebt geen rechten om deze URL te benaderen.
           headers:
             api-version:
@@ -955,7 +946,7 @@ paths:
                   it.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
-        404:
+        "404":
           description: Not found.
           headers:
             api-version:
@@ -972,7 +963,7 @@ paths:
                 detail: The server has not found anything matching the Request-URI.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notFound
-        405:
+        "405":
           description: Method not allowed.
           headers:
             api-version:
@@ -992,7 +983,7 @@ paths:
                   resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: methodNotAllowed
-        406:
+        "406":
           description: Not Acceptable. Je hebt waarschijnlijk een gewenst formaat
             met de `Accept` header verstuurd welke niet ondersteund wordt.
           headers:
@@ -1014,7 +1005,7 @@ paths:
                   not acceptable according to the accept headers sent in the request
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notAcceptable
-        412:
+        "412":
           description: Precondition failed.
           headers:
             api-version:
@@ -1032,7 +1023,7 @@ paths:
                   fields evaluated to false when it was tested on the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: preconditionFailed
-        500:
+        "500":
           description: Internal server error.
           headers:
             api-version:
@@ -1050,7 +1041,7 @@ paths:
                   it from fulfilling the request.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: serverError
-        503:
+        "503":
           description: Service Unavailable. Er vindt mogelijk (gepland) onderhoud
             of een storing plaats.
           headers:
@@ -1376,7 +1367,7 @@ components:
       description: Het Link Object zoals gespecificeerd in https://tools.ietf.org/html/draft-kelly-json-hal-08#section-5
     Href:
       type: string
-      example: datapunt.voorbeeldgemeente.nl/api/{major-versie}/resourcenaam/{resource-identificatie}
+      example: https://{base-uri}/{dienst}/{apinaam}/{major-versie}/resourcenaam/{resource-identificatie}
     HalCollectionLinks:
       type: object
       properties:
@@ -1417,7 +1408,7 @@ components:
         een object of data type een indicatie J (Ja) of N (Nee) heeft in de registratie.
       enum:
       - J
-      - N
+      - "N"
     Voorkomen:
       title: Voorkomen
       required:
@@ -1571,7 +1562,7 @@ components:
       name: geldigOp
       in: query
       description: |
-        Filtert op objecten die geldig zijn op de opgegeven datum `JJJJ-MM-DD` Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling).
+        Filtert op objecten die geldig zijn op de opgegeven datum `JJJJ-MM-DD` Deze parameters komen uit de API strategie, het hoofdstuk tijdreizen.
       required: false
       style: form
       explode: true
@@ -1583,7 +1574,7 @@ components:
       name: beschikbaarOp
       in: query
       description: |
-        Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss' Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
+        Filtert op objecten die beschikbaar zijn op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss' Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden conform ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
       required: false
       style: form
       explode: true
@@ -1593,8 +1584,10 @@ components:
     geheleLvc:
       name: geheleLvc
       in: query
-      description: |
-        Filtert naast geldige voorkomens ook de voorkomens die uit de geldige levenscyclus van het object zijn verwijderd. Als deze parameter wordt weggelaten worden alleen geldige voorkomens geretourneerd (default is false).
+      description: Filtert naast geldige voorkomens ook de voorkomens die uit de geldige
+        levenscyclus van het object zijn verwijderd. Als deze parameter wordt weggelaten
+        worden alleen geldige voorkomens geretourneerd (default is false). Voor een
+        toelichting zie de [Praktijkhandleiding BAG](https://imbag.github.io/praktijkhandleiding/artikelen/wat-is-het-verschil-tussen-actieve-voorkomens-actuele-voorkomens-en-huidige-voorkomens).
       required: false
       style: form
       explode: true

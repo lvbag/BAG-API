@@ -2,7 +2,7 @@ components:
   schemas:
     Href:
       type: string
-      example: 'datapunt.voorbeeldgemeente.nl/api/{major-versie}/resourcenaam/{resource-identificatie}'
+      example: 'https://{base-uri}/{dienst}/{apinaam}/{major-versie}/resourcenaam/{resource-identificatie}'
     
     HalLink:
       description: 'Het Link Object zoals gespecificeerd in https://tools.ietf.org/html/draft-kelly-json-hal-08#section-5'
@@ -35,7 +35,7 @@ components:
               properties:
                 href:
                   type: string
-                  example: 'https://datapunt.voorbeeldgemeente.nl/api/{major-versie}/resourcenaam?page=1'
+                  example: 'https://{base-uri}/{dienst}/{apinaam}/{major-versie}/resourcenaam?page=1'
                 templated:
                   type: boolean
                 title:
@@ -47,7 +47,7 @@ components:
               properties:
                 href:
                   type: string
-                  example: 'https://datapunt.voorbeeldgemeente.nl/api/{major-versie}/resourcenaam?page=3'
+                  example: 'https://{base-uri}/{dienst}/{apinaam}/{major-versie}/resourcenaam?page=3'
                 templated:
                   type: boolean
                 title:
@@ -59,9 +59,21 @@ components:
               properties:
                 href:
                   type: string
-                  example: 'https://datapunt.voorbeeldgemeente.nl/api/{major-versie}/resourcenaam?page=5'
+                  example: 'https://{base-uri}/{dienst}/{apinaam}/{major-versie}/resourcenaam?page=5'
                 templated:
                   type: boolean
                 title:
                   type: string
                   example: 'Volgende pagina'
+            last:
+              type: object
+              description: uri voor het opvragen van de laatste pagina van deze collectie
+              properties:
+                href:
+                  type: string
+                  example: 'https://{base-uri}/{dienst}/{apinaam}/{major-versie}/resourcenaam?page=15'
+                templated:
+                  type: boolean
+                title:
+                  type: string
+                  example: 'Laatste pagina'

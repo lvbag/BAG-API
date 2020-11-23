@@ -44,7 +44,7 @@ paths:
       summary: Algemene info van de API
       operationId: getInfo
       responses:
-        200:
+        "200":
           description: Bevraging getInfo geslaagd
           content:
             application/json:

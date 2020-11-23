@@ -60,13 +60,11 @@ paths:
         - apiKeyBAG: []
       tags: 
         - Openbare ruimte
-      summary: bevragen 1 openbare ruimte op basis van de identificatie. 
+      summary: bevragen van een openbare ruimte met de identificatie van een openbare ruimte. 
       description: >-
-        Bevragen/raadplegen één openbare ruimte, via de identificatie van een openbare ruimte.
-        Geleverd wordt de openbare ruimte, met embedded de woonplaats waar de openbare ruimte in ligt.
-        Parameter openbareRuimteIdentificatie bevat de 16 cijferige identificatie van een openbare ruimte. 
+        Bevragen/raadplegen van een openbare ruimte met de identificatie van een openbare ruimte.
         Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd. 
-        Als expand=ligtInWoonplaats dan wordt de woonplaats als geneste resource geleverd.  
+        Als expand=ligtInWoonplaats of true dan wordt de woonplaats als geneste resource geleverd.
       parameters: 
         - $ref: '#/components/parameters/openbareRuimteIdentificatie'
         - $ref: '#/components/parameters/geldigOp'
@@ -114,13 +112,10 @@ paths:
         - apiKeyBAG: []
       tags:
         - Openbare ruimte
-      summary: bevragen levenscyclus van een openbare ruimte op basis van de identificatie.
+      summary: bevragen levenscyclus van een openbare ruimte met de identificatie van een openbare ruimte.
       description: >-
         Bevragen/raadplegen van de levenscyclus van één openbare ruimte, via de identificatie van een openbare ruimte.
-        Geleverd wordt de openbare ruimte, met embedded de woonplaats waar de openbare ruimte in ligt.
-        Parameter openbareRuimteIdentificatie bevat de 16 cijferige identificatie van een openbare ruimte.
-        Parameter geheleLvc bevat een indicatie dat de gehele levenscyclus (inclusief voorkomens die uit de geldige levenscyclus zijn verwijderd) zijn gewenst. Als deze parameter wordt weggelaten (default) wordt alleen de geldige levenscyclus geretourneerd.
-        Als expand=ligtInWoonplaats dan wordt de woonplaats als geneste resource geleverd.
+        Als expand=ligtInWoonplaats of true dan wordt de woonplaats als geneste resource geleverd.
       parameters:
         - $ref: '#/components/parameters/openbareRuimteIdentificatie'
         - $ref: '#/components/parameters/geheleLvc'
@@ -168,29 +163,30 @@ paths:
         - Openbare ruimte
       summary: bevragen openbare ruimte(n) op basis van de verschillende combinaties van parameters.
       description: >-
-        "De volgende (combinaties van) parameters worden ondersteund:<br/>
+        De volgende (combinaties van) parameters worden ondersteund:<br/>
         <ol>
-        <li>Bevragen/raadplegen van een openbare ruimte via woonplaats naam en openbare ruimte naam.
-           Parameter woonplaatsNaam bevat de naam van een woonplaats object.
-           Parameter openbareRuimteNaam bevat de naam van een openbare ruimte object.</li>
-           Als expand=ligtInWoonplaats dan wordt de woonplaats als geneste resource geleverd.<br/>
-        <li>Bevragen/raadplegen van een openbare ruimte via woonplaats identificatie en openbare ruimte naam.
-           Parameter woonplaatsIdentificatie bevat de 4 cijferige identificatie van een woonplaats object.
-           Parameter openbareRuimteNaam bevat de naam van een openbare ruimte object.</li>
-           Als expand=ligtInWoonplaats dan wordt de woonplaats als geneste resource geleverd.<br/>
-        <li>Bevragen/zoeken van alle gerelateerde openbare ruimten, via paginering en met exacte match op woonplaats identificatie.
-           Geleverd wordt een array van openbare ruimte IDs.
-           Parameter woonplaatsIdentificatie bevat de 4 cijferige identificatie van een woonplaats object.</li>
+          <li>
+            Bevragen/raadplegen van een openbare ruimte met een woonplaats naam en een openbare ruimte naam.
+            Als expand=ligtInWoonplaats of true dan wordt de woonplaats als geneste resource geleverd.
+          </li>
+          <li>
+            Bevragen/raadplegen van een openbare ruimte met een woonplaats identificatie en een openbare ruimte naam.
+            Als expand=ligtInWoonplaats of true dan wordt de woonplaats als geneste resource geleverd.
+          </li>
+          <li>
+            Bevragen/zoeken van alle aan een woonplaats gerelateerde openbare ruimten met de woonplaats identificatie.
+            Parameter huidig kan worden toegepast. Huidig kan niet gebruikt worden i.c.m. geldigOp en beschikbaarOp parameters. 
+            Expand wordt niet ondersteund.
+          </li>
         </ol>
-        Bij alle bovenstaande combinaties kunnen eveneens de volgende parameters worden gebruikt:<br/>        
-        Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.<br/> 
-        Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.<br/>
-        Parameter page bevat de gewenste pagina met resultaten.
-        Parameter pageSize bevat het aantal resultaten per pagina."
+        Bij alle bovenstaande combinaties wordt paginering ondersteund en kunnen de parameters geldigOp en beschikbaarOp worden gebruikt (tenzij anders vermeld).        
+        Voor paginering, zie: [functionele specificatie paginering](https://github.com/lvbag/BAG-API/blob/master/Features/paginering.feature).
+        Als geldigOp en beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.
       parameters:
         - $ref: '#/components/parameters/woonplaatsNaam'
         - $ref: '#/components/parameters/openbareRuimteNaam'
         - $ref: '#/components/parameters/woonplaatsIdentificatie'
+        - $ref: '#/components/parameters/huidig'
         - $ref: '#/components/parameters/geldigOp'
         - $ref: '#/components/parameters/beschikbaarOp'
         - $ref: '../../../../generiek/parameters.yaml#/page'
@@ -237,15 +233,11 @@ paths:
         - apiKeyBAG: []
       tags:
         - Openbare ruimte
-      summary: bevragen voorkomen van een openbare ruimte, op basis van de identificatie van een openbare ruimte en de identificatie van een voorkomen, bestaande uit een versie en een timestamp van het tijdstip van registratie in de LV BAG.
+      summary: bevragen van een voorkomen van een openbare ruimte met de identificatie van een openbare ruimte en de identificatie van een voorkomen, bestaande uit een versie en een timestamp van het tijdstip van registratie in de LV BAG.
       operationId: openbareruimteIdentificatieVoorkomen 
       description: >-
-        Bevragen/raadplegen van een voorkomen van een openbare ruimte, via de identificatie van een openbare ruimte en de identificatie van een voorkomen, bestaande uit een versie en een timestamp van het tijdstip van registratie in de LV BAG.
-        Geleverd wordt een openbare ruimte voorkomen.
-        Parameter identificatie bevat de 16 cijferige identificatie van een openbare ruimte.
-        Parameter versie bevat de versie van een voorkomen van een openbare ruimte.
-        Parameter timestampRegistratieLv bevat een timestamp van het tijdstip van registratie van het voorkomen in de LV BAG>
-        Als expand=ligtInWoonplaats dan wordt de woonplaats als geneste resource geleverd.
+        Bevragen/raadplegen van een voorkomen van een openbare ruimte met de identificatie van een openbare ruimte en de identificatie van een voorkomen, bestaande uit een versie en een timestamp van het tijdstip van registratie in de LV BAG.
+        Als expand=ligtInWoonplaats of true dan wordt de woonplaats als geneste resource geleverd.
       parameters:
         - $ref: '#/components/parameters/openbareRuimteIdentificatie'
         - $ref: '#/components/parameters/versie'
@@ -367,7 +359,7 @@ components:
     geldigOp:
       description: > 
         Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD' 
-        Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
+        Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
       name: geldigOp
       in: query
       required: false
@@ -378,10 +370,10 @@ components:
 
     beschikbaarOp:
       description: >
-        Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss' 
-        Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'.
+        Filtert op objecten die beschikbaar zijn op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'
+        Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden conform ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'.
         Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'.
-        Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
+        Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
       name: beschikbaarOp
       in: query
       required: false
@@ -391,9 +383,10 @@ components:
         example: '2019-06-01T12:00:00.000'
 
     geheleLvc:
-      description: >
+      description: >-
         Filtert naast geldige voorkomens ook de voorkomens die uit de geldige levenscyclus van het object zijn verwijderd.
         Als deze parameter wordt weggelaten worden alleen geldige voorkomens geretourneerd (default is false).
+        Voor een toelichting zie de [Praktijkhandleiding BAG](https://imbag.github.io/praktijkhandleiding/artikelen/wat-is-het-verschil-tussen-actieve-voorkomens-actuele-voorkomens-en-huidige-voorkomens).
       name: geheleLvc
       in: query
       required: false
@@ -401,3 +394,13 @@ components:
         type: boolean
         default: false
         example: 'true'
+
+    huidig:
+      description: Indicatie dat alleen actuele object voorkomens zonder eindstatus gewenst zijn.
+      name: huidig
+      in: query
+      required: false
+      schema:
+        type: boolean
+        default: false
+        example: false

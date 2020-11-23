@@ -45,7 +45,7 @@ paths:
       - Adresgegevens
       summary: Bevragen 1 adres op basis van verschillende combinaties van parameters.
       description: |-
-        "De volgende (combinaties van) parameters worden ondersteund: <ol> <li>Bevragen/raadplegen één adres, via de identificatie van een nummeraanduiding.
+        De volgende (combinaties van) parameters worden ondersteund: <ol> <li>Bevragen/raadplegen één adres, via de identificatie van een nummeraanduiding.
            Geleverd worden adresgegevens bestaande uit een selectie van informatie uit woonplaats, openbare ruimte, nummeraanduiding, adresseerbare objecten en bronhouder informatie.
            Parameter nummeraanduidingIdentificatie bevat de 16 cijferige identificatie van een nummeraanduiding object.</li>
         <li>Bevragen/raadplegen van adresgegevens via postcode en huisnummer.
@@ -77,7 +77,7 @@ paths:
            Het opgeven van exacteMatch is geen garantie dat er maar 1 object wordt geretourneerd.
            Bv. bij een straat met huisnummers 3, 3A en 3Abis, 3B en 3Bbis, als er wordt gezocht met huisnummer 3 en toevoeging 'bis' en exacteMatch=true zijn er meerdere resultaten.
            Deze worden alle geretourneerd.</li>
-        </ol> Bij alle bovenstaande combinaties kunnen eveneens de volgende parameters worden gebruikt:<br/> Als expand=heeftAlsHoofdAdres dan wordt de nummeraanduiding van het hoofdadres als geneste resource geleverd.<br/> Als expand=heeftAlsNevenAdres dan worden de nummeraanduidingen van de nevenadressen als geneste resources geleverd.<br/> Als expand=ligtInWoonplaats dan wordt de woonplaats als geneste resource geleverd.<br/> Als expand=ligtAanOpenbareRuimte dan wordt de openbare ruimte als geneste resource geleverd.<br/> Als expand=true dan worden alle gerelateerde objecten als geneste resources geleverd.<br/>"
+        </ol> Bij alle bovenstaande combinaties kunnen eveneens de volgende parameters worden gebruikt:<br/> Als expand=heeftAlsHoofdAdres dan wordt de nummeraanduiding van het hoofdadres als geneste resource geleverd.<br/> Als expand=heeftAlsNevenAdres dan worden de nummeraanduidingen van de nevenadressen als geneste resources geleverd.<br/> Als expand=ligtInWoonplaats dan wordt de woonplaats als geneste resource geleverd.<br/> Als expand=ligtAanOpenbareRuimte dan wordt de openbare ruimte als geneste resource geleverd.<br/> Als expand=true dan worden alle gerelateerde objecten als geneste resources geleverd.<br/>
       operationId: zoekAdresgegevens
       parameters:
       - name: nummeraanduidingIdentificatie
@@ -134,21 +134,8 @@ paths:
           example: A
       - name: exacteMatch
         in: query
-        description: '"Indicatie of de nummeraanduiding gegevens een exacte match
-          moeten opleveren. Dit houdt in, dat als de zoekopdracht met de opgegeven
-          parameters meerdere resultaten oplevert, alleen het resultaat dat exact
-          overeenkomt met deze parameters wordt geretourneerd. Bv. gevraagd wordt
-          postcode: 1234AA en huisnummer: 3, geen huisletter en geen huisnummertoevoeging.
-          Gegeven een straat met postcode 1234AA en huisnummer 3, 3A en 3B, levert
-          als resultaten alle 3 de adressen op. Wordt exacteMatch=true opgegeven,
-          dan wordt alleen nummeraanduiding met postcode 1234AA en huisnummer 3 geretourneeerd.
-          Als er ondanks dat exacteMatch=true is opgegeven nog steeds meerdere zoekresultaten
-          zijn, dan wordt toch een lijst met meerdere resultaten geretourneerd. Bv.
-          gevraagd wordt postcode 1234AA, huisnummer 3 en toevoeging bis en geen huisletter.
-          Gegeven een straat met postcode 1234AA en huisnummers 3, 3A en 3Abis, 3B
-          en 3Bbis, levert als resultaten 3Abis en 3Bbis op. Wordt exacteMatch=true
-          opgegeven, dan blijven er nog steeds twee resultaten over. De default waarde
-          is false."'
+        description: '"Een indicatie of de resultaten van een zoekoperatie exact overeen
+          moeten komen met de zoekcriteria, zie [functionele specificatie exacte match](https://github.com/lvbag/BAG-API/blob/master/Features/exacte_match.feature)."'
         required: false
         style: form
         explode: true
@@ -204,15 +191,15 @@ paths:
           type: string
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de coördinaten in de response.
+        description: Gewenste CRS van de co�rdinaten in de response.
         required: false
         schema:
           type: string
-          description: CRS van de coördinaten in de response.
+          description: CRS van de co�rdinaten in de response.
           enum:
           - epsg:28992
       responses:
-        200:
+        "200":
           description: Bevraging zoekAdresgegevens geslaagd
           headers:
             api-version:
@@ -225,7 +212,7 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/AdresgegevensHalCollection'
-        400:
+        "400":
           description: Bad request
           headers:
             api-version:
@@ -248,7 +235,7 @@ paths:
                   name: verblijfplaats_huisnummer
                   code: integer
                   reason: Waarde is geen geldige integer.
-        401:
+        "401":
           description: Unauthorized. Je hebt waarschijnlijk geen geldige `X-Api-Key`
             header meegestuurd.
           headers:
@@ -268,7 +255,7 @@ paths:
                   a challenge applicable to the requested resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: authentication
-        403:
+        "403":
           description: Forbidden. Je hebt geen rechten om deze URL te benaderen.
           headers:
             api-version:
@@ -286,7 +273,7 @@ paths:
                   it.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
-        405:
+        "405":
           description: Method not allowed.
           headers:
             api-version:
@@ -306,7 +293,7 @@ paths:
                   resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: methodNotAllowed
-        406:
+        "406":
           description: Not Acceptable. Je hebt waarschijnlijk een gewenst formaat
             met de `Accept` header verstuurd welke niet ondersteund wordt.
           headers:
@@ -328,7 +315,7 @@ paths:
                   not acceptable according to the accept headers sent in the request
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notAcceptable
-        412:
+        "412":
           description: Precondition failed.
           headers:
             api-version:
@@ -346,7 +333,7 @@ paths:
                   fields evaluated to false when it was tested on the server.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: preconditionFailed
-        500:
+        "500":
           description: Internal server error.
           headers:
             api-version:
@@ -364,7 +351,7 @@ paths:
                   it from fulfilling the request.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: serverError
-        503:
+        "503":
           description: Service Unavailable. Er vindt mogelijk (gepland) onderhoud
             of een storing plaats.
           headers:
@@ -947,7 +934,7 @@ components:
       description: Het Link Object zoals gespecificeerd in https://tools.ietf.org/html/draft-kelly-json-hal-08#section-5
     Href:
       type: string
-      example: datapunt.voorbeeldgemeente.nl/api/{major-versie}/resourcenaam/{resource-identificatie}
+      example: https://{base-uri}/{dienst}/{apinaam}/{major-versie}/resourcenaam/{resource-identificatie}
     WoonplaatsIdentificatie:
       title: identificatie
       maxLength: 4
@@ -964,7 +951,7 @@ components:
         een object of data type een indicatie J (Ja) of N (Nee) heeft in de registratie.
       enum:
       - J
-      - N
+      - "N"
     OpenbareRuimteIdentificatie:
       title: identificatie
       maxLength: 16
@@ -1368,6 +1355,7 @@ components:
           title: openbare ruimte naam
           maxLength: 80
           minLength: 1
+          pattern: ^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*
           type: string
           description: Een naam die aan een openbare ruimte is toegekend in een daartoe
             strekkend formeel gemeentelijk besluit.
@@ -1832,20 +1820,8 @@ components:
     exacteMatch:
       name: exacteMatch
       in: query
-      description: '"Indicatie of de nummeraanduiding gegevens een exacte match moeten
-        opleveren. Dit houdt in, dat als de zoekopdracht met de opgegeven parameters
-        meerdere resultaten oplevert, alleen het resultaat dat exact overeenkomt met
-        deze parameters wordt geretourneerd. Bv. gevraagd wordt postcode: 1234AA en
-        huisnummer: 3, geen huisletter en geen huisnummertoevoeging. Gegeven een straat
-        met postcode 1234AA en huisnummer 3, 3A en 3B, levert als resultaten alle
-        3 de adressen op. Wordt exacteMatch=true opgegeven, dan wordt alleen nummeraanduiding
-        met postcode 1234AA en huisnummer 3 geretourneeerd. Als er ondanks dat exacteMatch=true
-        is opgegeven nog steeds meerdere zoekresultaten zijn, dan wordt toch een lijst
-        met meerdere resultaten geretourneerd. Bv. gevraagd wordt postcode 1234AA,
-        huisnummer 3 en toevoeging bis en geen huisletter. Gegeven een straat met
-        postcode 1234AA en huisnummers 3, 3A en 3Abis, 3B en 3Bbis, levert als resultaten
-        3Abis en 3Bbis op. Wordt exacteMatch=true opgegeven, dan blijven er nog steeds
-        twee resultaten over. De default waarde is false."'
+      description: '"Een indicatie of de resultaten van een zoekoperatie exact overeen
+        moeten komen met de zoekcriteria, zie [functionele specificatie exacte match](https://github.com/lvbag/BAG-API/blob/master/Features/exacte_match.feature)."'
       required: false
       style: form
       explode: true
