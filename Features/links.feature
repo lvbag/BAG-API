@@ -109,11 +109,6 @@ Functionaliteit: links naar gerelateerde resources
   Scenario: links naar gerelateerde resources in een resource
     Als er een bevraging wordt gedaan op één van de endpoints (niet zijnde een levenscyclus endpoint)
     En deze endpoint levert één of meerdere resource
-    En de resource heeft geen relatie met andere resources
-    Dan bevat de _links geen property voor gerelateerde resources
-
-    Als er een bevraging wordt gedaan op één van de endpoints (niet zijnde een levenscyclus endpoint)
-    En deze endpoint levert één of meerdere resource
     En de resource heeft een relatie met één of meer andere resources
     En de geldigOp parameter wordt meegegeven
     En de beschikbaarOp parameter wordt meegegeven
@@ -161,12 +156,17 @@ Functionaliteit: links naar gerelateerde resources
     Dan bevat de _links een property voor iedere gerelateerde resource met een link naar het tijdreis endpoint van het betreffende resource type en met de resource ID, zoals hierboven beschreven (binnnen het scenario)
     En bevat de link deze parameters niet
 
-  Scenario: links naar gerelateerde resources in een embedded resources
     Als er een bevraging wordt gedaan op één van de endpoints (niet zijnde een levenscyclus endpoint)
     En deze endpoint levert één of meerdere resource
-    En één of meer resource worden geëxpand
-    Dan bevat _embedded van iedere resources de embedded resources
-    En bevat de embedded resource voor iedere gerelateerde resource een link naar het tijdreis endpoint van het betreffende resource type en met de resource ID
+    En de resource heeft geen relatie met andere resources conform het informatiemodel BAG 2.0
+    Dan bevat de _links geen property voor gerelateerde resources
+
+  Scenario: links naar gerelateerde resources in embedded resources
+    Als er een bevraging wordt gedaan op één van de endpoints (niet zijnde een levenscyclus endpoint)
+    En deze endpoint levert één of meerdere resource
+    En één of meer aan een resource gerelateerde resource worden geëxpand
+    Dan bevat de _embedded sectie van iedere resource, de embedded resources
+    En bevat de embedded resource voor iedere aan de embedded resource gerelateerde resource een link naar het tijdreis endpoint van het betreffende resource type en met de resource ID
     En wordt de link opgebouwd zoals beschreven in scenario 'links naar gerelateerde resources in een resource'
 
 Functionaliteit: paginering links
@@ -456,7 +456,7 @@ Functionaliteit: links bij levenscyclusendpoints
   Scenario: bevragen levenscyclus van een resource
     Als er een verblijfsobject wordt opgevraagd op het levenscyclusendpoint verblijfsobjecten
     En er wordt expand=heeftAlsHoofdAdres meegegeven
-    Dan bevat de collectie in de response meerdere voorkomens
+    Dan bevat de collectie in de response de voorkomens van het verblijfsobject
     En wordt de self link van de collectie opgebouwd zoals beschreven in scenario 'self link van collectie'
     En wordt de self link van de resources (voorkomens) opgebouwd zoals beschreven in scenario 'self link van een resource in de levenscyclus collectie'
     En worden de links naar gerelateerde resources opgebouwd zoals beschreven in scenario 'link naar gerelateerde resources van een resource in een levenscyclus'
@@ -523,7 +523,19 @@ Functionaliteit: links bij levenscyclusendpoints
       },
       "_links": {
         "self": {
-          "href": "http://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/verblijfsobjecten/<verblijfsobjectIdentificatie>/lvc",
+          "href": "http://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/verblijfsobjecten/<verblijfsobjectIdentificatie>/lvc?expand=heeftAlsHoofdAdres",
         }
       }
     }
+    
+Functionaliteit: links bij voorkomen endpoints
+
+  Scenario: links naar resources bij voorkomen endpoints
+    Als er een object voorkomen wordt opgevraagd op het voorkomen endpoint voor dat object type
+    Dan bevat de response het voorkomen van het object
+    En wordt de self link van de resource (het voorkomen) opgebouwd zoals beschreven in scenario 'self link van een resource'
+    En worden de links naar gerelateerde resources opgebouwd zoals beschreven in scenario 'link naar gerelateerde resources in een resource'
+    En worden de self links van embedded resources opgebouw zoals beschreven in scenario 'self link van een embedded resource in een resource'
+    En worden de links van gerelateerde resources in embedded resources opgebouw zoals beschreven in scenario 'links naar gerelateerde resources in een embedded resources'
+    En worden er geen paginering links opgegeven zoals beschreven in scenario 'geen paginering links bij levenscyclus'
+
