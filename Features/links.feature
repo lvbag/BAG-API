@@ -429,24 +429,21 @@ Functionaliteit: links bij levenscyclusendpoints
     Dan bevat _embedded de collectie van de voorkomens van de resource
     En bevat de _links.self van iedere resource voorkomen in de levenscyclus collectie, een link naar het voorkomen endpoint van het betreffende resource type, met de resource identificatie, versie en timestamp van registratie in de LV BAG
 
-  Scenario: link naar gerelateerde resources van een resource in een levenscyclus
-    Als de levenscyclus van een resource wordt opgevraagd via de levenscyclus endpoint van dat resource type
+  Scenario: link naar gerelateerde resources van een resource in een levenscyclus (niet zijnde een woonplaats)
+    Als de levenscyclus van een resource (niet zijnde een woonplaats) wordt opgevraagd via de levenscyclus endpoint van dat resource type
     Dan bevat _embedded de collectie van de voorkomens van de resource
     En bevat de _links van iedere resource voorkomen in de levenscyclus collectie, een attribuut met een link naar het levenscyclus endpoint van het betreffende gerelateerde resource type
 
-  Scenario: self link van een embedded resource in een resource 
-    Als de levenscyclus van een resource wordt opgevraagd via de levenscyclus endpoint van dat resource type
-    En één, meer of alle gerelateerde resources worden geëxpand met de expand parameter
+  Scenario: link naar gerelateerde resources van een resource in een levenscyclus (zijnde een woonplaats)
+    Als de levenscyclus van een woonplaats resource wordt opgevraagd via de levenscyclus endpoint van dat resource type
     Dan bevat _embedded de collectie van de voorkomens van de resource
-    En bevat ieder van de resources een _embedded sectie voor de gerelateerde resources
-    En bevat _embedded.<gerelateerder resource>._links sectie een self property met een link naar de levenscyclus endpoint van het gerelateerde resource type
+    En bevat de _links van iedere resource voorkomen in de levenscyclus collectie, een attribuut bronhouders met één of meer link(s) naar het voorkomen endpoint van het bronhouder type
 
-  Scenario: links naar gerelateerde resources in een embedded resources
+  Scenario: geen expand van gerelateerde resrouces van een resource in een levenscyclus
     Als de levenscyclus van een resource wordt opgevraagd via de levenscyclus endpoint van dat resource type
     En één, meer of alle gerelateerde resources worden geëxpand met de expand parameter
     Dan bevat _embedded de collectie van de voorkomens van de resource
-    En bevat ieder van de resources een _embedded sectie voor de gerelateerde resources
-    En bevat _embedded.<gerelateerder resource>._links sectie een property met een link naar de levenscyclus endpoint van het betreffende resource type
+    En bevat geen van de resources een _embedded sectie voor de gerelateerde embedded resources
 
   Scenario: geen paginering links bij levenscyclus
     Als er een levenscyclus wordt opgevraagd van een resource
@@ -477,29 +474,6 @@ Functionaliteit: links bij levenscyclusendpoints
                 ...
               }
             ],
-            "_embedded": {
-              "heeftAlsHoofdAdres": {
-                "nummeraanduiding": {
-                  ...
-                },
-                "inonderzoek": [
-                  {
-                    ...
-                  }
-                ],
-                "_links": {
-                  "self": {
-                    "href": "http://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/nummeraanduidingen/<nummeraanduidingIdentificatie>/lvc",
-                  },
-                  "ligtInWoonplaats": {
-                    "href": "http://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/woonplaatsen/<woonplaatsIdentificatie>/lvc",
-                  },
-                  "ligtAanOpenbareRuimte": {
-                    "href": "http://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/openbareruimten/<openbareRuimteIdentificatie>/lvc",
-                  }
-                }
-              },
-            },
             "_links": {
               "self": {
                 "href": "http://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/verblijfsobjecten/<verblijfsobjectIdentificatie>/<versie>/<timestampRegistratieLv>",
@@ -530,12 +504,69 @@ Functionaliteit: links bij levenscyclusendpoints
     
 Functionaliteit: links bij voorkomen endpoints
 
-  Scenario: links naar resources bij voorkomen endpoints
-    Als er een object voorkomen wordt opgevraagd op het voorkomen endpoint voor dat object type
+  Scenario: link naar gerelateerde resources van een resource voorkomen (niet zijnde een woonplaats)
+    Als de levenscyclus van een resource (niet zijnde een woonplaats) wordt opgevraagd via de levenscyclus endpoint van dat resource type
+    Dan bevat _embedded de collectie van de voorkomens van de resource
+    En bevat de _links van iedere resource voorkomen in de levenscyclus collectie, een attribuut met een link naar het levenscyclus endpoint van het betreffende gerelateerde resource type
+
+  Scenario: link naar gerelateerde resources van een resource voorkomen (zijnde een woonplaats)
+    Als de levenscyclus van een woonplaats resource wordt opgevraagd via de levenscyclus endpoint van dat resource type
+    Dan bevat _embedded de collectie van de voorkomens van de resource
+    En bevat de _links van iedere resource voorkomen in de levenscyclus collectie, een attribuut bronhouders met één of meer link(s) naar het voorkomen endpoint van het bronhouder type
+
+  Scenario: links naar resources bij voorkomen endpoints (niet zijnde een woonplaats)
+    Als er een object (niet zijnde een woonplaats) voorkomen wordt opgevraagd op het voorkomen endpoint van het betreffende object type
+    Dan bevat de response het voorkomen van het object
+    En wordt de self link van de resource (het voorkomen) opgebouwd zoals beschreven in scenario 'self link van een resource'
+    En worden de links naar gerelateerde resources opgebouwd zoals beschreven in scenario 'link naar gerelateerde resources in een resource voorkomen (niet zijnde een woonplaats'
+    En worden er geen paginering links opgegeven zoals beschreven in scenario 'geen paginering links bij levenscyclus'
+
+    {
+      "nummeraanduiding": {
+        ...
+      },
+      "_links": {
+        "self": {
+          "href": "https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/nummeraanduidingen/<nummeraanduidingIdentificatie/<versie>/<timestamp tijdstip registratie LV>"
+        },
+        "ligtInWoonplaats": {
+          "href": "https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/woonplaatsen/<woonplaatsIdentificatie>/lvc"
+        },
+        "ligtAanOpenbareRuimte": {
+          "href": "https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/openbareruimten/<openbareRuimteIdentificatie>/lvc"
+        }
+      }
+    }
+
+  Scenario: links naar resources bij voorkomen endpoints (zijnde een woonplaats)
+    Als er een object (zijnde een woonplaats) voorkomen wordt opgevraagd op het voorkomen endpoint van het betreffende object type
+    Dan bevat de response het voorkomen van het object
+    En wordt de self link van de resource (het voorkomen) opgebouwd zoals beschreven in scenario 'self link van een resource'
+    En worden de links naar gerelateerde resources opgebouwd zoals beschreven in scenario 'link naar gerelateerde resources in een resource voorkomen (zijnde een woonplaats'
+    En worden er geen paginering links opgegeven zoals beschreven in scenario 'geen paginering links bij levenscyclus'
+
+    {
+      "woonplaats": {
+        ...
+      },
+      "_links": {
+        "self": {
+          "href": "https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/woonplaatsen/<woonplaatseIdentificatie/<versie>/<timestamp tijdstip registratie LV>"
+        },
+        "bronhouders": [
+          {
+            "href": "https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/bronhouders/<bronhouderIdentificatie>/<versie>/<timestamp tijdstip registratie LV>"
+          },
+        ]
+      }
+    }
+
+  Scenario: geen expand van gerelateerde resource van een resource bij voorkomen endpoints
+    Als er een object voorkomen wordt opgevraagd op het voorkomen endpoint van het betreffende object type
+    En één, meer of alle gerelateerde resources worden geëxpand met de expand parameter
     Dan bevat de response het voorkomen van het object
     En wordt de self link van de resource (het voorkomen) opgebouwd zoals beschreven in scenario 'self link van een resource'
     En worden de links naar gerelateerde resources opgebouwd zoals beschreven in scenario 'link naar gerelateerde resources in een resource'
-    En worden de self links van embedded resources opgebouw zoals beschreven in scenario 'self link van een embedded resource in een resource'
-    En worden de links van gerelateerde resources in embedded resources opgebouw zoals beschreven in scenario 'links naar gerelateerde resources in een embedded resources'
+    En bevat de resource geen _embedded sectie voor de gerelateerde embedded resoruces
     En worden er geen paginering links opgegeven zoals beschreven in scenario 'geen paginering links bij levenscyclus'
 
