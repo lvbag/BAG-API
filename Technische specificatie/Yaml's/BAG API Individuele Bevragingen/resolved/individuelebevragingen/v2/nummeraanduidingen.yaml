@@ -43,17 +43,13 @@ paths:
     get:
       tags:
       - Nummeraanduiding
-      summary: bevragen 1 nummeraanduiding op basis van de identificatie.
-      description: Bevragen/raadplegen één nummeraanduiding, via de identificatie
-        van een nummeraanduiding. Geleverd wordt een voorkomen van een nummeraanduiding
-        met (indien gevraagd) embedded de woonplaats waar de nummeraanduiding in ligt
-        en de openbare ruimte waar de nummeraanduiding aan ligt.  Parameter nummeraanduidingIdentificatie
-        bevat de 16 cijferige identificatie van een nummeraanduiding object. Als geldigOp
-        en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.  Als
-        expand=ligtInWoonplaats dan wordt de woonplaats als geneste resource geleverd.   Als
-        expand=ligtAanOpenbareRuimte dan wordt de openbare ruimte als geneste resource
-        geleverd.   Als expand=true dan worden alle gerelateerde objecten als geneste
-        resources geleverd.
+      summary: bevragen van een nummeraanduiding op basis van de identificatie van
+        een nummeraanduiding
+      description: 'Bevragen/raadplegen van één nummeraanduiding met de identificatie
+        van een nummeraanduiding. Als geldigOp en/of beschikbaarOp niet wordt opgegeven,
+        worden de actuele gegevens geleverd.  Als expand=ligtInWoonplaats, ligtAanOpenbareRuimte
+        of als expand=true dan worden de gevraagde of alle gerelateerde objecten als
+        geneste resources geleverd. '
       operationId: nummeraanduidingIdentificatie
       parameters:
       - name: nummeraanduidingIdentificatie
@@ -70,7 +66,7 @@ paths:
       - name: geldigOp
         in: query
         description: |
-          Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD'  Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
+          Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD'  Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
         required: false
         style: form
         explode: true
@@ -81,7 +77,7 @@ paths:
       - name: beschikbaarOp
         in: query
         description: |
-          Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'  Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
+          Filtert op objecten die beschikbaar zijn op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss' Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden conform ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
         required: false
         style: form
         explode: true
@@ -99,7 +95,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        "200":
           description: Bevraging nummeraanduidingIdentificatie geslaagd
           headers:
             api-version:
@@ -110,7 +106,7 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/NummeraanduidingIOHal'
-        400:
+        "400":
           description: Bad request
           headers:
             api-version:
@@ -133,7 +129,7 @@ paths:
                   name: verblijfplaats_huisnummer
                   code: integer
                   reason: Waarde is geen geldige integer.
-        401:
+        "401":
           description: Unauthorized. Je hebt waarschijnlijk geen geldige `X-Api-Key`
             header meegestuurd.
           headers:
@@ -153,7 +149,7 @@ paths:
                   a challenge applicable to the requested resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: authentication
-        403:
+        "403":
           description: Forbidden. Je hebt geen rechten om deze URL te benaderen.
           headers:
             api-version:
@@ -171,7 +167,7 @@ paths:
                   it.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
-        404:
+        "404":
           description: Not found.
           headers:
             api-version:
@@ -188,7 +184,7 @@ paths:
                 detail: The server has not found anything matching the Request-URI.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notFound
-        405:
+        "405":
           description: Method not allowed.
           headers:
             api-version:
@@ -208,7 +204,7 @@ paths:
                   resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: methodNotAllowed
-        406:
+        "406":
           description: Not Acceptable. Je hebt waarschijnlijk een gewenst formaat
             met de `Accept` header verstuurd welke niet ondersteund wordt.
           headers:
@@ -230,7 +226,7 @@ paths:
                   not acceptable according to the accept headers sent in the request
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notAcceptable
-        500:
+        "500":
           description: Internal server error.
           headers:
             api-version:
@@ -248,7 +244,7 @@ paths:
                   it from fulfilling the request.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: serverError
-        503:
+        "503":
           description: Service Unavailable. Er vindt mogelijk (gepland) onderhoud
             of een storing plaats.
           headers:
@@ -291,52 +287,24 @@ paths:
       - Nummeraanduiding
       summary: bevragen nummeraanduiding(en) op basis van verschillende combinaties
         van parameters.
-      description: De volgende (combinaties van) parameters worden ondersteund:<br/>
-        <ol> <li>Bevragen/raadplegen van een adres via postcode en huisnummer (evt.
-        met huisletter en huisnummertoevoeging). Geleverd wordt een (lijst van) voorkomens
-        van één of meer nummeraanduidingen met (indien gevraagd) embedded de woonplaats
-        waar de nummeraanduiding in ligt en de openbare ruimte waar de nummeraanduiding
-        aan ligt. Parameter postcode bevat de postcode van een nummeraanduiding object.
-        Parameter huisnummer bevat het huisnummer van hetzelfde nummeraanduiding object.
-        Parameter huisnummertoevoeging (optioneel) bevat de huisnummertoevoeging van
-        hetzelfde nummeraanduiding object. Parameter huisletter (optioneel) bevat
-        de huisletter van een nummeraanduiding object. Het opgeven van alleen een
-        postcode en huisnummer levert mogelijk meerdere nummeraanduidingen op (bv.
-        bij 3, 3A en 3B in dezelfde straat). Met de exacteMatch parameter kan worden
-        aangegeven dat alleen het object dat exact overeenkomt met de opgegeven parameters,
-        geretourneerd moet worden. Het opgeven van exacteMatch is geen garantie dat
-        er maar 1 object wordt geretourneerd. Bv. bij een straat met huisnummers 3,
-        3A en 3Abis, 3B en 3Bbis, als er wordt gezocht met huisnummer 3 en toevoeging
-        'bis' en exacteMatch=true zijn er meerdere resultaten. Deze worden alle geretourneerd.</li>
-        <li>Bevragen/raadplegen van een adres via woonplaats naam, openbare ruimte
-        naam, huisnummer en optioneel huisnummertoevoeging en huisletter. Geleverd
-        wordt een (lijst van) voorkomens van één of meer nummeraanduidingen met (indien
-        gevraagd) embedded de woonplaats waar de nummeraanduiding in ligt en de openbare
-        ruimte waar de nummeraanduiding aan ligt. Parameter woonplaatsNaam bevat de
-        naam van een woonplaats object. Parameter openbareRuimteNaam bevat de naam
-        van een openbare ruimte object. Parameter huisnummer bevat het huisnummer
-        van hetzelfde nummeraanduiding object. Parameter huisnummertoevoeging (optioneel)
-        bevat de huisnummertoevoeging van hetzelfde nummeraanduiding object. Parameter
-        huisletter (optioneel) bevat de huisletter van een nummeraanduiding object.
-        Het opgeven van alleen een postcode en huisnummer levert mogelijk meerdere
-        nummeraanduidingen op (bv. bij 3, 3A en 3B in dezelfde straat). Met de exacteMatch
-        parameter kan worden aangegeven dat alleen het object dat exact overeenkomt
-        met de opgegeven parameters, geretourneerd moet worden. Het opgeven van exacteMatch
-        is geen garantie dat er maar 1 object wordt geretourneerd. Bv. bij een straat
-        met huisnummers 3, 3A en 3Abis, 3B en 3Bbis, als er wordt gezocht met huisnummer
-        3 en toevoeging 'bis' en exacteMatch=true zijn er meerdere resultaten. Deze
-        worden alle geretourneerd.</li> <li>Bevragen/zoeken van alle gerelateerde
-        nummeraanduidingen, via paginering en met exacte match op openbare ruimte
-        ID. Geleverd wordt een lijst van voorkomens van nummeraanduidingen. Parameter
-        openbareRuimteIdentificatie bevat de 16 cijferige identificatie van een openbare
-        ruimte.</li> </ol> Bij alle bovenstaande combinaties kunnen eveneens de volgende
-        parameters worden gebruikt:<br/> Als geldigOp en/of beschikbaarOp niet wordt
-        opgegeven, worden de actuele gegevens geleverd.<br/> Parameter page bevat
-        de gewenste pagina met resultaten. Parameter pageSize bevat het aantal resultaten
-        per pagina. Als expand=ligtInWoonplaats dan wordt de woonplaats als geneste
-        resource geleverd.<br/> Als expand=ligtAanOpenbareRuimte dan wordt de openbare
-        ruimte als geneste resource geleverd.<br/> Als expand=true dan worden alle
-        gerelateerde objecten als geneste resources geleverd.
+      description: "De volgende (combinaties van) parameters worden ondersteund:<br/>\
+        \ <ol>\n  <li>\n    Bevragen/raadplegen van een (collectie van) nummeraanduiding(en)\
+        \ met postcode en huisnummer (evt. met huisletter en huisnummertoevoeging).\n\
+        \  </li>\n  <li>\n    Bevragen/raadplegen van een (collectie van) nummeraanduiding(en)\
+        \ met woonplaats naam, openbare ruimte naam, huisnummer en optioneel huisnummertoevoeging\
+        \ en huisletter. \n  </li>\n  <li>\n    Bevragen/zoeken van alle aan een openbare\
+        \ ruimte gerelateerde nummeraanduidingen met een openbare ruimte identificatie.\
+        \ \n    Parameter huidig kan worden toegepast. Huidig kan niet gebruikt worden\
+        \ i.c.m. geldigOp en beschikbaarOp parameters. Expand wordt niet ondersteund.\
+        \            \n  </li>\n</ol> Bij de bovenstaande bevragingen kunnen (tenzij\
+        \ anders vermeld) de volgende parameters worden gebruikt: geldigOp, beschikbaarOp,\
+        \ page en pageSize.  Voor paginering, zie: [functionele specificatie paginering](https://github.com/lvbag/BAG-API/blob/master/Features/paginering.feature).\
+        \ Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele\
+        \ gegevens geleverd. Als expand=ligtInWoonplaats, ligtAanOpenbareRuimte of\
+        \ als expand=true dan worden de gevraagde of alle gerelateerde objecten als\
+        \ geneste resources geleverd.  Met de exacteMatch parameter kan worden aangegeven\
+        \ dat alleen object(en) die exact overeenkomen met de opgegeven parameters,\
+        \ geretourneerd moeten worden."
       operationId: zoekNummeraanduiding
       parameters:
       - name: postcode
@@ -382,21 +350,8 @@ paths:
           example: A
       - name: exacteMatch
         in: query
-        description: '"Indicatie of de nummeraanduiding gegevens een exacte match
-          moeten opleveren.  Dit houdt in, dat als de zoek opdracht met de opgegeven
-          parameters meerdere resultaten oplevert,  alleen het resultaat dat exact
-          overeenkomt met deze parameters wordt geretourneerd.  Bv. gevraagd wordt
-          postcode: 1234AA en huisnummer: 3, geen huisletter en geen huisnummertoevoeging.  Gegeven
-          een straat met postcode 1234AA en huisnummer 3, 3A en 3B, levert als resultaten
-          alle 3 de adressen op. Wordt exacteMatch=true opgegeven, dan wordt alleen
-          nummeraanduiding met postcode 1234AA en huisnummer 3 geretourneeerd. Als
-          er ondanks dat exacteMatch=true is opgegeven nog steeds meerdere zoekresultaten
-          zijn, dan wordt toch een foutmelding geretourneerd. Bv. gevraagd wordt postcode
-          1234AA, huisnummer 3 en toevoeging bis en geen huisletter. Gegeven een straat
-          met postcode 1234AA en huisnummers 3, 3A en 3Abis, 3B en 3Bbis, levert als
-          resultaten 3Abis en 3Bbis op. Wordt exacteMatch=true opgegeven, dan blijven
-          beide resultaten over.  Ook wanneer er geen objecten zijn gevonden wordt
-          een foutmelding geretourneerd. De default waarde is false." '
+        description: '"Een indicatie of de resultaten van een zoekoperatie exact overeen
+          moeten komen met de zoekcriteria, zie [functionele specificatie exacte match](https://github.com/lvbag/BAG-API/blob/master/Features/exacte_match.feature)."'
         required: false
         style: form
         explode: true
@@ -439,10 +394,21 @@ paths:
           pattern: ^[0-9]{4}30[0-9]{10}$
           type: string
           example: "0226300000136124"
+      - name: huidig
+        in: query
+        description: Indicatie dat alleen actuele object voorkomens zonder eindstatus
+          gewenst zijn.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          example: false
+          default: false
       - name: geldigOp
         in: query
         description: |
-          Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD'  Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
+          Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD'  Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
         required: false
         style: form
         explode: true
@@ -453,7 +419,7 @@ paths:
       - name: beschikbaarOp
         in: query
         description: |
-          Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'  Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
+          Filtert op objecten die beschikbaar zijn op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss' Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden conform ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
         required: false
         style: form
         explode: true
@@ -470,10 +436,11 @@ paths:
           default: 1
       - name: pageSize
         in: query
+        description: Aantal resultaten per pagina
         required: false
         schema:
           maximum: 100
-          minimum: 1
+          minimum: 10
           type: integer
           default: 20
       - name: expand
@@ -487,7 +454,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        "200":
           description: Bevraging zoekNummeraanduiding geslaagd
           headers:
             api-version:
@@ -502,7 +469,7 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/NummeraanduidingIOHalCollection'
-        400:
+        "400":
           description: Bad request
           headers:
             api-version:
@@ -525,7 +492,7 @@ paths:
                   name: verblijfplaats_huisnummer
                   code: integer
                   reason: Waarde is geen geldige integer.
-        401:
+        "401":
           description: Unauthorized. Je hebt waarschijnlijk geen geldige `X-Api-Key`
             header meegestuurd.
           headers:
@@ -545,7 +512,7 @@ paths:
                   a challenge applicable to the requested resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: authentication
-        403:
+        "403":
           description: Forbidden. Je hebt geen rechten om deze URL te benaderen.
           headers:
             api-version:
@@ -563,7 +530,7 @@ paths:
                   it.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
-        405:
+        "405":
           description: Method not allowed.
           headers:
             api-version:
@@ -583,7 +550,7 @@ paths:
                   resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: methodNotAllowed
-        406:
+        "406":
           description: Not Acceptable. Je hebt waarschijnlijk een gewenst formaat
             met de `Accept` header verstuurd welke niet ondersteund wordt.
           headers:
@@ -605,7 +572,7 @@ paths:
                   not acceptable according to the accept headers sent in the request
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notAcceptable
-        500:
+        "500":
           description: Internal server error.
           headers:
             api-version:
@@ -623,7 +590,7 @@ paths:
                   it from fulfilling the request.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: serverError
-        503:
+        "503":
           description: Service Unavailable. Er vindt mogelijk (gepland) onderhoud
             of een storing plaats.
           headers:
@@ -664,20 +631,12 @@ paths:
     get:
       tags:
       - Nummeraanduiding
-      summary: bevragen levenscyclus van 1 nummeraanduiding op basis van de identificatie.
-      description: Bevragen/raadplegen levenscyclus van één nummeraanduiding, via
-        de identificatie van een nummeraanduiding. Geleverd worden de voorkomens van
-        een nummeraanduiding die de levenscyclus vormen, met embedded de identificaties
-        van woonplaats waar de nummeraanduiding in ligt en de openbare ruimte waar
-        de nummeraanduiding aan ligt.  Parameter identificatie.lokaalID bevat de 16
-        cijferige identificatie van een nummeraanduiding object. Parameter geheleLvc
-        bevat een indicatie dat de gehele levenscyclus (inclusief voorkomens die uit
-        de geldige levenscyclus zijn verwijderd) zijn gewenst. Als deze parameter
-        wordt weggelaten (default) wordt alleen de geldige levenscyclus geretourneerd.  Als
-        expand=ligtInWoonplaats dan wordt de woonplaats als geneste resource geleverd.   Als
-        expand=ligtAanOpenbareRuimte dan wordt de openbare ruimte als geneste resource
-        geleverd.   Als expand=true dan worden alle gerelateerde objecten als geneste
-        resources geleverd.
+      summary: bevragen levenscyclus van een nummeraanduiding met de identificatie
+        van een nummeraanduiding.
+      description: 'Bevragen/raadplegen van de levenscyclus van één nummeraanduiding
+        met de identificatie van een nummeraanduiding. Als expand=ligtInWoonplaats,
+        ligtAanOpenbareRuimte of als expand=true dan worden de gevraagde of alle gerelateerde
+        objecten als geneste resources geleverd. '
       operationId: nummeraanduidingLvcIdentificatie
       parameters:
       - name: nummeraanduidingIdentificatie
@@ -693,8 +652,10 @@ paths:
           example: "0226200000038923"
       - name: geheleLvc
         in: query
-        description: |
-          Filtert naast geldige voorkomens ook de voorkomens die uit de geldige levenscyclus van het object zijn verwijderd. Als deze parameter wordt weggelaten worden alleen geldige voorkomens geretourneerd (default is false).
+        description: Filtert naast geldige voorkomens ook de voorkomens die uit de
+          geldige levenscyclus van het object zijn verwijderd. Als deze parameter
+          wordt weggelaten worden alleen geldige voorkomens geretourneerd (default
+          is false). Voor een toelichting zie de [Praktijkhandleiding BAG](https://imbag.github.io/praktijkhandleiding/artikelen/wat-is-het-verschil-tussen-actieve-voorkomens-actuele-voorkomens-en-huidige-voorkomens).
         required: false
         style: form
         explode: true
@@ -713,7 +674,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        "200":
           description: Bevraging nummeraanduidingLvcIdentificatie geslaagd
           headers:
             api-version:
@@ -724,7 +685,7 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/NummeraanduidingIOLvcHalCollection'
-        400:
+        "400":
           description: Bad request
           headers:
             api-version:
@@ -747,7 +708,7 @@ paths:
                   name: verblijfplaats_huisnummer
                   code: integer
                   reason: Waarde is geen geldige integer.
-        401:
+        "401":
           description: Unauthorized. Je hebt waarschijnlijk geen geldige `X-Api-Key`
             header meegestuurd.
           headers:
@@ -767,7 +728,7 @@ paths:
                   a challenge applicable to the requested resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: authentication
-        403:
+        "403":
           description: Forbidden. Je hebt geen rechten om deze URL te benaderen.
           headers:
             api-version:
@@ -785,7 +746,7 @@ paths:
                   it.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
-        404:
+        "404":
           description: Not found.
           headers:
             api-version:
@@ -802,7 +763,7 @@ paths:
                 detail: The server has not found anything matching the Request-URI.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notFound
-        405:
+        "405":
           description: Method not allowed.
           headers:
             api-version:
@@ -822,7 +783,7 @@ paths:
                   resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: methodNotAllowed
-        406:
+        "406":
           description: Not Acceptable. Je hebt waarschijnlijk een gewenst formaat
             met de `Accept` header verstuurd welke niet ondersteund wordt.
           headers:
@@ -844,7 +805,7 @@ paths:
                   not acceptable according to the accept headers sent in the request
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notAcceptable
-        500:
+        "500":
           description: Internal server error.
           headers:
             api-version:
@@ -862,7 +823,7 @@ paths:
                   it from fulfilling the request.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: serverError
-        503:
+        "503":
           description: Service Unavailable. Er vindt mogelijk (gepland) onderhoud
             of een storing plaats.
           headers:
@@ -903,21 +864,16 @@ paths:
     get:
       tags:
       - Nummeraanduiding
-      summary: bevragen voorkomen van een nummeraanduiding, op basis van de identificatie
-        van een nummeraanduiding en de identificatie van een voorkomen, bestaande
-        uit een versie en een timestamp van het tijdstip van registratie in de LV
-        BAG.
-      description: Bevragen/raadplegen van een voorkomen van een nummeraanduiding,
-        via de identificatie van een nummeraanduiding en de identificatie van een
+      summary: bevragen van een voorkomen van een nummeraanduiding, op basis van de
+        identificatie van een nummeraanduiding en de identificatie van een voorkomen,
+        bestaande uit een versie en een timestamp van het tijdstip van registratie
+        in de LV BAG.
+      description: 'Bevragen/raadplegen van een voorkomen van een nummeraanduiding
+        met de identificatie van een nummeraanduiding en de identificatie van een
         voorkomen, bestaande uit een versie en een timestamp van het tijdstip van
-        registratie in de LV BAG. Geleverd wordt een nummeraanduiding voorkomen. Parameter
-        identificatie bevat de 16 cijferige identificatie van een nummeraanduiding.
-        Parameter versie bevat de versie van een voorkomen van een nummeraanduiding.
-        Parameter timestampRegistratieLv bevat een timestamp van het tijdstip van
-        registratie van het voorkomen in de LV BAG> Als expand=ligtInWoonplaats dan
-        wordt de woonplaats als geneste resource geleverd.   Als expand=ligtAanOpenbareRuimte
-        dan wordt de openbare ruimte als geneste resource geleverd.   Als expand=true
-        dan worden alle gerelateerde objecten als geneste resources geleverd.
+        registratie in de LV BAG. Als expand=ligtInWoonplaats, ligtAanOpenbareRuimte
+        of als expand=true dan worden de gevraagde of alle gerelateerde objecten als
+        geneste resources geleverd. '
       operationId: nummeraanduidingIdentificatieVoorkomen
       parameters:
       - name: nummeraanduidingIdentificatie
@@ -961,7 +917,7 @@ paths:
         schema:
           type: string
       responses:
-        200:
+        "200":
           description: Bevraging nummeraanduidingIdentificatieVoorkomen geslaagd
           headers:
             api-version:
@@ -972,7 +928,7 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/NummeraanduidingIOHal'
-        400:
+        "400":
           description: Bad request
           headers:
             api-version:
@@ -995,7 +951,7 @@ paths:
                   name: verblijfplaats_huisnummer
                   code: integer
                   reason: Waarde is geen geldige integer.
-        401:
+        "401":
           description: Unauthorized. Je hebt waarschijnlijk geen geldige `X-Api-Key`
             header meegestuurd.
           headers:
@@ -1015,7 +971,7 @@ paths:
                   a challenge applicable to the requested resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: authentication
-        403:
+        "403":
           description: Forbidden. Je hebt geen rechten om deze URL te benaderen.
           headers:
             api-version:
@@ -1033,7 +989,7 @@ paths:
                   it.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: autorisation
-        404:
+        "404":
           description: Not found.
           headers:
             api-version:
@@ -1050,7 +1006,7 @@ paths:
                 detail: The server has not found anything matching the Request-URI.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notFound
-        405:
+        "405":
           description: Method not allowed.
           headers:
             api-version:
@@ -1070,7 +1026,7 @@ paths:
                   resource.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: methodNotAllowed
-        406:
+        "406":
           description: Not Acceptable. Je hebt waarschijnlijk een gewenst formaat
             met de `Accept` header verstuurd welke niet ondersteund wordt.
           headers:
@@ -1092,7 +1048,7 @@ paths:
                   not acceptable according to the accept headers sent in the request
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notAcceptable
-        500:
+        "500":
           description: Internal server error.
           headers:
             api-version:
@@ -1110,7 +1066,7 @@ paths:
                   it from fulfilling the request.
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: serverError
-        503:
+        "503":
           description: Service Unavailable. Er vindt mogelijk (gepland) onderhoud
             of een storing plaats.
           headers:
@@ -1685,7 +1641,7 @@ components:
       description: Het Link Object zoals gespecificeerd in https://tools.ietf.org/html/draft-kelly-json-hal-08#section-5
     Href:
       type: string
-      example: datapunt.voorbeeldgemeente.nl/api/{major-versie}/resourcenaam/{resource-identificatie}
+      example: https://{base-uri}/{dienst}/{apinaam}/{major-versie}/resourcenaam/{resource-identificatie}
     OpenbareRuimte:
       title: OpenbareRuimte
       required:
@@ -1714,6 +1670,7 @@ components:
           title: openbare ruimte naam
           maxLength: 80
           minLength: 1
+          pattern: ^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*
           type: string
           description: Een naam die aan een openbare ruimte is toegekend in een daartoe
             strekkend formeel gemeentelijk besluit.
@@ -1833,7 +1790,7 @@ components:
             properties:
               href:
                 type: string
-                example: https://datapunt.voorbeeldgemeente.nl/api/{major-versie}/resourcenaam?page=1
+                example: https://{base-uri}/{dienst}/{apinaam}/{major-versie}/resourcenaam?page=1
               templated:
                 type: boolean
               title:
@@ -1845,7 +1802,7 @@ components:
             properties:
               href:
                 type: string
-                example: https://datapunt.voorbeeldgemeente.nl/api/{major-versie}/resourcenaam?page=3
+                example: https://{base-uri}/{dienst}/{apinaam}/{major-versie}/resourcenaam?page=3
               templated:
                 type: boolean
               title:
@@ -1857,13 +1814,25 @@ components:
             properties:
               href:
                 type: string
-                example: https://datapunt.voorbeeldgemeente.nl/api/{major-versie}/resourcenaam?page=5
+                example: https://{base-uri}/{dienst}/{apinaam}/{major-versie}/resourcenaam?page=5
               templated:
                 type: boolean
               title:
                 type: string
                 example: Volgende pagina
             description: uri voor het opvragen van de volgende pagina van deze collectie
+          last:
+            type: object
+            properties:
+              href:
+                type: string
+                example: https://{base-uri}/{dienst}/{apinaam}/{major-versie}/resourcenaam?page=15
+              templated:
+                type: boolean
+              title:
+                type: string
+                example: Laatste pagina
+            description: uri voor het opvragen van de laatste pagina van deze collectie
     HalCollectionLinks:
       type: object
       properties:
@@ -1892,7 +1861,7 @@ components:
         een object of data type een indicatie J (Ja) of N (Nee) heeft in de registratie.
       enum:
       - J
-      - N
+      - "N"
     Voorkomen:
       title: Voorkomen
       required:
@@ -2165,7 +2134,7 @@ components:
       name: geldigOp
       in: query
       description: |
-        Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD'  Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
+        Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD'  Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
       required: false
       style: form
       explode: true
@@ -2177,7 +2146,7 @@ components:
       name: beschikbaarOp
       in: query
       description: |
-        Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'  Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
+        Filtert op objecten die beschikbaar zijn op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss' Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden conform ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'. Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'. Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
       required: false
       style: form
       explode: true
@@ -2209,21 +2178,8 @@ components:
     exacteMatch:
       name: exacteMatch
       in: query
-      description: '"Indicatie of de nummeraanduiding gegevens een exacte match moeten
-        opleveren.  Dit houdt in, dat als de zoek opdracht met de opgegeven parameters
-        meerdere resultaten oplevert,  alleen het resultaat dat exact overeenkomt
-        met deze parameters wordt geretourneerd.  Bv. gevraagd wordt postcode: 1234AA
-        en huisnummer: 3, geen huisletter en geen huisnummertoevoeging.  Gegeven een
-        straat met postcode 1234AA en huisnummer 3, 3A en 3B, levert als resultaten
-        alle 3 de adressen op. Wordt exacteMatch=true opgegeven, dan wordt alleen
-        nummeraanduiding met postcode 1234AA en huisnummer 3 geretourneeerd. Als er
-        ondanks dat exacteMatch=true is opgegeven nog steeds meerdere zoekresultaten
-        zijn, dan wordt toch een foutmelding geretourneerd. Bv. gevraagd wordt postcode
-        1234AA, huisnummer 3 en toevoeging bis en geen huisletter. Gegeven een straat
-        met postcode 1234AA en huisnummers 3, 3A en 3Abis, 3B en 3Bbis, levert als
-        resultaten 3Abis en 3Bbis op. Wordt exacteMatch=true opgegeven, dan blijven
-        beide resultaten over.  Ook wanneer er geen objecten zijn gevonden wordt een
-        foutmelding geretourneerd. De default waarde is false." '
+      description: '"Een indicatie of de resultaten van een zoekoperatie exact overeen
+        moeten komen met de zoekcriteria, zie [functionele specificatie exacte match](https://github.com/lvbag/BAG-API/blob/master/Features/exacte_match.feature)."'
       required: false
       style: form
       explode: true
@@ -2234,14 +2190,28 @@ components:
     geheleLvc:
       name: geheleLvc
       in: query
-      description: |
-        Filtert naast geldige voorkomens ook de voorkomens die uit de geldige levenscyclus van het object zijn verwijderd. Als deze parameter wordt weggelaten worden alleen geldige voorkomens geretourneerd (default is false).
+      description: Filtert naast geldige voorkomens ook de voorkomens die uit de geldige
+        levenscyclus van het object zijn verwijderd. Als deze parameter wordt weggelaten
+        worden alleen geldige voorkomens geretourneerd (default is false). Voor een
+        toelichting zie de [Praktijkhandleiding BAG](https://imbag.github.io/praktijkhandleiding/artikelen/wat-is-het-verschil-tussen-actieve-voorkomens-actuele-voorkomens-en-huidige-voorkomens).
       required: false
       style: form
       explode: true
       schema:
         type: boolean
         example: true
+        default: false
+    huidig:
+      name: huidig
+      in: query
+      description: Indicatie dat alleen actuele object voorkomens zonder eindstatus
+        gewenst zijn.
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: boolean
+        example: false
         default: false
   headers:
     api_version:

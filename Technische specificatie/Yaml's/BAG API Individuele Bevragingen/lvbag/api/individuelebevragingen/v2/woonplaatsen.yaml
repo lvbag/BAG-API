@@ -59,16 +59,12 @@ paths:
         - apiKeyBAG: []
       tags:
         - Woonplaats
-      summary: bevragen 1 woonplaats, op basis van de identificatie.
+      summary: bevragen van een woonplaats met de identificatie van een woonplaats.
       operationId: woonplaatsIdentificatie
       description: >-
-        Bevragen/raadplegen van één voorkomen van een Woonplaats, via de identificatie van de woonplaats. 
-        Geleverd wordt een woonplaats.
-        Parameter identificatie bevat de 4 cijferige identificatie van een woonplaats object.
+        Bevragen/raadplegen van een voorkomen van een Woonplaats met de identificatie van de woonplaats. 
         Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.
-        Als expand=bronhouders dan worden de bronhouders als geneste resource geleverd.
-        Als expand=geometrie dan wordt de geometrie van de woonplaats als geneste resource geleverd.
-        Als expand=true dan worden alle gerelateerde objecten als geneste resources geleverd.
+        Als expand=bronhouders, geometrie of true dan worden de gevraagde of alle gerelateerde objecten als geneste resource geleverd.
       parameters:
         - $ref: '#/components/parameters/identificatie'
         - $ref: '#/components/parameters/geldigOp'
@@ -120,16 +116,11 @@ paths:
         - apiKeyBAG: []
       tags:
         - Woonplaats
-      summary: bevragen levenscyclus van een woonplaats, op basis van de identificatie.
+      summary: bevragen van de levenscyclus van een woonplaats met de identificatie van een woonplaats.
       operationId: woonplaatsLvcIdentificatie
       description: >-
-        Bevragen/raadplegen van de levenscyclus van een Woonplaats, via de identificatie van de woonplaats.
-        Geleverd wordt een woonplaats levenscyclus.
-        Parameter identificatie bevat de 4 cijferige identificatie van een woonplaats object.
-        Parameter geheleLvc bevat een indicatie dat de gehele levenscyclus (inclusief voorkomens die uit de geldige levenscyclus zijn verwijderd) zijn gewenst. Als deze parameter wordt weggelaten (default) wordt alleen de geldige levenscyclus geretourneerd. 
-        Als expand=bronhouders dan worden de bronhouders als geneste resource geleverd.
-        Als expand=geometrie dan wordt de geometrie van de woonplaats als geneste resource geleverd.
-        Als expand=true dan worden alle gerelateerde objecten als geneste resources geleverd.
+        Bevragen/raadplegen van de levenscyclus van een Woonplaats met de identificatie van de woonplaats.
+        Als expand=bronhouders, geometrie of true dan worden de gevraagde of alle gerelateerde objecten als geneste resource geleverd.
       parameters:
         - $ref: '#/components/parameters/identificatie'
         - $ref: '#/components/parameters/geheleLvc'
@@ -186,15 +177,12 @@ paths:
         - apiKeyBAG: []
       tags:
         - Woonplaats
-      summary: bevragen 1 woonplaats, op basis van een geometrisch punt.
+      summary: bevragen van een woonplaats met een geometrische locatie.
       operationId: woonplaatsGeometrie
       description: >-
-        Bevragen/raadplegen van één voorkomen van een Woonplaats, via een geometrisch punt.
-        Geleverd wordt een woonplaats. 
+        Bevragen/raadplegen van een voorkomen van een Woonplaats met een geometrische locatie.
         Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd. 
-        Als expand=bronhouders dan worden de bronhouders als geneste resource geleverd.
-        Als expand=geometrie dan wordt de geometrie van de woonplaats als geneste resource geleverd.
-        Als expand=true dan worden alle gerelateerde objecten als geneste resources geleverd.
+        Als expand=bronhouders, geometrie of true dan worden de gevraagde of alle gerelateerde objecten als geneste resource geleverd.
       parameters:
         - $ref: '#/components/parameters/geldigOp'
         - $ref: '#/components/parameters/beschikbaarOp'
@@ -244,16 +232,12 @@ paths:
         - apiKeyBAG: []
       tags:
         - Woonplaats
-      summary: bevragen één of meer woonplaatsen, op basis van de woonplaatsnaam.
+      summary: bevragen van één of meer woonplaatsen met een woonplaatsnaam.
       operationId: woonplaatsNaam
       description: >-
-        Bevragen/raadplegen van één voorkomen van één of meer woonplaatsen, met een woonplaatsnaam.
-        Geleverd wordt één of meer woonplaatsen.
-        Parameter naam bevat de naam van een woonplaats object.
+        Bevragen/raadplegen van één voorkomen van één of meer woonplaatsen met een woonplaatsnaam.
         Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd. 
-        Als expand=bronhouders dan worden de bronhouders als geneste resource geleverd.
-        Als expand=geometrie dan wordt de geometrie van de woonplaats als geneste resource geleverd.
-        Als expand=true dan worden alle gerelateerde objecten als geneste resources geleverd.
+        Als expand=bronhouders, geometrie of true dan worden de gevraagde of alle gerelateerde objecten als geneste resource geleverd.
       parameters:
         - $ref: '#/components/parameters/naam'
         - $ref: '#/components/parameters/geldigOp'
@@ -302,17 +286,11 @@ paths:
         - apiKeyBAG: []
       tags:
         - Woonplaats
-      summary: bevragen voorkomen van een woonplaats, op basis van de identificatie van een woonplaats en de identificatie van een voorkomen, bestaande uit een versie en een timestamp van het tijdstip van registratie in de LV BAG.
+      summary: bevragen van een voorkomen van een woonplaats met de identificatie van een woonplaats en de identificatie van een voorkomen, bestaande uit een versie en een timestamp van het tijdstip van registratie in de LV BAG.
       operationId: woonplaatsIdentificatieVoorkomen 
       description: >-
-        Bevragen/raadplegen van een voorkomen van een Woonplaats, via de identificatie van een woonplaats en de identificatie van een voorkomen, bestaande uit een versie en een timestamp van het tijdstip van registratie in de LV BAG.
-        Geleverd wordt een woonplaats voorkomen.
-        Parameter identificatie bevat de 4 cijferige identificatie van een woonplaats object.
-        Parameter versie bevat de versie van een voorkomen van een woonplaats.
-        Parameter timestampRegistratieLv bevat een timestamp van het tijdstip van registratie van het voorkomen in de LV BAG>
-        Als expand=bronhouders dan worden de bronhouders als geneste resource geleverd.
-        Als expand=geometrie dan wordt de geometrie van de woonplaats als geneste resource geleverd.
-        Als expand=true dan worden alle gerelateerde objecten als geneste resources geleverd.
+        Bevragen/raadplegen van een voorkomen van een Woonplaats met de identificatie van een woonplaats en de identificatie van een voorkomen, bestaande uit een versie en een timestamp van het tijdstip van registratie in de LV BAG.
+        Als expand=bronhouders, geometrie of true dan worden de gevraagde of alle gerelateerde objecten als geneste resource geleverd.
       parameters:
         - $ref: '#/components/parameters/identificatie'
         - $ref: '#/components/parameters/versie'
@@ -418,7 +396,7 @@ components:
     geldigOp:
       description: >
         Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD'
-        Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
+        Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
       name: geldigOp
       in: query
       required: false
@@ -429,10 +407,10 @@ components:
 
     beschikbaarOp:
       description: >
-        Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'.
-        Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'.
+        Filtert op objecten die beschikbaar zijn op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'
+        Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden conform ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'.
         Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'.
-        Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
+        Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
       name: beschikbaarOp
       in: query
       required: false
@@ -442,9 +420,10 @@ components:
         example: '2019-06-01T12:00:00.000'
 
     geheleLvc:
-      description: >
+      description: >-
         Filtert naast geldige voorkomens ook de voorkomens die uit de geldige levenscyclus van het object zijn verwijderd.
         Als deze parameter wordt weggelaten worden alleen geldige voorkomens geretourneerd (default is false).
+        Voor een toelichting zie de [Praktijkhandleiding BAG](https://imbag.github.io/praktijkhandleiding/artikelen/wat-is-het-verschil-tussen-actieve-voorkomens-actuele-voorkomens-en-huidige-voorkomens).
       name: geheleLvc
       in: query
       required: false

@@ -12,6 +12,20 @@ warning:
     type: string
     example: '299 https://service.../api/.../v1 "Deze versie van de API is verouderd en zal uit dienst worden genomen op 2018-02-01. Raadpleeg voor meer informatie hier de documentatie: https://omgevingswet.../api/.../v1".'
 
+X_Total_Count:
+  required: false
+  schema:
+    description: Totaal aantal resultaten
+    type: integer
+    example: 288
+
+X_Pagination_Count:
+  required: false
+  schema:
+    description: Totaal aantal paginas.
+    type: integer
+    example: 15
+
 X_Pagination_Page:
   required: false
   schema:

@@ -61,9 +61,9 @@ GET <basis URL>/objectrelaties
 GET <basis URL>/objectrelaties/lvc  
 
 
-*Adresgegevens*  
+*Adressenuitgebreid*  
 
-GET <basis URL>/adresgegevens
+GET <basis URL>/adressenuitgebreid
 
 *Bronhouderbepaling*  
 
@@ -77,4 +77,8 @@ GET <basis URL>/info
 *Adressen*  
 
 GET <basis URL>/adressen  
-POST <basis URL>/adressen
+POST <basis URL>/adressen  
+    
+*Adressen/zoek*  
+  
+GET <basisurl>/adressen/zoek

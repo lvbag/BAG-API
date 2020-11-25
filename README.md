@@ -4,6 +4,8 @@ De BAG API's zijn bedoeld om individuele bevragingen te doen op de landelijke vo
 Gedurende de ontwikkeling van de BAG API's is dit het platform waar de API documentatie gepubliceerd wordt.
 De geplaatste documentatie is in bewerking en wordt op basis van feedback samengevoegd tot een definitieve versie.
 
+Let Op! Nog niet alle endpoints zijn op dit moment beschikbaar. Zie voor de laatste stand van zaken de informatie onder [Releasenotes](https://github.com/lvbag/BAG-API/tree/master/Releasenotes).
+
 __Documentatie__  
 * Technische specificaties van de API in Swagger-formaat kunt u hier vinden:
 
@@ -22,4 +24,4 @@ __Documentatie__
 
 [Panden](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/panden.yaml)  
   
-[Adresgegevens](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/adresgegevens.yaml)  
+[Adressen](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/adressen.yaml)  

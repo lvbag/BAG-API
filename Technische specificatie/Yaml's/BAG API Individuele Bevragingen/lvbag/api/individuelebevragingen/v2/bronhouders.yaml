@@ -59,13 +59,11 @@ paths:
         - apiKeyBAG: []
       tags:
         - Bronhouder
-      summary: 'Bevragen bronhouder, op basis van de bronhouder identificatie (gemeentecode).'
+      summary: 'Bevragen bronhouder met de bronhouder identificatie (gemeentecode).'
       operationId: bevragenBronhouder
       description: >-
-        "Bevragen/raadplegen van een bronhouder, via de identificatie van een bronhouder (gemeentecode).
-         Geleverd wordt een bronhouder.
-         Parameter identificatie bevat de 4 cijferige identificatie van een bronhouder (gemeentecode).
-         Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd."
+        Bevragen/raadplegen van een bronhouder met de identificatie van een bronhouder (gemeentecode).
+        Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.
       parameters:
         - $ref: '#/components/parameters/identificatie'
         - $ref: '#/components/parameters/geldigOp'
@@ -167,20 +165,12 @@ paths:
         - apiKeyBAG: []
       tags:
         - Bronhouder
-      summary: 'Bevragen bronhouder, op basis van de object identificatie.'
+      summary: 'Bevragen bronhouder met een object identificatie.'
       operationId: zoekBronhouder
       description: >-
-        "Bevragen/raadplegen van een bronhouder, via de identificatie van een object.
-         Geleverd wordt een bronhouder.
-         Één van de onderstaande parameters dient gespecificeerd te worden:<br/>
-         Parameter woonplaatsIdentificatie bevat de 4 cijferige identificatie van een woonplaats object.<br/>
-         Parameter openbareRuimteIdentificatie bevat de 16 cijferige identificatie van een openbare ruimte object.<br/>
-         Parameter nummeraanduidingIdentificatie bevat de 16 cijferige identificatie van een nummeraanduiding object.<br/>
-         Parameter ligplaatsIdentificatie bevat de 16 cijferige identificatie van een ligplaats.<br/>
-         Parameter standplaatsIdentificatie bevat de 16 cijferige identificatie van een standplaats.<br/>
-         Parameter verblijfsobjectIdentificatie bevat de 16 cijferige identificatie van een verblijfsobject.<br/>
-         Parameter pandIdentificatie bevat de 16 cijferige identificatie van een pand.<br/>
-         Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd."
+        Bevragen/raadplegen van een bronhouder met de identificatie van een object.
+        De identificatie van één van de objecten: woonplaats, openbare ruimte, nummeraanduiding, ligplaats, standplaats, verblijfsobject of pand dient gespecificeerd te worden:<br/>
+        Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.
       parameters:
         - $ref: '#/components/parameters/woonplaatsIdentificatie'
         - $ref: '#/components/parameters/openbareRuimteIdentificatie'
@@ -228,14 +218,10 @@ paths:
         - apiKeyBAG: []
       tags:
         - Bronhouder
-      summary: bevragen voorkomen van een bronhouder, op basis van de identificatie van een bronhouder en de identificatie van een voorkomen, bestaande uit een versie en een timestamp van het tijdstip van registratie in de LV BAG.
+      summary: bevragen voorkomen van een bronhouder met de identificatie van een bronhouder en de identificatie van een voorkomen, bestaande uit een versie en een timestamp van het tijdstip van registratie in de LV BAG.
       operationId: bronhouderIdentificatieVoorkomen 
       description: >-
-        Bevragen/raadplegen van een voorkomen van een bronhouder, via de identificatie van een bronhouder en de identificatie van een voorkomen, bestaande uit een versie en een timestamp van het tijdstip van registratie in de LV BAG.
-        Geleverd wordt een bronhouder voorkomen.
-        Parameter identificatie bevat de 4 cijferige identificatie van een bronhouder object.
-        Parameter versie bevat de versie van een voorkomen van een bronhouder.
-        Parameter timestampRegistratieLv bevat een timestamp van het tijdstip van registratie van het voorkomen in de LV BAG.
+        Bevragen/raadplegen van een voorkomen van een bronhouder met de identificatie van een bronhouder en de identificatie van een voorkomen, bestaande uit een versie en een timestamp van het tijdstip van registratie in de LV BAG.
       parameters:
         - $ref: '#/components/parameters/identificatie'
         - $ref: '#/components/parameters/versie'
@@ -391,7 +377,7 @@ components:
     geldigOp:
       description: >
         Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD'
-        Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
+        Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
       name: geldigOp
       in: query
       required: false
@@ -402,10 +388,10 @@ components:
 
     beschikbaarOp:
       description: >
-        Filtert op objecten die beschikbaar zijn gekomen op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'
-        Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden confrom ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'.
+        Filtert op objecten die beschikbaar zijn op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'
+        Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden conform ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'.
         Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'.
-        Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie-ext/#time-travelling)
+        Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
       name: beschikbaarOp
       in: query
       required: false

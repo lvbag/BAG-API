@@ -62,7 +62,7 @@ paths:
         - Adresgegevens
       summary: Bevragen 1 adres op basis van verschillende combinaties van parameters.
       description: >-
-        "De volgende (combinaties van) parameters worden ondersteund:
+        De volgende (combinaties van) parameters worden ondersteund:
         <ol>
         <li>Bevragen/raadplegen één adres, via de identificatie van een nummeraanduiding.
            Geleverd worden adresgegevens bestaande uit een selectie van informatie uit woonplaats, openbare ruimte, nummeraanduiding, adresseerbare objecten en bronhouder informatie.
@@ -102,7 +102,7 @@ paths:
         Als expand=heeftAlsNevenAdres dan worden de nummeraanduidingen van de nevenadressen als geneste resources geleverd.<br/>
         Als expand=ligtInWoonplaats dan wordt de woonplaats als geneste resource geleverd.<br/>
         Als expand=ligtAanOpenbareRuimte dan wordt de openbare ruimte als geneste resource geleverd.<br/>
-        Als expand=true dan worden alle gerelateerde objecten als geneste resources geleverd.<br/>"
+        Als expand=true dan worden alle gerelateerde objecten als geneste resources geleverd.<br/>
       parameters:
         - $ref: '#/components/parameters/nummeraanduidingIdentificatie'
         - $ref: '#/components/parameters/postcode'
@@ -231,17 +231,7 @@ components:
 
     exacteMatch:
       description: >-
-        "Indicatie of de nummeraanduiding gegevens een exacte match moeten opleveren.
-        Dit houdt in, dat als de zoekopdracht met de opgegeven parameters meerdere resultaten oplevert,
-        alleen het resultaat dat exact overeenkomt met deze parameters wordt geretourneerd.
-        Bv. gevraagd wordt postcode: 1234AA en huisnummer: 3, geen huisletter en geen huisnummertoevoeging.
-        Gegeven een straat met postcode 1234AA en huisnummer 3, 3A en 3B, levert als resultaten alle 3 de adressen op.
-        Wordt exacteMatch=true opgegeven, dan wordt alleen nummeraanduiding met postcode 1234AA en huisnummer 3 geretourneeerd.
-        Als er ondanks dat exacteMatch=true is opgegeven nog steeds meerdere zoekresultaten zijn, dan wordt toch een lijst met meerdere resultaten geretourneerd.
-        Bv. gevraagd wordt postcode 1234AA, huisnummer 3 en toevoeging bis en geen huisletter.
-        Gegeven een straat met postcode 1234AA en huisnummers 3, 3A en 3Abis, 3B en 3Bbis, levert als resultaten 3Abis en 3Bbis op.
-        Wordt exacteMatch=true opgegeven, dan blijven er nog steeds twee resultaten over.
-        De default waarde is false."
+        "Een indicatie of de resultaten van een zoekoperatie exact overeen moeten komen met de zoekcriteria, zie [functionele specificatie exacte match](https://github.com/lvbag/BAG-API/blob/master/Features/exacte_match.feature)."
       name: exacteMatch
       in: query
       required: false

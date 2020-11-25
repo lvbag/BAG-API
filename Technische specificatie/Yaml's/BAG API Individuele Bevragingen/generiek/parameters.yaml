@@ -9,12 +9,13 @@ page:
     default: 1
 
 pageSize:
+  description: Aantal resultaten per pagina
   name: pageSize
   in: query
   required: false
   schema:
     type: integer
-    minimum: 1
+    minimum: 10
     maximum: 100
     default: '20'
 
@@ -54,9 +55,9 @@ acceptCrs:
   name: Accept-Crs
   in: header
   required: false
-  description: Gewenste CRS van de coÃ¶rdinaten in de response.
+  description: Gewenste CRS van de coördinaten in de response.
   schema:
-    description: 'CRS van de coÃ¶rdinaten in de response.'
+    description: 'CRS van de coördinaten in de response.'
     type: string
     enum:
 #      - epsg:4326 wordt nog niet ondersteund

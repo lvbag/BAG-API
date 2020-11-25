@@ -569,4 +569,3 @@ Functionaliteit: links bij voorkomen endpoints
     En worden de links naar gerelateerde resources opgebouwd zoals beschreven in scenario 'link naar gerelateerde resources van een resource voorkomen (zijnde een woonplaats)' of 'link naar gerelateerde resources van een resource voorkomen (niet zijnde een woonplaats)' afhankelijke van het type resource
     En bevat de resource geen _embedded sectie voor de gerelateerde embedded resoruces
     En worden er geen paginering links opgegeven zoals beschreven in scenario 'geen paginering links bij levenscyclus'
-

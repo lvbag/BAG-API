@@ -620,24 +620,6 @@ ObjectrelatiesHalCollection:
     _links:
       $ref: '../../../../generiek/hallinks.yaml#/components/schemas/HalCollectionLinks'
 
-ObjectrelatiesLvcHalCollection:
-  type: object
-  properties:
-    _embedded:
-      type: object
-      properties:
-        objectrelaties:
-          type: array
-          items:
-            type: object
-            properties:
-              voorkomens:
-                type: array
-                items:
-                  $ref: '#/ObjectrelatiesHal'
-    _links:
-      $ref: '../../../../generiek/hallinks.yaml#/components/schemas/HalCollectionLinks'
-
 AdresseerbaarObjectIO:
   title: AdresseerbaarObjectIO
   oneOf:

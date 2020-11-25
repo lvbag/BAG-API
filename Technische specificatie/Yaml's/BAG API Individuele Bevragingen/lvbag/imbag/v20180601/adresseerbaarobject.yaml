@@ -18,6 +18,15 @@ AdresseerbaarObject:
   discriminator:
     propertyName: type
 
+AdresseerbaarObjectIdentificatie:
+  description: 'Identificatie van een adresseerbaar object (ligplaats, standplaats of verblijfsobject) uit de BAG.'
+  title: identificatie van adresseerbaar object
+  type: string
+  minLength: 16
+  maxLength: 16
+  pattern: '^[0-9]{4}(01|02|03)[0-9]{10}$'
+  example: '0226010000038820'
+
 TypeAdresseerbaarObject:
   title: TypeAdresseerbaarObject
   description: De aard van een als zodanig benoemde Nummeraanduiding.
