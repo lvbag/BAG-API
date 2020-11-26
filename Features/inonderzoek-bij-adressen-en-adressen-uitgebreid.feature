@@ -9,12 +9,12 @@ Functionaliteit: In onderzoek bij Adressen en Adressen uitgebreid
   Voor een extra toelichting op in onderzoek zie het artikel hierover in de praktijkhandleiding BAG raadplegen. (https://imbag.github.io/praktijkhandleiding/artikelen/wat-is-de-inhoudelijke-betekenis-van-de-verschillende-soorten-in-onderzoek).
 
   Abstract Scenario: In onderzoek wordt gevuld op basis van het in onderzoek staan van gegevens in de registratie
-    Gegeven in object <Objecttype> is gegeven <Attribuut in de BAG> in onderzoek
-    En het <Attibuut in de BAG> dat in onderzoek is, is relevant voor een Adres of voor Adres uitgebreid
-    Als de /adressen of /adressenuitgebreid wordt bevraagd
-    Dan bevat het antwoord in property inonderzoek een property met de naam <Naam> van ieder attribuut dat in onderzoek is
+    Gegeven in object <Objecttype> is gegeven <Attribuut> in onderzoek
+    En het <Attribuut> dat in onderzoek is, is relevant voor een Adres of voor Adres uitgebreid
+    Als /adressen of /adressenuitgebreid wordt bevraagd
+    Dan bevat het antwoord in property inonderzoek een property met de naam <Naam> van ieder attribuut <Attribuut> dat in onderzoek is
     En bevat ieder property de waarde true
-    En bevat het antwoord in property inOnderzoek de property toelichting een lijst met toelichtingen <Toelichting> voor ieder attribuut dat in onderzoek is
+    En bevat het antwoord in property inOnderzoek de property toelichting een lijst met toelichtingen <Toelichting> voor ieder attribuut <Attribuut> dat in onderzoek is
 
     Attributen waarbij in onderzoek relevant is voor Adressen:
       | Objecttype       | Attribuut                                | Naam                   | Toelichting |
