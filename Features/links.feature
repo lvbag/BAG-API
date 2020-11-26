@@ -439,12 +439,6 @@ Functionaliteit: links bij levenscyclusendpoints
     Dan bevat _embedded de collectie van de voorkomens van de resource
     En bevat de _links van iedere resource voorkomen in de levenscyclus collectie, een attribuut bronhouders met één of meer link(s) naar het voorkomen endpoint van het bronhouder type
 
-  Scenario: geen expand van gerelateerde resrouces van een resource in een levenscyclus
-    Als de levenscyclus van een resource wordt opgevraagd via de levenscyclus endpoint van dat resource type
-    En één, meer of alle gerelateerde resources worden geëxpand met de expand parameter
-    Dan bevat _embedded de collectie van de voorkomens van de resource
-    En bevat geen van de resources een _embedded sectie voor de gerelateerde embedded resources
-
   Scenario: geen paginering links bij levenscyclus
     Als er een levenscyclus wordt opgevraagd van een resource
     Dan bevat de collectie in de response de voorkomens
@@ -560,12 +554,3 @@ Functionaliteit: links bij voorkomen endpoints
         ]
       }
     }
-
-  Scenario: geen expand van gerelateerde resource van een resource bij voorkomen endpoints
-    Als er een object voorkomen wordt opgevraagd op het voorkomen endpoint van het betreffende object type
-    En één, meer of alle gerelateerde resources worden geëxpand met de expand parameter
-    Dan bevat de response het voorkomen van het object
-    En wordt de self link van de resource (het voorkomen) opgebouwd zoals beschreven in scenario 'self link van een resource'
-    En worden de links naar gerelateerde resources opgebouwd zoals beschreven in scenario 'link naar gerelateerde resources van een resource voorkomen (zijnde een woonplaats)' of 'link naar gerelateerde resources van een resource voorkomen (niet zijnde een woonplaats)' afhankelijke van het type resource
-    En bevat de resource geen _embedded sectie voor de gerelateerde embedded resoruces
-    En worden er geen paginering links opgegeven zoals beschreven in scenario 'geen paginering links bij levenscyclus'
