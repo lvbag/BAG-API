@@ -13,16 +13,17 @@ Functionaliteit: In onderzoek bij Adressen en Adressen uitgebreid
     En het <Attibuut in de BAG> dat in onderzoek is, is relevant voor een Adres of voor Adres uitgebreid
     Als de /adressen of /adressenuitgebreid wordt bevraagd
     Dan bevat het antwoord in property inonderzoek een property met de naam <Naam> van ieder attribuut dat in onderzoek is
+    En bevat ieder property de waarde true
     En bevat het antwoord in property inOnderzoek de property toelichting een lijst met toelichtingen <Toelichting> voor ieder attribuut dat in onderzoek is
 
     Attributen waarbij in onderzoek relevant is voor Adressen:
-      | Objecttype       | Attribuut		                            | Naam	                 | Toelichting |
+      | Objecttype       | Attribuut                                | Naam                   | Toelichting |
       | Woonplaats       | Naam                                     | woonplaatsNaam 	       | Woonplaatsnaam is mogelijk onjuist geschreven. |
       | Openbare ruimte  | Naam                                     | openbareRuimteNaam     | Openbare ruimte naam komt mogelijk niet overeen met de vermelding in het straatnaambesluit. |
       | Openbare ruimte  | Naam                                     | korteNaam              | Korte naam is mogelijk onjuist, omdat de Openbare ruimte naam mogelijk niet overeen komt met de vermelding in het straatnaambesluit. Dit is geen indicatie dat de openbare ruimte naam mogelijk onjuist is verkort. |
       | Openbare ruimte  | Status                                   | openbareRuimteStatus   | Openbare ruimte bestaat mogelijk niet (meer). |
       | Openbare ruimte  | Ligt in (gerelateerde woonplaats)        | openbareRuimteLigtIn   | Mogelijk verkeerde woonplaats gebruikt. De openbare ruimte moet verwijzen naar de woonplaats waarin de openbare ruimte fysiek ligt. |
-      | Nummeraanduiding | Huisnummer                               | huisnummer	           | Mogelijk is het verkeerde huisnummer geregistreerd. |
+      | Nummeraanduiding | Huisnummer                               | huisnummer             | Mogelijk is het verkeerde huisnummer geregistreerd. |
       | Nummeraanduiding | Huisletter                               | huisletter             | Mogelijk is ten onrechte een huisletter toegekend, ontbreekt de huisletter ten onrechte, of is een verkeerde huisletter toegekend. |
       | Nummeraanduiding | Huisnummertoevoeging                     | huisnummertoevoeging   | Mogelijk is ten onrechte een huisnummertoevoeging toegekend, ontbreekt de huisnummertoevoeging ten onrechte, of is een verkeerde huisnummertoevoeging toegekend. |
       | Nummeraanduiding | Postcode                                 | postcode               | Mogelijk is ten onrechte een postcode toegekend, ontbreekt de postcode ten onrechte, of is een verkeerde postcode toegekend. |
@@ -31,7 +32,7 @@ Functionaliteit: In onderzoek bij Adressen en Adressen uitgebreid
       | Nummeraanduiding | Ligt aan (gerelateerde openbare ruimte)  | nummeraanduidingligtAan| Mogelijk verkeerde openbare ruimte gebruikt. Het adres moet verwijzen naar de openbare ruimte waaraan het adres ligt. |
 
      Attributen waarbij in onderzoek relevant is voor Adressen uitgebreid. Dit is aanvullend op wat bij Adressen wordt geleverd:
-      | Objecttype       | Attribuut		                                  | Naam	                                    | Toelichting |
+      | Objecttype       | Attribuut                                      | Naam                                      | Toelichting |
       | Nummeraanduidng  | Type adresseerbaarobject                       | typeAdresseerbaarObject                   | Mogelijk is het verkeerde type adresseerbaar object gekoppeld. Deze indicatie heeft daarmee feitelijke betrekking op het gerelateerde adresseerbare object. |
       | Pand             | Oorspronkelijk bouwjaar                        | oorspronkelijkBouwjaar                    | Mogelijk is het bouwjaar onjuist |
       | Verblijfsobject  | Geometrie                                      | adresseerbaarObjectGeometrie              | Mogelijk is de locatie van het verblijfsobject onjuist of, wanneer het een standplaats of ligplaats betreft, is mogelijk de locatie van de contouren onjuist of de contour onjuist. |
