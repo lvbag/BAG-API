@@ -99,67 +99,8 @@ paths:
         default:
           $ref: '../../../../generiek/responses.yaml#/default'
 
-  # Vraag bronhouderGeometrie
+  # Zoek bronhouder
   /bronhouders:
-    post:
-      requestBody:
-        description: Geometrisch punt waarvoor de bronhouder(s) bepaald moet(en) worden.
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '../../../../geometrie/geometrie.yaml#/components/schemas/Point'
-      security:
-        - apiKeyBAG: []
-      tags:
-        - Bronhouder
-      summary: 'bevragen 1 bronhouder, op basis van de geometrische locatie.'
-      operationId: bronhouderGeometrie
-      description: >-
-        Bevragen/raadplegen van een bronhouder, via een geometrische locatie.
-        Geleverd wordt een bronhouder.
-        Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.
-      parameters:
-        - $ref: '#/components/parameters/geldigOp'
-        - $ref: '#/components/parameters/beschikbaarOp'
-        - $ref: '../../../../generiek/parameters.yaml#/contentCrs'
-        - $ref: '../../../../generiek/parameters.yaml#/acceptCrs'
-
-      # Antwoord bronhouderGeometrie
-      responses:
-        '200':
-          description: Bevraging bronhouderGeometrie geslaagd
-          headers:
-            api-version: #Is dit wel API strategie?
-              $ref: '../../../../generiek/headers.yaml#/api_version'
-            warning:
-              $ref: '../../../../generiek/headers.yaml#/warning'
-          content:
-            application/hal+json:
-              schema:
-                $ref: './resources.yaml#/BronhouderHalCollection'
-        '400':
-          $ref: '../../../../generiek/responses.yaml#/400'
-        '401':
-          $ref: '../../../../generiek/responses.yaml#/401'
-        '403':
-          $ref: '../../../../generiek/responses.yaml#/403'
-        '405':
-          $ref: '../../../../generiek/responses.yaml#/405'
-        '406':
-          $ref: '../../../../generiek/responses.yaml#/406'
-        '412':
-          $ref: '../../../../generiek/responses.yaml#/412'
-        '415':
-          $ref: '../../../../generiek/responses.yaml#/415'
-        '500':
-          $ref: '../../../../generiek/responses.yaml#/500'
-        '503':
-          $ref: '../../../../generiek/responses.yaml#/503'
-        default:
-          $ref: '../../../../generiek/responses.yaml#/default'
-
-    # Zoek bronhouder
     get:
       security:
         - apiKeyBAG: []

@@ -575,9 +575,11 @@ paths:
       - Standplaats
       summary: bevragen van een standplaats met een geometrische locatie.
       description: Bevragen/raadplegen van één of meer standplaatsen met een geometrische
-        locatie. Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de
-        actuele gegevens geleverd. Als expand=heeftAlsHoofdAdres, heeftAlsNevenAdres
-        of true dan worden de gevraagde of alle objecten als geneste resource geleverd.
+        locatie. Parameter huidig kan worden toegepast. Huidig kan niet gebruikt worden
+        i.c.m. geldigOp en beschikbaarOp parameters.  Als geldigOp en/of beschikbaarOp
+        niet wordt opgegeven, worden de actuele gegevens geleverd. Als expand=heeftAlsHoofdAdres,
+        heeftAlsNevenAdres of true dan worden de gevraagde of alle objecten als geneste
+        resource geleverd.
       operationId: standplaatsGeometrie
       parameters:
       - name: geldigOp
@@ -601,6 +603,17 @@ paths:
         schema:
           type: string
           format: date-time
+      - name: huidig
+        in: query
+        description: Indicatie dat alleen actuele object voorkomens zonder eindstatus
+          gewenst zijn.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          example: false
+          default: false
       - name: expand
         in: query
         description: Hier kan aangegeven worden welke gerelateerde resources meegeladen
@@ -2258,6 +2271,18 @@ components:
       schema:
         type: boolean
         example: true
+        default: false
+    huidig:
+      name: huidig
+      in: query
+      description: Indicatie dat alleen actuele object voorkomens zonder eindstatus
+        gewenst zijn.
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: boolean
+        example: false
         default: false
   headers:
     api_version:

@@ -552,8 +552,10 @@ paths:
       - Pand
       summary: bevragen panden met een geometrische locatie.
       description: Bevragen/raadplegen van een voorkomen van één of meer panden met
-        de geometrische lcoatie van het pand. Als geldigOp en/of beschikbaarOp niet
-        wordt opgegeven, worden de actuele gegevens geleverd.
+        de geometrische lcoatie van het pand. Parameter huidig kan worden toegepast.
+        Huidig kan niet gebruikt worden i.c.m. geldigOp en beschikbaarOp parameters.  Als
+        geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens
+        geleverd.
       operationId: pandGeometrie
       parameters:
       - name: geldigOp
@@ -577,6 +579,17 @@ paths:
         schema:
           type: string
           format: date-time
+      - name: huidig
+        in: query
+        description: Indicatie dat alleen actuele object voorkomens zonder eindstatus
+          gewenst zijn.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          example: false
+          default: false
       - name: Content-Crs
         in: header
         description: CRS van de meegegeven geometrie.
@@ -1594,6 +1607,18 @@ components:
       schema:
         type: boolean
         example: true
+        default: false
+    huidig:
+      name: huidig
+      in: query
+      description: Indicatie dat alleen actuele object voorkomens zonder eindstatus
+        gewenst zijn.
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: boolean
+        example: false
         default: false
   headers:
     api_version:

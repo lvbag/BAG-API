@@ -287,8 +287,7 @@ paths:
       summary: bevragen levenscyclus van een openbare ruimte met de identificatie
         van een openbare ruimte.
       description: Bevragen/raadplegen van de levenscyclus van één openbare ruimte,
-        via de identificatie van een openbare ruimte. Als expand=ligtInWoonplaats
-        of true dan wordt de woonplaats als geneste resource geleverd.
+        via de identificatie van een openbare ruimte.
       operationId: openbareruimteLvcIdentificatie
       parameters:
       - name: openbareRuimteIdentificatie
@@ -315,16 +314,6 @@ paths:
           type: boolean
           example: true
           default: false
-      - name: expand
-        in: query
-        description: Hier kan aangegeven worden welke gerelateerde resources meegeladen
-          moeten worden. Resources en velden van resources die gewenst zijn kunnen
-          in de expand parameter kommagescheiden worden opgegeven. Specifieke velden
-          van resource kunnen worden opgegeven door het opgeven van de resource-naam
-          gevolgd door de veldnaam, met daartussen een punt.
-        required: false
-        schema:
-          type: string
       responses:
         "200":
           description: Bevraging openbareruimteLvcIdentificatie geslaagd
@@ -816,8 +805,7 @@ paths:
       description: Bevragen/raadplegen van een voorkomen van een openbare ruimte met
         de identificatie van een openbare ruimte en de identificatie van een voorkomen,
         bestaande uit een versie en een timestamp van het tijdstip van registratie
-        in de LV BAG. Als expand=ligtInWoonplaats of true dan wordt de woonplaats
-        als geneste resource geleverd.
+        in de LV BAG.
       operationId: openbareruimteIdentificatieVoorkomen
       parameters:
       - name: openbareRuimteIdentificatie
@@ -850,16 +838,6 @@ paths:
         schema:
           type: string
           example: "1530403860000"
-      - name: expand
-        in: query
-        description: Hier kan aangegeven worden welke gerelateerde resources meegeladen
-          moeten worden. Resources en velden van resources die gewenst zijn kunnen
-          in de expand parameter kommagescheiden worden opgegeven. Specifieke velden
-          van resource kunnen worden opgegeven door het opgeven van de resource-naam
-          gevolgd door de veldnaam, met daartussen een punt.
-        required: false
-        schema:
-          type: string
       responses:
         "200":
           description: Bevraging openbareruimteIdentificatieVoorkomen geslaagd

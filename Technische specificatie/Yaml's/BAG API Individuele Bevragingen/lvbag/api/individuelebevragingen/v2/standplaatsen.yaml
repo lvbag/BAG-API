@@ -181,11 +181,13 @@ paths:
       operationId: standplaatsGeometrie
       description: >-
         Bevragen/raadplegen van één of meer standplaatsen met een geometrische locatie.
+        Parameter huidig kan worden toegepast. Huidig kan niet gebruikt worden i.c.m. geldigOp en beschikbaarOp parameters. 
         Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.
         Als expand=heeftAlsHoofdAdres, heeftAlsNevenAdres of true dan worden de gevraagde of alle objecten als geneste resource geleverd.
       parameters:
         - $ref: '#/components/parameters/geldigOp'
         - $ref: '#/components/parameters/beschikbaarOp'
+        - $ref: '#/components/parameters/huidig'
         - $ref: '../../../../generiek/parameters.yaml#/expand'
         - $ref: '../../../../generiek/parameters.yaml#/contentCrs'
         - $ref: '../../../../generiek/parameters.yaml#/acceptCrs'
@@ -362,3 +364,13 @@ components:
         type: boolean
         default: false
         example: 'true'
+
+    huidig:
+      description: Indicatie dat alleen actuele object voorkomens zonder eindstatus gewenst zijn.
+      name: huidig
+      in: query
+      required: false
+      schema:
+        type: boolean
+        default: false
+        example: false

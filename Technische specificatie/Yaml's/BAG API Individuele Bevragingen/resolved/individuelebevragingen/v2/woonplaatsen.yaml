@@ -834,10 +834,11 @@ paths:
       - Woonplaats
       summary: bevragen van een woonplaats met een geometrische locatie.
       description: Bevragen/raadplegen van een voorkomen van een Woonplaats met een
-        geometrische locatie. Als geldigOp en/of beschikbaarOp niet wordt opgegeven,
-        worden de actuele gegevens geleverd.  Als expand=bronhouders, geometrie of
-        true dan worden de gevraagde of alle gerelateerde objecten als geneste resource
-        geleverd.
+        geometrische locatie. Parameter huidig kan worden toegepast. Huidig kan niet
+        gebruikt worden i.c.m. geldigOp en beschikbaarOp parameters.  Als geldigOp
+        en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.  Als
+        expand=bronhouders, geometrie of true dan worden de gevraagde of alle gerelateerde
+        objecten als geneste resource geleverd.
       operationId: woonplaatsGeometrie
       parameters:
       - name: geldigOp
@@ -861,6 +862,17 @@ paths:
         schema:
           type: string
           format: date-time
+      - name: huidig
+        in: query
+        description: Indicatie dat alleen actuele object voorkomens zonder eindstatus
+          gewenst zijn.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          example: false
+          default: false
       - name: expand
         in: query
         description: Hier kan aangegeven worden welke gerelateerde resources meegeladen
@@ -1981,6 +1993,18 @@ components:
       schema:
         type: boolean
         example: true
+        default: false
+    huidig:
+      name: huidig
+      in: query
+      description: Indicatie dat alleen actuele object voorkomens zonder eindstatus
+        gewenst zijn.
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: boolean
+        example: false
         default: false
   headers:
     api_version:

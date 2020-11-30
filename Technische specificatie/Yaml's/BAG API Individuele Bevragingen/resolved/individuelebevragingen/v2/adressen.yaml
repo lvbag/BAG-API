@@ -942,10 +942,7 @@ components:
           type: array
           items:
             type: string
-            example: Geometrie of woonplaatsgrens is in onderzoek, waardoor gaten
-              of overlappingen ontstaan in de registratie van woonplaatsen. Gevolg
-              kan zijn dat een object in een verkeerde woonplaats, in twee woonplaatsen,
-              of in geen enkele woonplaats ligt.
+            example: Woonplaatsnaam is mogelijk onjuist geschreven.
       description: Wanneer hier een property is opgenomen met de waarde true, dan
         is de waarde van het gelijknamige property in de resource in onderzoek. De
         juistheid van dit gegeven wordt op dit moment onderzocht. Onder property toelichting

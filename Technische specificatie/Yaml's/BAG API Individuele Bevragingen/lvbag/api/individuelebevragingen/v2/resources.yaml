@@ -38,7 +38,7 @@ Woonplaats_links:
     self:
       $ref: '../../../../generiek/hallinks.yaml#/components/schemas/HalLink'
     bronhouders:
-      description: De gemeente(n) waar de woonplaats onderdeel van uitmaakt. 
+      description: De gemeente(n) waar de woonplaats onderdeel van uitmaakt.
       type: array
       items:
         $ref: '../../../../generiek/hallinks.yaml#/components/schemas/HalLink'
