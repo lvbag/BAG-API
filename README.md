@@ -25,3 +25,5 @@ __Documentatie__
 [Panden](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/panden.yaml)  
   
 [Adressen](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/adressen.yaml)  
+
+[Adressen uitgebreid](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/adressenuitgebreid.yaml)
