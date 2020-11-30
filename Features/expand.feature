@@ -45,6 +45,9 @@ Functionaliteit: Automatisch laden van sub-resources
   Wanneer in de expand-parameter een resource(naam) wordt opgegeven die niet bestaat, of waarvoor automatisch laden niet wordt ondersteund in de api, wordt een foutmelding teruggegeven.
   Wanneer de expand-parameter wordt opgenomen zonder waarde, wordt een foutmelding gegeven.
 
+  De levenscyclus endpoints ondersteunen het gebruik van de expand parameter niet.
+  De voorkomen endpoints ondersteunen het gebruik van de expand parameter niet.
+
   Achtergrond:
     Gegeven een te raadplegen verblijfsobject met een gerelateerde nummeraanduiding voor hoofdadres, meerdere gerelateerde nummeraanduidingen voor nevenadressen en meerdere gerelateerde panden waar het verblijfsobject deel van uitmaakt
 
