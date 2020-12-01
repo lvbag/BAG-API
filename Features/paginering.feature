@@ -8,96 +8,137 @@ Functionaliteit: Als afnemer wil ik kunnen bladeren door een groot aantal result
   Bladeren kan door gebruik van de parameter page.
   De links first, previous, next en last worden alleen opgenomen in de response wanneer dit van toepassing is.
 
-  De provider kan ervoor kiezen de link last niet te leveren, om te voorkomen dat elke keer een volledige table scan nodig is om een enkele pagina te leveren.
-
-  Wanneer geen page parameter wordt meegegeven in het request, wordt de eerste pagina van het resultaat getoond.
-
   Wanneer de opgegeven pagina met de page parameter hoger is dan het aantal pagina's resultaat, wordt een foutmelding getoond.
   
   Wanneer bij een endpoint de paginering.feature niet is geimplementeerd en de parameter page of pageSize wordt meegegeven, wordt de parameter genegeerd
 
-PageSize:
-    De api toont standaard 20 resultaten per pagina
-    De api toont minimaal 10 resultaten per pagina
-    De api toont maximaal 100 resultaten per pagina
+  page:
+    De api levert standaard pagina 1 wanneer geen page parameter wordt meegegeven in het request en als er meerdere pagina's met resultaten zijn
+    Het minimale paginanummer is 1 
+    Het maximale paginanummer is afhankelijk van het aantal resultaten van een query: (totaal aantal resultaten) / (aantal resultaten per pagina (pageSize))
 
-  Scenario: de zoekvraag levert meerdere pagina's en er wordt geen page parameter gebruikt
-    Als de request wordt gedaan zonder page parameter 
-    Dan zitten er 20 resultaten in het antwoord
-    En zijn dit <items> 1 tot en met 20 van de collectie
-    En is attribuut _links.self.href gelijk aan de request
+  pageSize:
+    De api levert standaard 20 resultaten per pagina
+    De api levert minimaal 10 resultaten per pagina
+    De api levert maximaal 100 resultaten per pagina
+
+  Scenario: de zoekvraag levert meerdere pagina's en er wordt geen page of pageSize parameter gebruikt
+    Als de zoekvraag wordt gedaan op een endpoint waar paginering van toepassing is
+    En de zoekvraag bevat geen page parameter
+    En de zoekvraag bevat geen pageSize parameter
+    En er zijn 61-80 resultaten die voldoen aan de zoekvraag
+    Dan bevat het antwoord de resultaten 1 t/m 20 in de collectie
+    En is attribuut _links.self opgebouwd zoals beschreven in de links.feature: https://github.com/lvbag/BAG-API/blob/master/Features/links.feature
     En bevat het antwoord geen attribuut _links.first
     En bevat het antwoord geen attribuut _links.previous
-    En is attribuut _links.next.href gelijk aan "?page=2"
-    En is attribuut _links.last.href gelijk aan "?page=4"
+    En bevat het antwoord een attribuut _links.next.href met "<de bron URI>"
+    En bevat het attribuut _links.next.href "page=2"
+    En bevat het attribuut _links.next.href niet "pageSize"
+    En bevat het antwoord een attribuut _links.last.href met "<de bron URI>"
+    En bevat het attribuut _links.last.href "page=4"
+    En bevat het attribuut _links.last.href niet "pageSize"
 
-  Scenario: de zoekvraag levert meerdere pagina's en met de page parameter wordt de eerste pagina gevraagd
-    Als de request wordt gedaan naar naar een endpoint waar paginering van toepassing is met de parameter ?page=1
-    En er zijn meer dan 20 items die voldoen aan de zoekvraag
-    Dan zitten er 20 items in het antwoord
-    En zijn dit items 1 tot en met 20 van de collectie
-    En is attribuut _links.self.href gelijk aan "?page=1"
+  Scenario: de zoekvraag levert meerdere pagina's en met de page parameter wordt de eerste pagina gevraagd en er wordt geen pageSize parameter gebruikt
+    Als de zoekvraag wordt gedaan op een endpoint waar paginering van toepassing is
+    En de zoekvraag bevat een page parameter met "page=1"
+    En de zoekvraag bevat geen pageSize parameter
+    En er zijn 61-80 resultaten die voldoen aan de zoekvraag
+    Dan bevat het antwoord de resultaten 1 t/m 20 in de collectie
+    En is attribuut _links.self opgebouwd zoals beschreven in de links.feature: https://github.com/lvbag/BAG-API/blob/master/Features/links.feature
     En bevat het antwoord geen attribuut _links.first
     En bevat het antwoord geen attribuut _links.previous
-    En is attribuut _links.next.href gelijk aan "?page=2"
-    En is attribuut _links.last.href gelijk aan "?page=4"
+    En bevat het antwoord een attribuut _links.next.href met "<de bron URI zonder de opgegeven page parameter>"
+    En bevat het attribuut _links.next.href "page=2"
+    En bevat het attribuut _links.next.href niet "pageSize"
+    En bevat het antwoord een attribuut _links.last.href met "<de bron URI zonder de opgegeven page parameter>"
+    En bevat het attribuut _links.last.href "page=4"
+    En bevat het attribuut _links.last.href niet "pageSize"
 
   Scenario: de zoekvraag levert meerdere pagina's en met de page parameter wordt een volgende pagina gevraagd
-    Als de request wordt gedaan naar naar een endpoint waar paginering is geimplementeerd met de parameter "?page=3
-    Dan zitten er 20 resultaten in het antwoord
-    En zijn dit items 41 tot en met 60 met de collectie
-    En is attribuut _links.self.href gelijk aan "?page=3"
-    En is attribuut _links.first.href gelijk aan "?page=1"
-    En is attribuut _links.previous.href gelijk aan "?page=2"
-    En is attribuut _links.next.href gelijk aan "?page=4"
-    En is attribuut _links.last.href gelijk aan "?page=4"
+    Als de zoekvraag wordt gedaan op een endpoint waar paginering van toepassing is
+    En de zoekvraag bevat een page parameter met "page=3"
+    En de zoekvraag bevat geen pageSize parameter
+    En er zijn 61-80 resultaten die voldoen aan de zoekvraag
+    Dan bevat het antwoord de resultaten 41 t/m 60 in de collectie
+    En is attribuut _links.self.href opgebouwd zoals beschreven in de links.feature: https://github.com/lvbag/BAG-API/blob/master/Features/links.feature
+    En bevat het antwoord een attribuut _links.first.href met "<de bron URI zonder de opgegeven page parameter>"
+    En bevat het attribuut _links.first.href "page=1"
+    En bevat het attribuut _links.first.href niet "pageSize"
+    En bevat het antwoord een attribuut _links.previous.href met "<de bron URI zonder de opgegeven page parameter>"
+    En bevat het attribuut _links.previous.href "page=2"
+    En bevat het attribuut _links.previous.href niet "pageSize"
+    En bevat het antwoord een attribuut _links.next.href met "<de bron URI zonder de opgegeven page parameter>"
+    En bevat het attribuut _links.next.href "page=4"
+    En bevat het attribuut _links.next.href niet "pageSize"
+    En bevat het antwoord een attribuut _links.last.href met "<de bron URI zonder de opgegeven page parameter>"
+    En bevat het attribuut _links.last.href "page=4"
+    En bevat het attribuut _links.last.href niet "pageSize"
 
   Scenario: de zoekvraag levert meerdere pagina's en met de page parameter wordt de laatste pagina gevraagd
-    Als de request wordt gedaan naar een endpoint waar paginering van toepassing is met "?page=4"
-    En het totaal aantal items in de collectie was 72
-    Dan zitten er 12 resultaten in het antwoord
-    En zijn dit items 61 tot en met 72 van de collectie
-    En is attribuut _links.self.href gelijk aan "?page=4"
-    En is attribuut _links.first.href gelijk aan "?page=1"
-    En is attribuut _links.previous.href gelijk aan "?page=3"
+    Als de zoekvraag wordt gedaan op een endpoint waar paginering van toepassing is
+    En de zoekvraag bevat een page parameter met "page=4"
+    En de zoekvraag bevat geen pageSize parameter
+    En er zijn 72 resultaten die voldoen aan de zoekvraag
+    Dan bevat het antwoord de resultaten 61 t/m 72 in de collectie
+    En is attribuut _links.self.href opgebouwd zoals beschreven in de links.feature: https://github.com/lvbag/BAG-API/blob/master/Features/links.feature
+    En bevat het antwoord een attribuut _links.first.href met "<de bron URI zonder de opgegeven page parameter>"
+    En bevat het attribuut _links.first.href "page=1"
+    En bevat het attribuut _links.first.href niet "pageSize"
+    En bevat het antwoord een attribuut _links.previous.href met "<de bron URI zonder de opgegeven page parameter>"
+    En bevat het attribuut _links.previous.href "page=3"
+    En bevat het attribuut _links.previous.href niet "pageSize"
     En bevat het antwoord geen attribuut _links.next
     En bevat het antwoord geen attribuut _links.last
 
   Scenario: de zoekvraag levert meerdere pagina's en met de page parameter wordt een pagina bevraagd die niet bestaat
-    Als de request wordt gedaan naar een endpoint waar paginering van toepassing is met parameter "?page=15"
-    Dan heeft het antwoord statuscode 400
-    En bevat het antwoord status met de waarde 400
-    En bevat het antwoord title met de waarde "Een of meerdere parameters zijn niet correct."
-    En bevat het antwoord instance met de waarde "?page=15"
-    En bevat het antwoord invalidParams[0].name met de waarde "page"
-    En bevat het antwoord invalidParams[0].reason met de waarde "De opgegeven pagina bestaat niet."
-    En bevat het antwoord invalidParams[0].code met de waarde "page"
+    Als de zoekvraag wordt gedaan op een endpoint waar paginering van toepassing is
+    En de zoekvraag bevat een page parameter met "page=15"
+    En de zoekvraag bevat geen pageSize parameter
+    En er zijn 72 resultaten die voldoen aan de zoekvraag
+    Dan bevat het antwoord een attribuut status met de waarde 400
+    En bevat het antwoord een attribuut title met de waarde "Een of meerdere parameters zijn niet correct."
+    En bevat het antwoord een attribuut instance met de waarde "?page=15"
+    En bevat het antwoord een attribuut invalidParams[0].name met de waarde "page"
+    En bevat het antwoord een attribuut invalidParams[0].reason met de waarde "De opgegeven pagina bestaat niet."
+    En bevat het antwoord een attribuut invalidParams[0].code met de waarde "page"
+    En bevat het antwoord geen attribuut _links.self
+    En bevat het antwoord geen attribuut _links.first
+    En bevat het antwoord geen attribuut _links.previous
+    En bevat het antwoord geen attribuut _links.next
+    En bevat het antwoord geen attribuut _links.last
 
   Scenario: de zoekvraag levert één pagina
-    Als de request wordt gedaan naar een endpoint waar paginering van toepassing is
-    En er zitten er voldoen minder dan 20 items in het antwoord
-    Dan is attribuut _links.self.href gelijk aan de request
+    Als de zoekvraag wordt gedaan op een endpoint waar paginering van toepassing is
+    En er zijn 1-20 resultaten die voldoen aan de zoekvraag
+    Dan bevat het antwoord alle gevonden resultaten in de collectie
+    En is attribuut _links.self.href opgebouwd zoals beschreven in de links.feature: https://github.com/lvbag/BAG-API/blob/master/Features/links.feature
     En bevat het antwoord geen attribuut _links.first
     En bevat het antwoord geen attribuut _links.previous
     En bevat het antwoord geen attribuut _links.next
     En bevat het antwoord geen attribuut _links.last
 
   Scenario: de zoekvraag levert geen resultaten
-    Als de request wordt gedaan naar een endpoint waarbij paginering van toepassing is
+    Als de zoekvraag wordt gedaan op een endpoint waarbij paginering van toepassing is
     En er zijn geen resulaten gevonden
-    Dan is attribuut _links.self.href gelijk aan de request
+    Dan bevat het antwoord geen collectie
+    En is attribuut _links.self.href gelijk aan de request
     En bevat het antwoord geen attribuut _links.first
     En bevat het antwoord geen attribuut _links.previous
     En bevat het antwoord geen attribuut _links.next
     En bevat het antwoord geen attribuut _links.last
 
-  Scenario: de zoekvraag levert meerdere pagina's en de pageSize parameter wordt gebruikt
-    Als de request wordt gedaan met parameter "?page=3&pageSize=15"
-    Dan zitten er 15 resultaten in het antwoord
-    En is attribuut _links.self.href gelijk aan "?page=3&pageSize=15"
-    En is attribuut _links.first.href gelijk aan "?page=1&pageSize=15"
-    En is attribuut _links.previous.href gelijk aan "?page=2&pageSize=15"
-    En is attribuut _links.next gelijk aan "?page=4&pageSize=15"
-    En is attribuut _links.last gelijk aan "?page=5&pageSize=15"
-    
-   
+  Scenario: de zoekvraag levert meerdere pagina's en de page en pageSize parameters worden gebruikt
+    Als de zoekvraag wordt gedaan op een endpoint waarbij paginering van toepassing is
+    En de zoekvraag bevat een parameter "page=3"
+    En de zoekvraag bevat een parameter "pageSize=15"
+    En er zijn 61-75 resultaten die voldoen aan de zoekvraag
+    Dan bevat het antwoorden resultaten 31 t/m 45 in de collectie
+    En is attribuut _links.self.href opgebouwd zoals beschreven in de links.feature: https://github.com/lvbag/BAG-API/blob/master/Features/links.feature "?page=3&pageSize=15"
+    En bevat het antwoord een attribuut _links.first.href met "<de bron URI zonder de opgegeven page parameter>"
+    En bevat het attribuut _links.first.href "page=1"
+    En bevat het antwoord een attribuut _links.previous.href met "<de bron URI zonder de opgegeven page parameter>"
+    En bevat het attribuut _links.previous.href "page=2"
+    En bevat het antwoord een attribuut _links.next.href met "<de bron URI zonder de opgegeven page parameter>"
+    En bevat het attribuut _links.next.href "page=4"
+    En bevat het antwoord een attribuut _links.last.href met "<de bron URI zonder de opgegeven page parameter>"
+    En bevat het attribuut _links.last.href "page=5"
