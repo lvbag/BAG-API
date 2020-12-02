@@ -134,11 +134,11 @@ Functionaliteit: Als afnemer wil ik kunnen bladeren door een groot aantal result
     En er zijn 61-75 resultaten die voldoen aan de zoekvraag
     Dan bevat het antwoorden resultaten 31 t/m 45 in de collectie
     En is attribuut _links.self.href opgebouwd zoals beschreven in de links.feature: https://github.com/lvbag/BAG-API/blob/master/Features/links.feature "?page=3&pageSize=15"
-    En bevat het antwoord een attribuut _links.first.href met "<de bron URI zonder de opgegeven page parameter>"
+    En bevat het antwoord een attribuut _links.first.href met "<de bron URI zonder de opgegeven page parameter maar met de opgegeven pageSize parameter>"
     En bevat het attribuut _links.first.href "page=1"
-    En bevat het antwoord een attribuut _links.previous.href met "<de bron URI zonder de opgegeven page parameter>"
+    En bevat het antwoord een attribuut _links.previous.href met "<de bron URI zonder de opgegeven page parameter maar met de opgegeven pageSize parameter>"
     En bevat het attribuut _links.previous.href "page=2"
-    En bevat het antwoord een attribuut _links.next.href met "<de bron URI zonder de opgegeven page parameter>"
+    En bevat het antwoord een attribuut _links.next.href met "<de bron URI zonder de opgegeven page parameter maar met de opgegeven pageSize parameter>"
     En bevat het attribuut _links.next.href "page=4"
-    En bevat het antwoord een attribuut _links.last.href met "<de bron URI zonder de opgegeven page parameter>"
+    En bevat het antwoord een attribuut _links.last.href met "<de bron URI zonder de opgegeven page parameter maar met de opgegeven pageSize parameter>"
     En bevat het attribuut _links.last.href "page=5"
