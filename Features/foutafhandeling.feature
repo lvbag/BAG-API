@@ -11,22 +11,23 @@ In de foutresponse krijgt "code" een waarde, zie tabel hieronder.
 In de foutresponse krijgt "instance" de url van het request die tot de fout heeft geleid.
 
 We kennen de volgende foutsituaties:
-| Foutsituatie                       | status | title                                                            | code               |
-| Geen parameter is meegegeven       | 400    | Ten minste één parameter moet worden opgegeven.                  | paramsRequired     |
-| Verplichte parameter(combinatie)   | 400    | Minimale combinatie van parameters moet worden opgegeven.        | paramsCombination  |
-| Parametervalidatie                 | 400    | Een of meerdere parameters zijn niet correct.                    | paramsValidation   |
-| Teveel zoekresultaten              | 400    | Teveel zoekresultaten.                                           | tooManyResults     |
-| Niet geauthenticeerd               | 401    | Niet correct geauthenticeerd.                                    | authentication     |
-| Geen autorisatie voor operatie     | 403    | U bent niet geautoriseerd voor deze operatie.                    | autorisation       |
-| Opgevraagde resource bestaat niet  | 404    | Opgevraagde resource bestaat niet.                               | notFound           |
-| Methode niet toegestaan            | 405    | Deze methode is niet toegestaan                                  | methodNotAllowed   |
-| Accept header <> JSON              | 406    | Gevraagde contenttype wordt niet ondersteund.                    | notAcceptable      |
-| Accept-Crs niet ondersteund        | 406    | CRS niet ondersteund.                                            | crsNotAcceptable   |
-| Geen Accept-Crs                    | 412    | Gewenste coördinatenstelsel voor geometrie moet worden opgegeven.| acceptCrsMissing   |
-| Geen Content-Crs                   | 412    | Coördinatenstelsel van gestuurde geometrie moet worden opgegeven.| contentCrsMissing  |
-| Content-Crs niet ondersteund       | 415    | CRS niet ondersteund                                             | crsNotSupported    |
-| Technische of interne fout         | 500    | Interne server fout.                                             | serverError        |
-| Bronservice niet beschikbaar       | 503    | Bronservice is niet beschikbaar.                                 | sourceUnavailable  |
+| Foutsituatie                        | status | title                                                            | code               |
+| Geen parameter is meegegeven        | 400    | Ten minste één parameter moet worden opgegeven.                  | paramsRequired     |
+| Verplichte parameter(combinatie)    | 400    | Minimale combinatie van parameters moet worden opgegeven.        | paramsCombination  |
+| Niet toegestane parametercombinatie | 400    | De combinatie van opgegeven parameters is niet toegestaan.       | unsupportedCombi   |
+| Parametervalidatie                  | 400    | Een of meerdere parameters zijn niet correct.                    | paramsValidation   |
+| Teveel zoekresultaten               | 400    | Teveel zoekresultaten.                                           | tooManyResults     |
+| Niet geauthenticeerd                | 401    | Niet correct geauthenticeerd.                                    | authentication     |
+| Geen autorisatie voor operatie      | 403    | U bent niet geautoriseerd voor deze operatie.                    | autorisation       |
+| Opgevraagde resource bestaat niet   | 404    | Opgevraagde resource bestaat niet.                               | notFound           |
+| Methode niet toegestaan             | 405    | Deze methode is niet toegestaan                                  | methodNotAllowed   |
+| Accept header <> JSON               | 406    | Gevraagde contenttype wordt niet ondersteund.                    | notAcceptable      |
+| Accept-Crs niet ondersteund         | 406    | CRS niet ondersteund.                                            | crsNotAcceptable   |
+| Geen Accept-Crs                     | 412    | Gewenste coördinatenstelsel voor geometrie moet worden opgegeven.| acceptCrsMissing   |
+| Geen Content-Crs                    | 412    | Coördinatenstelsel van gestuurde geometrie moet worden opgegeven.| contentCrsMissing  |
+| Content-Crs niet ondersteund        | 415    | CRS niet ondersteund                                             | crsNotSupported    |
+| Technische of interne fout          | 500    | Interne server fout.                                             | serverError        |
+| Bronservice niet beschikbaar        | 503    | Bronservice is niet beschikbaar.                                 | sourceUnavailable  |
 
 Wanneer de fout is veroorzaakt door fouten in requestparameters (of request body), wordt "invalid-params" gevuld met details over elke foute parameter.
 
@@ -118,6 +119,24 @@ Abstract Scenario: Ongeldige queryparameter waarde bij zoeken
     En bevat invalid-params exact 2 voorkomen(s)
     En is er een invalid-params met name=onbekend
     En is er een invalid-params met name=fout
+
+  Scenario: zoeken zonder minimale combinatie van zoekparameters
+    Als er openbare ruimten worden gezocht met een openbare ruimte naam <openbare ruimte naam>
+    Dan is de http status code van het antwoord 400
+    En is in het antwoord status=400
+    En eindigt attribuut instance met openbareruimten?openbareRuimteNaam=<openbare ruimte naam>
+    En is in het antwoord code=paramsCombination
+    En komt attribuut invalidParams niet voor in het antwoord
+
+  Scenario: combinatie van opgegeven parameters wordt niet ondersteund
+    Gegeven op endpoint /openbareruimten kan gezocht worden op <woonplaatsnaam> en <openbare ruimtenaam> of <woonplaatsidentificate> en <openbare ruimtenaam> of <woonplaatsidentificatie>
+    En worden andere combinaties van deze parameters niet ondersteund
+    Als <woonplaatsidentificatie>, <woonplaatsnaam>, <openbare ruimtenaam> worden opgegeven
+    Dan is de http status code van het antwoord 400
+    En is in het antwoord status=400
+    En eindigt attribuut instance met /openbareruimten?woonplaatsIdentificatie=<woonplaatsIdentificatie>&woonplaatsNaam=<woonplaatsnaam>&openbareRuimteNaam=<openbare ruimtenaam>
+    En is in het antwoord code=unsupportedCombi
+    En komt attribuut invalidParams niet voor in het antwoord
 
   Scenario: niet geauthenticeerd
     Als panden worden gezocht zonder authenticatiegegevens (zonder SAML assertion)
