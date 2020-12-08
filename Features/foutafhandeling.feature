@@ -11,23 +11,23 @@ In de foutresponse krijgt "code" een waarde, zie tabel hieronder.
 In de foutresponse krijgt "instance" de url van het request die tot de fout heeft geleid.
 
 We kennen de volgende foutsituaties:
-| Foutsituatie                        | status | title                                                            | code               |
-| Geen parameter is meegegeven        | 400    | Ten minste één parameter moet worden opgegeven.                  | paramsRequired     |
-| Verplichte parameter(combinatie)    | 400    | Minimale combinatie van parameters moet worden opgegeven.        | paramsCombination  |
-| Niet toegestane parametercombinatie | 400    | De combinatie van opgegeven parameters is niet toegestaan.       | unsupportedCombi   |
-| Parametervalidatie                  | 400    | Een of meerdere parameters zijn niet correct.                    | paramsValidation   |
-| Teveel zoekresultaten               | 400    | Teveel zoekresultaten.                                           | tooManyResults     |
-| Niet geauthenticeerd                | 401    | Niet correct geauthenticeerd.                                    | authentication     |
-| Geen autorisatie voor operatie      | 403    | U bent niet geautoriseerd voor deze operatie.                    | autorisation       |
-| Opgevraagde resource bestaat niet   | 404    | Opgevraagde resource bestaat niet.                               | notFound           |
-| Methode niet toegestaan             | 405    | Deze methode is niet toegestaan                                  | methodNotAllowed   |
-| Accept header <> JSON               | 406    | Gevraagde contenttype wordt niet ondersteund.                    | notAcceptable      |
-| Accept-Crs niet ondersteund         | 406    | CRS niet ondersteund.                                            | crsNotAcceptable   |
-| Geen Accept-Crs                     | 412    | Gewenste coördinatenstelsel voor geometrie moet worden opgegeven.| acceptCrsMissing   |
-| Geen Content-Crs                    | 412    | Coördinatenstelsel van gestuurde geometrie moet worden opgegeven.| contentCrsMissing  |
-| Content-Crs niet ondersteund        | 415    | CRS niet ondersteund                                             | crsNotSupported    |
-| Technische of interne fout          | 500    | Interne server fout.                                             | serverError        |
-| Bronservice niet beschikbaar        | 503    | Bronservice is niet beschikbaar.                                 | sourceUnavailable  |
+| Foutsituatie                        | status | title                                                            | code                   |
+| Geen parameter is meegegeven        | 400    | Ten minste één parameter moet worden opgegeven.                  | paramsRequired         |
+| Verplichte parameter(combinatie)    | 400    | Minimale combinatie van parameters moet worden opgegeven.        | paramsCombination      |
+| Niet toegestane parametercombinatie | 400    | De combinatie van opgegeven parameters is niet toegestaan.       | unsupportedCombination |
+| Parametervalidatie                  | 400    | Een of meerdere parameters zijn niet correct.                    | paramsValidation       |
+| Teveel zoekresultaten               | 400    | Teveel zoekresultaten.                                           | tooManyResults         |
+| Niet geauthenticeerd                | 401    | Niet correct geauthenticeerd.                                    | authentication         |
+| Geen autorisatie voor operatie      | 403    | U bent niet geautoriseerd voor deze operatie.                    | autorisation           |
+| Opgevraagde resource bestaat niet   | 404    | Opgevraagde resource bestaat niet.                               | notFound               |
+| Methode niet toegestaan             | 405    | Deze methode is niet toegestaan                                  | methodNotAllowed       |
+| Accept header <> JSON               | 406    | Gevraagde contenttype wordt niet ondersteund.                    | notAcceptable          |
+| Accept-Crs niet ondersteund         | 406    | CRS niet ondersteund.                                            | crsNotAcceptable       |
+| Geen Accept-Crs                     | 412    | Gewenste coördinatenstelsel voor geometrie moet worden opgegeven.| acceptCrsMissing       |
+| Geen Content-Crs                    | 412    | Coördinatenstelsel van gestuurde geometrie moet worden opgegeven.| contentCrsMissing      |
+| Content-Crs niet ondersteund        | 415    | CRS niet ondersteund                                             | crsNotSupported        |
+| Technische of interne fout          | 500    | Interne server fout.                                             | serverError            |
+| Bronservice niet beschikbaar        | 503    | Bronservice is niet beschikbaar.                                 | sourceUnavailable      |
 
 Wanneer de fout is veroorzaakt door fouten in requestparameters (of request body), wordt "invalid-params" gevuld met details over elke foute parameter.
 
