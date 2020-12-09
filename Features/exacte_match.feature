@@ -13,69 +13,135 @@ Er zijn situaties waarbij er ondanks het gebruik van exacteMatch=true meerdere r
 
 De default waarde van de exacteMatch parameter is false.
 
-Abstract scenario: standaard gedrag
-  Gegeven een object met postcode 1234AA en 3 objecten met huisnummer en huisletter combinaties: 3, 3A en 3B.
-  Als er wordt gezocht met postcode: 1234AA 
-  En huisnummer: 3
+Scenario: standaard gedrag
+  Gegeven een verzameling van 3 objecten met postcode=1234AA 
+  En één object (1) met huisnummer=3
+  En geen huisletter
+  En geen huisnummertoevoeging
+  En één object (2) met huisnummer=3
+  En huisletter=A
+  En geen huisnummertoevoeging
+  En één object (3) met huisnummer=3
+  En huisletter=B
+  En geen huisnummertoevoeging
+  Als er wordt gezocht met postcode=1234AA 
+  En huisnummer=3
   En geen huisletter
   En geen huisnummertoevoeging 
   En exacteMatch=false
   Dan bevat het resultaat alle 3 de objecten
 	
-  Gegeven een object met postcode 1234AA en 3 objecten met huisnummer en huisletter combinaties: 3, 3A en 3B.
-  Als er wordt gezocht met postcode: 1234AA 
-  En huisnummer: 3
+  Gegeven een verzameling van 3 objecten met postcode=1234AA 
+  En één object (1) met huisnummer=3
+  En geen huisletter
+  En geen huisnummertoevoeging
+  En één object (2) met huisnummer=3
+  En huisletter=A
+  En geen huisnummertoevoeging
+  En één object (3) met huisnummer=3
+  En huisletter=B
+  En geen huisnummertoevoeging
+  Als er wordt gezocht met postcode=1234AA 
+  En huisnummer=3
   En geen huisletter
   En geen huisnummertoevoeging 
   En exacteMatch=true
-  Dan bevat het resultaat alleen het object met postcode 1234AA en huisnummer 3
+  Dan bevat het resultaat alleen het object (1) met postcode=1234AA 
+  En huisnummer=3
 
-Abstract scenario: combinatie van huisnummer en huisnummertoevoeging
-  Gegeven een object met postcode 1234AA en 5 objecten met huisnummer, huisletter en huisnummertoevoeging combinaties: 3, 3A en 3Abis, 3B en 3Bbis.
-  Als er wordt gezocht met postcode 1234AA
-  En huisnummer: 3 
-  En huisnummertoevoeging: bis
+Scenario: combinatie van huisnummer en huisnummertoevoeging
+  Gegeven een verzameling van 5 objecten met postcode=1234AA 
+  En één object (1) met huisnummer=3
+  En geen huisletter
+  En geen huisnummertoevoeging
+  En één object (2) met huisnummer=3
+  En huisletter=A
+  En geen huisnummertoevoeging
+  En één object (3) met huisnummer=3
+  En huisletter=A
+  En huisnummertoevoeging=bis
+  En één object (4) met huisnummer=3
+  En huisletter=B
+  En geen huisnummertoevoeging
+  En één object (5) met huisnummer=3
+  En huisletter=B
+  En huisnummertoevoeging=bis
+  Als er wordt gezocht met postcode=1234AA
+  En huisnummer=3 
+  En huisnummertoevoeging=bis
   En geen huisletter 
   En exacteMatch=false
-  Dan bevat het resultaat de objecten met huisnummer, huisletter en huisnummertoevoeging combinaties: 3Abis en 3Bbis. 
+  Dan bevat het resultaat object (3) met huisnummer=3
+  Em huisletter=A 
+  En huisnummertoevoeging=bis 
+  En object (5) met huisnummer=3
+  En huisletter=B
+  En huisnummertoevoeging=bis
 	
-  Gegeven een object met postcode 1234AA en huisnummer, huisletter en huisnummertoevoeging combinaties: 3, 3A en 3Abis, 3B en 3Bbis.
-  Als er wordt gezocht met postcode 1234AA
-  En huisnummer: 3 
-  En huisnummertoevoeging: bis
+  Gegeven een verzameling van 5 objecten met postcode=1234AA 
+  En één object (1) met huisnummer=3
+  En geen huisletter
+  En geen huisnummertoevoeging
+  En één object (2) met huisnummer=3
+  En huisletter=A
+  En geen huisnummertoevoeging
+  En één object (3) met huisnummer=3
+  En huisletter=A
+  En huisnummertoevoeging=bis
+  En één object (4) met huisnummer=3
+  En huisletter=B
+  En geen huisnummertoevoeging
+  En één object (5) met huisnummer=3
+  En huisletter=B
+  En huisnummertoevoeging=bis
+  Als er wordt gezocht met postcode=1234AA
+  En huisnummer=3 
+  En huisnummertoevoeging=bis
   En geen huisletter 
   En exacteMatch=true
   Dan bevat het resultaat geen objecten
 
-Abstract Scenario: combinatie van huisnummer, huisletter en/of huisnummertoevoeging komt meerdere keren voor en exacteMatch wordt niet toegepast
-  Gegeven een object met postcode 1234AA en twee objecten met huisnummer 3 en geen huisnummer 3 met een huisletter en/of huisnummertoevoeging
-  Als postcode=1234AA
-  En huisnummer: 3
+Scenario: combinatie van huisnummer, huisletter en/of huisnummertoevoeging komt meerdere keren voor en exacteMatch wordt niet toegepast
+  Gegeven een verzameling van 2 objecten met postcode=1234AA
+  En huisnummer=3 
+  En geen huisletter 
+  En geen huisnummertoevoeging
+  Als er wordt gezocht met postcode=1234AA
+  En huisnummer=3
   En geen huisnummertoevoeging
   En geen huisletter 
   En exacteMatch=false
   Dan bevat het resultaat beide objecten
   
-Abstract Scenario: combinatie van huisnummer, huisletter en/of huisnummertoevoeging komt meerdere keren voor en exacteMatch wordt toegepast
-  Gegeven een object met postcode 1234AA en twee objecten met huisnummer 3 en geen huisnummer 3 met een huisletter en/of huisnummertoevoeging
-  Als postcode=1234AA
+Scenario: combinatie van huisnummer, huisletter en/of huisnummertoevoeging komt meerdere keren voor en exacteMatch wordt toegepast
+  Gegeven een verzameling van 2 objecten met postcode=1234AA
+  En huisnummer=3 
+  En geen huisletter 
+  En geen huisnummertoevoeging
+  Als er wordt gezocht met postcode=1234AA
   En huisnummer=3
   En geen huisnummertoevoeging
   En geen huisletter 
   En exacteMatch=true
   Dan bevat het resultaat beide objecten
   
-Abstract Scenario: endpoints waarbij exacteMatch kan worden toegepast kennen geen fuzzy search
-  Gegeven een object met postcode 1234AA en een object met huisnummer 3 en een object met huisnummer 13
-  Als postcode=1234AA
+Scenario: endpoints waarbij exacteMatch kan worden toegepast kennen geen fuzzy search
+  Gegeven een verzameling van 2 objecten met postcode=1234AA
+  En één object (1) met huisnummer=3 
+  En één object (2) met huisnummer=13
+  Als er wordt gezocht met postcode=1234AA
   En huisnummer=3
   En exacteMatch=false
-  Dan bevat het resultaat alleen het object met postcode 1234AA en huisnummer 3
-
-Abstract Scenario: endpoints waarbij exacteMatch kan worden toegepast kennen geen fuzzy search
-  Gegeven een object met postcode 1234AA en een object met huisnummer 3 en huisletter B en geen huisnummertoevoeging
-  Als postcode=1234AA
+  Dan bevat het resultaat alleen object (1) met postcode=1234AA 
   En huisnummer=3
-  En huisnummertoevoeging = B
+
+Scenario: endpoints waarbij exacteMatch kan worden toegepast kennen geen fuzzy search
+  Gegeven een object met postcode= 1234AA 
+  En huisnummer=3 
+  En huisletter=B
+  En geen huisnummertoevoeging
+  Als er wordt gezocht met postcode=1234AA
+  En huisnummer=3
+  En huisnummertoevoeging=B
   En exacteMatch=false
   Dan bevat het resultaat geen objecten
