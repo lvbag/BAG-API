@@ -72,7 +72,7 @@ Scenario: combinatie van huisnummer en huisnummertoevoeging
   En geen huisletter 
   En exacteMatch=false
   Dan bevat het resultaat object (3) met huisnummer=3
-  Em huisletter=A 
+  En huisletter=A 
   En huisnummertoevoeging=bis 
   En object (5) met huisnummer=3
   En huisletter=B
