@@ -236,7 +236,6 @@ paths:
         - $ref: '#/components/parameters/identificatie'
         - $ref: '#/components/parameters/versie'
         - $ref: '#/components/parameters/timestampRegistratieLv'
-        - $ref: '../../../../generiek/parameters.yaml#/expand'
         - $ref: '../../../../generiek/parameters.yaml#/acceptCrs'
 
       # Antwoord pandIdentificatieVoorkomen

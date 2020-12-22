@@ -120,11 +120,9 @@ paths:
       operationId: standplaatsLvcIdentificatie
       description: >-
         Bevragen/raadplegen van de levenscyclus van een standplaats met de identificatie van de standplaats.
-        Als expand=heeftAlsHoofdAdres, heeftAlsNevenAdres of true dan worden de gevraagde of alle objecten als geneste resource geleverd.
       parameters:
         - $ref: '#/components/parameters/identificatie'
         - $ref: '#/components/parameters/geheleLvc'
-        - $ref: '../../../../generiek/parameters.yaml#/expand'
         - $ref: '../../../../generiek/parameters.yaml#/acceptCrs'
 
       # Antwoord standplaatsLvcIdentificatie
@@ -238,12 +236,10 @@ paths:
       operationId: standplaatsIdentificatieVoorkomen 
       description: >-
         Bevragen/raadplegen van een voorkomen van een standplaats met de identificatie van een standplaats en de identificatie van een voorkomen, bestaande uit een versie en een timestamp van het tijdstip van registratie in de LV BAG.
-        Als expand=heeftAlsHoofdAdres, heeftAlsNevenAdres of true dan worden de gevraagde of alle objecten als geneste resource geleverd.
       parameters:
         - $ref: '#/components/parameters/identificatie'
         - $ref: '#/components/parameters/versie'
         - $ref: '#/components/parameters/timestampRegistratieLv'
-        - $ref: '../../../../generiek/parameters.yaml#/expand'
         - $ref: '../../../../generiek/parameters.yaml#/acceptCrs'
 
       # Antwoord standplaatsIdentificatieVoorkomen

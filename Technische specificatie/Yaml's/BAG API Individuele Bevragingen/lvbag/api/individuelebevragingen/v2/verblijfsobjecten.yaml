@@ -120,11 +120,9 @@ paths:
       operationId: verblijfsobjectLvcIdentificatie
       description: >-
         Bevragen/raadplegen van de levenscyclus van een Verblijfsobject met de identificatie van de verblijfsobject.
-        Als expand=heeftAlsHoofdAdres, heeftAlsNevenAdres, maaktDeelUitVan of true, dan worden gevraagde of alle gerelateerde objecten als geneste resource geleverd.
       parameters:
         - $ref: '#/components/parameters/identificatie'
         - $ref: '#/components/parameters/geheleLvc'
-        - $ref: '../../../../generiek/parameters.yaml#/expand'
         - $ref: '../../../../generiek/parameters.yaml#/acceptCrs'
 
       # Antwoord verblijfsobjectLvcIdentificatie
@@ -234,12 +232,10 @@ paths:
       operationId: verblijfsobjectIdentificatieVoorkomen 
       description: >-
         Bevragen/raadplegen van een voorkomen van een verblijfsobject, met de identificatie van een verblijfsobject en de identificatie van een voorkomen, bestaande uit een versie en een timestamp van het tijdstip van registratie in de LV BAG.
-        Als expand=heeftAlsHoofdAdres, heeftAlsNevenAdres, maaktDeelUitVan of true, dan worden gevraagde of alle gerelateerde objecten als geneste resource geleverd.
       parameters:
         - $ref: '#/components/parameters/identificatie'
         - $ref: '#/components/parameters/versie'
         - $ref: '#/components/parameters/timestampRegistratieLv'
-        - $ref: '../../../../generiek/parameters.yaml#/expand'
         - $ref: '../../../../generiek/parameters.yaml#/acceptCrs'
 
       # Antwoord verblijfsobjectIdentificatieVoorkomen

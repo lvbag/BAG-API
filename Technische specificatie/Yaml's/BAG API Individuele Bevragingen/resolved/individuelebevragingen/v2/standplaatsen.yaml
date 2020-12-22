@@ -315,8 +315,7 @@ paths:
       summary: bevragen levenscyclus van een standplaats met de identificatie van
         een standplaats.
       description: Bevragen/raadplegen van de levenscyclus van een standplaats met
-        de identificatie van de standplaats. Als expand=heeftAlsHoofdAdres, heeftAlsNevenAdres
-        of true dan worden de gevraagde of alle objecten als geneste resource geleverd.
+        de identificatie van de standplaats.
       operationId: standplaatsLvcIdentificatie
       parameters:
       - name: identificatie
@@ -343,16 +342,6 @@ paths:
           type: boolean
           example: true
           default: false
-      - name: expand
-        in: query
-        description: Hier kan aangegeven worden welke gerelateerde resources meegeladen
-          moeten worden. Resources en velden van resources die gewenst zijn kunnen
-          in de expand parameter kommagescheiden worden opgegeven. Specifieke velden
-          van resource kunnen worden opgegeven door het opgeven van de resource-naam
-          gevolgd door de veldnaam, met daartussen een punt.
-        required: false
-        schema:
-          type: string
       - name: Accept-Crs
         in: header
         description: Gewenste CRS van de co�rdinaten in de response.
@@ -867,8 +856,7 @@ paths:
       description: Bevragen/raadplegen van een voorkomen van een standplaats met de
         identificatie van een standplaats en de identificatie van een voorkomen, bestaande
         uit een versie en een timestamp van het tijdstip van registratie in de LV
-        BAG. Als expand=heeftAlsHoofdAdres, heeftAlsNevenAdres of true dan worden
-        de gevraagde of alle objecten als geneste resource geleverd.
+        BAG.
       operationId: standplaatsIdentificatieVoorkomen
       parameters:
       - name: identificatie
@@ -901,16 +889,6 @@ paths:
         schema:
           type: string
           example: "1530403860000"
-      - name: expand
-        in: query
-        description: Hier kan aangegeven worden welke gerelateerde resources meegeladen
-          moeten worden. Resources en velden van resources die gewenst zijn kunnen
-          in de expand parameter kommagescheiden worden opgegeven. Specifieke velden
-          van resource kunnen worden opgegeven door het opgeven van de resource-naam
-          gevolgd door de veldnaam, met daartussen een punt.
-        required: false
-        schema:
-          type: string
       - name: Accept-Crs
         in: header
         description: Gewenste CRS van de co�rdinaten in de response.
