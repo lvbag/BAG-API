@@ -46,6 +46,8 @@ Functionaliteit: Automatisch laden van sub-resources
   Wanneer de expand-parameter wordt opgenomen zonder waarde, wordt een foutmelding gegeven.
 
   De levenscyclus endpoints ondersteunen het gebruik van de expand parameter niet.
+  Een uitzondering hierop is het /woonplaatsen/{woonplaatsIdentificatie}/lvc endpoint waarbij bronhouders en geometrie wel geëxpand kunnen worden.
+  
   De voorkomen endpoints ondersteunen het gebruik van de expand parameter niet.
 
   Achtergrond:
