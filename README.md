@@ -23,6 +23,8 @@ __Documentatie__
 [Ligplaatsen](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/ligplaatsen.yaml)
 
 [Panden](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/panden.yaml)  
+
+[Adresseerbare objecten](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/adresseerbareobjecten.yaml)
   
 [Adressen](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/adressen.yaml)  
 
