@@ -262,6 +262,7 @@ paths:
         description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
           woonplaats en 16 lang bij de andere objecten.
         required: false
+        deprecated: true
         style: form
         explode: true
         schema:
@@ -270,7 +271,7 @@ paths:
           description: 'Deze wordt gebruikt in de operation, bv. /woonplaatsen/3560.
             Waarde: 0001-9999, formaat: ^[0-9]{3}[1-9]\|[0-9]{2}[1-9][0-9]\|[0-9][1-9][0-9]{2}\|[1-9][0-9]{3}$.'
           example: "2096"
-      - name: openbareRuimteIdentificatie
+      - name: objectIdentificatie
         in: query
         description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
           woonplaats en 16 lang bij de andere objecten.
@@ -278,62 +279,7 @@ paths:
         style: form
         explode: true
         schema:
-          pattern: ^[0-9]{4}30[0-9]{10}$
-          type: string
-          example: "0226300000136124"
-      - name: nummeraanduidingIdentificatie
-        in: query
-        description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
-          woonplaats en 16 lang bij de andere objecten.
-        required: false
-        style: form
-        explode: true
-        schema:
-          pattern: ^[0-9]{4}20[0-9]{10}$
-          type: string
-          example: "0226200000038923"
-      - name: ligplaatsIdentificatie
-        in: query
-        description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
-          woonplaats en 16 lang bij de andere objecten.
-        required: false
-        style: form
-        explode: true
-        schema:
-          pattern: ^[0-9]{4}02[0-9]{10}$
-          type: string
-          example: "0797020000056894"
-      - name: standplaatsIdentificatie
-        in: query
-        description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
-          woonplaats en 16 lang bij de andere objecten.
-        required: false
-        style: form
-        explode: true
-        schema:
-          pattern: ^[0-9]{4}03[0-9]{10}$
-          type: string
-          example: "0797030000056834"
-      - name: verblijfsobjectIdentificatie
-        in: query
-        description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
-          woonplaats en 16 lang bij de andere objecten.
-        required: false
-        style: form
-        explode: true
-        schema:
-          pattern: ^[0-9]{4}01[0-9]{10}$
-          type: string
-          example: "0226010000038820"
-      - name: pandIdentificatie
-        in: query
-        description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
-          woonplaats en 16 lang bij de andere objecten.
-        required: false
-        style: form
-        explode: true
-        schema:
-          pattern: ^[0-9]{4}10[0-9]{10}$
+          pattern: ^[0-9]{4}(?:01|02|03|10|20|30)[0-9]{10}$|^[0-9]{3}[1-9]$|^[0-9]{2}[1-9][0-9]$|^[0-9][1-9][0-9]{2}$|^[1-9][0-9]{3}$
           type: string
           example: "0226100000008856"
       - name: geldigOp
@@ -948,6 +894,7 @@ components:
       description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
         woonplaats en 16 lang bij de andere objecten.
       required: false
+      deprecated: true
       style: form
       explode: true
       schema:
@@ -956,8 +903,8 @@ components:
         description: 'Deze wordt gebruikt in de operation, bv. /woonplaatsen/3560.
           Waarde: 0001-9999, formaat: ^[0-9]{3}[1-9]\|[0-9]{2}[1-9][0-9]\|[0-9][1-9][0-9]{2}\|[1-9][0-9]{3}$.'
         example: "2096"
-    openbareRuimteIdentificatie:
-      name: openbareRuimteIdentificatie
+    objectIdentificatie:
+      name: objectIdentificatie
       in: query
       description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
         woonplaats en 16 lang bij de andere objecten.
@@ -965,67 +912,7 @@ components:
       style: form
       explode: true
       schema:
-        pattern: ^[0-9]{4}30[0-9]{10}$
-        type: string
-        example: "0226300000136124"
-    nummeraanduidingIdentificatie:
-      name: nummeraanduidingIdentificatie
-      in: query
-      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
-        woonplaats en 16 lang bij de andere objecten.
-      required: false
-      style: form
-      explode: true
-      schema:
-        pattern: ^[0-9]{4}20[0-9]{10}$
-        type: string
-        example: "0226200000038923"
-    verblijfsobjectIdentificatie:
-      name: verblijfsobjectIdentificatie
-      in: query
-      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
-        woonplaats en 16 lang bij de andere objecten.
-      required: false
-      style: form
-      explode: true
-      schema:
-        pattern: ^[0-9]{4}01[0-9]{10}$
-        type: string
-        example: "0226010000038820"
-    ligplaatsIdentificatie:
-      name: ligplaatsIdentificatie
-      in: query
-      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
-        woonplaats en 16 lang bij de andere objecten.
-      required: false
-      style: form
-      explode: true
-      schema:
-        pattern: ^[0-9]{4}02[0-9]{10}$
-        type: string
-        example: "0797020000056894"
-    standplaatsIdentificatie:
-      name: standplaatsIdentificatie
-      in: query
-      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
-        woonplaats en 16 lang bij de andere objecten.
-      required: false
-      style: form
-      explode: true
-      schema:
-        pattern: ^[0-9]{4}03[0-9]{10}$
-        type: string
-        example: "0797030000056834"
-    pandIdentificatie:
-      name: pandIdentificatie
-      in: query
-      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een
-        woonplaats en 16 lang bij de andere objecten.
-      required: false
-      style: form
-      explode: true
-      schema:
-        pattern: ^[0-9]{4}10[0-9]{10}$
+        pattern: ^[0-9]{4}(?:01|02|03|10|20|30)[0-9]{10}$|^[0-9]{3}[1-9]$|^[0-9]{2}[1-9][0-9]$|^[0-9][1-9][0-9]{2}$|^[1-9][0-9]{3}$
         type: string
         example: "0226100000008856"
     geldigOp:

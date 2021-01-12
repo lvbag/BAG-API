@@ -29,10 +29,9 @@ AdresseerbaarObjectIdentificatie:
 
 TypeAdresseerbaarObject:
   title: TypeAdresseerbaarObject
-  description: De aard van een als zodanig benoemde Nummeraanduiding.
+  description: De aard van het object waaraan een nummeraanduiding is toegekend.
   type: string
   enum:
     - 'Verblijfsobject'
     - 'Standplaats'
     - 'Ligplaats'
-

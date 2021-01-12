@@ -294,17 +294,17 @@ paths:
         \ met woonplaats naam, openbare ruimte naam, huisnummer en optioneel huisnummertoevoeging\
         \ en huisletter. \n  </li>\n  <li>\n    Bevragen/zoeken van alle aan een openbare\
         \ ruimte gerelateerde nummeraanduidingen met een openbare ruimte identificatie.\
-        \ \n    Parameter huidig kan worden toegepast. Huidig kan niet gebruikt worden\
-        \ i.c.m. geldigOp en beschikbaarOp parameters. Expand wordt niet ondersteund.\
-        \            \n  </li>\n</ol> Bij de bovenstaande bevragingen kunnen (tenzij\
-        \ anders vermeld) de volgende parameters worden gebruikt: geldigOp, beschikbaarOp,\
-        \ page en pageSize.  Voor paginering, zie: [functionele specificatie paginering](https://github.com/lvbag/BAG-API/blob/master/Features/paginering.feature).\
+        \ \n    Expand wordt niet ondersteund.\n  </li>\n</ol> Bij de bovenstaande\
+        \ bevragingen kunnen (tenzij anders vermeld) de volgende parameters worden\
+        \ gebruikt: geldigOp, beschikbaarOp, huidig, page en pageSize.  Voor paginering,\
+        \ zie: [functionele specificatie paginering](https://github.com/lvbag/BAG-API/blob/master/Features/paginering.feature).\
         \ Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele\
-        \ gegevens geleverd. Als expand=ligtInWoonplaats, ligtAanOpenbareRuimte of\
-        \ als expand=true dan worden de gevraagde of alle gerelateerde objecten als\
-        \ geneste resources geleverd.  Met de exacteMatch parameter kan worden aangegeven\
-        \ dat alleen object(en) die exact overeenkomen met de opgegeven parameters,\
-        \ geretourneerd moeten worden."
+        \ gegevens geleverd. Parameter huidig kan worden toegepast. Huidig kan niet\
+        \ gebruikt worden i.c.m. geldigOp en beschikbaarOp parameters. Als expand=ligtInWoonplaats,\
+        \ ligtAanOpenbareRuimte of als expand=true dan worden de gevraagde of alle\
+        \ gerelateerde objecten als geneste resources geleverd.  Met de exacteMatch\
+        \ parameter kan worden aangegeven dat alleen object(en) die exact overeenkomen\
+        \ met de opgegeven parameters, geretourneerd moeten worden."
       operationId: zoekNummeraanduiding
       parameters:
       - name: postcode
@@ -1817,7 +1817,7 @@ components:
     TypeAdresseerbaarObject:
       title: TypeAdresseerbaarObject
       type: string
-      description: De aard van een als zodanig benoemde Nummeraanduiding.
+      description: De aard van het object waaraan een nummeraanduiding is toegekend.
       enum:
       - Verblijfsobject
       - Standplaats

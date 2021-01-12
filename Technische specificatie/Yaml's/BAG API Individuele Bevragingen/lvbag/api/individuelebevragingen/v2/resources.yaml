@@ -270,7 +270,6 @@ NummeraanduidingIOHalCollection:
 LigplaatsIOHal:
   title: LigplaatsIOHal
   description: Een verzameling van een Ligplaats en een lijst van alle bijbehorende inonderzoek informatie.
-  type: object
   required:
     - ligplaats
   properties:
@@ -348,7 +347,6 @@ LigplaatsIOHalCollection:
 StandplaatsIOHal:
   title: StandplaatsIOHal
   description: Een verzameling van een Standplaats en een lijst van alle bijbehorende inonderzoek informatie.
-  type: object
   required:
     - standplaats
   properties:
@@ -426,7 +424,6 @@ StandplaatsIOHalCollection:
 VerblijfsobjectIOHal:
   title: VerblijfsobjectIOHal
   description: Een verzameling van een verblijfsobject en een lijst van alle bijbehorende inonderzoek informatie.
-  type: object
   required:
     - verblijfsobject
   properties:
@@ -464,6 +461,7 @@ Verblijfsobject_links:
   type: object
   required:
     - self
+    - heeftAlsHoofdAdres
     - maaktDeelUitVan
   properties:
     self:
@@ -566,9 +564,16 @@ PandIOHalCollection:
     _links:
       $ref: '../../../../generiek/hallinks.yaml#/components/schemas/HalCollectionLinks'
 
-AdresseerbaarObjectIO:
-  title: AdresseerbaarObjectIO
-  oneOf:
-    - $ref: '#/LigplaatsIOHal'
-    - $ref: '#/StandplaatsIOHal'
-    - $ref: '#/VerblijfsobjectIOHal'
+AdresseerbaarObjectIOHal:
+  title: AdresseerbaarObjectIOHal
+  type: object
+  description: Een adresseerbaar object kan een ligplaats, standplaats of verblijfsobject zijn, er wordt van onderstaande properties dus altijd maar één ingevuld.
+  properties:
+    _links:
+      $ref: '../../../../generiek/hallinks.yaml#/components/schemas/HalCollectionLinks'
+    ligplaats:
+      $ref: '#/LigplaatsIOHal'
+    standplaats:
+      $ref: '#/StandplaatsIOHal'
+    verblijfsobject:
+      $ref: '#/VerblijfsobjectIOHal'

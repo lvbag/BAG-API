@@ -1112,7 +1112,6 @@ components:
       title: LigplaatsIOHal
       required:
       - ligplaats
-      type: object
       properties:
         ligplaats:
           $ref: '#/components/schemas/Ligplaats'
@@ -1981,7 +1980,7 @@ components:
     TypeAdresseerbaarObject:
       title: TypeAdresseerbaarObject
       type: string
-      description: De aard van een als zodanig benoemde Nummeraanduiding.
+      description: De aard van het object waaraan een nummeraanduiding is toegekend.
       enum:
       - Verblijfsobject
       - Standplaats

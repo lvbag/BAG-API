@@ -1103,7 +1103,6 @@ components:
       title: VerblijfsobjectIOHal
       required:
       - verblijfsobject
-      type: object
       properties:
         verblijfsobject:
           $ref: '#/components/schemas/Verblijfsobject'
@@ -1309,6 +1308,7 @@ components:
           $ref: '#/components/schemas/HalLink'
     Verblijfsobject_links:
       required:
+      - heeftAlsHoofdAdres
       - maaktDeelUitVan
       - self
       type: object
@@ -2227,7 +2227,7 @@ components:
     TypeAdresseerbaarObject:
       title: TypeAdresseerbaarObject
       type: string
-      description: De aard van een als zodanig benoemde Nummeraanduiding.
+      description: De aard van het object waaraan een nummeraanduiding is toegekend.
       enum:
       - Verblijfsobject
       - Standplaats
