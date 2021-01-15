@@ -314,7 +314,7 @@ paths:
         style: form
         explode: true
         schema:
-          pattern: ^[1-9]{1}[0-9]{3}[A-Z]{2}$
+          pattern: ^[1-9]{1}[0-9]{3}[a-zA-Z]{2}$
           type: string
           example: 6922KZ
       - name: huisnummer
@@ -2053,7 +2053,7 @@ components:
       style: form
       explode: true
       schema:
-        pattern: ^[1-9]{1}[0-9]{3}[A-Z]{2}$
+        pattern: ^[1-9]{1}[0-9]{3}[a-zA-Z]{2}$
         type: string
         example: 6922KZ
     huisnummer:

@@ -204,7 +204,7 @@ components:
       required: false
       schema:
         type: string
-        pattern: '^[1-9]{1}[0-9]{3}[A-Z]{2}$'
+        pattern: '^[1-9]{1}[0-9]{3}[a-zA-Z]{2}$'
         example: '6922KZ'
 
     huisnummer:
