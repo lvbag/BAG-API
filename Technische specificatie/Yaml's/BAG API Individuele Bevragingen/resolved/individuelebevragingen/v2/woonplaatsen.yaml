@@ -834,8 +834,7 @@ paths:
       - Woonplaats
       summary: bevragen van een woonplaats met een geometrische locatie.
       description: Bevragen/raadplegen van een voorkomen van een Woonplaats met een
-        geometrische locatie. Parameter huidig kan worden toegepast. Huidig kan niet
-        gebruikt worden i.c.m. geldigOp en beschikbaarOp parameters.  Als geldigOp
+        geometrische locatie. Parameter huidig kan worden toegepast. Als geldigOp
         en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.  Als
         expand=bronhouders, geometrie of true dan worden de gevraagde of alle gerelateerde
         objecten als geneste resource geleverd.

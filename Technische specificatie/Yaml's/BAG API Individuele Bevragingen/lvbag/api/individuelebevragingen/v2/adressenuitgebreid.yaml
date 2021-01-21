@@ -113,7 +113,7 @@ paths:
             Het opgeven van een combinatie van parameters levert niet altijd een exacte match met één adres, bv. in geval van meerdere objecten met huisnummertoevoegingen en/of huisletters. 
             Met de exacteMatch parameter kan worden aangegeven dat alleen object(en) die exact overeenkomen met de opgegeven parameters, geretourneerd moeten worden.
           </li>
-          <li>Bevragen van de uitgebreide informatie van één of meer huidige adressen met de identificatie van een adresseerbaar object identificatie.</li>
+          <li>Bevragen van de uitgebreide informatie van één of meer huidige adressen met de identificatie van een adresseerbaar object.</li>
           <li>Bevragen van de uitgebreide informatie van één of meer huidige adressen met woonplaats naam, openbare ruimte naam, huisnummer en optioneel huisnummertoevoeging en huisletter.
             Het opgeven van een combinatie van parameters levert niet altijd een exacte match met één adres, bv. in geval van meerdere objecten met huisnummertoevoegingen en/of huisletters. 
             Met de exacteMatch parameter kan worden aangegeven dat alleen object(en) die exact overeenkomen met de opgegeven parameters, geretourneerd moeten worden.

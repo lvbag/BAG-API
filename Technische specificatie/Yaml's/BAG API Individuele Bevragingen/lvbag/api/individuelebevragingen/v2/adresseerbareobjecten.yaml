@@ -164,7 +164,7 @@ paths:
       summary: Bevragen van één of meer adresseerbare objecten op basis van een nummeraanduiding identificatie.
       description: >-
         Bevragen/zoeken van alle aan een nummeraanduiding identificatie gerelateerde adresseerbare objecten (ligplaats, standplaats of verblijfsobject).
-        Parameter huidig kan worden toegepast. Huidig kan niet gebruikt worden i.c.m. geldigOp en beschikbaarOp parameters.            
+        Parameter huidig kan worden toegepast.
         Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd. 
         Als expand=heeftAlsHoofdAdres, heeftAlsNevenAdres, maaktDeelUitVan (of een combinatie daarvan) of als expand=true, dan wordt gevraagde of alle gerelateerde resources als geneste resource geleverd.
       parameters:

@@ -569,9 +569,8 @@ paths:
         paginering).
       description: 'Bevragen/zoeken van alle aan een pand gerelateerde verblijfsobjecten,
         met een pand identificatie en met paginering. Parameter huidig kan worden
-        toegepast. Huidig kan niet gebruikt worden i.c.m. geldigOp en beschikbaarOp
-        parameters. Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden
-        de actuele gegevens geleverd. Voor paginering, zie: [functionele specificatie
+        toegepast. Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de
+        actuele gegevens geleverd. Voor paginering, zie: [functionele specificatie
         paginering](https://github.com/lvbag/BAG-API/blob/master/Features/paginering.feature).'
       operationId: zoekVerblijfsobjecten
       parameters:

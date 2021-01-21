@@ -535,9 +535,8 @@ paths:
         identificatie.
       description: Bevragen/zoeken van alle aan een nummeraanduiding identificatie
         gerelateerde adresseerbare objecten (ligplaats, standplaats of verblijfsobject).
-        Parameter huidig kan worden toegepast. Huidig kan niet gebruikt worden i.c.m.
-        geldigOp en beschikbaarOp parameters.             Als geldigOp en/of beschikbaarOp
-        niet wordt opgegeven, worden de actuele gegevens geleverd.  Als expand=heeftAlsHoofdAdres,
+        Parameter huidig kan worden toegepast. Als geldigOp en/of beschikbaarOp niet
+        wordt opgegeven, worden de actuele gegevens geleverd.  Als expand=heeftAlsHoofdAdres,
         heeftAlsNevenAdres, maaktDeelUitVan (of een combinatie daarvan) of als expand=true,
         dan wordt gevraagde of alle gerelateerde resources als geneste resource geleverd.
       operationId: zoekAdresseerbaarObject

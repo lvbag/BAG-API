@@ -553,8 +553,7 @@ paths:
       summary: bevragen panden met een geometrische locatie.
       description: Bevragen/raadplegen van een voorkomen van één of meer panden met
         de geometrische lcoatie van het pand. Parameter huidig kan worden toegepast.
-        Huidig kan niet gebruikt worden i.c.m. geldigOp en beschikbaarOp parameters.  Als
-        geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens
+        Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens
         geleverd.
       operationId: pandGeometrie
       parameters:

@@ -299,8 +299,7 @@ paths:
         \ gebruikt: geldigOp, beschikbaarOp, huidig, page en pageSize.  Voor paginering,\
         \ zie: [functionele specificatie paginering](https://github.com/lvbag/BAG-API/blob/master/Features/paginering.feature).\
         \ Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele\
-        \ gegevens geleverd. Parameter huidig kan worden toegepast. Huidig kan niet\
-        \ gebruikt worden i.c.m. geldigOp en beschikbaarOp parameters. Als expand=ligtInWoonplaats,\
+        \ gegevens geleverd. Parameter huidig kan worden toegepast. Als expand=ligtInWoonplaats,\
         \ ligtAanOpenbareRuimte of als expand=true dan worden de gevraagde of alle\
         \ gerelateerde objecten als geneste resources geleverd.  Met de exacteMatch\
         \ parameter kan worden aangegeven dat alleen object(en) die exact overeenkomen\

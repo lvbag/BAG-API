@@ -177,7 +177,7 @@ paths:
       operationId: pandGeometrie
       description: >-
         Bevragen/raadplegen van een voorkomen van één of meer panden met de geometrische lcoatie van het pand.
-        Parameter huidig kan worden toegepast. Huidig kan niet gebruikt worden i.c.m. geldigOp en beschikbaarOp parameters. 
+        Parameter huidig kan worden toegepast.
         Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.
       parameters:
         - $ref: '#/components/parameters/geldigOp'

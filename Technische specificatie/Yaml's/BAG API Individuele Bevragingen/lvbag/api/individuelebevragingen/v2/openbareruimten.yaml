@@ -173,11 +173,11 @@ paths:
           </li>
           <li>
             Bevragen/zoeken van alle aan een woonplaats gerelateerde openbare ruimten met de woonplaats identificatie.
-            Parameter huidig kan worden toegepast. Huidig kan niet gebruikt worden i.c.m. geldigOp en beschikbaarOp parameters. 
+            Parameter huidig kan worden toegepast.
             Expand wordt niet ondersteund.
           </li>
         </ol>
-        Bij alle bovenstaande combinaties wordt paginering ondersteund en kunnen de parameters geldigOp en beschikbaarOp worden gebruikt (tenzij anders vermeld).        
+        Bij alle bovenstaande combinaties wordt paginering ondersteund en kunnen de parameters geldigOp en beschikbaarOp worden gebruikt.
         Voor paginering, zie: [functionele specificatie paginering](https://github.com/lvbag/BAG-API/blob/master/Features/paginering.feature).
         Als geldigOp en beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.
       parameters:

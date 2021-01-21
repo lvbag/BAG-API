@@ -507,22 +507,22 @@ paths:
       - Openbare ruimte
       summary: bevragen openbare ruimte(n) op basis van de verschillende combinaties
         van parameters.
-      description: "De volgende (combinaties van) parameters worden ondersteund:<br/>\
-        \ <ol>\n  <li>\n    Bevragen/raadplegen van een openbare ruimte met een woonplaats\
-        \ naam en een openbare ruimte naam.\n    Als expand=ligtInWoonplaats of true\
-        \ dan wordt de woonplaats als geneste resource geleverd.\n  </li>\n  <li>\n\
-        \    Bevragen/raadplegen van een openbare ruimte met een woonplaats identificatie\
-        \ en een openbare ruimte naam.\n    Als expand=ligtInWoonplaats of true dan\
-        \ wordt de woonplaats als geneste resource geleverd.\n  </li>\n  <li>\n  \
-        \  Bevragen/zoeken van alle aan een woonplaats gerelateerde openbare ruimten\
-        \ met de woonplaats identificatie.\n    Parameter huidig kan worden toegepast.\
-        \ Huidig kan niet gebruikt worden i.c.m. geldigOp en beschikbaarOp parameters.\
-        \ \n    Expand wordt niet ondersteund.\n  </li>\n</ol> Bij alle bovenstaande\
-        \ combinaties wordt paginering ondersteund en kunnen de parameters geldigOp\
-        \ en beschikbaarOp worden gebruikt (tenzij anders vermeld).         Voor paginering,\
-        \ zie: [functionele specificatie paginering](https://github.com/lvbag/BAG-API/blob/master/Features/paginering.feature).\
-        \ Als geldigOp en beschikbaarOp niet wordt opgegeven, worden de actuele gegevens\
-        \ geleverd."
+      description: |-
+        De volgende (combinaties van) parameters worden ondersteund:<br/> <ol>
+          <li>
+            Bevragen/raadplegen van een openbare ruimte met een woonplaats naam en een openbare ruimte naam.
+            Als expand=ligtInWoonplaats of true dan wordt de woonplaats als geneste resource geleverd.
+          </li>
+          <li>
+            Bevragen/raadplegen van een openbare ruimte met een woonplaats identificatie en een openbare ruimte naam.
+            Als expand=ligtInWoonplaats of true dan wordt de woonplaats als geneste resource geleverd.
+          </li>
+          <li>
+            Bevragen/zoeken van alle aan een woonplaats gerelateerde openbare ruimten met de woonplaats identificatie.
+            Parameter huidig kan worden toegepast.
+            Expand wordt niet ondersteund.
+          </li>
+        </ol> Bij alle bovenstaande combinaties wordt paginering ondersteund en kunnen de parameters geldigOp en beschikbaarOp worden gebruikt. Voor paginering, zie: [functionele specificatie paginering](https://github.com/lvbag/BAG-API/blob/master/Features/paginering.feature). Als geldigOp en beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.
       operationId: zoekOpenbareRuimten
       parameters:
       - name: woonplaatsNaam

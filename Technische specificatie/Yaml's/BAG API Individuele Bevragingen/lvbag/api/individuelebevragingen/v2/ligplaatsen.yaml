@@ -179,7 +179,7 @@ paths:
       operationId: ligplaatsGeometrie
       description: >-
         Bevragen/raadplegen van een ligplaats met een geometrische locatie.
-        Parameter huidig kan worden toegepast. Huidig kan niet gebruikt worden i.c.m. geldigOp en beschikbaarOp parameters. 
+        Parameter huidig kan worden toegepast.
         Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.
         Als expand=heeftAlsHoofdAdres, heeftAlsNevenAdres of true dan worden de gevraagde of alle objecten als geneste resource geleverd.
       parameters:
