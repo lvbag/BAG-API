@@ -64,7 +64,7 @@ paths:
       description: >-
         Bevragen/raadplegen van één voorkomen van een Verblijfsobject met de identificatie van een verblijfsobject.
         Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.
-        Als expand=heeftAlsHoofdAdres, heeftAlsNevenAdres, maaktDeelUitVan of true, dan worden gevraagde of alle gerelateerde objecten als geneste resource geleverd.
+        Als expand=heeftAlsHoofdAdres, heeftAlsNevenAdres, maaktDeelUitVan of true, dan worden de gevraagde of alle gerelateerde objecten als geneste resource geleverd.
       parameters:
         - $ref: '#/components/parameters/identificatie'
         - $ref: '#/components/parameters/geldigOp'

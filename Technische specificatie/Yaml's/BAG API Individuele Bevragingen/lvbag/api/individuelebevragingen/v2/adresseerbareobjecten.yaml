@@ -124,7 +124,7 @@ paths:
       # Antwoord bevragenAdresseerbaarObjectLvc
       responses:
         '200':
-          description: 'Bevraging bevragenAdresseerbaarObjectLvc geslaagd geslaagd. Ondanks dat er in de example een voorbeeld van alle mogelijke adresseerbare objecten (ligplaats, standplaats of verblijfspobject) staat, wordt er altijd slechts één van deze objecten geretourneerd.'
+          description: 'Bevraging bevragenAdresseerbaarObjectLvc geslaagd. Ondanks dat er in de example een voorbeeld van alle mogelijke adresseerbare objecten (ligplaats, standplaats of verblijfspobject) staat, wordt er altijd slechts één van deze objecten geretourneerd.'
           headers:
             api-version:
               $ref: '../../../../generiek/headers.yaml#/api_version'
@@ -166,7 +166,7 @@ paths:
         Bevragen/zoeken van alle aan een nummeraanduiding identificatie gerelateerde adresseerbare objecten (ligplaats, standplaats of verblijfsobject).
         Parameter huidig kan worden toegepast.
         Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd. 
-        Als expand=heeftAlsHoofdAdres, heeftAlsNevenAdres, maaktDeelUitVan (of een combinatie daarvan) of als expand=true, dan wordt gevraagde of alle gerelateerde resources als geneste resource geleverd.
+        Als expand=heeftAlsHoofdAdres, heeftAlsNevenAdres, maaktDeelUitVan (of een combinatie daarvan) of als expand=true, dan worden de gevraagde of alle gerelateerde resources als geneste resource geleverd.
       parameters:
         - $ref: '#/components/parameters/nummeraanduidingIdentificatie'
         - $ref: '#/components/parameters/huidig'

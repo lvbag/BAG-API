@@ -176,7 +176,7 @@ paths:
       summary: bevragen panden met een geometrische locatie.
       operationId: pandGeometrie
       description: >-
-        Bevragen/raadplegen van een voorkomen van één of meer panden met de geometrische lcoatie van het pand.
+        Bevragen/raadplegen van een voorkomen van één of meer panden met de geometrische locatie van het pand.
         Parameter huidig kan worden toegepast.
         Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.
       parameters:

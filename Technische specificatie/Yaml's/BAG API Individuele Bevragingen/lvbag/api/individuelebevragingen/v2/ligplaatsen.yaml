@@ -178,7 +178,7 @@ paths:
       summary: 'bevragen van een ligplaats, op basis van een geometrische locatie.'
       operationId: ligplaatsGeometrie
       description: >-
-        Bevragen/raadplegen van een ligplaats met een geometrische locatie.
+        Bevragen/raadplegen van één of meer ligplaatsen met een geometrische locatie.
         Parameter huidig kan worden toegepast.
         Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.
         Als expand=heeftAlsHoofdAdres, heeftAlsNevenAdres of true dan worden de gevraagde of alle objecten als geneste resource geleverd.
