@@ -5,7 +5,7 @@ Huidig betekent dat het object actueel is en geen eindstatus heeft.
 Voor een toelichting kunt u het artikel hierover in de Praktijkhandleiding BAG raadplegen. (https://imbag.github.io/praktijkhandleiding/artikelen/wat-is-het-verschil-tussen-actieve-voorkomens-actuele-voorkomens-en-huidige-voorkomens).
 
 Bij enkele endpoints wordt de mogelijkheid geboden om met de parameter 'Huidig' alleen huidige objecten op te vragen
-Anders endpoints leveren alleen huidige gegevens. Het gaat dan om het adressen en adressen uitgebreid endpoint.
+Andere endpoints leveren alleen huidige gegevens. Het gaat dan om het adressen en adressen uitgebreid endpoint.
 NB: In de scenario's hieronder wordt nader toegelicht hoe 'huidig' bij die endpoints werkt.
 
 Parameter Huidig werkt als een filter.
