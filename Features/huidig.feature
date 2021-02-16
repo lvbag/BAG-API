@@ -31,4 +31,46 @@ Dan bevat de response de verblijfsobjecten met een eindstatus niet en de verblij
 #### Scenario:
 Gegeven een pand met een eindstatus
 Wanneer op het endpoint verblijfsobjecten de verblijfsobjecten in dat pand worden opgevraagd met de parameter 'huidig'
-Dan volgt een 404 foutmelding dat het pand niet gevonden kan worden.
+Dan worden er geen verblijfsobjecten geretourneerd
+
+#### Scenario:
+Gegeven het adressen endpoint retourneert alleen huidige objecten
+En er bestaat een nummeraanduiding met status 'Naamgeving ingetrokken'
+Wanneer het adressen endpoint voor deze nummeraanduiding wordt bevraagd
+Dan wordt het adres niet geretourneerd
+
+#### Scenario:
+Gegeven het adressen endpoint retourneert alleen huidige objecten
+En er bestaat een nummeraanduiding met status 'Naamgeving uitgegeven'
+En het gerelateerde verblijfsobject heeft status 'Verblijfsobject ingetrokken'
+Wanneer het adressen endpoint voor deze nummeraanduiding wordt bevraagd
+Dan wordt het adres niet geretourneerd
+
+#### Scenario:
+Gegeven het adressen endpoint retourneert alleen huidige objecten
+En er bestaat een nummeraanduiding met status 'Naamgeving uitgegeven'
+En het gerelateerde verblijfsobject heeft status 'Verblijfsobject in gebruik'
+Wanneer het adressen endpoint voor deze nummeraanduiding wordt bevraagd
+Dan wordt het adres geretourneerd
+
+#### Scenario:
+Gegeven het adressen endpoint retourneert alleen huidige objecten
+En er bestaat een nummeraanduiding met status 'Naamgeving uitgegeven'
+En het gerelateerde verblijfsobject heeft status 'Verblijfsobject in gebruik'
+En het gerelateerde pand heeft status 'Pand gesloopt'
+Wanneer het adressen endpoint voor deze nummeraanduiding wordt bevraagd
+Dan wordt het adres geretourneerd
+
+#### Scenario:
+Gegeven het adressen uitgebereid endpoint retourneert alleen huidige objecten
+En er bestaat een nummeraanduiding met status 'Naamgeving uitgegeven'
+En het gerelateerde pand heeft status 'Pand gesloopt'
+Wanneer het adressen uitgebreid endpoint voor deze nummeraanduiding wordt bevraagd
+Dan wordt het adres niet geretourneerd
+
+#### Scenario:
+Gegeven het adressen uitgebereid endpoint retourneert alleen huidige objecten
+En er bestaat een nummeraanduiding met status 'Naamgeving uitgegeven'
+En het gerelateerde pand heeft status 'Pand in gebruik'
+Wanneer het adressen uitgebreid endpoint voor deze nummeraanduiding wordt bevraagd
+Dan wordt het adres geretourneerd
