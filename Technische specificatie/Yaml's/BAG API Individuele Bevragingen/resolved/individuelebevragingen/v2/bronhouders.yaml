@@ -720,6 +720,7 @@ components:
       title: Bronhouder
       required:
       - code
+      - naam
       type: object
       properties:
         code:
@@ -739,8 +740,45 @@ components:
           type: string
           description: Een officiële naam die aan een gemeente is toegekend.
           example: Duiven
+        beginGeldigheid:
+          title: beginGeldigheid
+          type: string
+          description: De datum waarop een versie van een bronhouder geldig is in
+            de werkelijkheid. Dit tijdstip wordt vastgelegd in de beginGeldigheid.
+          format: date
+          example: 2019-06-01
+        eindGeldigheid:
+          title: eindGeldigheid
+          type: string
+          description: De datum waarop de periode van geldigheid van een versie van
+            een bronhouder eindigt. Wanneer er geen tijdstip is ingevuld, dan is de
+            versie nog geldig. Dit tijdstip wordt vastgelegd in de eindGeldigheid.
+          format: date
+          example: 2019-06-01
+        provincie:
+          $ref: '#/components/schemas/Provincie'
       description: Een bronhouder is een gemeente of samenwerkingsverband van gemeenten
         en heeft een code en naam net als een gemeente.
+    Provincie:
+      title: Provincie
+      required:
+      - afkorting
+      - naam
+      type: object
+      properties:
+        naam:
+          title: naam
+          maxLength: 32
+          minLength: 1
+          type: string
+          example: Gelderland
+        afkorting:
+          title: afkorting
+          maxLength: 2
+          minLength: 1
+          type: string
+          example: Ge
+      description: Gegevens van een provincie
     Bronhouder_links:
       required:
       - self

@@ -90,6 +90,7 @@ Bronhouder:
   type: object
   required:
     - code
+    - naam
   properties:
     code:
       description: Een officiële code die aan een gemeente is toegekend, ontleend is aan tabel 33 en zoals bijgehouden in de LVBAG. Dit gegeven is geen officieel BAG gegeven en wordt niet als kenmerk van het BAG object Woonplaats object bijgehouden. Het wordt als hulpgegeven meegeleverd.
@@ -105,6 +106,28 @@ Bronhouder:
       maxLength: 80
       pattern: '^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*'
       example: 'Duiven'
+    beginGeldigheid:
+      description: De datum waarop een versie van een bronhouder geldig is in de werkelijkheid. Dit tijdstip wordt vastgelegd in de beginGeldigheid.
+      title: beginGeldigheid
+      type: string
+      format: date
+      example: '2019-06-01'
+    eindGeldigheid:
+      description: De datum waarop de periode van geldigheid van een versie van een bronhouder eindigt. Wanneer er geen tijdstip is ingevuld, dan is de versie nog geldig. Dit tijdstip wordt vastgelegd in de eindGeldigheid.
+      title: eindGeldigheid
+      type: string
+      format: date
+      example: '2019-06-01'
+    provincie:
+      $ref: '#/Provincie'
+
+StatusBronhouder:
+  title: StatusBronhouder
+  description: Een aanduiding van alle waarden die de status van een bronhouder kan aannemen.
+  type: string
+  enum:
+    - 'Actief'
+    - 'Beëindigd'
 
 Bronhouder_links:
   required:
@@ -126,6 +149,28 @@ BronhouderHalCollection:
             $ref: '#/BronhouderHal'
     _links:
       $ref: '../../../../generiek/hallinks.yaml#/components/schemas/HalCollectionLinks'
+
+# Provincie gegevens groep
+Provincie:
+  title: Provincie
+  description: Gegevens van een provincie
+  type: object
+  required:
+    - naam
+    - afkorting
+  properties:
+    naam:
+      title: naam
+      type: string
+      minLength: 1
+      maxLength: 32
+      example: 'Gelderland'
+    afkorting:
+      title: afkorting
+      type: string
+      minLength: 1
+      maxLength: 2
+      example: 'Ge'
 
 # OpenbareRuimteIOHal resource
 OpenbareRuimteIOHal:
