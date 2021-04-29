@@ -1,5 +1,13 @@
 **Geplande activiteiten**  
   
+_22 april 2021_  
+
+De documentatie van deze bijeenkomst is terug te vinden in de map 22 april 2021.
+
+_21 januari 2021_  
+
+De documentatie van deze bijeenkomst is terug te vinden in de map 21 januari 2021. 
+
 _12 oktober_  
 
 De documentatie van deze bijeenkomst is terug te vinden in de map 12 oktober 2020. 
