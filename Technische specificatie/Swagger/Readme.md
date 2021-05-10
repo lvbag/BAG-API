@@ -1,4 +1,4 @@
-* Technische specificaties van de API in Swagger-formaat kunt u hier vinden:
+Technische specificaties van de API in Swagger-formaat kunt u hier vinden:
 
 
 [Woonplaatsen](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/woonplaatsen.yaml)
@@ -21,4 +21,4 @@
 
 [Adressen uitgebreid](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/adressenuitgebreid.yaml)
 
-[Bronhouders](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/bronhouders.yaml)
+[Bronhouders](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/bronhouders.yaml)  
