@@ -11,6 +11,6 @@ Wilt u gebruikmaken van de BAG API, vraag dan door middel van [dit formulier](ht
 
 __Documentatie__    
   
-![Swagger](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.scottbrady91.com%2FIdentity-Server%2FASPNET-Core-Swagger-UI-Authorization-using-IdentityServer4&psig=AOvVaw11M_STRXwWM6f99Q8yJJKq&ust=1623822566637000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJi2rqH5mPECFQAAAAAdAAAAABAD)  
+![7658037](https://user-images.githubusercontent.com/36453437/122001017-f5199f00-cdaf-11eb-9bae-293d01a51f3d.png)
 * Technische specificaties van de API in Swagger-formaat kunt u [hier](https://github.com/lvbag/BAG-API/tree/master/Technische%20specificatie/Swagger) vinden:
 
