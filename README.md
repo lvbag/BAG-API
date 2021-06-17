@@ -11,5 +11,5 @@ Wilt u gebruikmaken van de BAG API, vraag dan door middel van [dit formulier](ht
 
 __Documentatie Swagger__    
   
-* Technische specificaties van de API in Swagger-formaat kunt u [hier](https://github.com/lvbag/BAG-API/tree/master/Technische%20specificatie/Swagger) vinden:
+* Technische specificaties van de API in Swagger-formaat kunt u [hier](https://github.com/lvbag/BAG-API/tree/master/Technische%20specificatie/Swagger) vinden.
 
