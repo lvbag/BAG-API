@@ -9,8 +9,7 @@ Voor meer informatie over de BAG API kunt u de [pagina BAG API Individuele Bevra
 Wilt u gebruikmaken van de BAG API, vraag dan door middel van [dit formulier](https://formulieren.kadaster.nl/aanvraag_bag_api_individuele_bevragingen_productie) een API Key aan. 
 
 
-__Documentatie__    
+__Documentatie Swagger__    
   
-![7658037](https://user-images.githubusercontent.com/36453437/122001017-f5199f00-cdaf-11eb-9bae-293d01a51f3d.png)
 * Technische specificaties van de API in Swagger-formaat kunt u [hier](https://github.com/lvbag/BAG-API/tree/master/Technische%20specificatie/Swagger) vinden:
 
