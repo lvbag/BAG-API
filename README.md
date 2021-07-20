@@ -12,5 +12,5 @@ Wilt u gebruikmaken van de BAG API, vraag dan door middel van [dit formulier](ht
 __Documentatie__    
   
 * Technische specificaties van de API in [Swagger-formaat](https://github.com/lvbag/BAG-API/tree/master/Technische%20specificatie/Swagger).
-* [Tabel 'wat zit in welk endpoint'](https://github.com/lvbag/BAG-API/tree/master/Documentatie).
+* [Tabel 'wat zit in welk endpoint'](https://github.com/lvbag/BAG-API/blob/master/Documentatie/Tabel%20_Wat%20zit%20in%20welk%20endpoint_.pdf).
 
