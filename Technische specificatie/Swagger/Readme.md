@@ -1,10 +1,14 @@
 Technische specificaties van de API in Swagger-formaat kunt u hier vinden:
 
-  
-[Adressen](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/adressen.yaml)  
+*Samengestelde bevragingen:* <br> 
+[Adressen](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/adressen.yaml): 
+<br> met deze API kunt u met één bevraging één of meer huidige adressen opvragen. 
 
-[Adressen uitgebreid](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/adressenuitgebreid.yaml)
+[Adressen uitgebreid](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/adressenuitgebreid.yaml): 
+<br> met deze API kunt u met één bevraging één of meer huidige adressen inclusief belangrijke gegevens zoals bouwjaar en gebruiksoppervlakte opvragen.
+<br> <br>
 
+*Objecten:* <br>
 [Woonplaatsen](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/woonplaatsen.yaml)
 
 [Openbare Ruimten](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/openbareruimten.yaml)
