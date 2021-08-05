@@ -25,7 +25,7 @@ info:
   license:
     name: European Union Public License, version 1.2 (EUPL-1.2)
     url: https://eupl.eu/1.2/nl/
-  version: "2"
+  version: 2.0.0
 servers:
 - url: https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2
   description: LVBAG - ACCEPTATIE
