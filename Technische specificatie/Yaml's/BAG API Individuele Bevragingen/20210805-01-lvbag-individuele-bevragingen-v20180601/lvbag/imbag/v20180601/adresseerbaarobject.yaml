@@ -1,0 +1,37 @@
+AdresseerbaarObject:
+  title: AdresseerbaarObject
+  description: Abstract type adresseerbaar object
+  type: object
+  required:
+    - type
+    - heeftAlsHoofdAdres
+  properties:
+    heeftAlsHoofdAdres:
+      $ref: './nummeraanduiding.yaml#/NummeraanduidingIdentificatie'
+    heeftAlsNevenAdres:
+      type: array
+      items:
+        $ref: './nummeraanduiding.yaml#/NummeraanduidingIdentificatie'
+      minItems: 1
+    type:
+      $ref: '#/TypeAdresseerbaarObject'
+  discriminator:
+    propertyName: type
+
+AdresseerbaarObjectIdentificatie:
+  description: 'Identificatie van een adresseerbaar object (ligplaats, standplaats of verblijfsobject) uit de BAG.'
+  title: identificatie van adresseerbaar object
+  type: string
+  minLength: 16
+  maxLength: 16
+  pattern: '^[0-9]{4}(01|02|03)[0-9]{10}$'
+  example: '0226010000038820'
+
+TypeAdresseerbaarObject:
+  title: TypeAdresseerbaarObject
+  description: De aard van het object waaraan een nummeraanduiding is toegekend.
+  type: string
+  enum:
+    - 'Verblijfsobject'
+    - 'Standplaats'
+    - 'Ligplaats'

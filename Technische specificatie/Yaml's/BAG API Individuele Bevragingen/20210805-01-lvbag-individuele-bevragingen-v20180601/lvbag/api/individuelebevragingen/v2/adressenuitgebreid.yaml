@@ -1,0 +1,379 @@
+﻿openapi: 3.0.0
+
+# Server specificatie
+servers:
+  - description: LVBAG - ACCEPTATIE
+    url: https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2
+  - description: LVBAG - PRODUCTIE
+    url: https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2
+
+# API specificatie - algemeen
+info:
+  title: BAG API Individuele Bevragingen - van de LVBAG
+  description: >-
+    Dit is de [BAG API](https://zakelijk.kadaster.nl/-/bag-api) Individuele Bevragingen van de Landelijke Voorziening Basisregistratie Adressen en Gebouwen (LVBAG). 
+    <br/>
+    Meer informatie over de Basisregistratie Adressen en Gebouwen is te vinden op de website van het [Ministerie van Binnenlandse Zaken en Koninkrijksrelaties](https://www.geobasisregistraties.nl/basisregistraties/adressen-en-gebouwen) en [Kadaster](https://zakelijk.kadaster.nl/bag).
+    <br/>
+    <br/>
+    De BAG API levert informatie conform de [BAG Catalogus 2018](https://www.geobasisregistraties.nl/documenten/publicatie/2018/03/12/catalogus-2018) en het informatiemodel IMBAG 2.0.
+    De API specificatie volgt de [Nederlandse API-Strategie](https://docs.geostandaarden.nl/api/API-Strategie) specificatie versie van 20200204 en is opgesteld in [OpenAPI Specificatie](https://www.forumstandaardisatie.nl/standaard/openapi-specification) (OAS) v3. 
+    <br/>
+    Het standaard mediatype HAL (`application/hal+json`) wordt gebruikt. Dit is een mediatype voor het weergeven van resources en hun relaties via hyperlinks.
+    <br/>
+    <br/>
+    Deze API is vooral gericht op individuele bevragingen (op basis van de identificerende gegevens van een object).
+    Om gebruik te kunnen maken van de BAG API is een API key nodig, deze kan verkregen worden door het [aanvraagformulier](https://formulieren.kadaster.nl/aanvraag_bag_api_individuele_bevragingen_productie) in te vullen.
+    <br/>
+    <br/>
+    Voor vragen, neem contact op met de LVBAG beheerder o.v.v. BAG API 2.0. We zijn aan het kijken naar een geschikt medium hiervoor, mede ook om de API iteratief te kunnen opstellen of doorontwikkelen samen met de community. Als de API iets (nog) niet kan, wat u wel graag wilt, neem dan contact op.
+
+  # Gebruikte versienotatie: x.y.z voor major, minor en patch releases. 
+  # De major versie komt overeen met de major versie in de api-info.yaml.
+  version: '2.0.0'
+  termsOfService: https://zakelijk.kadaster.nl/algemene-voorwaarden
+  contact:
+    name: Kadaster - Beheerder LVBAG
+    url: https://zakelijk.kadaster.nl/bag
+  license:
+    name: European Union Public License, version 1.2 (EUPL-1.2)
+    url: https://eupl.eu/1.2/nl/
+
+security:
+  - apiKeyBAG: []
+  # Alle requests verwachten een (BAG) API key (niet per operation of end-point verschillend)
+  # Voor definitie van benoemde 'apiKeyBAG', zie security-schemes onderin.
+
+#+Functionele toelichting bij de operations/end-points als documentatie indeling.
+tags:
+  -
+    name: Adres uitgebreid
+    description: 'Deze service levert uitgebreide informatie van één of meer huidige adressen, met embedded resources en links. Huidig betekent dat het adres actueel is en geen eind status heeft. Voor een toelichting zie de [Praktijkhandleiding BAG](https://imbag.github.io/praktijkhandleiding/artikelen/wat-is-het-verschil-tussen-actieve-voorkomens-actuele-voorkomens-en-huidige-voorkomens).'
+
+paths:
+
+  # Bevragen adres uitgebreid met nummeraanduiding identificatie
+  /adressenuitgebreid/{nummeraanduidingIdentificatie}:
+    get:
+      security:
+        - apiKeyBAG: []
+      operationId: bevraagAdresUitgebreidMetNumId
+      tags:
+        - Adres uitgebreid
+      summary: Bevragen van de uitgebreide informatie van één huidig adres met de identificatie van een nummeraanduiding.
+      description: >-
+        Bevragen van de uitgebreide informatie van één huidig adres met de identificatie van een nummeraanduiding.
+      parameters:
+        - $ref: '#/components/parameters/nummeraanduidingIdentificatie'
+        - $ref: '../../../../generiek/parameters.yaml#/acceptCrs'
+
+      # Antwoord bevraagAdresUitgebreidMetNumId
+      responses:
+        '200':
+          description: Bevraging bevraagAdresUitgebreidMetNumId geslaagd
+          headers:
+            api-version:
+              $ref: '../../../../generiek/headers.yaml#/api_version'
+            warning:
+              $ref: '../../../../generiek/headers.yaml#/warning'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/AdresUitgebreidHal'
+        '400':
+          $ref: '../../../../generiek/responses.yaml#/400'
+        '401':
+          $ref: '../../../../generiek/responses.yaml#/401'
+        '403':
+          $ref: '../../../../generiek/responses.yaml#/403'
+        '406':
+          $ref: '../../../../generiek/responses.yaml#/406'
+        '412':
+          $ref: '../../../../generiek/responses.yaml#/412'
+        '500':
+          $ref: '../../../../generiek/responses.yaml#/500'
+        '503':
+          $ref: '../../../../generiek/responses.yaml#/503'
+        default:
+          $ref: '../../../../generiek/responses.yaml#/default'
+
+  # Zoek adres uitgebreid
+  /adressenuitgebreid:
+    get:
+      security:
+        - apiKeyBAG: []
+      operationId: zoekAdresUitgebreid
+      tags:
+        - Adres uitgebreid
+      summary: Bevragen van de uitgebreide informatie van één of meer huidige adressen op basis van verschillende combinaties van parameters.
+      description: >-
+        De volgende (combinaties van) parameters worden ondersteund:
+        <ol>
+          <li>Bevragen van de uitgebreide informatie van één of meer huidige adressen met een postcode, huisnummer en optioneel huisnummertoevoeging en huisletter.
+            Het opgeven van een combinatie van parameters levert niet altijd een exacte match met één adres, bv. in geval van meerdere objecten met huisnummertoevoegingen en/of huisletters. 
+            Met de exacteMatch parameter kan worden aangegeven dat alleen object(en) die exact overeenkomen met de opgegeven parameters, geretourneerd moeten worden.
+          </li>
+          <li>Bevragen van de uitgebreide informatie van één of meer huidige adressen met de identificatie van een adresseerbaar object.</li>
+          <li>Bevragen van de uitgebreide informatie van één of meer huidige adressen met woonplaats naam, openbare ruimte naam, huisnummer en optioneel huisnummertoevoeging en huisletter.
+            Het opgeven van een combinatie van parameters levert niet altijd een exacte match met één adres, bv. in geval van meerdere objecten met huisnummertoevoegingen en/of huisletters. 
+            Met de exacteMatch parameter kan worden aangegeven dat alleen object(en) die exact overeenkomen met de opgegeven parameters, geretourneerd moeten worden.
+          </li>
+        </ol>
+      parameters:
+        - $ref: '#/components/parameters/postcode'
+        - $ref: '#/components/parameters/huisnummer'
+        - $ref: '#/components/parameters/huisnummertoevoeging'
+        - $ref: '#/components/parameters/huisletter'
+        - $ref: '#/components/parameters/exacteMatch'
+        - $ref: '#/components/parameters/adresseerbaarObjectIdentificatie'
+        - $ref: '#/components/parameters/woonplaatsNaam'
+        - $ref: '#/components/parameters/openbareRuimteNaam'
+        - $ref: '../../../../generiek/parameters.yaml#/acceptCrs'
+
+      # Antwoord zoekAdresUitgebreid
+      responses:
+        '200':
+          description: Bevraging zoekAdresUitgebreid geslaagd
+          headers:
+            api-version:
+              $ref: '../../../../generiek/headers.yaml#/api_version'
+            warning:
+              $ref: '../../../../generiek/headers.yaml#/warning'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/AdresUitgebreidHalCollection'
+        '400':
+          $ref: '../../../../generiek/responses.yaml#/400'
+        '401':
+          $ref: '../../../../generiek/responses.yaml#/401'
+        '403':
+          $ref: '../../../../generiek/responses.yaml#/403'
+        '406':
+          $ref: '../../../../generiek/responses.yaml#/406'
+        '412':
+          $ref: '../../../../generiek/responses.yaml#/412'
+        '500':
+          $ref: '../../../../generiek/responses.yaml#/500'
+        '503':
+          $ref: '../../../../generiek/responses.yaml#/503'
+        default:
+          $ref: '../../../../generiek/responses.yaml#/default'
+
+components:
+
+  securitySchemes:
+    apiKeyBAG:
+      type: apiKey
+      name: X-Api-Key
+      in: header
+      description: >
+        De API-key die je hebt gekregen dient bij elke request via de
+        `X-Api-Key` request header meegestuurd te worden. Indien deze
+        niet juist wordt meegestuurd, of het een ongeldige key betreft,
+        zul je de foutmelding `403 Forbidden` terugkrijgen.
+
+  parameters:
+    # Opsomming van path parameters - /{...} - specificatie bij operation zelf.
+    nummeraanduidingIdentificatie:
+      description: Identificatie van een nummeraanduiding uit de BAG.
+      name: nummeraanduidingIdentificatie
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: '^[0-9]{4}20[0-9]{10}$'
+        example: '0226200000038923'
+
+    # Opsomming van request parameters - ?='...' parameters (by name) - specificatie bij operation zelf.
+    adresseerbaarObjectIdentificatie:
+      description: Identificatie van een adresseerbaar object uit de BAG.
+      name: adresseerbaarObjectIdentificatie
+      in: query
+      required: false
+      schema:
+        title: identificatie van adresseerbaar object
+        type: string
+        pattern: '^[0-9]{4}(01|02|03)[0-9]{10}$'
+        example: '0226010000038820'
+
+    postcode:
+      description: Postcode behorende bij een nummeraanduiding.
+      name: postcode
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: '^[1-9]{1}[0-9]{3}[a-zA-Z]{2}$'
+        example: '6922KZ'
+
+    huisnummer:
+      description: Huisnummer behorende bij een nummeraanduiding.
+      name: huisnummer
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 99999
+        example: '1'
+
+    huisnummertoevoeging:
+      description: Huisnummertoevoeging behorende bij een nummeraanduiding.
+      name: huisnummertoevoeging
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: '^[0-9a-zA-Z]{1,4}$'
+        example: 'bis'
+
+    huisletter:
+      description: Huisletter behorende bij een nummeraanduiding.
+      name: huisletter
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: '^[a-zA-Z]{1}$'
+        example: 'A'
+
+    exacteMatch:
+      description: >-
+        "Een indicatie of de resultaten van een zoekoperatie exact overeen moeten komen met de zoekcriteria, zie [functionele specificatie exacte match](https://github.com/lvbag/BAG-API/blob/master/Features/exacte_match.feature)."
+      name: exacteMatch
+      in: query
+      required: false
+      schema:
+        type: boolean
+        example: 'true'
+        default: false
+
+    woonplaatsNaam:
+      description: Naam van een woonplaats.
+      name: woonplaatsNaam
+      in: query
+      required: false
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 80
+        pattern: '^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*'
+        example: 'Duiven'
+
+    openbareRuimteNaam:
+      description: Naam van een openbare ruimte.
+      name: openbareRuimteNaam
+      in: query
+      required: false
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 80
+        pattern: '^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*'
+        example: 'Laan van de landinrichtingscommissie Duiven-Westervoort'
+
+  schemas:
+
+    AdresUitgebreidHal:
+      allOf:
+      - $ref: '#/components/schemas/AdresUitgebreid'
+      - properties:
+          _links:
+            $ref: '#/components/schemas/AdresUitgebreid_links'
+
+    AdresUitgebreid:
+      title: AdresUitgebreid
+      description: >-
+        Een adres is een verzameling van informatie uit adresseerbare objecten, gerelateerde nummeraanduidingen
+        (hoofd- en nevenadres(sen)), aan de nummeraanduiding gerelateerde openbare ruimte en (indien aanwezig)
+        de aan de nummeraanduiding gerelateerde woonplaats en indien deze niet beschikbaar is, de aan de openbare
+        ruimte gerelateerde woonplaats. Waarbij alleen 'huidige' object voorkomen informatie wordt geretourneerd,
+        dit houdt in: het actuele object voorkomen mits deze geen eind status heeft. Adres uitgebreid bevat een adres
+        uitgebreid met adresseerbaar object informatie.
+      allOf:
+      - $ref: './adressen.yaml#/components/schemas/Adres'
+      - properties:  
+          typeAdresseerbaarObject:
+            $ref: '../../../imbag/v20180601/adresseerbaarobject.yaml#/TypeAdresseerbaarObject'
+          adresseerbaarObjectGeometrie:
+            $ref: '../../../imbag/v20180601/geometrie.yaml#/components/schemas/PuntOfVlak'
+          adresseerbaarObjectStatus:
+            type: string
+          gebruiksdoelen:
+            type: array
+            items:
+              $ref: '../../../imbag/v20180601/verblijfsobject.yaml#/Gebruiksdoel'
+            minItems: 1
+          oppervlakte:
+            title: oppervlakte
+            type: integer
+            pattern: '^[1-9][0-9]{0,5}$'
+          oorspronkelijkBouwjaar:
+            type: array
+            items:
+              description: 'De aanduiding van het jaar waarin een pand oorspronkelijk als bouwkundig gereed is of zal worden opgeleverd. Bij het initieel opvoeren van een PAND wordt door de gemeente een reële inschatting gemaakt van het waarschijnlijke bouwjaar van het PAND. Bij het bouwkundig gereed opleveren van het PAND wordt deze waarde in voorkomende gevallen aangepast. Indien in latere jaren wijzigingen aan een pand worden aangebracht, leidt dit niet tot wijziging van het bouwjaar.'
+              type: string
+              maxLength: 4
+              pattern: '-?([1-9][0-9]{3,}|0[0-9]{3})(Z|(\+|-)((0[0-9]|1[0-3]):[0-5][0-9]|14:00))?'
+              example: '1991'
+          geconstateerd:
+            $ref: '#/components/schemas/AdresUitgebreidGeconstateerd'
+          inonderzoek:
+            $ref: '#/components/schemas/AdresUitgebreidInOnderzoek'
+            description: 'Bij het controleren of een property in onderzoek is kan het zijn dat er meerdere indicaties voor een property opgenomen zijn. In dat geval zijn er meerdere indicaties waarvan de naam begint met de property-naam.'
+
+    AdresUitgebreidGeconstateerd:
+      allOf:
+      - $ref: './adressen.yaml#/components/schemas/Geconstateerd'
+      - properties:
+          ligplaats:
+            type: boolean
+          standplaats:
+            type: boolean
+          verblijfsobject:
+            type: boolean
+          pand:
+            type: boolean
+
+    AdresUitgebreidInOnderzoek:
+      allOf:
+      - $ref: './adressen.yaml#/components/schemas/AdresInOnderzoek'
+      - properties:
+          typeAdresseerbaarObject:
+            type: boolean
+          adresseerbaarObjectGeometrie:
+            description: Een indicatie dat de geometrie van het aan een adres gerelateerde adresseerbare object in onderzoek is.
+            type: boolean
+          adresseerbaarObjectStatus:
+            description: Een indicatie dat de status van het aan een adres gerelateerde adresseerbare object in onderzoek is.
+            type: boolean
+          adresseerbaarObjectheeftAlsHoofdadres:
+            type: boolean
+          adresseerbaarObjectheeftAlsNevenadres:
+            type: boolean
+          gebruiksdoelen:
+            type: boolean
+          oppervlakte:
+            type: boolean
+          maaktDeelUitVan:
+            type: boolean
+          oorspronkelijkBouwjaar:
+            type: boolean
+  
+    AdresUitgebreidHalCollection:
+      type: object
+      properties:
+        _embedded:
+          type: object
+          properties:
+            adressen:
+              type: array
+              items:
+                $ref: '#/components/schemas/AdresUitgebreidHal'
+        _links:
+          $ref: '../../../../generiek/hallinks.yaml#/components/schemas/HalCollectionLinks'
+
+    AdresUitgebreid_links:
+      allOf:
+        - $ref: './adressen.yaml#/components/schemas/AdresIO_links'

@@ -1,0 +1,26 @@
+#API-info - algemene informatie voor gebruikers van de API.
+API-info:
+  title: API-info
+  type: object
+  properties:
+    api-name:
+      description: De naam van de API.
+      type: string
+    api-version:
+      description: Versie van de API.
+      type: string
+    api-description:
+      description: Omschrijving van de API.
+      type: string
+    informationmodel:
+      description: Naam van het informatiemodel dat als basis is genomen voor deze API.
+      type: string
+      example: IMBAGLV
+    informationmodel-version:
+      description: Versie van het logische informatiemodel dat als basis is genomen voor deze API.
+      type: string
+      example: v20190601
+    informationmodel-location:
+      description: 'Locatie (URI) van het logische informatiemodel die als basis is genomen voor deze API.'
+      type: string
+      format: URI
