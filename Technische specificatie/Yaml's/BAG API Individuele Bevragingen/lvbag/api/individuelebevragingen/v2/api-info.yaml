@@ -29,7 +29,7 @@ info:
     
   # Omdat deze info betrekking heeft op de BAG Individuele Bevragingen API en deze API uit meerdere onderdelen bestaaat die afzonderlijk van elkaar kunnen wijzigen,
   # wordt hier alleen het major versie nummer (x in de versienotatie x.y.z) opgegeven. De onderdelen zelf bevatten een versienummer x.y.z.
-  version: '2'
+  version: '2.0.0'
   termsOfService: https://zakelijk.kadaster.nl/algemene-voorwaarden
   contact:
     name: Kadaster - Beheerder Landelijke Voorziening BAG 

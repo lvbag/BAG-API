@@ -13,7 +13,7 @@ info:
     Dit is een mediatype voor het weergeven van resources en hun relaties via hyperlinks.
     <br/> <br/> Deze API is vooral gericht op individuele bevragingen (op basis van
     de identificerende gegevens van een object). Om gebruik te kunnen maken van de
-    BAG API is een API key nodig, deze kan verkregen worden door het [aanvraagformulier](https://formulieren.kadaster.nl/aanvragen_bag_api_key_productieomgeving)
+    BAG API is een API key nodig, deze kan verkregen worden door het [aanvraagformulier](https://formulieren.kadaster.nl/aanvraag_bag_api_individuele_bevragingen_productie)
     in te vullen. <br/> <br/> Voor vragen, neem contact op met de LVBAG beheerder
     o.v.v. BAG API 2.0. We zijn aan het kijken naar een geschikt medium hiervoor,
     mede ook om de API iteratief te kunnen opstellen of doorontwikkelen samen met
