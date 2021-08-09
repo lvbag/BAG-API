@@ -9,6 +9,8 @@ Met deze API kunt u met één bevraging één of meer huidige adressen inclusief
 <br> <br>
 
 *Objecten:* <br>
+Deze endpoints leveren één of meer (voorkomens van) object(en), met embedded resources en links.
+
 [Woonplaatsen](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/openapi.yaml)
 
 [Openbare Ruimten](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/openapi.yaml)
