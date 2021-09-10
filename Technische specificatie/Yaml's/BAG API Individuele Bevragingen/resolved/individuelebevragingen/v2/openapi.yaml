@@ -148,13 +148,13 @@ paths:
           type: string
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de co�rdinaten in de response.
+        description: Gewenste CRS van de coördinaten in de response.
         required: false
         style: simple
         explode: false
         schema:
           type: string
-          description: CRS van de co�rdinaten in de response.
+          description: CRS van de coördinaten in de response.
           enum:
           - epsg:28992
       responses:
@@ -386,13 +386,13 @@ paths:
           default: false
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de co�rdinaten in de response.
+        description: Gewenste CRS van de coördinaten in de response.
         required: false
         style: simple
         explode: false
         schema:
           type: string
-          description: CRS van de co�rdinaten in de response.
+          description: CRS van de coördinaten in de response.
           enum:
           - epsg:28992
       responses:
@@ -662,13 +662,13 @@ paths:
           type: string
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de co�rdinaten in de response.
+        description: Gewenste CRS van de coördinaten in de response.
         required: false
         style: simple
         explode: false
         schema:
           type: string
-          description: CRS van de co�rdinaten in de response.
+          description: CRS van de coördinaten in de response.
           enum:
           - epsg:28992
       responses:
@@ -1616,13 +1616,13 @@ paths:
           example: "0226200000038923"
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de co�rdinaten in de response.
+        description: Gewenste CRS van de coördinaten in de response.
         required: false
         style: simple
         explode: false
         schema:
           type: string
-          description: CRS van de co�rdinaten in de response.
+          description: CRS van de coördinaten in de response.
           enum:
           - epsg:28992
       responses:
@@ -1916,13 +1916,13 @@ paths:
           example: Laan van de landinrichtingscommissie Duiven-Westervoort
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de co�rdinaten in de response.
+        description: Gewenste CRS van de coördinaten in de response.
         required: false
         style: simple
         explode: false
         schema:
           type: string
-          description: CRS van de co�rdinaten in de response.
+          description: CRS van de coördinaten in de response.
           enum:
           - epsg:28992
       responses:
@@ -2861,13 +2861,13 @@ paths:
           type: string
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de co�rdinaten in de response.
+        description: Gewenste CRS van de coördinaten in de response.
         required: false
         style: simple
         explode: false
         schema:
           type: string
-          description: CRS van de co�rdinaten in de response.
+          description: CRS van de coördinaten in de response.
           enum:
           - epsg:28992
       responses:
@@ -3115,13 +3115,13 @@ paths:
           default: false
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de co�rdinaten in de response.
+        description: Gewenste CRS van de coördinaten in de response.
         required: false
         style: simple
         explode: false
         schema:
           type: string
-          description: CRS van de co�rdinaten in de response.
+          description: CRS van de coördinaten in de response.
           enum:
           - epsg:28992
       responses:
@@ -3406,13 +3406,13 @@ paths:
           - epsg:28992
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de co�rdinaten in de response.
+        description: Gewenste CRS van de coördinaten in de response.
         required: false
         style: simple
         explode: false
         schema:
           type: string
-          description: CRS van de co�rdinaten in de response.
+          description: CRS van de coördinaten in de response.
           enum:
           - epsg:28992
       requestBody:
@@ -3678,13 +3678,13 @@ paths:
           example: "1530403860000"
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de co�rdinaten in de response.
+        description: Gewenste CRS van de coördinaten in de response.
         required: false
         style: simple
         explode: false
         schema:
           type: string
-          description: CRS van de co�rdinaten in de response.
+          description: CRS van de coördinaten in de response.
           enum:
           - epsg:28992
       responses:
@@ -6036,13 +6036,13 @@ paths:
           format: date-time
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de co�rdinaten in de response.
+        description: Gewenste CRS van de coördinaten in de response.
         required: false
         style: simple
         explode: false
         schema:
           type: string
-          description: CRS van de co�rdinaten in de response.
+          description: CRS van de coördinaten in de response.
           enum:
           - epsg:28992
       responses:
@@ -6289,13 +6289,13 @@ paths:
           default: false
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de co�rdinaten in de response.
+        description: Gewenste CRS van de coördinaten in de response.
         required: false
         style: simple
         explode: false
         schema:
           type: string
-          description: CRS van de co�rdinaten in de response.
+          description: CRS van de coördinaten in de response.
           enum:
           - epsg:28992
       responses:
@@ -6567,13 +6567,13 @@ paths:
           - epsg:28992
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de co�rdinaten in de response.
+        description: Gewenste CRS van de coördinaten in de response.
         required: false
         style: simple
         explode: false
         schema:
           type: string
-          description: CRS van de co�rdinaten in de response.
+          description: CRS van de coördinaten in de response.
           enum:
           - epsg:28992
       requestBody:
@@ -6838,13 +6838,13 @@ paths:
           example: "1530403860000"
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de co�rdinaten in de response.
+        description: Gewenste CRS van de coördinaten in de response.
         required: false
         style: simple
         explode: false
         schema:
           type: string
-          description: CRS van de co�rdinaten in de response.
+          description: CRS van de coördinaten in de response.
           enum:
           - epsg:28992
       responses:
@@ -7118,13 +7118,13 @@ paths:
           type: string
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de co�rdinaten in de response.
+        description: Gewenste CRS van de coördinaten in de response.
         required: false
         style: simple
         explode: false
         schema:
           type: string
-          description: CRS van de co�rdinaten in de response.
+          description: CRS van de coördinaten in de response.
           enum:
           - epsg:28992
       responses:
@@ -7372,13 +7372,13 @@ paths:
           default: false
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de co�rdinaten in de response.
+        description: Gewenste CRS van de coördinaten in de response.
         required: false
         style: simple
         explode: false
         schema:
           type: string
-          description: CRS van de co�rdinaten in de response.
+          description: CRS van de coördinaten in de response.
           enum:
           - epsg:28992
       responses:
@@ -7663,13 +7663,13 @@ paths:
           - epsg:28992
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de co�rdinaten in de response.
+        description: Gewenste CRS van de coördinaten in de response.
         required: false
         style: simple
         explode: false
         schema:
           type: string
-          description: CRS van de co�rdinaten in de response.
+          description: CRS van de coördinaten in de response.
           enum:
           - epsg:28992
       requestBody:
@@ -7935,13 +7935,13 @@ paths:
           example: "1530403860000"
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de co�rdinaten in de response.
+        description: Gewenste CRS van de coördinaten in de response.
         required: false
         style: simple
         explode: false
         schema:
           type: string
-          description: CRS van de co�rdinaten in de response.
+          description: CRS van de coördinaten in de response.
           enum:
           - epsg:28992
       responses:
@@ -8217,13 +8217,13 @@ paths:
           type: string
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de co�rdinaten in de response.
+        description: Gewenste CRS van de coördinaten in de response.
         required: false
         style: simple
         explode: false
         schema:
           type: string
-          description: CRS van de co�rdinaten in de response.
+          description: CRS van de coördinaten in de response.
           enum:
           - epsg:28992
       responses:
@@ -8472,13 +8472,13 @@ paths:
           default: false
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de co�rdinaten in de response.
+        description: Gewenste CRS van de coördinaten in de response.
         required: false
         style: simple
         explode: false
         schema:
           type: string
-          description: CRS van de co�rdinaten in de response.
+          description: CRS van de coördinaten in de response.
           enum:
           - epsg:28992
       responses:
@@ -8774,13 +8774,13 @@ paths:
           default: 20
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de co�rdinaten in de response.
+        description: Gewenste CRS van de coördinaten in de response.
         required: false
         style: simple
         explode: false
         schema:
           type: string
-          description: CRS van de co�rdinaten in de response.
+          description: CRS van de coördinaten in de response.
           enum:
           - epsg:28992
       responses:
@@ -9024,13 +9024,13 @@ paths:
           example: "1530403860000"
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de co�rdinaten in de response.
+        description: Gewenste CRS van de coördinaten in de response.
         required: false
         style: simple
         explode: false
         schema:
           type: string
-          description: CRS van de co�rdinaten in de response.
+          description: CRS van de coördinaten in de response.
           enum:
           - epsg:28992
       responses:
@@ -9307,13 +9307,13 @@ paths:
           type: string
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de co�rdinaten in de response.
+        description: Gewenste CRS van de coördinaten in de response.
         required: false
         style: simple
         explode: false
         schema:
           type: string
-          description: CRS van de co�rdinaten in de response.
+          description: CRS van de coördinaten in de response.
           enum:
           - epsg:28992
       responses:
@@ -9577,13 +9577,13 @@ paths:
           type: string
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de co�rdinaten in de response.
+        description: Gewenste CRS van de coördinaten in de response.
         required: false
         style: simple
         explode: false
         schema:
           type: string
-          description: CRS van de co�rdinaten in de response.
+          description: CRS van de coördinaten in de response.
           enum:
           - epsg:28992
       responses:
@@ -9862,13 +9862,13 @@ paths:
           type: string
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de co�rdinaten in de response.
+        description: Gewenste CRS van de coördinaten in de response.
         required: false
         style: simple
         explode: false
         schema:
           type: string
-          description: CRS van de co�rdinaten in de response.
+          description: CRS van de coördinaten in de response.
           enum:
           - epsg:28992
       responses:
@@ -10135,13 +10135,13 @@ paths:
           - epsg:28992
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de co�rdinaten in de response.
+        description: Gewenste CRS van de coördinaten in de response.
         required: false
         style: simple
         explode: false
         schema:
           type: string
-          description: CRS van de co�rdinaten in de response.
+          description: CRS van de coördinaten in de response.
           enum:
           - epsg:28992
       requestBody:
@@ -10422,13 +10422,13 @@ paths:
           type: string
       - name: Accept-Crs
         in: header
-        description: Gewenste CRS van de co�rdinaten in de response.
+        description: Gewenste CRS van de coördinaten in de response.
         required: false
         style: simple
         explode: false
         schema:
           type: string
-          description: CRS van de co�rdinaten in de response.
+          description: CRS van de coördinaten in de response.
           enum:
           - epsg:28992
       responses:
