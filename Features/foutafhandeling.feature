@@ -26,6 +26,7 @@ We kennen de volgende foutsituaties:
 | Geen Accept-Crs                     | 412    | Gewenste coördinatenstelsel voor geometrie moet worden opgegeven.| acceptCrsMissing       |
 | Geen Content-Crs                    | 412    | Coördinatenstelsel van gestuurde geometrie moet worden opgegeven.| contentCrsMissing      |
 | Content-Crs niet ondersteund        | 415    | CRS niet ondersteund                                             | crsNotSupported        |
+| Invalide request body               | 422    | Request body bevat een ongeldige waarde.                         | unprocessableEntity    |
 | Technische of interne fout          | 500    | Interne server fout.                                             | serverError            |
 | Bronservice niet beschikbaar        | 503    | Bronservice is niet beschikbaar.                                 | sourceUnavailable      |
 
@@ -218,6 +219,14 @@ Abstract Scenario: Ongeldige queryparameter waarde bij zoeken
     En is in het antwoord title=Coördinatenstelsel a in Content-Crs wordt niet ondersteund.
     En is in het antwoord status=415
     En is in het antwoord code=crsNotSupported
+
+  Scenario: Invalide request body
+    Gegeven op endpoint /panden kan met POST gezocht worden op <locatie>
+    Als een request body wordt aangeboden die niet vertaald kan worden naar een valide locatie
+    Dan is de http status code van het antwoord 422
+    En is in het antwoord title=Request body bevat een ongeldige waarde.
+    En is in het antwoord status=422
+    En is in het antwoord code=unprocessableEntity
 
   Scenario: Technische- of interne fout
     Gegeven de API heeft last van een technisch probleem bij een verzoek van de gebruiker
