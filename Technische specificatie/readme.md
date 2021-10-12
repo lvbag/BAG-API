@@ -1,4 +1,4 @@
-Technische specificaties van de API in Swagger-formaat kunt u hier vinden:
+[Technische specificaties van de API in Swagger-formaat](https://lvbag.github.io/BAG-API/Technische%20specificatie/) kunt u hier vinden:
 
 *Samengestelde bevragingen:* <br> 
 __[Adressen](https://lvbag.github.io/BAG-API/Technische%20specificatie/#/Adres):__  
@@ -17,14 +17,14 @@ Deze endpoints leveren één of meer (voorkomens van) object(en), met embedded r
 
 [Nummeraanduidingen](https://lvbag.github.io/BAG-API/Technische%20specificatie/#/Nummeraanduiding)
 
-[Verblijfsobjecten](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/openapi.yaml)
+[Verblijfsobjecten](https://lvbag.github.io/BAG-API/Technische%20specificatie/#/Verblijfsobject)
 
-[Standplaatsen](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/openapi.yaml)
+[Standplaatsen](https://lvbag.github.io/BAG-API/Technische%20specificatie/#/Standplaats)
 
-[Ligplaatsen](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/openapi.yaml)
+[Ligplaatsen](https://lvbag.github.io/BAG-API/Technische%20specificatie/#/Ligplaats)
 
-[Panden](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/openapi.yaml)  
+[Panden](https://lvbag.github.io/BAG-API/Technische%20specificatie/#/Pand)  
 
-[Adresseerbare objecten](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/openapi.yaml)
+[Adresseerbare objecten](https://lvbag.github.io/BAG-API/Technische%20specificatie/#/Adresseerbaar%20object)
 
-[Bronhouders](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/lvbag/BAG-API/master/Technische%20specificatie/Yaml%27s/BAG%20API%20Individuele%20Bevragingen/resolved/individuelebevragingen/v2/openapi.yaml)  
+[Bronhouders](https://lvbag.github.io/BAG-API/Technische%20specificatie/#/Bronhouder)  
