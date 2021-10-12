@@ -1,0 +1,21 @@
+components:
+  schemas:
+    PuntOfVlak:
+      title: PuntOfVlak
+      type: object
+      description: Een samengesteld geometriegegevenstype waarbij wordt afgedwongen dat voor de geometrie een keuze gemaakt moet worden tussen een punt of een vlak.
+      properties:
+        punt:
+          $ref: '../../../geometrie/geometrie.yaml#/components/schemas/Point'
+        vlak:
+          $ref: '../../../geometrie/geometrie.yaml#/components/schemas/Surface'
+
+    VlakOfMultivlak:
+      title: VlakOfMultivlak
+      type: object
+      description: Een samengesteld geometriegegevenstype waarbij wordt afgedwongen dat voor de geometrie een keuze gemaakt moet worden tussen een vlak (GM_Surface) of een multivlak (GM_MultiSurface).
+      properties:
+        vlak:
+          $ref: '../../../geometrie/geometrie.yaml#/components/schemas/Surface'
+        multivlak:
+          $ref: '../../../geometrie/geometrie.yaml#/components/schemas/MultiSurface'

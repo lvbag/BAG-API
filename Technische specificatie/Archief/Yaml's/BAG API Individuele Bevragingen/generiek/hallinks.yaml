@@ -1,0 +1,79 @@
+components:
+  schemas:
+    Href:
+      type: string
+      example: 'https://{base-uri}/{dienst}/{apinaam}/{major-versie}/resourcenaam/{resource-identificatie}'
+    
+    HalLink:
+      description: 'Het Link Object zoals gespecificeerd in https://tools.ietf.org/html/draft-kelly-json-hal-08#section-5'
+      type: object
+      required:
+        - href
+      properties:
+        href:
+          $ref: '#/components/schemas/Href'
+        templated:
+          type: boolean
+        title:
+         description: 'Voor mens leesbaar label bij de link'
+         type: string
+
+    HalCollectionLinks:
+      type: object
+      properties:
+        self:
+          $ref: '#/components/schemas/HalLink'
+
+    HalPaginationLinks:
+      allOf:
+        - $ref: '#/components/schemas/HalCollectionLinks'
+        - type: object
+          properties:
+            first:
+              type: object
+              description: 'uri voor het opvragen van de eerste pagina van deze collectie'
+              properties:
+                href:
+                  type: string
+                  example: 'https://{base-uri}/{dienst}/{apinaam}/{major-versie}/resourcenaam?page=1'
+                templated:
+                  type: boolean
+                title:
+                  type: string
+                  example: 'Eerste pagina'
+            previous:
+              type: object
+              description: uri voor het opvragen van de vorige pagina van deze collectie
+              properties:
+                href:
+                  type: string
+                  example: 'https://{base-uri}/{dienst}/{apinaam}/{major-versie}/resourcenaam?page=3'
+                templated:
+                  type: boolean
+                title:
+                  type: string
+                  example: 'Vorige pagina'
+            next:
+              type: object
+              description: uri voor het opvragen van de volgende pagina van deze collectie
+              properties:
+                href:
+                  type: string
+                  example: 'https://{base-uri}/{dienst}/{apinaam}/{major-versie}/resourcenaam?page=5'
+                templated:
+                  type: boolean
+                title:
+                  type: string
+                  example: 'Volgende pagina'
+            last:
+              type: object
+              description: uri voor het opvragen van de laatste pagina van deze collectie
+              properties:
+                href:
+                  type: string
+                  example: 'https://{base-uri}/{dienst}/{apinaam}/{major-versie}/resourcenaam?page=15'
+                templated:
+                  type: boolean
+                title:
+                  type: string
+                  example: 'Laatste pagina'

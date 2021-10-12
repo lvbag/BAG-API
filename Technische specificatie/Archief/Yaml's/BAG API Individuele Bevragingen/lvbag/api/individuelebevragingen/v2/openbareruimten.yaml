@@ -1,0 +1,402 @@
+openapi: 3.0.0
+
+# Server specificatie 
+servers:
+  - description: LVBAG - ACCEPTATIE
+    url: https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2
+  - description: LVBAG - PRODUCTIE
+    url: https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2
+    
+# API specificatie - algemeen
+info:
+  title: BAG API Individuele Bevragingen - van de LVBAG
+  description: >-
+    Dit is de [BAG API](https://zakelijk.kadaster.nl/-/bag-api) Individuele Bevragingen van de Landelijke Voorziening Basisregistratie Adressen en Gebouwen (LVBAG). 
+    <br/>
+    Meer informatie over de Basisregistratie Adressen en Gebouwen is te vinden op de website van het [Ministerie van Binnenlandse Zaken en Koninkrijksrelaties](https://www.geobasisregistraties.nl/basisregistraties/adressen-en-gebouwen) en [Kadaster](https://zakelijk.kadaster.nl/bag).
+    <br/>
+    <br/>
+    De BAG API levert informatie conform de [BAG Catalogus 2018](https://www.geobasisregistraties.nl/documenten/publicatie/2018/03/12/catalogus-2018) en het informatiemodel IMBAG 2.0.
+    De API specificatie volgt de [Nederlandse API-Strategie](https://docs.geostandaarden.nl/api/API-Strategie) specificatie versie van 20200204 en is opgesteld in [OpenAPI Specificatie](https://www.forumstandaardisatie.nl/standaard/openapi-specification) (OAS) v3. 
+    <br/>
+    Het standaard mediatype HAL (`application/hal+json`) wordt gebruikt. Dit is een mediatype voor het weergeven van resources en hun relaties via hyperlinks.
+    <br/>
+    <br/>
+    Deze API is vooral gericht op individuele bevragingen (op basis van de identificerende gegevens van een object).
+    Om gebruik te kunnen maken van de BAG API is een API key nodig, deze kan verkregen worden door het [aanvraagformulier](https://formulieren.kadaster.nl/aanvraag_bag_api_individuele_bevragingen_productie) in te vullen.
+    <br/>
+    <br/>
+    Voor vragen, neem contact op met de LVBAG beheerder o.v.v. BAG API 2.0. We zijn aan het kijken naar een geschikt medium hiervoor, mede ook om de API iteratief te kunnen opstellen of doorontwikkelen samen met de community. Als de API iets (nog) niet kan, wat u wel graag wilt, neem dan contact op.
+
+  # Gebruikte versienotatie: x.y.z voor major, minor en patch releases. 
+  # De major versie komt overeen met de major versie in de api-info.yaml.
+  version: '2.0.0'
+  termsOfService: https://zakelijk.kadaster.nl/algemene-voorwaarden
+  contact:
+    name: Kadaster - Beheerder LVBAG
+    url: https://zakelijk.kadaster.nl/bag
+  license:
+    name: European Union Public License, version 1.2 (EUPL-1.2)
+    url: https://eupl.eu/1.2/nl/
+
+security:
+  - apiKeyBAG: []
+  # Alle requests verwachten een (BAG) API key (niet per operation of end-point verschillend)
+  # Voor definitie van benoemde 'apiKeyBAG', zie security-schemes onderin. 
+
+#+Functionele toelichting bij de operations/end-points als documentatie indeling. 
+tags:
+  - 
+    name: Openbare ruimte
+    description: Dit endpoint levert één of meer (voorkomens van) openbare ruimte(n), met embedded resources en links.
+
+paths:
+
+  # Vraag openbareruimteIdentificatie
+  /openbareruimten/{openbareRuimteIdentificatie}:
+    get:
+      operationId: openbareruimteIdentificatie
+      security:
+        - apiKeyBAG: []
+      tags: 
+        - Openbare ruimte
+      summary: bevragen van een openbare ruimte met de identificatie van een openbare ruimte. 
+      description: >-
+        Bevragen/raadplegen van een openbare ruimte met de identificatie van een openbare ruimte.
+        Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd. 
+        Als expand=ligtInWoonplaats of true dan wordt de woonplaats als geneste resource geleverd.
+      parameters: 
+        - $ref: '#/components/parameters/openbareRuimteIdentificatie'
+        - $ref: '#/components/parameters/geldigOp'
+        - $ref: '#/components/parameters/beschikbaarOp'
+        - $ref: '../../../../generiek/parameters.yaml#/expand'
+      
+      # Antwoord openbareruimtenIdentificatie
+      responses:
+        '200':
+          description: "Bevraging openbareruimtenIdentificatie geslaagd"
+          headers:
+            api-version:
+              $ref: '../../../../generiek/headers.yaml#/api_version'
+            warning:
+              $ref: '../../../../generiek/headers.yaml#/warning'
+          content:
+            application/hal+json:
+              # 1 resource, niet een collectie, dus geen items en geen paginering.
+              schema:
+                $ref: './resources.yaml#/OpenbareRuimteIOHal'
+        '400':
+          $ref: '../../../../generiek/responses.yaml#/400'
+        '401':
+          $ref: '../../../../generiek/responses.yaml#/401'
+        '403':
+          $ref: '../../../../generiek/responses.yaml#/403'
+        '404':
+          $ref: '../../../../generiek/responses.yaml#/404'
+        '405':
+          $ref: '../../../../generiek/responses.yaml#/405'
+        '406':
+          $ref: '../../../../generiek/responses.yaml#/406'
+        '500':
+          $ref: '../../../../generiek/responses.yaml#/500'
+        '503':
+          $ref: '../../../../generiek/responses.yaml#/503'
+        default:
+          $ref: '../../../../generiek/responses.yaml#/default'
+
+  # Vraag openbareruimteLvcIdentificatie
+  /openbareruimten/{openbareRuimteIdentificatie}/lvc:
+    get:
+      operationId: openbareruimteLvcIdentificatie
+      security:
+        - apiKeyBAG: []
+      tags:
+        - Openbare ruimte
+      summary: bevragen levenscyclus van een openbare ruimte met de identificatie van een openbare ruimte.
+      description: >-
+        Bevragen/raadplegen van de levenscyclus van één openbare ruimte, via de identificatie van een openbare ruimte.
+      parameters:
+        - $ref: '#/components/parameters/openbareRuimteIdentificatie'
+        - $ref: '#/components/parameters/geheleLvc'
+      
+      # Antwoord openbareruimteLvcIdentificatie
+      responses:
+        '200':
+          description: "Bevraging openbareruimteLvcIdentificatie geslaagd"
+          headers:
+            api-version:
+              $ref: '../../../../generiek/headers.yaml#/api_version'
+            warning:
+              $ref: '../../../../generiek/headers.yaml#/warning'
+          content:
+            application/hal+json:
+              schema:
+                $ref: './resources.yaml#/OpenbareRuimteIOLvcHalCollection'
+        '400':
+          $ref: '../../../../generiek/responses.yaml#/400'
+        '401':
+          $ref: '../../../../generiek/responses.yaml#/401'
+        '403':
+          $ref: '../../../../generiek/responses.yaml#/403'
+        '404':
+          $ref: '../../../../generiek/responses.yaml#/404'
+        '405':
+          $ref: '../../../../generiek/responses.yaml#/405'
+        '406':
+          $ref: '../../../../generiek/responses.yaml#/406'
+        '500':
+          $ref: '../../../../generiek/responses.yaml#/500'
+        '503':
+          $ref: '../../../../generiek/responses.yaml#/503'
+        default:
+          $ref: '../../../../generiek/responses.yaml#/default'
+
+  # Zoek openbareruimte
+  /openbareruimten:
+    get:
+      security:
+        - apiKeyBAG: []
+      operationId: zoekOpenbareRuimten
+      tags:
+        - Openbare ruimte
+      summary: bevragen openbare ruimte(n) op basis van de verschillende combinaties van parameters.
+      description: >-
+        De volgende (combinaties van) parameters worden ondersteund:<br/>
+        <ol>
+          <li>
+            Bevragen/raadplegen van een openbare ruimte met een woonplaats naam en een openbare ruimte naam.
+            Als expand=ligtInWoonplaats of true dan wordt de woonplaats als geneste resource geleverd.
+          </li>
+          <li>
+            Bevragen/raadplegen van een openbare ruimte met een woonplaats identificatie en een openbare ruimte naam.
+            Als expand=ligtInWoonplaats of true dan wordt de woonplaats als geneste resource geleverd.
+          </li>
+          <li>
+            Bevragen/zoeken van alle aan een woonplaats gerelateerde openbare ruimten met de woonplaats identificatie.
+            Parameter huidig kan worden toegepast.
+            Expand wordt niet ondersteund.
+          </li>
+        </ol>
+        Bij alle bovenstaande combinaties wordt paginering ondersteund en kunnen de parameters geldigOp en beschikbaarOp worden gebruikt.
+        Voor paginering, zie: [functionele specificatie paginering](https://github.com/lvbag/BAG-API/blob/master/Features/paginering.feature).
+        Als geldigOp en beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.
+      parameters:
+        - $ref: '#/components/parameters/woonplaatsNaam'
+        - $ref: '#/components/parameters/openbareRuimteNaam'
+        - $ref: '#/components/parameters/woonplaatsIdentificatie'
+        - $ref: '#/components/parameters/huidig'
+        - $ref: '#/components/parameters/geldigOp'
+        - $ref: '#/components/parameters/beschikbaarOp'
+        - $ref: '../../../../generiek/parameters.yaml#/page'
+        - $ref: '../../../../generiek/parameters.yaml#/pageSize'
+        - $ref: '../../../../generiek/parameters.yaml#/expand'
+      
+      # Antwoord zoekOpenbareRuimten
+      responses:
+        '200':
+          description: Bevraging zoekOpenbareRuimten geslaagd
+          headers:
+            api-version:
+              $ref: '../../../../generiek/headers.yaml#/api_version'
+            warning:
+              $ref: '../../../../generiek/headers.yaml#/warning'
+            X-Pagination-Page:
+              $ref: '../../../../generiek/headers.yaml#/X_Pagination_Page'
+            X-Pagination-Limit:
+              $ref: '../../../../generiek/headers.yaml#/X_Pagination_Limit'
+          content:
+            application/hal+json:
+              schema:
+                $ref: './resources.yaml#/OpenbareRuimteIOHalCollection'
+        '400':
+          $ref: '../../../../generiek/responses.yaml#/400'
+        '401':
+          $ref: '../../../../generiek/responses.yaml#/401'
+        '403':
+          $ref: '../../../../generiek/responses.yaml#/403'
+        '405':
+          $ref: '../../../../generiek/responses.yaml#/405'
+        '406':
+          $ref: '../../../../generiek/responses.yaml#/406'
+        '500':
+          $ref: '../../../../generiek/responses.yaml#/500'
+        '503':
+          $ref: '../../../../generiek/responses.yaml#/503'
+        default:
+          $ref: '../../../../generiek/responses.yaml#/default'
+
+  /openbareruimten/{openbareRuimteIdentificatie}/{versie}/{timestampRegistratieLv}:
+    get:
+      security:
+        - apiKeyBAG: []
+      tags:
+        - Openbare ruimte
+      summary: bevragen van een voorkomen van een openbare ruimte met de identificatie van een openbare ruimte en de identificatie van een voorkomen, bestaande uit een versie en een timestamp van het tijdstip van registratie in de LV BAG.
+      operationId: openbareruimteIdentificatieVoorkomen 
+      description: >-
+        Bevragen/raadplegen van een voorkomen van een openbare ruimte met de identificatie van een openbare ruimte en de identificatie van een voorkomen, bestaande uit een versie en een timestamp van het tijdstip van registratie in de LV BAG.
+      parameters:
+        - $ref: '#/components/parameters/openbareRuimteIdentificatie'
+        - $ref: '#/components/parameters/versie'
+        - $ref: '#/components/parameters/timestampRegistratieLv'
+
+      # Antwoord openbareruimteIdentificatieVoorkomen
+      responses:
+        '200':
+          description: Bevraging openbareruimteIdentificatieVoorkomen geslaagd
+          headers:
+            api-version:
+              $ref: '../../../../generiek/headers.yaml#/api_version'
+            warning:
+              $ref: '../../../../generiek/headers.yaml#/warning'
+          content:
+            application/hal+json:
+              schema:
+                $ref: './resources.yaml#/OpenbareRuimteIOHal'
+        '400':
+          $ref: '../../../../generiek/responses.yaml#/400'
+        '401':
+          $ref: '../../../../generiek/responses.yaml#/401'
+        '403':
+          $ref: '../../../../generiek/responses.yaml#/403'
+        '404':
+          $ref: '../../../../generiek/responses.yaml#/404'
+        '405':
+          $ref: '../../../../generiek/responses.yaml#/405'
+        '406':
+          $ref: '../../../../generiek/responses.yaml#/406'
+        '500':
+          $ref: '../../../../generiek/responses.yaml#/500'
+        '503':
+          $ref: '../../../../generiek/responses.yaml#/503'
+        default:
+          $ref: '../../../../generiek/responses.yaml#/default'
+
+components:
+
+  securitySchemes:
+    apiKeyBAG: 
+      type: apiKey
+      name: X-Api-Key
+      in: header
+      description: >
+        De API-key die je hebt gekregen dient bij elke request via de 
+        `X-Api-Key` request header meegestuurd te worden. Indien deze 
+        niet juist wordt meegestuurd, of het een ongeldige key betreft, 
+        zul je de foutmelding `403 Forbidden` terugkrijgen.
+
+  parameters:
+  
+    # Opsomming van path parameters - /{...} - specificatie bij operation zelf. 
+    openbareRuimteIdentificatie:
+      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een woonplaats en 16 lang bij de andere objecten. 
+      name: openbareRuimteIdentificatie
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: '^[0-9]{4}30[0-9]{10}$'
+        example: '0226300000136124'
+    
+    versie:
+      description: 'De versie van een voorkomen van een object'
+      name: versie
+      in: path
+      required: true
+      schema:
+        type: integer
+        example: 1
+        
+    timestampRegistratieLv:
+      description: 'Een timestamp van het tijdstip waarop een voorkomen is geregistreerd in de LV BAG'
+      name: timestampRegistratieLv
+      in: path
+      required: true
+      schema:
+        type: string
+        example: '1530403860000'
+
+    # Opsomming van request parameters - ?='...' parameters (by name) - specificatie bij operation zelf. 
+    openbareRuimteNaam:
+      description: Naam van een openbare ruimte object uit de BAG.
+      name: openbareRuimteNaam
+      in: query
+      required: false
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 80
+        pattern: '^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*'
+        example: 'Laan van de landinrichtingscommissie Duiven-Westervoort' 
+
+    woonplaatsIdentificatie:
+      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een woonplaats en 16 lang bij de andere objecten. 
+      name: woonplaatsIdentificatie
+      in: query
+      required: false
+      schema:
+        description: 'Deze wordt gebruikt in de operation, bv. /woonplaatsen/3560. Waarde: 0001-9999, formaat: ^[0-9]{3}[1-9]\|[0-9]{2}[1-9][0-9]\|[0-9][1-9][0-9]{2}\|[1-9][0-9]{3}$.'
+        type: string
+        pattern: '[0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]|[0-9][1-9][0-9]{2}|[1-9][0-9]{3}'
+        example: '2096'
+
+    woonplaatsNaam:
+      description: Naam van een woonplaats object uit de BAG.
+      name: woonplaatsNaam
+      in: query
+      required: false
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 80
+        pattern: '^[\u0020-\u007E;\u00A0-\u00FF;\u0100-\u0113;\u0116-\u012B;\u012E-\u014D;\u0150-\u017E;\u02C7;\u02D8-\u02DB;\u02DD;\u2015;\u2018-\u2019;\u201C-\u201D;\u20AC;\u2122;\u2126;\u215B-\u215E;\u2190-\u2193;\u266A;]*'
+        example: 'Duiven'
+      
+    geldigOp:
+      description: > 
+        Filtert op objecten die geldig zijn op de opgegeven datum 'YYYY-MM-DD' 
+        Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
+      name: geldigOp
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date
+      example: '2019-06-01'
+
+    beschikbaarOp:
+      description: >
+        Filtert op objecten die beschikbaar zijn op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'
+        Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden conform ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'.
+        Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'.
+        Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
+      name: beschikbaarOp
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time 
+        example: '2019-06-01T12:00:00.000'
+
+    geheleLvc:
+      description: >-
+        Filtert naast geldige voorkomens ook de voorkomens die uit de geldige levenscyclus van het object zijn verwijderd.
+        Als deze parameter wordt weggelaten worden alleen geldige voorkomens geretourneerd (default is false).
+        Voor een toelichting zie de [Praktijkhandleiding BAG](https://imbag.github.io/praktijkhandleiding/artikelen/wat-is-het-verschil-tussen-actieve-voorkomens-actuele-voorkomens-en-huidige-voorkomens).
+      name: geheleLvc
+      in: query
+      required: false
+      schema:
+        type: boolean
+        default: false
+        example: 'true'
+
+    huidig:
+      description: Indicatie dat alleen actuele object voorkomens zonder eindstatus gewenst zijn.
+      name: huidig
+      in: query
+      required: false
+      schema:
+        type: boolean
+        default: false
+        example: false

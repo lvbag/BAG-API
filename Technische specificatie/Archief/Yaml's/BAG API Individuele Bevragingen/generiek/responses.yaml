@@ -1,0 +1,347 @@
+# De HTTP responsecodes die volgens de OpenAPI Specificatie v3 ondersteund moeten worden. 
+# Niet alle foutmeldingen zullen optreden bij iedere operaties. 
+'200':
+  description: OK
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+      example:
+        status: 200
+        title: OK
+        type: 'https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.2.1 200 OK'
+        detail: The request has succeeded.
+        instance: 'https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde'
+        code: ok
+
+'201':
+  description: Created
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+      example:
+        status: 201
+        title: Aangemaakt
+        type: 'https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.2.2 201 Created'
+        detail: The request has been fulfilled and resulted in a new resource being created. 
+        instance: 'https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde'
+        code: created
+
+'204':
+  description: No content
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+      example:
+        status: 204
+        title: Geen inhoud
+        type: 'https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.2.5 204 No Content'
+        detail: The server has fulfilled the request but does not need to return an entity-body, and might want to return updated meta-information.
+        instance: 'https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde'
+        code: noContent
+
+'304':
+  description: Not modified
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+      example:
+        status: 304
+        title: Niet gewijzigd
+        type: 'https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.3.5 304  Not Modified'
+        detail: If the client has performed a conditional GET request and access is allowed, but the document has not been modified, the server SHOULD respond with this status code.
+        instance: 'https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde'
+        code: notModified
+
+'400':
+  description: Bad request
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+      example:
+        status: 400
+        title: Ten minste één parameter moet worden opgegeven.
+        type: 'https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.1 400 Bad Request'
+        detail: The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modification.
+        instance: 'https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde'
+        code: paramsRequired
+        invalid-params:
+          - type: 'https://www.vng.nl/realisatie/api/validaties/integer'
+            name: verblijfplaats_huisnummer
+            code: integer
+            reason: Waarde is geen geldige integer.
+
+'401':
+  description: 'Unauthorized. Je hebt waarschijnlijk geen geldige `X-Api-Key` header meegestuurd.'
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+      example:
+        status: 401
+        title: Niet correct geauthenticeerd.
+        type: 'https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.2 401 Unauthorized'
+        detail: The request requires user authentication. The response MUST include a WWW-Authenticate header field (section 14.47) containing a challenge applicable to the requested resource.
+        instance: 'https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde'
+        code: authentication
+
+'403':
+  description: Forbidden. Je hebt geen rechten om deze URL te benaderen.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+      example:
+        status: 403
+        title: U bent niet geautoriseerd voor deze operatie.
+        type: 'https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.4 403 Forbidden'
+        detail: The server understood the request, but is refusing to fulfill it.
+        instance: 'https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde'
+        code: autorisation
+
+'404':
+  description: Not found.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+      example:
+        status: 404
+        title: Opgevraagde resource bestaat niet.
+        type: 'https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.5 404 Not Found'
+        detail: The server has not found anything matching the Request-URI.
+        instance: 'https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde'
+        code: notFound
+
+'405':
+  description: Method not allowed.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+      example:
+        status: 405
+        title: Methode niet toegestaan
+        type: 'https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.6 405 Method Not Allowed'
+        detail: 'The method specified in the Request-Line is not allowed for the resource identified by the Request-URI. The response MUST include an Allow header containing a list of valid methods for the requested resource.'
+        instance: 'https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde'
+        code: methodNotAllowed
+
+'406':
+  description: 'Not Acceptable. Je hebt waarschijnlijk een gewenst formaat met de `Accept` header verstuurd welke niet ondersteund wordt.'
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+    acceptCrs: 
+      $ref: './headers.yaml#/acceptCrs'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+      example:
+        status: 406
+        title: Gevraagde contenttype wordt niet ondersteund.
+        type: 'https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.7 406 Not Acceptable'
+        detail: The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to the accept headers sent in the request
+        instance: 'https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde'
+        code: notAcceptable
+
+'409':
+  description: Conflict.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+      example:
+        status: 409
+        title: Conflict
+        type: 'https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.10 409 Conflict'
+        detail: The request could not be completed due to a conflict with the current state of the resource
+        instance: 'https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde'
+        code: conflict
+
+'410':
+  description: Gone.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+      example:
+        status: 410
+        title: Verdwenen
+        type: 'https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.11 410 Gone'
+        detail: The request could not be completed due to a conflict with the current state of the resource
+        instance: 'https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde'
+        code: gone
+
+'412':
+  description: Precondition failed.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+      example:
+        status: 412
+        title: Niet voldaan aan vooraf gestelde voorwaarde
+        type: 'https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.13 412 Precondition Failed'
+        detail: The precondition given in one or more of the request-header fields evaluated to false when it was tested on the server.
+        instance: 'https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde'
+        code: preconditionFailed
+
+'415':
+  description: Unsupported media type.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+      example:
+        status: 415
+        title: Media-type niet ondersteund
+        type: 'https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.4.16 415 Unsupported Media Type'
+        detail: The server is refusing the request because the entity of the request is in a format not supported by the requested resource for the requested method.
+        instance: 'https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde'
+        code: unsupported
+
+'422':
+  description: Unprocessable entity.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+      example:
+        status: 422
+        title: Aanvraag kan niet verwerkt worden
+        type: 'https://tools.ietf.org/html/rfc4918#section-11.2'
+        detail: The server understands the content type of the request entity and the syntax of the request entity is correct but was unable to process the contained instructions.
+        instance: 'https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde'
+        code: unprocessableEntity
+
+'429':
+  description: Too many requests.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+      example:
+        status: 429
+        title: Te veel verzoeken
+        type: 'https://tools.ietf.org/html/rfc6585'
+        detail: The user has sent too many requests in a given amount of time (rate limiting).
+        instance: 'https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde'
+        code: tooManyRequests
+
+'500':
+  description: Internal server error.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+      example:
+        status: 500
+        title: Interne server fout.
+        type: 'https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.5.1 500 Internal server error'
+        detail: The server encountered an unexpected condition which prevented it from fulfilling the request.
+        instance: 'https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde'
+        code: serverError
+
+'501':
+  description: Not Implemented
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+      example:
+        status: 501
+        title: 'Niet geïmplementeerd'
+        type: 'https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.5.2 501 Not Implemented'
+        detail: The server does not support the functionality required to fulfill the request.
+        instance: 'https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde'
+        code: notImplemented
+
+'503':
+  description: 'Service Unavailable. Er vindt mogelijk (gepland) onderhoud of een storing plaats.'
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+    Retry-After:
+      description: Tijdstip waarop verwacht wordt dat de service weer beschikbaar zal zijn.
+      x-example: 'Sun, 28 Nov 2017 16:41:41 GMT'
+      schema:
+        type: string
+        format: date-time
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'
+      example:
+        status: 503
+        title: Bronservice {bron} is tijdelijk niet beschikbaar.
+        type: 'https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#/10.5.4 503 Service Unavailable'
+        detail: The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.
+        instance: 'https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde'
+        code: notAvailable
+
+default:
+  description: Er is een onverwachte fout opgetreden.
+  headers:
+    api-version:
+      $ref: './headers.yaml#/api_version'
+  content:
+    application/problem+json:
+      schema:
+        $ref: './error.yaml#/Error'

@@ -1,0 +1,372 @@
+openapi: 3.0.0
+
+# Server specificatie
+servers:
+  - description: LVBAG - ACCEPTATIE
+    url: https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2
+  - description: LVBAG - PRODUCTIE
+    url: https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2
+
+# API specificatie - algemeen
+info:
+  title: BAG API Individuele Bevragingen - van de LVBAG
+  description: >-
+    Dit is de [BAG API](https://zakelijk.kadaster.nl/-/bag-api) Individuele Bevragingen van de Landelijke Voorziening Basisregistratie Adressen en Gebouwen (LVBAG). 
+    <br/>
+    Meer informatie over de Basisregistratie Adressen en Gebouwen is te vinden op de website van het [Ministerie van Binnenlandse Zaken en Koninkrijksrelaties](https://www.geobasisregistraties.nl/basisregistraties/adressen-en-gebouwen) en [Kadaster](https://zakelijk.kadaster.nl/bag).
+    <br/>
+    <br/>
+    De BAG API levert informatie conform de [BAG Catalogus 2018](https://www.geobasisregistraties.nl/documenten/publicatie/2018/03/12/catalogus-2018) en het informatiemodel IMBAG 2.0.
+    De API specificatie volgt de [Nederlandse API-Strategie](https://docs.geostandaarden.nl/api/API-Strategie) specificatie versie van 20200204 en is opgesteld in [OpenAPI Specificatie](https://www.forumstandaardisatie.nl/standaard/openapi-specification) (OAS) v3. 
+    <br/>
+    Het standaard mediatype HAL (`application/hal+json`) wordt gebruikt. Dit is een mediatype voor het weergeven van resources en hun relaties via hyperlinks.
+    <br/>
+    <br/>
+    Deze API is vooral gericht op individuele bevragingen (op basis van de identificerende gegevens van een object).
+    Om gebruik te kunnen maken van de BAG API is een API key nodig, deze kan verkregen worden door het [aanvraagformulier](https://formulieren.kadaster.nl/aanvraag_bag_api_individuele_bevragingen_productie) in te vullen.
+    <br/>
+    <br/>
+    Voor vragen, neem contact op met de LVBAG beheerder o.v.v. BAG API 2.0. We zijn aan het kijken naar een geschikt medium hiervoor, mede ook om de API iteratief te kunnen opstellen of doorontwikkelen samen met de community. Als de API iets (nog) niet kan, wat u wel graag wilt, neem dan contact op.
+
+  # Gebruikte versienotatie: x.y.z voor major, minor en patch releases. 
+  # De major versie komt overeen met de major versie in de api-info.yaml.
+  version: '2.0.0'
+  termsOfService: https://zakelijk.kadaster.nl/algemene-voorwaarden
+  contact:
+    name: Kadaster - Beheerder LVBAG
+    url: https://zakelijk.kadaster.nl/bag
+  license:
+    name: European Union Public License, version 1.2 (EUPL-1.2)
+    url: https://eupl.eu/1.2/nl/
+
+security:
+  - apiKeyBAG: []
+  # Alle requests verwachten een (BAG) API key (niet per operation of end-point verschillend)
+  # Voor definitie van benoemde 'apiKeyBAG', zie security-schemes onderin.
+
+#+Functionele toelichting bij de operations/end-points als documentatie indeling.
+tags:
+  -
+    name: Ligplaats
+    description: 'Dit endpoint levert één of meer (voorkomens van) ligplaats(en), met embedded resources en links.'
+
+paths:
+
+  # Vraag verblijfsobjectIdentificatie
+  /ligplaatsen/{identificatie}:
+    get:
+      security:
+        - apiKeyBAG: []
+      tags:
+        - Ligplaats
+      summary: 'bevragen 1 ligplaats met de identificatie van een ligplaats.'
+      operationId: ligplaatsIdentificatie
+      description: >-
+        Bevragen/raadplegen van een voorkomen van een ligplaats met de identificatie van de ligplaats.
+        Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.
+        Als expand=heeftAlsHoofdAdres, heeftAlsNevenAdres of true dan worden de gevraagde of alle objecten als geneste resource geleverd.
+      parameters:
+        - $ref: '#/components/parameters/identificatie'
+        - $ref: '#/components/parameters/geldigOp'
+        - $ref: '#/components/parameters/beschikbaarOp'
+        - $ref: '../../../../generiek/parameters.yaml#/expand'
+        - $ref: '../../../../generiek/parameters.yaml#/acceptCrs'
+
+      # Antwoord ligplaatsIdentificatie
+      responses:
+        '200':
+          description: Bevraging ligplaatsIdentificatie geslaagd
+          headers:
+            api-version:
+              $ref: '../../../../generiek/headers.yaml#/api_version'
+            warning:
+              $ref: '../../../../generiek/headers.yaml#/warning'
+            Content-Crs:
+              $ref: '../../../../generiek/headers.yaml#/contentCrs'
+          content:
+            application/hal+json:
+              # 1 resource, niet een collectie, dus geen items en geen paginering.
+              schema:
+                $ref: './resources.yaml#/LigplaatsIOHal'
+        '400':
+          $ref: '../../../../generiek/responses.yaml#/400'
+        '401':
+          $ref: '../../../../generiek/responses.yaml#/401'
+        '403':
+          $ref: '../../../../generiek/responses.yaml#/403'
+        '404':
+          $ref: '../../../../generiek/responses.yaml#/404'
+        '405':
+          $ref: '../../../../generiek/responses.yaml#/405'
+        '406':
+          $ref: '../../../../generiek/responses.yaml#/406'
+        '412':
+          $ref: '../../../../generiek/responses.yaml#/412'
+        '500':
+          $ref: '../../../../generiek/responses.yaml#/500'
+        '503':
+          $ref: '../../../../generiek/responses.yaml#/503'
+        default:
+          $ref: '../../../../generiek/responses.yaml#/default'
+
+  # ligplaatsLvcIdentificatie
+  /ligplaatsen/{identificatie}/lvc:
+    get:
+      security:
+        - apiKeyBAG: []
+      tags:
+        - Ligplaats
+      summary: 'bevragen levenscyclus van een ligplaats met de identificatie van een ligplaats.'
+      operationId: ligplaatsLvcIdentificatie
+      description: >-
+        Bevragen/raadplegen van de levenscyclus van een ligplaats, via de identificatie van de ligplaats.
+      parameters:
+        - $ref: '#/components/parameters/identificatie'
+        - $ref: '#/components/parameters/geheleLvc'
+        - $ref: '../../../../generiek/parameters.yaml#/acceptCrs'
+
+      # Antwoord ligplaatsLvcIdentificatie
+      responses:
+        '200':
+          description: Bevraging ligplaatsLvcIdentificatie geslaagd
+          headers:
+            api-version:
+              $ref: '../../../../generiek/headers.yaml#/api_version'
+            warning:
+              $ref: '../../../../generiek/headers.yaml#/warning'
+            Content-Crs:
+              $ref: '../../../../generiek/headers.yaml#/contentCrs'
+          content:
+            application/hal+json:
+              schema:
+                $ref: './resources.yaml#/LigplaatsIOLvcHalCollection'
+        '400':
+          $ref: '../../../../generiek/responses.yaml#/400'
+        '401':
+          $ref: '../../../../generiek/responses.yaml#/401'
+        '403':
+          $ref: '../../../../generiek/responses.yaml#/403'
+        '404':
+          $ref: '../../../../generiek/responses.yaml#/404'
+        '405':
+          $ref: '../../../../generiek/responses.yaml#/405'
+        '406':
+          $ref: '../../../../generiek/responses.yaml#/406'
+        '412':
+          $ref: '../../../../generiek/responses.yaml#/412'
+        '500':
+          $ref: '../../../../generiek/responses.yaml#/500'
+        '503':
+          $ref: '../../../../generiek/responses.yaml#/503'
+        default:
+          $ref: '../../../../generiek/responses.yaml#/default'
+
+  # ligplaatsGeometrie
+  /ligplaatsen:
+    post:
+      requestBody:
+        description: Geometrisch punt waarop de ligplaatsen bepaald moeten worden.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../../../../geometrie/geometrie.yaml#/components/schemas/Point'
+      security:
+        - apiKeyBAG: []
+      tags:
+        - Ligplaats
+      summary: 'bevragen van een ligplaats, op basis van een geometrische locatie.'
+      operationId: ligplaatsGeometrie
+      description: >-
+        Bevragen/raadplegen van één of meer ligplaatsen met een geometrische locatie.
+        Parameter huidig kan worden toegepast.
+        Als geldigOp en/of beschikbaarOp niet wordt opgegeven, worden de actuele gegevens geleverd.
+        Als expand=heeftAlsHoofdAdres, heeftAlsNevenAdres of true dan worden de gevraagde of alle objecten als geneste resource geleverd.
+      parameters:
+        - $ref: '#/components/parameters/geldigOp'
+        - $ref: '#/components/parameters/beschikbaarOp'
+        - $ref: '#/components/parameters/huidig'
+        - $ref: '../../../../generiek/parameters.yaml#/expand'
+        - $ref: '../../../../generiek/parameters.yaml#/contentCrs'
+        - $ref: '../../../../generiek/parameters.yaml#/acceptCrs'
+
+      # Antwoord ligplaatsGeometrie
+      responses:
+        '200':
+          description: Bevraging ligplaatsGeometrie geslaagd
+          headers:
+            api-version:
+              $ref: '../../../../generiek/headers.yaml#/api_version'
+            warning:
+              $ref: '../../../../generiek/headers.yaml#/warning'
+            Content-Crs:
+              $ref: '../../../../generiek/headers.yaml#/contentCrs'
+          content:
+            application/hal+json:
+              schema:
+                $ref: './resources.yaml#/LigplaatsIOHalCollection'
+        '400':
+          $ref: '../../../../generiek/responses.yaml#/400'
+        '401':
+          $ref: '../../../../generiek/responses.yaml#/401'
+        '403':
+          $ref: '../../../../generiek/responses.yaml#/403'
+        '405':
+          $ref: '../../../../generiek/responses.yaml#/405'
+        '406':
+          $ref: '../../../../generiek/responses.yaml#/406'
+        '412':
+          $ref: '../../../../generiek/responses.yaml#/412'
+        '415':
+          $ref: '../../../../generiek/responses.yaml#/415'
+        '500':
+          $ref: '../../../../generiek/responses.yaml#/500'
+        '503':
+          $ref: '../../../../generiek/responses.yaml#/503'
+        default:
+          $ref: '../../../../generiek/responses.yaml#/default'
+
+  /ligplaatsen/{identificatie}/{versie}/{timestampRegistratieLv}:
+    get:
+      security:
+        - apiKeyBAG: []
+      tags:
+        - Ligplaats
+      summary: bevragen voorkomen van een ligplaats met de identificatie van een ligplaats en de identificatie van een voorkomen, bestaande uit een versie en een timestamp van het tijdstip van registratie in de LV BAG.
+      operationId: ligplaatsIdentificatieVoorkomen 
+      description: >-
+        Bevragen/raadplegen van een voorkomen van een ligplaats met de identificatie van een ligplaats en de identificatie van een voorkomen, bestaande uit een versie en een timestamp van het tijdstip van registratie in de LV BAG.
+      parameters:
+        - $ref: '#/components/parameters/identificatie'
+        - $ref: '#/components/parameters/versie'
+        - $ref: '#/components/parameters/timestampRegistratieLv'
+        - $ref: '../../../../generiek/parameters.yaml#/acceptCrs'
+
+      # Antwoord ligplaatsIdentificatieVoorkomen
+      responses:
+        '200':
+          description: Bevraging ligplaatsIdentificatieVoorkomen geslaagd
+          headers:
+            api-version:
+              $ref: '../../../../generiek/headers.yaml#/api_version'
+            warning:
+              $ref: '../../../../generiek/headers.yaml#/warning'
+            Content-Crs:
+              $ref: '../../../../generiek/headers.yaml#/contentCrs'
+          content:
+            application/hal+json:
+              schema:
+                $ref: './resources.yaml#/LigplaatsIOHal'
+        '400':
+          $ref: '../../../../generiek/responses.yaml#/400'
+        '401':
+          $ref: '../../../../generiek/responses.yaml#/401'
+        '403':
+          $ref: '../../../../generiek/responses.yaml#/403'
+        '404':
+          $ref: '../../../../generiek/responses.yaml#/404'
+        '405':
+          $ref: '../../../../generiek/responses.yaml#/405'
+        '406':
+          $ref: '../../../../generiek/responses.yaml#/406'
+        '412':
+          $ref: '../../../../generiek/responses.yaml#/412'
+        '500':
+          $ref: '../../../../generiek/responses.yaml#/500'
+        '503':
+          $ref: '../../../../generiek/responses.yaml#/503'
+        default:
+          $ref: '../../../../generiek/responses.yaml#/default'
+
+components:
+
+  securitySchemes:
+    apiKeyBAG:
+      type: apiKey
+      name: X-Api-Key
+      in: header
+      description: >
+        De API-key die je hebt gekregen dient bij elke request via de 
+        `X-Api-Key` request header meegestuurd te worden. Indien deze 
+        niet juist wordt meegestuurd, of het een ongeldige key betreft, 
+        zul je de foutmelding `403 Forbidden` terugkrijgen.
+
+  parameters:
+    # Opsomming van path parameters - /{...} - specificatie bij operation zelf.
+    identificatie:
+      description: Identificatie van een object uit de BAG. Deze is 4 lang bij een woonplaats en 16 lang bij de andere objecten.
+      name: identificatie
+      in: path
+      required: true
+      schema:
+        type: string
+        pattern: '^[0-9]{4}02[0-9]{10}$'
+        example: '0797020000056894'
+
+    versie:
+      description: 'De versie van een voorkomen van een object'
+      name: versie
+      in: path
+      required: true
+      schema:
+        type: integer
+        example: 1
+        
+    timestampRegistratieLv:
+      description: 'Een timestamp van het tijdstip waarop een voorkomen is geregistreerd in de LV BAG'
+      name: timestampRegistratieLv
+      in: path
+      required: true
+      schema:
+        type: string
+        example: '1530403860000'
+
+    # Opsomming van request parameters - ?='...' parameters (by name) - specificatie bij operation zelf.
+    geldigOp:
+      name: geldigOp
+      in: query
+      example: '2019-04-01'
+      required: false
+      description: >
+        Filtert op objecten die geldig zijn op de opgegeven datum `JJJJ-MM-DD`
+        Deze parameters komen uit de API strategie, het hoofdstuk tijdreizen.
+      schema:
+        type: string
+        format: date
+
+    beschikbaarOp:
+      description: >
+        Filtert op objecten die beschikbaar zijn op de opgegeven datum en tijd `YYYY-MM-DDThh:mm:ss.sss'
+        Hierin kunnen de seconden ':ss' en milliseconden '.sss' of alleen de milliseconden conform ISO 8601 specificatie worden weggelaten, in dat geval krijgen deze automatisch de waarde ':00' respectievelijk '.000'.
+        Indien er voor de milliseconden '.sss' meer dan 3 cijfers worden opgegeven, bv. '.12345', dan wordt dit afgekapt tot '.123'.
+        Deze parameters komen uit de API strategie, het hoofdstuk [tijdreizen](https://docs.geostandaarden.nl/api/API-Strategie/#tijdreizen)
+      name: beschikbaarOp
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
+        example: '2019-06-01T12:00:00.000'
+
+    geheleLvc:
+      description: >-
+        Filtert naast geldige voorkomens ook de voorkomens die uit de geldige levenscyclus van het object zijn verwijderd.
+        Als deze parameter wordt weggelaten worden alleen geldige voorkomens geretourneerd (default is false).
+        Voor een toelichting zie de [Praktijkhandleiding BAG](https://imbag.github.io/praktijkhandleiding/artikelen/wat-is-het-verschil-tussen-actieve-voorkomens-actuele-voorkomens-en-huidige-voorkomens).
+      name: geheleLvc
+      in: query
+      required: false
+      schema:
+        type: boolean
+        example: 'true'
+        default: false
+
+    huidig:
+      description: Indicatie dat alleen actuele object voorkomens zonder eindstatus gewenst zijn.
+      name: huidig
+      in: query
+      required: false
+      schema:
+        type: boolean
+        default: false
+        example: false

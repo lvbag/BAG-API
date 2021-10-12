@@ -1,0 +1,90 @@
+openapi: 3.0.0
+
+# Server specificatie 
+servers:
+  - description: LVBAG - ACCEPTATIE
+    url: https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2
+  - description: LVBAG - PRODUCTIE
+    url: https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2
+    
+# API specificatie - algemeen
+info:
+  title: IMBAG API - van de LVBAG 
+  description: >-
+    "Dit is de BAG API van de landelijke voorziening BAG (LVBAG) voor het informatiemodel IMBAG 2.0 en conform de API strategie 1.1 specificatie in OAS3. Deze is vooral gericht op individuele bevragingen (op basis van de identificerende gegevens van een object). 
+    <br/><br/>
+    Meer informatie over BAG 2.0 is te vinden op: [Catalogus BAG 2.0](https://www.geobasisregistraties.nl/basisregistraties/adressen-en-gebouwen)
+    <br/>
+    Meer informatie over Nederlandse API strategie is te vinden op: [API-Strategie](https://docs.geostandaarden.nl/api/API-Strategie) - deze API volgt versie 1.1 van 20190213. 
+    <br/>
+    Meer informatie over OAS3 specificatie is te vinden op: [OAS](https://www.forumstandaardisatie.nl/standaard/openapi-specification)  
+    <br/>
+    Het standaard mediatype HAL (`application/hal+json`) wordt gebruikt. Dit is een mediatype voor het weergeven van resources en hun relaties via hyperlinks.
+    <br/>
+    <br/>
+    Voor vragen, neem contact op met de BAG beheerder o.v.v. BAG API 2.0. We zijn aan het kijken naar een geschikt medium hiervoor, mede ook om de API iteratief te kunnen opstellen of doorontwikkelen samen met de community. Als de API iets (nog) niet kan, wat u wel graag wilt, neem dan contact op. 
+    <br/>
+    <br/>
+    Een API-key kan verkregen worden door een e-mail te sturen naar: zie onderstaande contactgegevens <font color='blue'>send e-mail</font>." 
+    
+  # Omdat deze info betrekking heeft op de BAG Individuele Bevragingen API en deze API uit meerdere onderdelen bestaaat die afzonderlijk van elkaar kunnen wijzigen,
+  # wordt hier alleen het major versie nummer (x in de versienotatie x.y.z) opgegeven. De onderdelen zelf bevatten een versienummer x.y.z.
+  version: '2.0.0'
+  termsOfService: https://zakelijk.kadaster.nl/algemene-voorwaarden
+  contact:
+    name: Kadaster - Beheerder Landelijke Voorziening BAG 
+    email: bag@kadaster.nl  
+    url: https://zakelijk.kadaster.nl/bag
+  license:
+    name: European Union Public License, version 1.2 (EUPL-1.2)
+    url: https://eupl.eu/1.2/nl/
+
+security:
+  - apiKeyBAG: []
+  # Alle requests verwachten een (BAG) API key (niet per operation of end-point verschillend)
+  # Voor definitie van benoemde 'apiKeyBAG', zie security-schemes onderin. 
+
+#+Functionele toelichting bij de operations/end-points als documentatie indeling. 
+tags:
+  - 
+    name: Algemene informatie
+    description: Het endpoint voor algemene informatie levert informatie op van de API. 
+      
+paths:
+
+  /info:
+    get:
+      security:
+        - apiKeyBAG: []
+      summary: 'Algemene info van de API'
+      tags:
+        - Algemene informatie
+      operationId: getInfo
+      responses:
+        '200':
+          description: Bevraging getInfo geslaagd
+          content:
+            application/json:
+              schema:
+                $ref: '../../../../generiek/api-info.yaml#/API-info'
+        default:
+          description: 'Onverwacht probleem'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '../../../../generiek/error.yaml#/Error'
+
+components:
+
+  securitySchemes:
+    apiKeyBAG: 
+      type: apiKey
+      name: X-Api-Key
+      in: header
+      description: >
+        De API-key die je hebt gekregen dient bij elke request via de 
+        `X-Api-Key` request header meegestuurd te worden. Indien deze 
+        niet juist wordt meegestuurd, of het een ongeldige key betreft, 
+        zul je de foutmelding `403 Forbidden` terugkrijgen.
+
+  
