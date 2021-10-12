@@ -1,0 +1,95 @@
+api_version:
+  required: true
+  schema:
+    description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep.'
+    type: string
+    example: 1.0.1
+
+warning:
+  required: false
+  schema:
+    description: 'zie RFC 7234. In het geval een major versie wordt uitgefaseerd, gebruiken we warn-code 299 ("Miscellaneous Persistent Warning") en het API end-point (inclusief versienummer) als de warn-agent van de warning, gevolgd door de warn-text met de human-readable waarschuwing'
+    type: string
+    example: '299 https://service.../api/.../v1 "Deze versie van de API is verouderd en zal uit dienst worden genomen op 2018-02-01. Raadpleeg voor meer informatie hier de documentatie: https://omgevingswet.../api/.../v1".'
+
+X_Total_Count:
+  required: false
+  schema:
+    description: Totaal aantal resultaten
+    type: integer
+    example: 288
+
+X_Pagination_Count:
+  required: false
+  schema:
+    description: Totaal aantal paginas.
+    type: integer
+    example: 15
+
+X_Pagination_Page:
+  required: false
+  schema:
+    description: Huidige pagina.
+    type: integer
+    example: 3
+
+X_Pagination_Limit:
+  required: false
+  schema:
+    description: Aantal resultaten per pagina.
+    type: integer
+    example: 20
+
+X_Rate_Limit_Limit:
+  required: false
+  schema:
+    description: Aantal requests dat is toegestaan per 5 minuten.
+    type: integer
+
+X_Rate_Limit_Remaining:
+  required: false
+  schema:
+    description: Het resterende aantal requests voordat de limiet wordt bereikt.
+    type: integer
+
+X_Rate_Limit_Reset:
+  required: false
+  schema:
+    description: De datum en tijd waarop de limiet wordt geupdate in UNIX timestamp format.
+    format: int64
+    type: integer
+
+contentType:
+  required: false
+  description: Media type van het request.
+  schema:
+    type: string
+
+contentCrs:
+  required: false
+  description: CRS van de meegegeven geometrie.
+  schema:
+    type: string
+    enum:
+#      - epsg:4326 wordt nog niet ondersteund
+#      - epsg:3857 wordt nog niet ondersteund
+#      - epsg:4258 wordt nog niet ondersteund
+      - epsg:28992
+# Default weglaten i.v.m. breaking change als de default anders wordt bij het uitbreiden van CRS ondersteuning. 
+# Zodra WGS84 ondersteund wordt, moet dat de default zijn.
+#    default: epsg:28992 
+
+acceptCrs:
+  required: false
+  description: Gewenste CRS van de coördinaten in de response.
+  schema:
+    description: 'CRS van de coördinaten in de response.'
+    type: string
+    enum:
+#      - epsg:4326 wordt nog niet ondersteund
+#      - epsg:3857 wordt nog niet ondersteund
+#      - epsg:4258 wordt nog niet ondersteund
+      - epsg:28992 
+# Default weglaten i.v.m. breaking change als de default anders wordt bij het uitbreiden van CRS ondersteuning. 
+# Zodra WGS84 ondersteund wordt, moet dat de default zijn.
+#    default: epsg:28992 
