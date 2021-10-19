@@ -1,3 +1,13 @@
+**Release notes 2.1.5:** 
+--
+In deze versie van de LV BAG Individuele Bevragingen API is de volgende functionaliteit geïmplementeerd:
+-	Bevragen van één of meer nummeraanduidingen met de identificatie van een pand.
+
+### Known issues:
+- Bij de endpoints is ondersteuning van de foutmelding 429 nog niet geïmplementeerd, specificaties kunnen op dit vlak nog wijzigen
+
+ ------------------------------ 
+
 **Release notes 17-02-2021:** 
 --
 In deze versie van de LV BAG Individuele Bevragingen API is de volgende functionaliteit geïmplementeerd:
