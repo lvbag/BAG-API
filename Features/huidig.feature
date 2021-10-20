@@ -13,7 +13,7 @@ De defaultwaarde van de parameter is 'nee'.
 Dan worden alle objecten teruggegeven ongeacht de status van het object.
 
 Wanneer parameter huidig=true wordt toegepast
-Dan worden alleen actuele objecten terugggeven waarvan de status NIET een van de volgende is:
+Dan worden alleen actuele objecten teruggegeven waarvan de status NIET een van de volgende is:
 * naamgeving ingetrokken
 * woonplaats ingetrokken
 * plaats ingetrokken
@@ -32,21 +32,21 @@ Dan bevat de response alle verblijfsobjecten met een relatie met dat pand ongeac
 #### Scenario:
 Gegeven een pand met status 'pand in gebruik' met verblijfsobjecten waaronder verblijfsobjecten met een eindstatus, (niet gerealiseerd verblijfsobject, of verblijfsobject ingetrokken of verblijfsobject ten onrechte opgevoerd)
 Wanneer op het endpoint verblijfsobjecten de verblijfsobjecten in dat pand worden opgevraagd met de pandidentificatie en de parameter 'huidig'
-Dan bevat de response de verblijfsobjecten met een eindstatus NIET en de verblijfsobjecten met de overige statussen (Verblijfsobject in gebruik, (niet ingemeten), Verblijfsobject in gebruik, Verblijfsobject buiten gebruik, tverbouwing verblijfsobject) wel
+Dan bevat de response de verblijfsobjecten met een eindstatus NIET en de verblijfsobjecten met de overige statussen (Verblijfsobject in gebruik, (niet ingemeten), Verblijfsobject in gebruik, Verblijfsobject buiten gebruik, Verbouwing verblijfsobject) wel
 
-Sporadisch komen statusconflicten tussen de verschillende objeten voor. In dat geval gelden de volgende scenario's:
+Sporadisch komen statusconflicten tussen de verschillende objecten voor. In dat geval gelden de volgende scenario's:
 
 #### Scenario: Parameter huidig is ook van toepassing op de status van het object dat wordt gebruikt als queryparameter
 Gegeven een pand met een eindstatus met één of meer verblijfsobjecten met een huidige status
 Wanneer op het endpoint verblijfsobjecten de verblijfsobjecten in dat pand worden opgevraagd met de pandidentificatie en de parameter 'huidig'
 Dan wordt een lege collectie geleverd
 
-#### Scenario: Parameter huidig is ook van toepassing de status van de objecten die wordt gebruikt als queryparameter
+#### Scenario: Parameter huidig is ook van toepassing de status van de objecten die worden gebruikt als queryparameter
 Gegeven een openbare ruimte met een eindstatus
 Wanneer op het endpoint nummeraanduidingen de nummeraanduidingen worden gevraagd met de parameters woonplaatsNaam=""&openbareRuimteNaam=""&huisnummer="" en de parameter 'huidig'
 Dan worden er geen nummeraanduidingen geretourneerd
 
-#### Scenario: Parameter huidig houdt geen rekening met gerealateerde objecten indien deze geen onderdeel uitmaken van de queryparameter
+#### Scenario: Parameter huidig houdt geen rekening met gerelateerde objecten indien deze geen onderdeel uitmaken van de queryparameter
 Gegeven een verblijfsobject met de status 'verblijfsobject in gebruik' dat deel uitmaakt van een pand met de status 'pand in gebruik' met een gerelateerd hoofdadres met de status 'naamgeving ingetrokken'
 Wanneer op het endpoint verblijfsobjecten met de pandidentificatie de verblijfsobjecten worden opgevraagd met de parameter 'huidig'
 Dan wordt dat verblijfsobjecten geleverd
@@ -54,7 +54,7 @@ Dan wordt dat verblijfsobjecten geleverd
 
 De endpoints adressen en adressen uitgebreid leveren altijd alleen huidige gegevens.
 
-Voor het endpoint adressen betekent dit dat alleen adressen worden terugggeven waarbij één van de objecten waarop het adres is gebaseerd en het gerelateerde adresseerbaar object NIET één van de volgende statussen heeft:
+Voor het endpoint adressen betekent dit dat alleen adressen worden teruggegeven waarbij één van de objecten waarop het adres is gebaseerd en het gerelateerde adresseerbaar object NIET één van de volgende statussen heeft:
 * naamgeving ingetrokken
 * woonplaats ingetrokken
 * plaats ingetrokken
@@ -62,7 +62,7 @@ Voor het endpoint adressen betekent dit dat alleen adressen worden terugggeven w
 * verblijfsobject ingetrokken
 * verblijfsobject ten onrechte opgevoerd
 
-Voor adressen uitgebreid betekent dit dat alleen adressen worden terugggeven waarbij één van de objecten waarop het adres is gebaseerd en het gerelateerde adresseerbaar object en eventeel het gerelateerde pand NIET een van de volgende statussen heeft:
+Voor adressen uitgebreid betekent dit dat alleen adressen worden teruggegeven waarbij één van de objecten waarop het adres is gebaseerd en het gerelateerde adresseerbaar object en eventueel het gerelateerde pand NIET een van de volgende statussen heeft:
 * naamgeving ingetrokken
 * woonplaats ingetrokken
 * plaats ingetrokken
@@ -116,7 +116,7 @@ Wanneer het adressen endpoint voor deze nummeraanduiding wordt bevraagd
 Dan wordt het adres geleverd
 
 #### Scenario: het adressen uitgebreid endpoint levert GEEN adressen wanneer deze gerelateerd is aan een pand met een eindstatus.
-Gegeven het adressen uitgebereid endpoint levert alleen huidige adressen
+Gegeven het adressen uitgebreid endpoint levert alleen huidige adressen
 En er bestaat een nummeraanduiding met status 'Naamgeving uitgegeven'
 En het gerelateerde verblijfsobject heeft status 'Verblijfsobject in gebruik'
 En het gerelateerde pand heeft status 'Pand gesloopt'
