@@ -68,3 +68,11 @@ Functionaliteit: In onderzoek bij Adressen en Adressen uitgebreid
           ]
         }
       }
+      
+    Scenario: In onderzoek wordt alleen geleverd wanneer dat relevant is
+      Gegeven in object openbare ruimte is gegeven ligt in in onderzoek
+      En in object nummeraanduiding heeft attribuut ligt in een waarde
+      En verder zijn er geen aan het adres gerelateerde attributen in onderzoek
+      Als de afgeleide Adres resource wordt opgevraagd
+      Dan bevat het antwoord geen in onderzoek informatie
+      
