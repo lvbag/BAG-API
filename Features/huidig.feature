@@ -112,8 +112,16 @@ Gegeven het adressen endpoint levert alleen huidige adressen
 En er bestaat een nummeraanduiding met status 'Naamgeving uitgegeven'
 En het gerelateerde verblijfsobject heeft status 'Verblijfsobject in gebruik'
 En het gerelateerde pand heeft status 'Pand gesloopt'
-Wanneer het adressen endpoint voor deze nummeraanduiding wordt bevraagd
+Wanneer het adressen endpoint voor deze nummeraanduiding wordt bevraagd met een queryparameter anders dan pandidentificatie
 Dan wordt het adres geleverd
+
+#### Scenario: het adressen endpoint levert GEEN adressen wanneer wordt bevraagd met het ID van een pand met een eindstatus, de queryparameter is niet huidig.
+Gegeven het adressen endpoint levert alleen huidige adressen
+En er bestaat een nummeraanduiding met status 'Naamgeving uitgegeven'
+En het gerelateerde verblijfsobject heeft status 'Verblijfsobject in gebruik'
+En het gerelateerde pand heeft status 'Pand gesloopt'
+Wanneer het adressen endpoint voor deze nummeraanduiding wordt bevraagd met queryparameter pandidentificatie
+Dan wordt het adres niet geleverd
 
 #### Scenario: het adressen uitgebreid endpoint levert GEEN adressen wanneer deze gerelateerd is aan een pand met een eindstatus.
 Gegeven het adressen uitgebreid endpoint levert alleen huidige adressen
