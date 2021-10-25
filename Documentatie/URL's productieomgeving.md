@@ -28,7 +28,7 @@ Bijvoorbeeld als met de API alle gegevens van de nummeraanduiding met BAG ID 020
   
 https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/nummeraanduidingen/0200200000075716  
   
-Voor een volledige beschrijving van de requests die gedaan kunnen worden met de BAG API verwijzen wij u naar de [yaml files](https://github.com/lvbag/BAG-API/tree/master/Technische%20specificatie/Yaml's/BAG%20API%20Individuele%20Bevragingen). 
+Voor een volledige beschrijving van de requests die gedaan kunnen worden met de BAG API verwijzen wij u naar de [yaml files in Swagger](https://github.com/lvbag/BAG-API/tree/master/Technische%20specificatie). 
 
 
 Om te bevragen op basis van geometrie kan een post op het endpoint worden gedaan.
