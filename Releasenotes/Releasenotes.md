@@ -1,3 +1,17 @@
+
+**Release notes 2.1.6:** 
+--
+In deze versie van de LV BAG Individuele Bevragingen API is de volgende functionaliteit geïmplementeerd:
+-	Binnen de resources, woonplaats, openbare ruimte, nummeraanduiding, verblijfsobject, standplaats, ligplaats en pand zijn de properties ' tijdstip Eindregistratie LV' en 'tijdstip inactief LV' toegevoegd
+-	Binnen de gerelateerde in onderzoek resource is de property 'tijdstip Eindregistratie LV' toegevoegd.
+-	In de header van de API is het versienummer van de release opgenomen. Deze is gelijkgetrokken met de versie van de productmatrix.
+
+### Known issues:
+- Bij de endpoints is ondersteuning van de foutmelding 429 nog niet geïmplementeerd, specificaties kunnen op dit vlak nog wijzigen
+
+ ------------------------------ 
+
+
 **Release notes 2.1.5:** 
 --
 In deze versie van de LV BAG Individuele Bevragingen API is de volgende functionaliteit geïmplementeerd:
