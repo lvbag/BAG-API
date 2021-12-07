@@ -42,6 +42,7 @@ Bij een fout op een parameter krijgt in "invalid-params" attribuut "reason" een 
 Bij valideren van een parameter tegen schema kunnen de volgende meldingen komen:
 | validatie        | reason                                                    | code         |
 | type: integer    | Waarde is geen geldige integer.                           | integer      |
+| type: number     | Waarde is geen geldige number.                            | number       |
 | type: boolean    | Waarde is geen geldige boolean.                           | boolean      |
 | format: date     | Waarde is geen geldige datum.                             | date         |
 | minimum          | Waarde is lager dan minimum {minimum}.                    | minimum      |
@@ -91,6 +92,7 @@ Abstract Scenario: Ongeldige queryparameter waarde bij zoeken
   Voorbeelden:
     | code         | reason                                                       | resource             | parameter                  | waarde                      |
     | integer      | Waarde is geen geldige integer.                              | panden               | identificatie              | a                           |
+    | number       | Waarde is geen geldige number.                               | panden               | coordinates                | [null, 474479.898]          |
     | date         | Waarde is geen geldige datum.                                | panden               | beginGeldigheid            | 23-04-2019                  |
     | date         | Waarde is geen geldige datum.                                | panden               | beginGeldigheid            | 1983-05-00                  |
     | maximum      | Waarde is hoger dan maximum 99999.                           | nummeraanduidingen   | huisnummer                 | 123456                      |
