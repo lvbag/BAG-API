@@ -1,3 +1,13 @@
+**Release notes 2.2.0:** 
+--
+In deze versie van de LV BAG Individuele Bevragingen API is de volgende functionaliteit geïmplementeerd:
+- De endpoints adressen en adressenuitgebreid zijn uitgebreid met adresregels. Hiervoor is een featurebeschrijving opgesteld.
+
+### Known issues:
+- Bij de endpoints is ondersteuning van de foutmelding 429 nog niet geïmplementeerd, specificaties kunnen op dit vlak nog wijzigen
+
+ ------------------------------ 
+
 
 **Release notes 2.1.6:** 
 --
