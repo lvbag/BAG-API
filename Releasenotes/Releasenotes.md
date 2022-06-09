@@ -2,6 +2,10 @@
 --
 In deze versie van de LV BAG Individuele Bevragingen API is de volgende functionaliteit geïmplementeerd:
 - De endpoints adressen en adressenuitgebreid zijn uitgebreid met adresregels. Hiervoor is een featurebeschrijving opgesteld.
+- De definities van Surface en MultiSurface zijn verplaatst van een generieke naar een BAG specifieke locatie. De referenties naar deze types zijn aangepast.
+-	Generieke geometrie types zijn verwijderd. Dit waren kopieën van GeoJSON types. De referenties naar de generieke geometrietypes zijn vervangen door referenties naar  GeoJSON types.
+-	Type HalLink wordt nu hergebruikt bij paginering links: previous, next, first, last, in plaats van afzonderlijke linkdefinities.
+
 
 ### Known issues:
 - Bij de endpoints is ondersteuning van de foutmelding 429 nog niet geïmplementeerd, specificaties kunnen op dit vlak nog wijzigen
