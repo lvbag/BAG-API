@@ -45,10 +45,12 @@ Bij valideren van een parameter tegen schema kunnen de volgende meldingen komen:
 | type: number     | Waarde is geen geldige number.                            | number       |
 | type: boolean    | Waarde is geen geldige boolean.                           | boolean      |
 | format: date     | Waarde is geen geldige datum.                             | date         |
+| format: timestamp| Waarde is geen geldig tijdstip.                           | timestamp    |
 | minimum          | Waarde is lager dan minimum {minimum}.                    | minimum      |
 | maximum          | Waarde is hoger dan maximum {maximum}.                    | maximum      |
 | minLength        | Waarde is korter dan minimale lengte {minLength}.         | minLength    |
 | maxLength        | Waarde is langer dan maximale lengte {minLength}.         | maxLength    |
+| bereik           | Lengte van waarde moet tussen {minimum} en {maximum} zijn.| size         |
 | pattern          | Waarde voldoet niet aan patroon {pattern}.                | pattern      |
 | enumeratiewaarde | Waarde heeft geen geldige waarde uit de enumeratie.       | enum         |
 | tabelwaarde      | Waarde komt niet voor in de tabel.                        | table        |
@@ -93,8 +95,8 @@ Abstract Scenario: Ongeldige queryparameter waarde bij zoeken
     | code         | reason                                                       | resource             | parameter                  | waarde                      |
     | integer      | Waarde is geen geldige integer.                              | panden               | identificatie              | a                           |
     | number       | Waarde is geen geldige number.                               | panden               | coordinates                | [null, 474479.898]          |
-    | date         | Waarde is geen geldige datum.                                | panden               | beginGeldigheid            | 23-04-2019                  |
-    | date         | Waarde is geen geldige datum.                                | panden               | beginGeldigheid            | 1983-05-00                  |
+    | date         | Waarde is geen geldige datum.                                | panden               | geldigOp                   | 23-04-2019                  |
+    | date         | Waarde is geen geldige datum.                                | panden               | geldigOp                   | 1983-05-00                  |
     | maximum      | Waarde is hoger dan maximum 99999.                           | nummeraanduidingen   | huisnummer                 | 123456                      |
     | maxLength    | Waarde is langer dan maximale lengte 4.                      | nummeraanduidingen   | huisnummertoevoeging       | tegenover                   |
     | pattern      | Waarde voldoet niet aan patroon ^[1-9]{1}[0-9]{3}[A-Z]{2}.   | nummeraanduidingen   | postcode                   | 123aa                       |
