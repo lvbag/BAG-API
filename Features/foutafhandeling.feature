@@ -55,8 +55,6 @@ Bij valideren van een parameter tegen schema kunnen de volgende meldingen komen:
 | enumeratiewaarde | Waarde heeft geen geldige waarde uit de enumeratie.       | enum         |
 | tabelwaarde      | Waarde komt niet voor in de tabel.                        | table        |
 | required         | Parameter is verplicht.                                   | required     |
-| parameters       | Parameter is niet verwacht.                               | unknownParam |
-| fields           | Deel van de parameterwaarde niet correct: {waarde}.       | fields       |
 | expand           | Deel van de parameterwaarde niet correct: {waarde}.       | expand       |
 | wildcard         | Incorrect gebruik van wildcard karakter {wildcard}.       | wildcard     |
 
@@ -77,7 +75,6 @@ Abstract Scenario: Ongeldige pathparameter waarde bij raadplegen resource
     | code         | reason                                                     | resource        | parameter           | waarde                  |
     | minLength    | Waarde is korter dan minimale lengte 16.                   | panden          | pandidentificatie   | 100010921152            |
     | maxLength    | Waarde is langer dan maximale lengte 16.                   | panden          | pandidentificatie   | 980014100010921152      |
-    | unknownParam | Parameter is niet verwacht.                                | panden          | bestaatniet         | fout                    |
     | expand       | Deel van de parameterwaarde is niet correct: bestaatniet.  | panden          | expand              | bestaatniet             |
 
 Abstract Scenario: Ongeldige queryparameter waarde bij zoeken
@@ -101,7 +98,6 @@ Abstract Scenario: Ongeldige queryparameter waarde bij zoeken
     | maxLength    | Waarde is langer dan maximale lengte 4.                      | nummeraanduidingen   | huisnummertoevoeging       | tegenover                   |
     | pattern      | Waarde voldoet niet aan patroon ^[1-9]{1}[0-9]{3}[A-Z]{2}.   | nummeraanduidingen   | postcode                   | 123aa                       |
     | enum         | Waarde heeft geen geldige waarde uit de enumeratie.          | nummeraanduidingen   | geconstateerd              | B                           |
-    | unknownParam | Parameter is niet verwacht.                                  | nummeraanduidingen   | onbekend                   | 0                           |
     | expand       | Deel van de parameterwaarde is niet correct: bestaatniet.    | nummeraanduidingen   | expand                     | bestaatniet                 |
 
   Scenario: geen enkele zoekparameter opgegeven in zoekvraag
