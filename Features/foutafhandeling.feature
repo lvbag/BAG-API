@@ -49,8 +49,7 @@ Bij valideren van een parameter tegen schema kunnen de volgende meldingen komen:
 | minimum          | Waarde is lager dan minimum {minimum}.                    | minimum      |
 | maximum          | Waarde is hoger dan maximum {maximum}.                    | maximum      |
 | minLength        | Waarde is korter dan minimale lengte {minLength}.         | minLength    |
-| maxLength        | Waarde is langer dan maximale lengte {minLength}.         | maxLength    |
-| bereik           | Lengte van waarde moet tussen {minimum} en {maximum} zijn.| size         |
+| maxLength        | Waarde is langer dan maximale lengte {maxLength}.         | maxLength    |
 | pattern          | Waarde voldoet niet aan patroon {pattern}.                | pattern      |
 | enumeratiewaarde | Waarde heeft geen geldige waarde uit de enumeratie.       | enum         |
 | tabelwaarde      | Waarde komt niet voor in de tabel.                        | table        |
