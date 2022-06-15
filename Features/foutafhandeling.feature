@@ -32,7 +32,9 @@ We kennen de volgende foutsituaties:
 
 Wanneer de fout is veroorzaakt door fouten in requestparameters (of request body), wordt "invalid-params" gevuld met details over elke foute parameter.
 
-Wanneer er fouten worden veroorzaak door meerdere parameters, dan wordt er per validatiefout een "invalid-params" instantie opgenomen in het antwoord. Alle fouten worden dus teruggegeven.
+Wanneer een parameterwaarde niet overeenkomt met het gespecificeerde type (integer, number, boolean of enumeratie), wordt alleen deze fout gemeld.
+
+Wanneer er meerdere parameterwaarden niet voldoen aan de gespecificeerde eisen (minimum ,maximum, pattern, maxItems, fields, expand) worden al deze fouten tegelijk gemeld
 
 Bij een fout op een parameter krijgt in "invalid-params" attribuut "type" een url naar een beschrijving van de fout in de parameter. De hier gerefereeerde foutbeschrijving is specifieker dan "type" op het hoofdniveau van het bericht.
 Bij een fout op een parameter krijgt in "invalid-params" attribuut "name" de naam van de parameter waar de fout in zit.
