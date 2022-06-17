@@ -34,7 +34,7 @@ Wanneer de fout is veroorzaakt door fouten in requestparameters (of request body
 
 Wanneer een parameterwaarde niet overeenkomt met het gespecificeerde type (integer, number, boolean of enumeratie), wordt alleen deze fout gemeld.
 
-Wanneer er meerdere parameterwaarden niet voldoen aan de gespecificeerde eisen (minimum ,maximum, pattern, maxItems, fields, expand) worden al deze fouten tegelijk gemeld
+Wanneer er meerdere parameterwaarden niet voldoen aan de gespecificeerde eisen (minimum ,maximum, pattern, maxItems, fields, expand), dan wordt voor iedere validatiefout een "invalid parameter" instantie opgenomen in het antwoord
 
 Bij een fout op een parameter krijgt in "invalid-params" attribuut "type" een url naar een beschrijving van de fout in de parameter. De hier gerefereeerde foutbeschrijving is specifieker dan "type" op het hoofdniveau van het bericht.
 Bij een fout op een parameter krijgt in "invalid-params" attribuut "name" de naam van de parameter waar de fout in zit.
