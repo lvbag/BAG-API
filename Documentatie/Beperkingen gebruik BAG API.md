@@ -8,7 +8,7 @@ Er mogen maximaal 5 berichten per seconde worden gestuurd waarbij wordt gekeken 
 
 Configuratie BAG API Individuele Bevragingen:
 Aantal: maximaal 5 requests per seconde
-Gemeten over: 60 seconden 
+Gemeten over: 1 seconde
 Aantal toegestane requests in de vastgestelde tijdsperiode: 5 x 60 = 300
 
 Rate limiting response headers, comform NL API Strategie:
