@@ -1,3 +1,10 @@
+**Release notes 2.3.0:**  
+--  
+
+In deze versie van de LV BAG Individuele Bevragingen API is de volgende functionaliteit geïmplementeerd:  
+- Het endpoint verblijfsobjecten is uitgebreid met de functionaliteit expand van de nummeraanduiding. Hierdoor is het mogelijk om binnen één bevraging de verblijfsobjecten en nummeraanduidingen op te halen die binnen een pand gelegen zijn. 
+  
+------------------------------   
 **Release notes 2.2.0:** 
 --
 In deze versie van de LV BAG Individuele Bevragingen API is de volgende functionaliteit geïmplementeerd:
