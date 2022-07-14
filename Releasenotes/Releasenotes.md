@@ -3,6 +3,10 @@
 
 In deze versie van de LV BAG Individuele Bevragingen API is de volgende functionaliteit geïmplementeerd:  
 - Het endpoint verblijfsobjecten is uitgebreid met de functionaliteit expand van de nummeraanduiding. Hierdoor is het mogelijk om binnen één bevraging de verblijfsobjecten en nummeraanduidingen op te halen die binnen een pand gelegen zijn. 
+ 
+  ## Known issues:
+- Bij de endpoints is ondersteuning van de foutmelding 429 nog niet geïmplementeerd, specificaties kunnen op dit vlak nog wijzigen
+
   
 ------------------------------   
 **Release notes 2.2.0:** 
