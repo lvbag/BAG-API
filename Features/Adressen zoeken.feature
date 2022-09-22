@@ -8,7 +8,7 @@ Huidig betekent dat het object actueel is en geen eindstatus heeft.
 
 Er kan gezocht worden met (een deel van) een postcode, woonplaats, straatnaam, huisnummer, huisletter, huisnummertoevoeging
 Het resultaat is een collectie van zoekresultaten waarin delen van de adressen overeenkomen met de zoekterm
-Op basis van het zoekresultaat kan met een volgend request op het endpoint adres/<zoekresultaatidentificatie> worden gedaan om alle gegevens van het adres te ontvangen.
+Het zoekresultaat bevat alle gegevens van het adres.
 Zoektermen kunnen gecombineerd worden door ze te scheiden met bijvoorbeeld een komma of een spatie (= %20) 
 
  Voorbeeld
