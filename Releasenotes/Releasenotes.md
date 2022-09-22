@@ -1,3 +1,14 @@
+**Release notes 2.4.0:**  (21 september 2022)  
+--  
+
+In deze versie van de LV BAG Individuele Bevragingen API is de volgende functionaliteit geïmplementeerd:  
+- Het endpoint adressen is uitgebreid met de functionaliteit restful zoeken. 
+- Foutmelding 429 is vanaf 15 september geïmplementeerd. Het limiet is ingesteld op 200.000 bevragingen per dag. Bij het overschreiden van het limiet, wordt foutmelding 429 gegeven.  
+Vanaf 1 december wordt het limiet aangescherpt naar 50.000 bevragingen per dag. 
+ 
+  
+------------------------------    
+  
 **Release notes 2.3.0:**  (14 juli 2022)
 --  
 
