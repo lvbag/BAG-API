@@ -1,3 +1,10 @@
+    
+**Release notes 2.4.0:**  (oktober 2022)  
+--  
+  
+In deze versie van de LV BAG Individuele Bevragingen API is de volgende functionaliteit geïmplementeerd:  
+- In het endpoint adressen uitgebreid wordt nu ook de pandstatus meegeleverd.
+    
 **Release notes 2.4.0:**  (21 september 2022)  
 --  
 
