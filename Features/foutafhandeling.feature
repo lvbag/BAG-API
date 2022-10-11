@@ -58,6 +58,7 @@ Bij valideren van een parameter tegen schema kunnen de volgende meldingen komen:
 | required         | Parameter is verplicht.                                   | required     |
 | expand           | Deel van de parameterwaarde niet correct: {waarde}.       | expand       |
 | wildcard         | Incorrect gebruik van wildcard karakter {wildcard}.       | wildcard     |
+| schema           | Waarde voldoet niet aan schema van {parameter}.           | schema       |
 
 Bij een validatiefout op de expandparameter, wordt de plek binnen de parameterwaarde opgenomen waar de fout gevonden wordt.
 
@@ -90,16 +91,17 @@ Abstract Scenario: Ongeldige queryparameter waarde bij zoeken
   En is in het antwoord invalid-params.code={code}
 
   Voorbeelden:
-    | code         | reason                                                       | resource             | parameter                  | waarde                      |
-    | integer      | Waarde is geen geldige integer.                              | panden               | identificatie              | a                           |
-    | number       | Waarde is geen geldige number.                               | panden               | coordinates                | [null, 474479.898]          |
-    | date         | Waarde is geen geldige datum.                                | panden               | geldigOp                   | 23-04-2019                  |
-    | date         | Waarde is geen geldige datum.                                | panden               | geldigOp                   | 1983-05-00                  |
-    | maximum      | Waarde is hoger dan maximum 99999.                           | nummeraanduidingen   | huisnummer                 | 123456                      |
-    | maxLength    | Waarde is langer dan maximale lengte 4.                      | nummeraanduidingen   | huisnummertoevoeging       | tegenover                   |
-    | pattern      | Waarde voldoet niet aan patroon ^[1-9]{1}[0-9]{3}[A-Z]{2}.   | nummeraanduidingen   | postcode                   | 123aa                       |
-    | enum         | Waarde heeft geen geldige waarde uit de enumeratie.          | nummeraanduidingen   | geconstateerd              | B                           |
-    | expand       | Deel van de parameterwaarde is niet correct: bestaatniet.    | nummeraanduidingen   | expand                     | bestaatniet                 |
+    | code         | reason                                                       | resource             | parameter                  | waarde                               |
+    | integer      | Waarde is geen geldige integer.                              | panden               | identificatie              | a                                    |
+    | number       | Waarde is geen geldige number.                               | panden               | coordinates                | [null, 474479.898]                   |
+    | date         | Waarde is geen geldige datum.                                | panden               | geldigOp                   | 23-04-2019                           |
+    | date         | Waarde is geen geldige datum.                                | panden               | geldigOp                   | 1983-05-00                           |
+    | schema       | Waarde voldoet niet aan schema van point.                    | panden               | point                      | type,Point,caardinates,155000,463000 |
+    | maximum      | Waarde is hoger dan maximum 99999.                           | nummeraanduidingen   | huisnummer                 | 123456                               |
+    | maxLength    | Waarde is langer dan maximale lengte 4.                      | nummeraanduidingen   | huisnummertoevoeging       | tegenover                            |
+    | pattern      | Waarde voldoet niet aan patroon ^[1-9]{1}[0-9]{3}[A-Z]{2}.   | nummeraanduidingen   | postcode                   | 123aa                                |
+    | enum         | Waarde heeft geen geldige waarde uit de enumeratie.          | nummeraanduidingen   | geconstateerd              | B                                    |
+    | expand       | Deel van de parameterwaarde is niet correct: bestaatniet.    | nummeraanduidingen   | expand                     | bestaatniet                          |
 
   Scenario: geen enkele zoekparameter opgegeven in zoekvraag
     Als resources worden gezocht zonder parameters
