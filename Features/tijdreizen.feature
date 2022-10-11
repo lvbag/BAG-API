@@ -5,7 +5,7 @@
 
 Functionaliteit: tijdreizen
 
-  Tijdreizen is op het opvragen van resource informatie op een bepaald moment in de tijd.
+  Tijdreizen is het opvragen van resource informatie op een bepaald moment in de tijd.
   Bij tijdreizen wordt er gekeken naar twee aspecten:
   - welke informatie was op een bepaald moment geldig (de materiële historie)
   - welke informatie was op een bepaald beschikbaar (de formele historie)
@@ -23,7 +23,7 @@ Functionaliteit: tijdreizen
   Tijdreizen wordt niet ondersteund voor de volgende resources:
   - adres
   - adresuitgebreid
-  Deze resources zijn samengestelde resources, waarover geen historie wordt bijgehouden.
+  Dit zijn samengestelde resources, waarover geen historie wordt bijgehouden.
 
   Tijdreizen wordt niet ondersteund bij endpoints:
   - waar de levenscyclus van een object opgevraagd kan worden
