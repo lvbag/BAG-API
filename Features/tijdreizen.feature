@@ -8,7 +8,7 @@ Functionaliteit: tijdreizen
   Tijdreizen is het opvragen van resource informatie op een bepaald moment in de tijd.
   Bij tijdreizen wordt er gekeken naar twee aspecten:
   - welke informatie was op een bepaald moment geldig (de materiële historie)
-  - welke informatie was op een bepaald beschikbaar (de formele historie)
+  - welke informatie was op een bepaald moment beschikbaar (de formele historie)
   
   Tijdreizen wordt mogelijk gemaakt voor de volgende resources:
   - woonplaats
