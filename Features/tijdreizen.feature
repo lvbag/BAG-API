@@ -50,7 +50,7 @@ Functionaliteit: tijdreizen
   Zie ook huidig feature beschrijving: https://github.com/lvbag/BAG-API/blob/master/Features/huidig.feature
 
   Scenario: geldigOp en beschikbaarOp niet opgegeven in request
-    Als bij een endpoint geldigOp en beschikbaar op ondersteund worden
+    Als bij een endpoint geldigOp en beschikbaarOp ondersteund worden
     En geldigOp is niet opgegeven in het request
     En beschikbaarOp is niet opgegeven in het request
     Dan bevat de response het voorkomen van een object dat geldig is op het moment van bevragen
