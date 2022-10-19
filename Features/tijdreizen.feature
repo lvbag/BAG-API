@@ -46,6 +46,8 @@ Functionaliteit: tijdreizen
   sss	  Milliseconden 3 cijfers (000-999)
 
   Als geen waarde is gespecificeerd voor één van de query parameters, dan wordt impliciet de datum (en tijd) van het moment van bevragen gebruikt. Dit levert de meest recente informatie over de gevraagde resource.
+  
+  Parameters geldigOp en/of beschikbaarOp kunnen niet worden gebruikt i.c.m. parameter huidig.
 
   Zie ook huidig feature beschrijving: https://github.com/lvbag/BAG-API/blob/master/Features/huidig.feature
 
