@@ -8,7 +8,7 @@ Functionaliteit: tijdreizen
   Tijdreizen is het opvragen van resource informatie op een bepaald moment in de tijd.
   Bij tijdreizen wordt er gekeken naar twee aspecten:
   - welke informatie was op een bepaald moment geldig (de materiële historie)
-  - welke informatie was op een bepaald beschikbaar (de formele historie)
+  - welke informatie was op een bepaald moment beschikbaar (de formele historie)
   
   Tijdreizen wordt mogelijk gemaakt voor de volgende resources:
   - woonplaats
@@ -52,28 +52,28 @@ Functionaliteit: tijdreizen
   Zie ook huidig feature beschrijving: https://github.com/lvbag/BAG-API/blob/master/Features/huidig.feature
 
   Scenario: geldigOp en beschikbaarOp niet opgegeven in request
-    Als bij een endpoint geldigOp en beschikbaar op ondersteund worden
+    Als bij een endpoint geldigOp en beschikbaarOp ondersteund worden
     En geldigOp is niet opgegeven in het request
     En beschikbaarOp is niet opgegeven in het request
     Dan bevat de response het voorkomen van een object dat geldig is op het moment van bevragen
     En dat geregistreerd staat op het moment van bevragen
   
   Scenario: geldigOp niet en beschikbaarOp wel opgegeven in request
-    Als bij een endpoint geldigOp en beschikbaar op ondersteund worden
+    Als bij een endpoint geldigOp en beschikbaarOp ondersteund worden
     En geldigOp is niet opgegeven in het request
     En beschikbaarOp is wel opgegeven in het request
     Dan bevat de response het voorkomen van een object dat geregistreerd stond op het opgegeven moment beschikbaarOp
     En dat met de kennis van toen geldig is op het moment van bevragen
   
   Scenario: geldigOp wel en beschikbaarOp niet opgegeven in request
-    Als bij een endpoint geldigOp en beschikbaar op ondersteund worden
+    Als bij een endpoint geldigOp en beschikbaarOp ondersteund worden
     En geldigOp is wel opgegeven in het request
     En beschikbaarOp is niet opgegeven in het request
     Dan bevat de response het voorkomen van een object dat op dit moment geregistreerd staat
     En dat met de kennis van dit moment, geldig was op het moment geldigOp
   
   Scenario: geldigOp en beschikbaarOp opgegeven in request
-    Als bij een endpoint geldigOp en beschikbaar op ondersteund worden
+    Als bij een endpoint geldigOp en beschikbaarOp ondersteund worden
     En geldigOp is wel opgegeven in het request
     En beschikbaarOp is wel opgegeven in het request
     Dan bevat de response het voorkomen van een object dat geregistreerd stond op het opgegeven moment beschikbaarOp
@@ -86,20 +86,20 @@ Functionaliteit: tijdreizen
     | Foutsituatie                        | status | voorbeeld title                                            | code              |
     | Niet toegestane parametercombinatie | 400    | De combinatie van opgegeven parameters is niet toegestaan. | unsupportedCombi  |
 
-  Scenario: query parameter huidig in request, status object voorkomen is geen eind status
+  Scenario: query parameter huidig in request, status object voorkomen is geen eindstatus
     Als bij een endpoint geldigOp, beschikbaarOp en huidig worden ondersteund
     En in een request wordt geen geldigOp opgegeven
     En in de request wordt geen beschikbaarOp opgegeven
     En in de request wordt huidig opgegeven
-    En de status van het betreffende object voorkomen is geen eind status
+    En de status van het betreffende object voorkomen is geen eindstatus
     Dan bevat de response het actuele voorkomen van een object
 
-  Scenario: query parameter huidig in request, status object voorkomen is eind status
+  Scenario: query parameter huidig in request, status object voorkomen is eindstatus
     Als bij een endpoint geldigOp, beschikbaarOp en huidig worden ondersteund
     En in een request wordt geen geldigOp opgegeven
     En in de request wordt geen beschikbaarOp opgegeven
     En in de request wordt huidig opgegeven
-    En de status van het betreffende object voorkomen is geen eind status
+    En de status van het betreffende object voorkomen is geen eindstatus
     Dan bevat de response geen resultaat
 
   Scenario: query parameter geldigOp, beschikbaarOp en huidig in request
