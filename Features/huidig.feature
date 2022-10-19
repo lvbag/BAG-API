@@ -12,6 +12,8 @@ Parameter Huidig werkt als een filter.
 De defaultwaarde van de parameter is 'nee'.
 Dan worden alle objecten teruggegeven ongeacht de status van het object.
 
+Parameter huidig kan niet worden gebruikt i.c.m. parameters geldigOp en/of beschikbaarOp.
+
 Wanneer parameter huidig=true wordt toegepast
 Dan worden alleen actuele objecten teruggegeven waarvan de status NIET een van de volgende is:
 * naamgeving ingetrokken
