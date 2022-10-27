@@ -1,9 +1,9 @@
     
-**Release notes 2.4.0:**  (oktober 2022)  
+**Release notes 2.5.0:**  (oktober 2022)  
 --  
   
 In deze versie van de LV BAG Individuele Bevragingen API is de volgende functionaliteit geïmplementeerd:  
-- In het endpoint adressen uitgebreid wordt nu ook de pandstatus meegeleverd.
+- In het endpoint adressen uitgebreid wordt nu ook de pandstatus meegeleverd en is het mogelijk om in onderzoeksgegevens van een adresseerbaar object te embedden.
 - De endpoints adresseerbare objecten, verblijfsobjecten, standplaatsen, ligplaatsen, panden en woonplaatsen zijn uitgebreid met de mogelijkheid om d.m.v. GET te zoeken op een bounding box of een punt.  
 - Het endpoint panden is uitgebreid met de mogelijkheid om te zoeken met een adresseerbaarobject identificatie (identificatie van een verblijfsobject, ligplaats of een standplaats) of een nummeraanduiding identificatie.
     
