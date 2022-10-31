@@ -17,6 +17,7 @@ Functionaliteit: tijdreizen
   - ligplaats
   - standplaats
   - verblijfsobject
+  - adressseerbare objecten (bestaat feitelijk uit een ligplaats, standplaats of verblijfsobject)
   - pand
   - bronhouder
   
@@ -39,11 +40,11 @@ Functionaliteit: tijdreizen
   
   YYYY  Jaartal 4 cijfers
   MM	  Maand 2 cijfers (01 = januari, etc.)
-  DD	  Dag van de maand 2 cijfers (01 to 31)
-  hh	  Uren 2 cijfers (00 to 23)
-  mm	  Minuten 2 cijfers (00 to 59)
-  ss	  Seconden 2 cijfers (00 to 59)
-  sss	  Milliseconden 3 cijfers (000-999)
+  DD	  Dag van de maand 2 cijfers (01 t/m 31)
+  hh	  Uren 2 cijfers (00 t/m 23)
+  mm	  Minuten 2 cijfers (00 t/m 59)
+  ss	  Seconden 2 cijfers (00 t/m 59)
+  sss	  Milliseconden 3 cijfers (000 t/m 999)
 
   Als geen waarde is gespecificeerd voor één van de query parameters, dan wordt impliciet de datum (en tijd) van het moment van bevragen gebruikt. Dit levert de meest recente informatie over de gevraagde resource.
   
@@ -90,7 +91,7 @@ Functionaliteit: tijdreizen
     Als bij een endpoint geldigOp, beschikbaarOp en huidig worden ondersteund
     En in een request wordt geen geldigOp opgegeven
     En in de request wordt geen beschikbaarOp opgegeven
-    En in de request wordt huidig opgegeven
+    En in de request wordt huidig=true opgegeven
     En de status van het betreffende object voorkomen is geen eindstatus
     Dan bevat de response het actuele voorkomen van een object
 
@@ -98,15 +99,15 @@ Functionaliteit: tijdreizen
     Als bij een endpoint geldigOp, beschikbaarOp en huidig worden ondersteund
     En in een request wordt geen geldigOp opgegeven
     En in de request wordt geen beschikbaarOp opgegeven
-    En in de request wordt huidig opgegeven
-    En de status van het betreffende object voorkomen is geen eindstatus
+    En in de request wordt huidig=true opgegeven
+    En de status van het betreffende object voorkomen is een eindstatus
     Dan bevat de response geen resultaat
 
   Scenario: query parameter geldigOp, beschikbaarOp en huidig in request
     Als bij een endpoint geldigOp, beschikbaarOp en huidig worden ondersteund
     En in een request wordt geldigOp opgegeven
     En in de request wordt beschikbaarOp opgegeven
-    En in de request wordt huidig opgegeven
+    En in de request wordt huidig=true opgegeven
     Dan treedt de volgende foutmelding op:
-    | Foutsituatie                        | status | voorbeeld title                                            | code              |
-    | Niet toegestane parametercombinatie | 400    | De combinatie van opgegeven parameters is niet toegestaan. | unsupportedCombi  |
+    | Foutsituatie                        | status | voorbeeld title                                            | code                   |
+    | Niet toegestane parametercombinatie | 400    | De combinatie van opgegeven parameters is niet toegestaan. | unsupportedCombination |
