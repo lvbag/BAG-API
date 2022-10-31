@@ -83,9 +83,7 @@ Functionaliteit: tijdreizen
   Scenario: endpoint ondersteunt query parameters geldigOp en beschikbaarOp niet
     Als bij een endpoint geldigOp en beschikbaarOp niet wordt ondersteund
     En in een request wordt geldigOp en/of beschikbaarOp opgegeven
-    Dan treedt de volgende foutmelding op:
-    | Foutsituatie                        | status | voorbeeld title                                            | code              |
-    | Niet toegestane parametercombinatie | 400    | De combinatie van opgegeven parameters is niet toegestaan. | unsupportedCombi  |
+    Dan worden de geldigOp en/of beschikbaarOp parameters genegeerd
 
   Scenario: query parameter huidig in request, status object voorkomen is geen eindstatus
     Als bij een endpoint geldigOp, beschikbaarOp en huidig worden ondersteund
