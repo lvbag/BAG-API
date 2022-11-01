@@ -11,24 +11,32 @@ In de foutresponse krijgt "code" een waarde, zie tabel hieronder.
 In de foutresponse krijgt "instance" de url van het request die tot de fout heeft geleid.
 
 We kennen de volgende foutsituaties:
-| Foutsituatie                        | status | title                                                            | code                   |
-| Geen parameter is meegegeven        | 400    | Ten minste één parameter moet worden opgegeven.                  | paramsRequired         |
-| Verplichte parameter(combinatie)    | 400    | Minimale combinatie van parameters moet worden opgegeven.        | paramsCombination      |
-| Niet toegestane parametercombinatie | 400    | De combinatie van opgegeven parameters is niet toegestaan.       | unsupportedCombination |
-| Parametervalidatie                  | 400    | Een of meerdere parameters zijn niet correct.                    | paramsValidation       |
-| Teveel zoekresultaten               | 400    | Teveel zoekresultaten.                                           | tooManyResults         |
-| Niet geauthenticeerd                | 401    | Niet correct geauthenticeerd.                                    | authentication         |
-| Geen autorisatie voor operatie      | 403    | U bent niet geautoriseerd voor deze operatie.                    | autorisation           |
-| Opgevraagde resource bestaat niet   | 404    | Opgevraagde resource bestaat niet.                               | notFound               |
-| Methode niet toegestaan             | 405    | Deze methode is niet toegestaan                                  | methodNotAllowed       |
-| Accept header <> JSON               | 406    | Gevraagde contenttype wordt niet ondersteund.                    | notAcceptable          |
-| Accept-Crs niet ondersteund         | 406    | CRS niet ondersteund.                                            | crsNotAcceptable       |
-| Geen Accept-Crs                     | 412    | Gewenste coördinatenstelsel voor geometrie moet worden opgegeven.| acceptCrsMissing       |
-| Geen Content-Crs                    | 412    | Coördinatenstelsel van gestuurde geometrie moet worden opgegeven.| contentCrsMissing      |
-| Content-Crs niet ondersteund        | 415    | CRS niet ondersteund                                             | crsNotSupported        |
-| Invalide request body               | 422    | Request body bevat een ongeldige waarde.                         | unprocessableEntity    |
-| Technische of interne fout          | 500    | Interne server fout.                                             | serverError            |
-| Bronservice niet beschikbaar        | 503    | Bronservice is niet beschikbaar.                                 | sourceUnavailable      |
+| Foutsituatie                        | status | title                                                              | code                    |
+| Geen parameter is meegegeven        | 400    | Ten minste één parameter moet worden opgegeven.                    | paramsRequired          |
+| Verplichte parameter(combinatie)    | 400    | Minimale combinatie van parameters moet worden opgegeven.          | paramsCombination       |
+| Niet toegestane parametercombinatie | 400    | De combinatie van opgegeven parameters is niet toegestaan.         | unsupportedCombination  |
+| Parametervalidatie                  | 400    | Een of meerdere parameters zijn niet correct.                      | paramsValidation        |
+| Teveel zoekresultaten               | 400    | Teveel zoekresultaten.                                             | tooManyResults          |
+| Niet geauthenticeerd                | 401    | Niet correct geauthenticeerd.                                      | authentication          |
+| Geen autorisatie voor operatie      | 403    | U bent niet geautoriseerd voor deze operatie.                      | autorisation            |
+| Opgevraagde resource bestaat niet   | 404    | Opgevraagde resource bestaat niet.                                 | notFound                |
+| Methode niet toegestaan             | 405    | Deze methode is niet toegestaan                                    | methodNotAllowed        |
+| Accept header <> JSON               | 406    | Gevraagde contenttype wordt niet ondersteund.                      | notAcceptable           |
+| Invalide request body               | 422    | Request body bevat een ongeldige waarde.                           | unprocessableEntity     |
+| Technische of interne fout          | 500    | Interne server fout.                                               | serverError             |
+| Bronservice niet beschikbaar        | 503    | Bronservice is niet beschikbaar.                                   | sourceUnavailable       |
+| CRS in parameter niet ondersteund   | 400    | CRS {crs} in parameter {parameter} wordt niet ondersteund.         | paramCrsNotSupported    |
+| CRS in header niet ondersteund      | 400    | CRS {crs} in header {header} wordt niet ondersteund.               | headerCrsNotSupported   |
+| Geen CRS voor parameter             | 400    | CRS voor geometrie in parameter {parameter} moet worden opgegeven. | paramCrsNotSpecified    |
+| Geen CRS voor resource              | 400    | CRS voor resource geometrie moet worden opgegeven.                 | resourceCrsNotSpecified |
+| Geen CRS voor request body          | 400    | CRS voor geometrie in request body moet worden opgegeven.          | reqBodyCrsNotSpecified  |    
+
+Deprecated:
+| Accept-Crs niet ondersteund         | 406    | CRS niet ondersteund.                                              | crsNotAcceptable        |
+| Geen Accept-Crs                     | 412    | Gewenste coördinatenstelsel voor geometrie moet worden opgegeven.  | acceptCrsMissing        |
+| Geen Content-Crs                    | 412    | Coördinatenstelsel van gestuurde geometrie moet worden opgegeven.  | contentCrsMissing       |
+| Content-Crs niet ondersteund        | 415    | CRS niet ondersteund                                               | crsNotSupported         |
+
 
 Wanneer de fout is veroorzaakt door fouten in requestparameters (of request body), wordt "invalid-params" gevuld met details over elke foute parameter.
 
@@ -190,6 +198,89 @@ Abstract Scenario: Ongeldige queryparameter waarde bij zoeken
     En is in het antwoord status=406
     En is in het antwoord code=notAcceptable
 
+  Scenario: Invalide request body
+    Gegeven op endpoint /panden kan met POST gezocht worden op <locatie>
+    Als een request body wordt aangeboden die niet vertaald kan worden naar een valide locatie
+    Dan is de http status code van het antwoord 422
+    En is in het antwoord title=Request body bevat een ongeldige waarde.
+    En is in het antwoord status=422
+    En is in het antwoord code=unprocessableEntity
+
+  Scenario: Technische- of interne fout
+    Gegeven de API heeft last van een technisch probleem bij een verzoek van de gebruiker
+    Als een endpoint wordt aangesproken
+    Dan is de http status code van het antwoord 500
+    En is in het antwoord title=Interne server fout.
+    En is in het antwoord status=500
+    En is in het antwoord code=serverError
+
+  Scenario: Bronservice is niet beschikbaar
+    Als een endpoint wordt geraadpleegd
+    En de BAG API geen response of een timeout geeft
+    Dan is de http status code van het antwoord 503
+    En is in het antwoord title=Bronservice is niet beschikbaar.
+    En is in het antwoord status=503
+
+  Scenario: CRS in bbox-crs parameter niet ondersteund
+    Als een pand wordt geraadpleegd met parameter 'bbox-crs'=b
+    Dan is de http status code in het antwoord 400
+    En is in het antwoord title=CRS b in parameter bbox-crs wordt niet ondersteund.
+    En is in het antwoord status=400
+    En is in het antwoord code=paramCrsNotSupported
+    
+  Scenario: CRS in filter-crs parameter niet ondersteund
+    Als een pand wordt geraadpleegd met parameter 'filter-crs'=b
+    Dan is de http status code in het antwoord 400
+    En is in het antwoord title=CRS b in parameter filter-crs wordt niet ondersteund.
+    En is in het antwoord status=400
+    En is in het antwoord code=paramCrsNotSupported
+
+  Scenario: CRS in crs parameter niet ondersteund
+    Als een pand wordt geraadpleegd met parameter 'crs'=b
+    Dan is de http status code in het antwoord 400
+    En is in het antwoord title=CRS b in parameter crs wordt niet ondersteund.
+    En is in het antwoord status=400
+    En is in het antwoord code=paramCrsNotSupported
+
+  Scenario: CRS in Content-Crs header wordt niet ondersteund
+    Als een pand wordt geraadpleegd met parameter 'Content-Crs'=b
+    Dan is de http status code in het antwoord 400
+    En is in het antwoord title=CRS b in header Content-Crs wordt niet ondersteund.
+    En is in het antwoord status=400
+    En is in het antwoord code=headerCrsNotSupported
+
+  Scenario: bbox-crs parameter niet gespecificeerd
+    Als een pand wordt geraadpleegd met parameter 'bbox'
+    En zonder een parameter 'bbox-crs'
+    Dan is de http status code in het antwoord 400
+    En is in het antwoord title=CRS voor geometrie in parameter bbox-crs moet worden opgegeven.
+    En is in het antwoord status=400
+    En is in het antwoord code=paramCrsNotSpecified
+
+  Scenario: filter-crs parameter niet gespecificeerd
+    Als een pand wordt geraadpleegd met een geometrie anders dan 'bbox', bv. 'point'
+    En zonder een parameter 'filter-crs'
+    Dan is de http status code in het antwoord 400
+    En is in het antwoord title=CRS voor geometrie in parameter filter-crs moet worden opgegeven.
+    En is in het antwoord status=400
+    En is in het antwoord code=paramCrsNotSpecified
+
+  Scenario: crs parameter niet gespecificeerd
+    Als een pand wordt geraadpleegd zonder een parameter 'crs'
+    Dan is de http status code in het antwoord 400
+    En is in het antwoord title=CRS voor resource geometrie moet worden opgegeven.
+    En is in het antwoord status=400
+    En is in het antwoord code=resourceCrsNotSpecified
+
+  Scenario: Content-Crs header niet gespecificeerd
+    Als een pand wordt geraadpleegd met een POST request en een 'point'
+    En zonder een Content-Crs header
+    Dan is de http status code in het antwoord 400
+    En is in het antwoord title=CRS voor geometrie in request body moet worden opgegeven.
+    En is in het antwoord status=400
+    En is in het antwoord code=reqBodyCrsNotSpecified
+
+Deprecated:
   Scenario: niet voldaan aan vooraf gestelde voorwaarde
     Als een pand wordt geraadpleegd met de header 'Accept-Crs' = b
     Dan is de http status code van het antwoord 406
@@ -220,26 +311,3 @@ Abstract Scenario: Ongeldige queryparameter waarde bij zoeken
     En is in het antwoord title=Coördinatenstelsel a in Content-Crs wordt niet ondersteund.
     En is in het antwoord status=415
     En is in het antwoord code=crsNotSupported
-
-  Scenario: Invalide request body
-    Gegeven op endpoint /panden kan met POST gezocht worden op <locatie>
-    Als een request body wordt aangeboden die niet vertaald kan worden naar een valide locatie
-    Dan is de http status code van het antwoord 422
-    En is in het antwoord title=Request body bevat een ongeldige waarde.
-    En is in het antwoord status=422
-    En is in het antwoord code=unprocessableEntity
-
-  Scenario: Technische- of interne fout
-    Gegeven de API heeft last van een technisch probleem bij een verzoek van de gebruiker
-    Als een endpoint wordt aangesproken
-    Dan is de http status code van het antwoord 500
-    En is in het antwoord title=Interne server fout.
-    En is in het antwoord status=500
-    En is in het antwoord code=serverError
-
-  Scenario: Bronservice is niet beschikbaar
-    Als een endpoint wordt geraadpleegd
-    En de BAG API geen response of een timeout geeft
-    Dan is de http status code van het antwoord 503
-    En is in het antwoord title=Bronservice is niet beschikbaar.
-    En is in het antwoord status=503
