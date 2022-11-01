@@ -85,27 +85,36 @@ Functionaliteit: tijdreizen
     En in een request wordt geldigOp en/of beschikbaarOp opgegeven
     Dan worden de geldigOp en/of beschikbaarOp parameters genegeerd
 
-  Scenario: query parameter huidig in request, status object voorkomen is geen eindstatus
-    Als bij een endpoint geldigOp, beschikbaarOp en huidig worden ondersteund
-    En in een request wordt geen geldigOp opgegeven
-    En in de request wordt geen beschikbaarOp opgegeven
-    En in de request wordt huidig=true opgegeven
-    En de status van het betreffende object voorkomen is geen eindstatus
-    Dan bevat de response het actuele voorkomen van een object
 
-  Scenario: query parameter huidig in request, status object voorkomen is eindstatus
-    Als bij een endpoint geldigOp, beschikbaarOp en huidig worden ondersteund
-    En in een request wordt geen geldigOp opgegeven
-    En in de request wordt geen beschikbaarOp opgegeven
-    En in de request wordt huidig=true opgegeven
-    En de status van het betreffende object voorkomen is een eindstatus
-    Dan bevat de response geen resultaat
+  Abstract scenario: <scenario> met een ondersteunde combinatie van van tijdreis- en huidig parameters
+    Gegeven een endpoint die de parameters geldigOp, beschikbaarOp en huidig ondersteund
+    En een object met <object status>
+    Als bij een request wordt gezocht met <geldigOp>, <beschikbaarOp> en <huidig> combinatie
+    Dan bevat het resultaat <resultaat> een indicatie of het object wordt geretourneerd
+    | geldigOp  | beschikbaarOp | huidig | object status    | resultaat | scenario                                                         |
+    | null (nu) | null (nu)     | false  | geen eind status | ja        | actuele voorkomen ongeacht status - object zonder eind status    |
+    | null (nu) | null (nu)     | false  | eind status      | ja        | actuele voorkomen ongeacht status - object met eind status       |
+    | null (nu) | null (nu)     | true   | geen eind status | ja        | actuele voorkomen zonder eind status - object zonder eind status |
+    | null (nu) | null (nu)     | true   | eind status      | nee       | actuele voorkomen zonder eind status - object met eind status    |    
 
-  Scenario: query parameter geldigOp, beschikbaarOp en huidig in request
-    Als bij een endpoint geldigOp, beschikbaarOp en huidig worden ondersteund
-    En in een request wordt geldigOp opgegeven
-    En in de request wordt beschikbaarOp opgegeven
-    En in de request wordt huidig=true opgegeven
-    Dan treedt de volgende foutmelding op:
+  Abstract scenario: <scenario> met een niet ondersteunde combinatie van van tijdreis- en huidig parameters
+    Gegeven een endpoint die de parameters geldigOp, beschikbaarOp en huidig parameter ondersteund
+    En een object met <object status>
+    Als bij een request wordt gezocht met <geldigOp>, <beschikbaarOp> en <huidig> combinatie:
+    | geldigOp        | beschikbaarOp   | huidig | object status    | scenario                                                                                                                                  |
+    | null (nu)       | not null (< nu) | false  | geen eind status } tijdreisvraag naar wat er nu geldig is met kennis in het verleden ongeacht status en actuele voorkomen zonder eind status is nit mogelijk |
+    | null (nu)       | not null (< nu) | false  | eind status      } tijdreisvraag naar wat er nu geldig is met kennis in het verleden ongeacht status - object zonder eind status                             |
+    | null (nu)       | not null (< nu) | true   | geen eind status | tijdreisvraag naar wat er nu geldig is met kennis in het verleden alleen eind status - object zonder eind status                          |
+    | null (nu)       | not null (< nu) | true   | eind status      | tijdreisvraag naar wat er nu geldig is met kennis in het verleden alleen eind status - object met eind status                             |
+    | not null (< nu) | null (nu)       | false  | geen eind status | tijdreisvraag naar wat er in het verleden geldig was ongeacht status - object zonder eind status                                          |
+    | not null (< nu) | null (nu)       | false  | eind status      | tijdreisvraag naar wat er in het verleden geldig was ongeacht status - object met eind status                                             |
+    | not null (< nu) | null (nu)       | true   | geen eind status | tijdreisvraag naar wat er in het verleden geldig was met kennis van nu en actuele voorkomen zonder eind status is niet mogelijk           |
+    | not null (< nu) | null (nu)       | true   | eind status      | tijdreisvraag naar wat er in het verleden geldig was met kennis van nu en actuele voorkomen zonder eind status is niet mogelijk           |
+    | not null (< nu) | not null (< nu) | false  | geen eind status | tijdreisvraag naar wat er in het verleden geldig was en met kennis in het verleden - object zonder eind status                            |
+    | not null (< nu) | not null (< nu) | false  | eind status      | tijdreisvraag naar wat er in het verleden geldig was en met kennis in het verleden - object met eind status                               |
+    | not null (< nu) | not null (< nu) | true   | geen eind status | tijdreisvraag naar wat er in het verleden geldig was met kennis in het verleden en actuele voorkomen zonder eind status is niet mogelijk  |
+    | not null (< nu) | not null (< nu) | true   | eind status      | tijdreisvraag naar wat er in het verleden geldig was met kennis in het verleden en actuele voorkomen zonder eind status is niet mogelijk  |
+    Dan treedt de volgende foutmelding op: 
     | Foutsituatie                        | status | voorbeeld title                                            | code                   |
     | Niet toegestane parametercombinatie | 400    | De combinatie van opgegeven parameters is niet toegestaan. | unsupportedCombination |
+    
