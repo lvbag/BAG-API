@@ -48,7 +48,7 @@ Functionaliteit: tijdreizen
 
   Als geen waarde is gespecificeerd voor één van de query parameters, dan wordt impliciet de datum (en tijd) van het moment van bevragen gebruikt. Dit levert de meest recente informatie over de gevraagde resource.
   
-  Parameters geldigOp en/of beschikbaarOp kunnen niet worden gebruikt i.c.m. parameter huidig.
+  Parameters geldigOp en/of beschikbaarOp kunnen niet worden gebruikt i.c.m. parameter huidig=true.
 
   Zie ook huidig feature beschrijving: https://github.com/lvbag/BAG-API/blob/master/Features/huidig.feature
 
@@ -85,7 +85,6 @@ Functionaliteit: tijdreizen
     En in een request wordt geldigOp en/of beschikbaarOp opgegeven
     Dan worden de geldigOp en/of beschikbaarOp parameters genegeerd
 
-
   Abstract scenario: <scenario> met een ondersteunde combinatie van van tijdreis- en huidig parameters
     Gegeven een endpoint die de parameters geldigOp, beschikbaarOp en huidig ondersteunt
     En een object met <object status>
@@ -97,24 +96,10 @@ Functionaliteit: tijdreizen
     | null (nu) | null (nu)     | true   | geen eind status | ja        | actuele voorkomen zonder eind status - object zonder eind status |
     | null (nu) | null (nu)     | true   | eind status      | nee       | actuele voorkomen zonder eind status - object met eind status    |    
 
-  Abstract scenario: <scenario> met een niet ondersteunde combinatie van van tijdreis- en huidig parameters
+  Scenario: een niet ondersteunde combinatie van tijdreis- en huidig parameters
     Gegeven een endpoint die de parameters geldigOp, beschikbaarOp en huidig parameter ondersteunt
-    En een object met <object status>
-    Als bij een request wordt gezocht met <geldigOp>, <beschikbaarOp> en <huidig> combinatie:
-    | geldigOp        | beschikbaarOp   | huidig | object status    | scenario                                                                                                                                  |
-    | null (nu)       | not null (< nu) | false  | geen eind status } tijdreisvraag naar wat er nu geldig is met kennis in het verleden ongeacht status en actuele voorkomen zonder eind status is niet mogelijk |
-    | null (nu)       | not null (< nu) | false  | eind status      } tijdreisvraag naar wat er nu geldig is met kennis in het verleden ongeacht status - object zonder eind status                             |
-    | null (nu)       | not null (< nu) | true   | geen eind status | tijdreisvraag naar wat er nu geldig is met kennis in het verleden alleen eind status - object zonder eind status                          |
-    | null (nu)       | not null (< nu) | true   | eind status      | tijdreisvraag naar wat er nu geldig is met kennis in het verleden alleen eind status - object met eind status                             |
-    | not null (< nu) | null (nu)       | false  | geen eind status | tijdreisvraag naar wat er in het verleden geldig was ongeacht status - object zonder eind status                                          |
-    | not null (< nu) | null (nu)       | false  | eind status      | tijdreisvraag naar wat er in het verleden geldig was ongeacht status - object met eind status                                             |
-    | not null (< nu) | null (nu)       | true   | geen eind status | tijdreisvraag naar wat er in het verleden geldig was met kennis van nu en actuele voorkomen zonder eind status is niet mogelijk           |
-    | not null (< nu) | null (nu)       | true   | eind status      | tijdreisvraag naar wat er in het verleden geldig was met kennis van nu en actuele voorkomen zonder eind status is niet mogelijk           |
-    | not null (< nu) | not null (< nu) | false  | geen eind status | tijdreisvraag naar wat er in het verleden geldig was en met kennis in het verleden - object zonder eind status                            |
-    | not null (< nu) | not null (< nu) | false  | eind status      | tijdreisvraag naar wat er in het verleden geldig was en met kennis in het verleden - object met eind status                               |
-    | not null (< nu) | not null (< nu) | true   | geen eind status | tijdreisvraag naar wat er in het verleden geldig was met kennis in het verleden en actuele voorkomen zonder eind status is niet mogelijk  |
-    | not null (< nu) | not null (< nu) | true   | eind status      | tijdreisvraag naar wat er in het verleden geldig was met kennis in het verleden en actuele voorkomen zonder eind status is niet mogelijk  |
+    Als bij een request wordt gezocht met huidig=true
+    En <geldigOp> en/of <beschikbaarOp> worden opgegeven
     Dan treedt de volgende foutmelding op: 
     | Foutsituatie                        | status | voorbeeld title                                            | code                   |
     | Niet toegestane parametercombinatie | 400    | De combinatie van opgegeven parameters is niet toegestaan. | unsupportedCombination |
-    
