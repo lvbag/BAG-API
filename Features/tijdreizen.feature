@@ -87,7 +87,7 @@ Functionaliteit: tijdreizen
 
 
   Abstract scenario: <scenario> met een ondersteunde combinatie van van tijdreis- en huidig parameters
-    Gegeven een endpoint die de parameters geldigOp, beschikbaarOp en huidig ondersteund
+    Gegeven een endpoint die de parameters geldigOp, beschikbaarOp en huidig ondersteunt
     En een object met <object status>
     Als bij een request wordt gezocht met <geldigOp>, <beschikbaarOp> en <huidig> combinatie
     Dan bevat het resultaat <resultaat> een indicatie of het object wordt geretourneerd
@@ -98,11 +98,11 @@ Functionaliteit: tijdreizen
     | null (nu) | null (nu)     | true   | eind status      | nee       | actuele voorkomen zonder eind status - object met eind status    |    
 
   Abstract scenario: <scenario> met een niet ondersteunde combinatie van van tijdreis- en huidig parameters
-    Gegeven een endpoint die de parameters geldigOp, beschikbaarOp en huidig parameter ondersteund
+    Gegeven een endpoint die de parameters geldigOp, beschikbaarOp en huidig parameter ondersteunt
     En een object met <object status>
     Als bij een request wordt gezocht met <geldigOp>, <beschikbaarOp> en <huidig> combinatie:
     | geldigOp        | beschikbaarOp   | huidig | object status    | scenario                                                                                                                                  |
-    | null (nu)       | not null (< nu) | false  | geen eind status } tijdreisvraag naar wat er nu geldig is met kennis in het verleden ongeacht status en actuele voorkomen zonder eind status is nit mogelijk |
+    | null (nu)       | not null (< nu) | false  | geen eind status } tijdreisvraag naar wat er nu geldig is met kennis in het verleden ongeacht status en actuele voorkomen zonder eind status is niet mogelijk |
     | null (nu)       | not null (< nu) | false  | eind status      } tijdreisvraag naar wat er nu geldig is met kennis in het verleden ongeacht status - object zonder eind status                             |
     | null (nu)       | not null (< nu) | true   | geen eind status | tijdreisvraag naar wat er nu geldig is met kennis in het verleden alleen eind status - object zonder eind status                          |
     | null (nu)       | not null (< nu) | true   | eind status      | tijdreisvraag naar wat er nu geldig is met kennis in het verleden alleen eind status - object met eind status                             |
