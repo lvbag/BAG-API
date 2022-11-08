@@ -25,7 +25,6 @@ We kennen de volgende foutsituaties:
 | Invalide request body               | 422    | Request body bevat een ongeldige waarde.                          | unprocessableEntity    |
 | Technische of interne fout          | 500    | Interne server fout.                                              | serverError            |
 | Bronservice niet beschikbaar        | 503    | Bronservice is niet beschikbaar.                                  | sourceUnavailable      |
-| CRS niet ondersteund                | 400    | CRS {crs} in {parameter}|{header} wordt niet ondersteund.         | crsNotSupported        |
 
 Deprecated:
 | Accept-Crs niet ondersteund         | 406    | CRS niet ondersteund.                                             | crsNotAcceptable       |
@@ -216,50 +215,6 @@ Abstract Scenario: Ongeldige queryparameter waarde bij zoeken
     Dan is de http status code van het antwoord 503
     En is in het antwoord title=Bronservice is niet beschikbaar.
     En is in het antwoord status=503
-
-  Scenario: CRS in bbox-crs parameter niet ondersteund
-    Als een pand wordt geraadpleegd met parameter 'bbox-crs'=b
-    Dan is de http status code in het antwoord 400
-    En is in het antwoord title=CRS b in bbox-crs wordt niet ondersteund.
-    En is in het antwoord status=400
-    En is in het antwoord code=crsNotSupported
-    
-  Scenario: CRS in filter-crs parameter niet ondersteund
-    Als een pand wordt geraadpleegd met parameter 'filter-crs'=b
-    Dan is de http status code in het antwoord 400
-    En is in het antwoord title=CRS b in filter-crs wordt niet ondersteund.
-    En is in het antwoord status=400
-    En is in het antwoord code=crsNotSupported
-
-  Scenario: CRS in crs parameter niet ondersteund
-    Als een pand wordt geraadpleegd met parameter 'crs'=b
-    Dan is de http status code in het antwoord 400
-    En is in het antwoord title=CRS b in crs wordt niet ondersteund.
-    En is in het antwoord status=400
-    En is in het antwoord code=crsNotSupported
-
-  Scenario: bbox-crs parameter niet gespecificeerd
-    Als een pand wordt geraadpleegd met parameter 'bbox'
-    En zonder een parameter 'bbox-crs'
-    Dan is de http status code in het antwoord 400
-    En is in het antwoord title=Minimale combinatie van parameters moet worden opgegeven.
-    En is in het antwoord status=400
-    En is in het antwoord code=paramsCombination
-
-  Scenario: filter-crs parameter niet gespecificeerd
-    Als een pand wordt geraadpleegd met een geometrie anders dan 'bbox', bv. 'point'
-    En zonder een parameter 'filter-crs'
-    Dan is de http status code in het antwoord 400
-    En is in het antwoord title=Minimale combinatie van parameters moet worden opgegeven.
-    En is in het antwoord status=400
-    En is in het antwoord code=paramsCombination
-
-  Scenario: crs parameter niet gespecificeerd
-    Als een pand wordt geraadpleegd zonder een parameter 'crs'
-    Dan is de http status code in het antwoord 400
-    En is in het antwoord title=Minimale combinatie van parameters moet worden opgegeven.
-    En is in het antwoord status=400
-    En is in het antwoord code=paramsCombination
 
 Deprecated:
   Scenario: niet voldaan aan vooraf gestelde voorwaarde
