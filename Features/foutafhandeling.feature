@@ -11,24 +11,27 @@ In de foutresponse krijgt "code" een waarde, zie tabel hieronder.
 In de foutresponse krijgt "instance" de url van het request die tot de fout heeft geleid.
 
 We kennen de volgende foutsituaties:
-| Foutsituatie                        | status | title                                                            | code                   |
-| Geen parameter is meegegeven        | 400    | Ten minste één parameter moet worden opgegeven.                  | paramsRequired         |
-| Verplichte parameter(combinatie)    | 400    | Minimale combinatie van parameters moet worden opgegeven.        | paramsCombination      |
-| Niet toegestane parametercombinatie | 400    | De combinatie van opgegeven parameters is niet toegestaan.       | unsupportedCombination |
-| Parametervalidatie                  | 400    | Een of meerdere parameters zijn niet correct.                    | paramsValidation       |
-| Teveel zoekresultaten               | 400    | Teveel zoekresultaten.                                           | tooManyResults         |
-| Niet geauthenticeerd                | 401    | Niet correct geauthenticeerd.                                    | authentication         |
-| Geen autorisatie voor operatie      | 403    | U bent niet geautoriseerd voor deze operatie.                    | autorisation           |
-| Opgevraagde resource bestaat niet   | 404    | Opgevraagde resource bestaat niet.                               | notFound               |
-| Methode niet toegestaan             | 405    | Deze methode is niet toegestaan                                  | methodNotAllowed       |
-| Accept header <> JSON               | 406    | Gevraagde contenttype wordt niet ondersteund.                    | notAcceptable          |
-| Accept-Crs niet ondersteund         | 406    | CRS niet ondersteund.                                            | crsNotAcceptable       |
-| Geen Accept-Crs                     | 412    | Gewenste coördinatenstelsel voor geometrie moet worden opgegeven.| acceptCrsMissing       |
-| Geen Content-Crs                    | 412    | Coördinatenstelsel van gestuurde geometrie moet worden opgegeven.| contentCrsMissing      |
-| Content-Crs niet ondersteund        | 415    | CRS niet ondersteund                                             | crsNotSupported        |
-| Invalide request body               | 422    | Request body bevat een ongeldige waarde.                         | unprocessableEntity    |
-| Technische of interne fout          | 500    | Interne server fout.                                             | serverError            |
-| Bronservice niet beschikbaar        | 503    | Bronservice is niet beschikbaar.                                 | sourceUnavailable      |
+| Foutsituatie                        | status | title                                                             | code                   |
+| Geen parameter is meegegeven        | 400    | Ten minste één parameter moet worden opgegeven.                   | paramsRequired         |
+| Verplichte parameter(combinatie)    | 400    | Minimale combinatie van parameters moet worden opgegeven.         | paramsCombination      |
+| Niet toegestane parametercombinatie | 400    | De combinatie van opgegeven parameters is niet toegestaan.        | unsupportedCombination |
+| Parametervalidatie                  | 400    | Een of meerdere parameters zijn niet correct.                     | paramsValidation       |
+| Teveel zoekresultaten               | 400    | Teveel zoekresultaten.                                            | tooManyResults         |
+| Niet geauthenticeerd                | 401    | Niet correct geauthenticeerd.                                     | authentication         |
+| Geen autorisatie voor operatie      | 403    | U bent niet geautoriseerd voor deze operatie.                     | autorisation           |
+| Opgevraagde resource bestaat niet   | 404    | Opgevraagde resource bestaat niet.                                | notFound               |
+| Methode niet toegestaan             | 405    | Deze methode is niet toegestaan                                   | methodNotAllowed       |
+| Accept header <> JSON               | 406    | Gevraagde contenttype wordt niet ondersteund.                     | notAcceptable          |
+| Invalide request body               | 422    | Request body bevat een ongeldige waarde.                          | unprocessableEntity    |
+| Technische of interne fout          | 500    | Interne server fout.                                              | serverError            |
+| Bronservice niet beschikbaar        | 503    | Bronservice is niet beschikbaar.                                  | sourceUnavailable      |
+
+Deprecated:
+| Accept-Crs niet ondersteund         | 406    | CRS niet ondersteund.                                             | crsNotAcceptable       |
+| Geen Accept-Crs                     | 412    | Gewenste coördinatenstelsel voor geometrie moet worden opgegeven. | acceptCrsMissing       |
+| Geen Content-Crs                    | 412    | Coördinatenstelsel van gestuurde geometrie moet worden opgegeven. | contentCrsMissing      |
+| Content-Crs niet ondersteund        | 415    | CRS niet ondersteund                                              | crsNotSupported        | 
+
 
 Wanneer de fout is veroorzaakt door fouten in requestparameters (of request body), wordt "invalid-params" gevuld met details over elke foute parameter.
 
@@ -192,6 +195,30 @@ Abstract Scenario: Ongeldige queryparameter waarde bij zoeken
     En is in het antwoord status=406
     En is in het antwoord code=notAcceptable
 
+  Scenario: Invalide request body
+    Gegeven op endpoint /panden kan met POST gezocht worden op <locatie>
+    Als een request body wordt aangeboden die niet vertaald kan worden naar een valide locatie
+    Dan is de http status code van het antwoord 422
+    En is in het antwoord title=Request body bevat een ongeldige waarde.
+    En is in het antwoord status=422
+    En is in het antwoord code=unprocessableEntity
+
+  Scenario: Technische- of interne fout
+    Gegeven de API heeft last van een technisch probleem bij een verzoek van de gebruiker
+    Als een endpoint wordt aangesproken
+    Dan is de http status code van het antwoord 500
+    En is in het antwoord title=Interne server fout.
+    En is in het antwoord status=500
+    En is in het antwoord code=serverError
+
+  Scenario: Bronservice is niet beschikbaar
+    Als een endpoint wordt geraadpleegd
+    En de BAG API geen response of een timeout geeft
+    Dan is de http status code van het antwoord 503
+    En is in het antwoord title=Bronservice is niet beschikbaar.
+    En is in het antwoord status=503
+
+Deprecated:
   Scenario: niet voldaan aan vooraf gestelde voorwaarde
     Als een pand wordt geraadpleegd met de header 'Accept-Crs' = b
     Dan is de http status code van het antwoord 406
@@ -222,26 +249,3 @@ Abstract Scenario: Ongeldige queryparameter waarde bij zoeken
     En is in het antwoord title=Coördinatenstelsel a in Content-Crs wordt niet ondersteund.
     En is in het antwoord status=415
     En is in het antwoord code=crsNotSupported
-
-  Scenario: Invalide request body
-    Gegeven op endpoint /panden kan met POST gezocht worden op <locatie>
-    Als een request body wordt aangeboden die niet vertaald kan worden naar een valide locatie
-    Dan is de http status code van het antwoord 422
-    En is in het antwoord title=Request body bevat een ongeldige waarde.
-    En is in het antwoord status=422
-    En is in het antwoord code=unprocessableEntity
-
-  Scenario: Technische- of interne fout
-    Gegeven de API heeft last van een technisch probleem bij een verzoek van de gebruiker
-    Als een endpoint wordt aangesproken
-    Dan is de http status code van het antwoord 500
-    En is in het antwoord title=Interne server fout.
-    En is in het antwoord status=500
-    En is in het antwoord code=serverError
-
-  Scenario: Bronservice is niet beschikbaar
-    Als een endpoint wordt geraadpleegd
-    En de BAG API geen response of een timeout geeft
-    Dan is de http status code van het antwoord 503
-    En is in het antwoord title=Bronservice is niet beschikbaar.
-    En is in het antwoord status=503
