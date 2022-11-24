@@ -2,67 +2,33 @@
 
 Functionaliteit: inclusief eind status
 
-  Bij endpoints die standaard huidige (actueel zonder eind status) gegevens leveren,
-  kan middels een parameter inclusiefEindStatus ook de actuele gegevens worden opgevraagd. 
+  Bij endpoints die standaard huidige (actueel zonder eind status) gegevens leveren (zoals /adressen en /adressenuitgebreid, zie https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/openapi.yaml),
+  kan middels een parameter inclusiefEindStatus ook de actuele gegevens worden opgevraagd.
   Actuele gegevens zijn de gegevens die nu geldig zijn ongeacht de status van het object voorkomen.
 
   Deze parameter kan niet worden gebruikt i.c.m. tijdreis parameters, zie https://github.com/lvbag/BAG-API/blob/master/Features/tijdreizen.feature of huidig parameter, zie https://github.com/lvbag/BAG-API/blob/master/Features/huidig.feature.
 
   De default waarde van de parameter inclusiefEindStatus is 'false'.
 
-  Scenario: geen inclusiefEindStatus in request
-    Gegeven een object met een actueel voorkomen zonder eind status (huidig)
+  Scenario: geen inclusiefindStatus in request
+    Gegeven een object met een actueel voorkomen <status>
     Als een request wordt ingediend om het huidige voorkomen op te vragen
-    En inclusiefEindStatus is niet opgegeven
-    En geldigOp is niet opgegeven
-    En beschikbaarOp is niet opgegeven
-    En huidig is niet opgegeven
-    Dan bevat de response het huidige voorkomen van het object
+    En inclusiefEindStatus wordt niet meegegeven in de request
+    Dan bevat de response het actuele voorkomen <resultaat> 
+    | status              | resultaat |
+    | zonder eind status  | wel       |
+    | met een eind status | niet      |    
 
-  Scenario: inclusiefEindStatus=false in request
-    Gegeven een object met een actueel voorkomen zonder eind status (huidig)
+  Scenario: inclusiefEindStatus in request
+    Gegeven een object met een actueel voorkomen met <status>
     Als een request wordt ingediend om het huidige voorkomen op te vragen
-    En inclusiefEindStatus=false is opgegeven
-    En geldigOp is niet opgegeven
-    En beschikbaarOp is niet opgegeven
-    En huidig is niet opgegeven
-    Dan bevat de response het huidige voorkomen van het object
-
-  Scenario: inclusiefEindStatus=true in request
-    Gegeven een object met een actueel voorkomen zonder eind status
-    Als een request wordt ingediend om het huidige voorkomen op te vragen
-    En inclusiefEindStatus=true is opgegeven
-    En geldigOp is niet opgegeven
-    En beschikbaarOp is niet opgegeven
-    En huidig is niet opgegeven
-    Dan bevat de response het huidige voorkomen van het object
-
-  Scenario: geen inclusiefEindStatus in request
-    Gegeven een object met een actueel voorkomen met een eind status
-    Als een request wordt ingediend om het huidige voorkomen op te vragen
-    En inclusiefEindStatus is niet opgegeven
-    En geldigOp is niet opgegeven
-    En beschikbaarOp is niet opgegeven
-    En huidig is niet opgegeven
-    Dan wordt het actuele voorkomen niet geleverd
-  
-  Scenario: inclusiefEindStatus=false in request
-    Gegeven een object met een actueel voorkomen met een eind status
-    Als een request wordt ingediend om het huidige voorkomen op te vragen
-    En inclusiefEindStatus=false is opgegeven
-    En geldigOp is niet opgegeven
-    En beschikbaarOp is niet opgegeven
-    En huidig is niet opgegeven
-    Dan wordt het actuele voorkomen niet geleverd
-
-  Scenario: inclusiefEindStatus=true in request
-    Gegeven een object met een actueel voorkomen met een eind status
-    Als een request wordt ingediend om het huidige voorkomen op te vragen
-    En inclusiefEindStatus=true is opgegeven
-    En geldigOp is niet opgegeven
-    En beschikbaarOp is niet opgegeven
-    En huidig is niet opgegeven
-    Dan bevat de response het actuele voorkomen van het object
+    En inclusiefEindStatus bevat waarde <inclusiefEindStatus>
+    Dan bevat de response het actuele voorkomen <resultaat> 
+    | status              | inclusiefEindStatus | resultaat |
+    | zonder eind status  | true                | wel       |
+    | met een eind status | true                | wel       |    
+    | zonder eind status  | false               | wel       |
+    | met een eind status | false               | niet      |
 
   Scenario: geldigOp, beschikbaarOp of huidig i.c.m. inclusiefEindStatus
     Als naar een endpoint dat standaard huidige gegevens levert een request wordt gestuurd
