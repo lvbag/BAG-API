@@ -10,6 +10,9 @@ Functionaliteit: inclusief eind status
 
   De default waarde van de parameter inclusiefEindStatus is 'false'.
 
+  Parameters die niet worden ondersteund bij endpoints die huidige gegevens leveren en wel worden opgegeven, worden genegeerd.
+  Er treedt in dat geval geen foutmelding op.
+
   Scenario: geen inclusiefindStatus in request
     Gegeven een object met een actueel voorkomen <status>
     Als een request wordt ingediend om het huidige voorkomen op te vragen
@@ -29,11 +32,3 @@ Functionaliteit: inclusief eind status
     | met een eind status | true                | wel       |    
     | zonder eind status  | false               | wel       |
     | met een eind status | false               | niet      |
-
-  Scenario: geldigOp, beschikbaarOp of huidig i.c.m. inclusiefEindStatus
-    Als naar een endpoint dat standaard huidige gegevens levert een request wordt gestuurd
-    En ingeinclusiefEindStatus=true is opgegeven
-    En één of meer van de parameters geldigOp, beschikbaarOp of huidig zijn opgegeven
-    Dan bevat de response status=400
-    En bevat de response code=unsupportedCombination
-    En bevat de response title=De combinatie van opgegeven parameters is niet toegestaan.
