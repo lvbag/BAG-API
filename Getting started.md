@@ -16,7 +16,7 @@ Testen wordt bij voorkeur gedaan in de testomgeving.
 Je kunt de Open API Specificaties (OAS3) van de API bekijken in [Swagger-formaat](https://lvbag.github.io/BAG-API/Technische%20specificatie/) of [Redoc.](https://lvbag.github.io/BAG-API/Technische%20specificatie/Redoc/)
 De (resolved) OAS3 is hier te downloaden: [openapi.yaml](https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/openapi.yaml).  
   
-### Beschikbare endpoint  
+### Beschikbare endpoints  
   
 De API kent de volgende endpoints:  
 
