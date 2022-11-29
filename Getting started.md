@@ -11,12 +11,38 @@ Om aan te sluiten kun je de volgende stappen doorlopen:
 [Vraag een API key voor de test- en productieomgeving aan.](https://formulieren.kadaster.nl/aanvraag_bag_api_individuele_bevragingen_productie) 
 Testen wordt bij voorkeur gedaan in de testomgeving.  
   
-## Fucntionaliteit en specificaties  
+## Functionaliteiten en specificaties  
  
 Je kunt de Open API Specificaties (OAS3) van de API bekijken in [Swagger-formaat](https://lvbag.github.io/BAG-API/Technische%20specificatie/) of [Redoc.](https://lvbag.github.io/BAG-API/Technische%20specificatie/Redoc/)
-De (resolved) OAS3 is hier te downloaden: [openapi.yaml](https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/openapi.yaml).
- 
+De (resolved) OAS3 is hier te downloaden: [openapi.yaml](https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/openapi.yaml).  
   
+### Beschikbare endpoint  
+  
+De API kent de volgende endpoints:  
+
+•	*Woonplaatsen*  
+•	*Openbare ruimten*  
+•	*Nummeraanduidingen*  
+•	*Verblijfsobjecten*  
+•	*Standplaatsen*  
+•	*Ligplaatsen*  
+•	*Panden*  
+•	*Bronhouders*  
+  
+
+•	*Adressen*: hierin zijn samenhangende en gerelateerde gegevens samengevoegd uit de nummeraanduiding, openbare ruimte en woonplaats die samen een adres vormen
+
+•	*Adressen uitgebreid*: deze resource ondersteunt de mogelijkheid om met één bevraging meer informatie over het adres op te halen zoals het bouwjaar en de gebruiksoppervlakte.   
+  
+•	*Adresseerbare objecten*: dit kan een verblijfsobject, ligplaats of standplaats zijn.  
+
+De objecten endpoints leveren één of meer (voorkomens van) object(en), met embedded resources en links. 
+
+De endpoints *Adressen* en *Adressen uitgebreid* en *Adresseerbare objecten* zijn samengestelde (convenience) endpoints waarin de gegevens van verschillende BAG objecten zijn samengevoegd.
+  
+ 
+ 
+ 
   
   
   
