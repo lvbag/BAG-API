@@ -71,7 +71,7 @@ Er zijn een aantal algemene functies die gelden voor bovenstaande aanvragen:
   
 Je kan een adres zoeken met het endpoint /adressen/. Als zoekingang kan bijvoorbeeld de postcode en huisnummercombinatie worden gebruikt.  
  
-Een volledig overzicht met mogelijke zoekingangen is opgenomen in de tabel [Wat zit in welk endpoint](https://github.com/lvbag/BAG-API/blob/master/Documentatie/Tabel_Wat zit in welk endpoint_.pdf).  
+Een volledig overzicht met mogelijke zoekingangen is opgenomen in de tabel [Wat zit in welk endpoint](https://github.com/lvbag/BAG-API/blob/master/Documentatie/Tabel_Watzitinwelkendpoint_.pdf).  
   
 Deze zoekfunctie kan soms veel zoekresultaten opleveren. Daarom wordt hier [paginering](https://github.com/lvbag/BAG-API/blob/master/Features/paginering.feature) toegepast.  
   
