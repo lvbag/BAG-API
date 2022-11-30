@@ -30,9 +30,9 @@ De API kent de volgende endpoints:
 •	*Bronhouders*  
   
 
-•	*Adressen*: hierin zijn samenhangende en gerelateerde gegevens samengevoegd uit de nummeraanduiding, openbare ruimte en woonplaats die samen een adres vormen
+•	*Adressen*: hierin zijn samenhangende en gerelateerde gegevens samengevoegd uit de nummeraanduiding, openbare ruimte en woonplaats die samen een adres vormen.
 
-•	*Adressen uitgebreid*: deze resource ondersteunt de mogelijkheid om met één bevraging meer informatie over het adres op te halen zoals het bouwjaar en de gebruiksoppervlakte.   
+•	*Adressen uitgebreid*: deze resource ondersteunt de mogelijkheid om met één bevraging meer informatie over het adres op te halen, zoals het bouwjaar en de gebruiksoppervlakte.   
   
 •	*Adresseerbare objecten*: dit kan een verblijfsobject, ligplaats of standplaats zijn.  
 
@@ -43,35 +43,35 @@ De endpoints *Adressen* en *Adressen uitgebreid* en *Adresseerbare objecten* zij
 ### Zoekingangen van de verschillende endpoints  
   
 Elk endpoint beschikt over een eigen set aan gegevens en elk endpoint is door middel van verschillende zoekingangen te bevragen.  
-In de tabel [Wat zit in welk endpoint](https://github.com/lvbag/BAG-API/blob/master/Documentatie/Tabel_Wat%20zit%20in%20welk%20endpoint_.pdf) is af te lezen welk zoekingangen mogelijk zijn bij de verschillende endpoints en welke informatie dit oplevert.  
+In de tabel [Wat zit in welk endpoint](https://github.com/lvbag/BAG-API/blob/master/Documentatie/Tabel_Wat%20zit%20in%20welk%20endpoint_.pdf) is af te lezen welke zoekingangen mogelijk zijn bij de verschillende endpoints en welke informatie dit oplevert.  
   
 ###   Algemene functionaliteit  
   
 Er zijn een aantal algemene functies die gelden voor bovenstaande aanvragen:  
   
-  •	De expand resource is te gebruiken om binnen een response extra informatie te ontvangen over een van de objecttypen. Bijvoorbeeld bij een adres kan de volledige informatie (inclusief registratie tijdstippen) van een openbare ruimte worden opgevraagd door expand=openbareruimte mee te nemen in de bevraging. Voor de werking, zie feature [expand.](https://github.com/lvbag/BAG-API/blob/master/Features/expand.feature)
+  •	De expand resource is te gebruiken om binnen een response extra informatie te ontvangen over een van de objecttypen. Zo kan bijvoorbeeld bij een adres de volledige informatie (inclusief registratie tijdstippen) van een openbare ruimte worden opgevraagd door expand=openbareruimte mee te nemen in de bevraging. Voor de werking, zie feature [expand.](https://github.com/lvbag/BAG-API/blob/master/Features/expand.feature)
 
 •	De functionaliteit exacte match biedt de mogelijkheid om een specifiek object te bevragen. Ook wanneer er meerdere objecten aan de opgegeven parameters voldoen. Parameter exacteMatch=true werkt als een filter op de objecten die voldoen aan de opgegeven parameters huisnummer, huisletter en huisnummertoevoeging. De endpoints waar exacte match kan worden toegepast kennen geen fuzzy search. Voor de werking, zie feature [exacte match.](https://github.com/lvbag/BAG-API/blob/master/Features/exacte_match.feature)
 
-•	Gebruik van paginering om het aantal zoekresultaten per zoekvraag te beperken. Met de page parameter kan een volgende pagina worden gevraagd. Met de pageSize parameter kan gekozen worden voor meer of minder zoekresultaten per pagina (standaard is 20, maximum is 100). Voor de werking, zie feature [paginering.](https://github.com/lvbag/BAG-API/blob/master/Features/paginering.feature) 
+•	Er wordt paginering gebruikt om het aantal zoekresultaten per zoekvraag te beperken. Met de page parameter kan een volgende pagina worden gevraagd. Met de pageSize parameter kan gekozen worden voor meer of minder zoekresultaten per pagina (standaard is 20, maximum is 100). Voor de werking, zie feature [paginering.](https://github.com/lvbag/BAG-API/blob/master/Features/paginering.feature) 
 
-•	Bij enkele endpoints wordt de mogelijkheid geboden om met de parameter Huidig alleen huidige objecten op te vragen. Huidig betekent dat het object actueel is en geen eindstatus heeft. Het adressen en adressen uitgebreid endpoint leveren alleen huidige gegevens. Voor meer informatie, zie feature [huidig.](https://github.com/lvbag/BAG-API/blob/master/Features/huidig.feature)
+•	Bij enkele endpoints wordt de mogelijkheid geboden om met de parameter Huidig alleen huidige objecten op te vragen. Huidig betekent dat het object actueel is en geen eindstatus heeft. De endpoints Adressen en Adressen uitgebreid leveren alleen huidige gegevens. Voor meer informatie, zie feature [huidig.](https://github.com/lvbag/BAG-API/blob/master/Features/huidig.feature)
 
-•	Soms kan er een onderzoek lopen of een gegeven wel correct is. Er zijn dan twijfels over de juistheid van de geregistreerde waarde. De API levert deze waarde wel, maar neemt die velden dan op in Inonderzoek met de waarde True. Voor de werking, zie feature [Inonderzoek bij adressen en adressenUitgebreid.](https://github.com/lvbag/BAG-API/blob/master/Features/inonderzoek-bij-adressen-en-adressen-uitgebreid.feature)  
+•	Soms kan een onderzoek lopen naar de juistheid van een gegeven. Er zijn dan twijfels over de juistheid van de geregistreerde waarde. De API levert deze waarde wel, maar neemt die velden dan op in Inonderzoek met de waarde True. Voor de werking, zie feature [Inonderzoek bij adressen en adressenUitgebreid.](https://github.com/lvbag/BAG-API/blob/master/Features/inonderzoek-bij-adressen-en-adressen-uitgebreid.feature)  
 
-De gegevens die worden geleverd met de endpoints adressen en adressen uitgebreid zijn huidige gegevens. Door middel van de boolean inclusief eindstatus, is het mogelijk om ook adressen te zoeken waarbij één van de bronobjecten (nummeraanduiding, openbare ruimte en woonplaats) een eindstatus heeft.
+•	De gegevens die worden geleverd met de endpoints adressen en adressen uitgebreid zijn huidige gegevens. Door middel van de boolean inclusief eindstatus, is het mogelijk om ook adressen te zoeken waarbij één van de bronobjecten (nummeraanduiding, openbare ruimte en woonplaats) een eindstatus heeft.
 
 •	Sommige resources bevatten geometrie. De API ondersteunt op dit moment alleen het RD coördinatenstelsel (epsg:28992). Bij een aanvraag die geometrie teruglevert, moet de request header Accept-Crs worden meegestuurd.
 
-•	Bij het zoeken naar panden en adresseerbare objecten kun je gebruik maken van boundingbox.
+•	Bij het zoeken naar panden en adresseerbare objecten kan gebruik worden gemaakt van een boundingbox.
   
 ### Uitwerking Use cases  
   
 ####  Zoeken op een adres d.m.v. postcode en huisnummer binnen het endpoint Adressen  
   
-Je kan een adres zoeken met endpoint /adressen/. Als zoekingang kan bijvoorbeeld de postcode en huisnummer combinatie worden gebruikt.  
+Je kan een adres zoeken met het endpoint /adressen/. Als zoekingang kan bijvoorbeeld de postcode en huisnummercombinatie worden gebruikt.  
  
-Een volledig overzicht met de mogelijke zoekingangen is opgenomen in de tabel [Wat zit in welk endpoint.](https://github.com/lvbag/BAG-API/blob/master/Documentatie/Tabel_Wat zit in welk endpoint_.pdf)  
+Een volledig overzicht met mogelijke zoekingangen is opgenomen in de tabel [Wat zit in welk endpoint.](https://github.com/lvbag/BAG-API/blob/master/Documentatie/Tabel_Wat zit in welk endpoint_.pdf)  
   
 Deze zoekfunctie kan soms veel zoekresultaten opleveren. Daarom wordt hier [paginering](https://github.com/lvbag/BAG-API/blob/master/Features/paginering.feature) toegepast.  
   
@@ -84,8 +84,7 @@ In onderstaand voorbeeld is gezocht op postcode 2631 CR, huisnummer 15 en huisle
   
 Wanneer je op zoek bent naar alle verblijfsobjecten die gelegen zijn binnen een pand, kan je dit doen door gebruik te maken van het verblijfsobjecten endpoint. Door de pandidentificatie als zoekingang te gebruiken, worden alle verblijfsobjecten binnen het pand geleverd.  
 
-Dit doe je met /verblijfsobjecten?pandIdentificatie={pandIdentificatie}, waarbij {pandIdentificatie} moet worden vervangen door de identificatie van het betreffende pand. Bijvoorbeeld /adressen?pandIdentificatie=0268100000021458  
-  
+Dit doe je met /verblijfsobjecten?pandIdentificatie={pandIdentificatie}, waarbij {pandIdentificatie} moet worden vervangen door de identificatie van het betreffende pand. Bijvoorbeeld /adressen?pandIdentificatie=0268100000021458:  
   
  ![image](https://user-images.githubusercontent.com/40664681/204532327-1d1547c3-f876-4cac-83c6-e2c51b2f4263.png)  
    
@@ -93,11 +92,11 @@ Dit doe je met /verblijfsobjecten?pandIdentificatie={pandIdentificatie}, waarbij
    
  #### Zoeken naar adressen binnen een bounding box  
    
-De BAG API biedt de mogelijkheid om binnen een specifiek gebied (bounding box) BAG gegevens op te vragen. Het is bijvoorbeeld mogelijk om door middel van bounding box te zoeken naar adresseerbare objecten (met adresgegevens) binnen een maximum oppervlakte van 250.000 vierkante meter.  
+De BAG API biedt de mogelijkheid om binnen een specifiek gebied (bounding box) BAG gegevens op te vragen. Het is bijvoorbeeld mogelijk om door middel van een bounding box te zoeken naar adresseerbare objecten (met adresgegevens) binnen een maximum oppervlakte van 250.000 vierkante meter.  
   
-Binnen het endpoint adresseerbare objecten kan het x en y coordinaat van de hoek linksonder worden opgegeven en het x en y coordinaat van de hoek rechtsboven. Deze twee punten maken een rechthoekige box waarbinnen wordt gezocht.  
+Binnen het endpoint adresseerbare objecten kunnen de x en y coördinaten van de hoek linksonder worden opgegeven en de x en y coördinaten van de hoek rechtsboven. Deze twee punten maken een rechthoekige box waarbinnen wordt gezocht.  
 
-Let op dat bij de bevraging de Content-Crs  epsg:28992 wordt meegegeven. 
+Let erop dat bij de bevraging de Content-Crs  epsg:28992 wordt meegegeven. 
   
 De url is als volgt:  
 https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/adresseerbareobjecten?huidig=false&page=1&pageSize=20&bbox=230781.67,582665.17,230956.35,582882.42  
@@ -106,19 +105,19 @@ https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/adresseer
   
 ## Implementeer de API client  
   
-Client code kun je genereren met de “[genereervariant](https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/openapi.yaml)” van de API-specificaties en een code generator. Een overzicht met codegeneratoren kun je vinden op [OpenAPI.Tools.](https://openapi.tools/#sdk)  
+Client code kan worden gegenereerd met de “[genereervariant](https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/openapi.yaml)” van de API-specificaties en een code generator. Een overzicht met codegeneratoren is te vinden op [OpenAPI.Tools.](https://openapi.tools/#sdk)  
   
 ## Probeer en test de API  
   
-De werking van de API is het makkelijkst te testen met behulp van [Postman](https://www.getpostman.com/). De [openapi.yaml](https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/openapi.yaml) kun je importeren als project, waarna de verschillende requests worden ingeladen die deze API ondersteunt.  
+De werking van de API is het gemakkelijkst te testen met behulp van [Postman](https://www.getpostman.com/). De [openapi.yaml](https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/openapi.yaml) kan je importeren als project, waarna de verschillende requests worden ingeladen die deze API ondersteunt.  
   
 ### API Key  
   
-Om de API te kunnen bevragen is een API key nodig. Deze moet je bij het request opnemen in request header “X-Api-Key”. [Vraag een API key voor de BAG API aan.](https://formulieren.kadaster.nl/aanvraag_bag_api_individuele_bevragingen_productie)  
+Om de API te kunnen bevragen, is een API key nodig. Deze moet je bij het request opnemen in request header “X-Api-Key”. [Vraag een API key voor de BAG API aan.](https://formulieren.kadaster.nl/aanvraag_bag_api_individuele_bevragingen_productie)  
   
 ### Testgevallen  
   
-Onderstaande tabellen bevatten testgevallen voor specifieke situaties waarmee de werking van de API kan worden getest.  
+Onderstaande tabellen bevatten testgevallen voor specifieke situaties waarmee de werking van de API kan worden getest:  
    
   | **Resource**          | **Test situatie**                                                                | **URI**                                 |
 |-----------------------|----------------------------------------------------------------------------------|-----------------------------------------|
