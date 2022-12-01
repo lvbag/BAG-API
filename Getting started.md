@@ -1,19 +1,19 @@
 # Getting Started 
   
 Om aan te sluiten kun je de volgende stappen doorlopen:
-1.	Aanmelden om toegang te krijgen tot de acceptatie- en productieomgeving
-2.	Bekijk de functionaliteit en specificaties
-3.	Implementeer de API Client
-4.	Probeer en test de API  
+1.	[Aanmelden om toegang te krijgen tot de acceptatie- en productieomgeving](#aanmelden)
+2.	[Bekijk de functionaliteit en specificaties](#functionaliteiten-en-specificaties)
+3.	[Implementeer de API Client](#implementeer-de-api-client)
+4.	[Probeer en test de API](#probeer-en-test-de-api)
   
 ## Aanmelden  
   
-[Vraag een API key voor de test- en productieomgeving aan.](https://formulieren.kadaster.nl/aanvraag_bag_api_individuele_bevragingen_productie) 
+[Vraag een API key voor de test- en productieomgeving aan.](https://formulieren.kadaster.nl/aanvraag_bag_api_individuele_bevragingen_productie){:target="_blank"}
 Testen wordt bij voorkeur gedaan in de testomgeving.  
   
 ## Functionaliteiten en specificaties  
  
-Je kunt de Open API Specificaties (OAS3) van de API bekijken in [Swagger-formaat](https://lvbag.github.io/BAG-API/Technische%20specificatie/) of [Redoc.](https://lvbag.github.io/BAG-API/Technische%20specificatie/Redoc/)
+Je kunt de Open API Specificaties (OAS3) van de API bekijken in [Swagger-formaat](https://lvbag.github.io/BAG-API/Technische%20specificatie/){:target="_blank"} of [Redoc.](https://lvbag.github.io/BAG-API/Technische%20specificatie/Redoc/)
 De (resolved) OAS3 is hier te downloaden: [openapi.yaml](https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/openapi.yaml).  
   
 ### Beschikbare endpoints  
