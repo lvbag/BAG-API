@@ -1,4 +1,13 @@
-    
+
+**Release notes 2.6.0:**  (5 december 2022)
+--
+
+In deze versie van de LV BAG Individuele Bevragingen API is de volgende functionaliteit geïmplementeerd:
+- Hal objecten kunnen één niveau genest worden.
+- Adressen en adressenuitgebreid endpoint zijn uitgebreid met een optionele 'inclusiefEindStatus' parameter.
+- De identificatie endpoints zijn uitgebreid met een optionele 'huidig' parameter.
+- Bij het adressen endpoint is het mogelijk om panden te expanden.
+
 **Release notes 2.5.0:**  (10 november 2022)  
 --  
   
