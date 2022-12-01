@@ -105,7 +105,7 @@ https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/adresseer
   
 ### Beperking gebruik BAG API Individuele Bevragingen
   
-Het gebruik van de BAG API Individuele Bevragingen is kosteloos. Bij het gebruik van deze service gelden voorwaarden om overmatig of onwenselijk gebruik van de API te voorkomen. We willen de BAG API voor alle afnemers snel en bruikbaar houden. Om dit te kunnen waarborgen zijn limieten ingesteld. Meer informatie over de beperkingen van de BAG API vindt u [hier](https://github.com/lvbag/BAG-API/blob/master/Documentatie/Beperkingen%20gebruik%20BAG%20API.md)     
+Het gebruik van de BAG API Individuele Bevragingen is kosteloos. Bij het gebruik van deze service gelden voorwaarden om overmatig of onwenselijk gebruik van de API te voorkomen. We willen de BAG API voor alle afnemers snel en bruikbaar houden. Om dit te kunnen waarborgen zijn limieten ingesteld. Meer informatie over de beperkingen van de BAG API vindt u [hier.](https://github.com/lvbag/BAG-API/blob/master/Documentatie/Beperkingen%20gebruik%20BAG%20API.md)     
   
 ## Implementeer de API client  
   
