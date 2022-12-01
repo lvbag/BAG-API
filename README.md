@@ -8,9 +8,13 @@ Voor meer informatie over de BAG API kunt u de [pagina BAG API Individuele Bevra
 
 Wilt u gebruikmaken van de BAG API, vraag dan door middel van [dit formulier](https://formulieren.kadaster.nl/aanvraag_bag_api_individuele_bevragingen_productie) een API Key aan. 
 
+Om u als gebruiker op weg te helpen bij de implementatie van de BAG API is het Getting Started bestand beschikbaar gesteld. Hierin is de belangrijkste informatie opgenomen over de BAG API Individuele Bevragingen.  
+  
+ 
 
 __Documentatie__    
   
-* Technische specificaties van de API in [Swagger-formaat](./Technische%20specificatie).
+* [Getting started] 
+* Technische specificaties van de API in [Swagger-formaat](./Technische%20specificatie) of in [Redoc-formaat](./Technische%20specificatie)
 * [Tabel 'wat zit in welk endpoint'](https://github.com/lvbag/BAG-API/blob/master/Documentatie/Tabel_Wat%20zit%20in%20welk%20endpoint_.pdf).
 
