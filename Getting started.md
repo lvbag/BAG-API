@@ -63,7 +63,7 @@ Er zijn een aantal algemene functies die gelden voor bovenstaande aanvragen:
 
 •	Sommige resources bevatten geometrie. De API ondersteunt op dit moment alleen het RD coördinatenstelsel (epsg:28992). Bij een aanvraag die geometrie teruglevert, moet de request header Accept-Crs worden meegestuurd.
 
-•	Bij het zoeken naar panden en adresseerbare objecten kan gebruik worden gemaakt van een boundingbox.
+•	Bij het zoeken naar panden en adresseerbare objecten kan gebruik worden gemaakt van een boundingbox.  
   
 ### Uitwerking Use cases  
   
@@ -101,7 +101,11 @@ Let erop dat bij de bevraging de Content-Crs  epsg:28992 wordt meegegeven.
 De url is als volgt:  
 https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/adresseerbareobjecten?huidig=false&page=1&pageSize=20&bbox=230781.67,582665.17,230956.35,582882.42  
   
-![image](https://user-images.githubusercontent.com/40664681/204532827-624028b3-de6d-4dce-9d89-3137bd283f31.png)
+![image](https://user-images.githubusercontent.com/40664681/204532827-624028b3-de6d-4dce-9d89-3137bd283f31.png)  
+  
+### Beperking gebruik BAG API Individuele Bevragingen
+  
+Het gebruik van de BAG API Individuele Bevragingen is kosteloos. Bij het gebruik van deze service gelden voorwaarden om overmatig of onwenselijk gebruik van de API te voorkomen. We willen de BAG API voor alle afnemers snel en bruikbaar houden. Om dit te kunnen waarborgen zijn limieten ingesteld. Meer informatie over de beperkingen van de BAG API vindt u [hier](https://github.com/lvbag/BAG-API/blob/master/Documentatie/Beperkingen%20gebruik%20BAG%20API.md)     
   
 ## Implementeer de API client  
   
@@ -146,6 +150,8 @@ Testomgeving:
 https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/  
 
 Productieomgeving:  
-https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/
+https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/  
+  
+
 
     
