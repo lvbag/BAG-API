@@ -8,12 +8,12 @@ Om aan te sluiten kun je de volgende stappen doorlopen:
   
 ## Aanmelden  
   
-[Vraag een API key voor de test- en productieomgeving aan.](https://formulieren.kadaster.nl/aanvraag_bag_api_individuele_bevragingen_productie){:target="_blank"}
+[Vraag een API key voor de test- en productieomgeving aan.](https://formulieren.kadaster.nl/aanvraag_bag_api_individuele_bevragingen_productie)
 Testen wordt bij voorkeur gedaan in de testomgeving.  
   
 ## Functionaliteiten en specificaties  
  
-Je kunt de Open API Specificaties (OAS3) van de API bekijken in [Swagger-formaat](https://lvbag.github.io/BAG-API/Technische%20specificatie/){:target="_blank"} of [Redoc.](https://lvbag.github.io/BAG-API/Technische%20specificatie/Redoc/)
+Je kunt de Open API Specificaties (OAS3) van de API bekijken in [Swagger-formaat](https://lvbag.github.io/BAG-API/Technische%20specificatie/) of [Redoc.](https://lvbag.github.io/BAG-API/Technische%20specificatie/Redoc/)
 De (resolved) OAS3 is hier te downloaden: [openapi.yaml](https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/openapi.yaml).  
   
 ### Beschikbare endpoints  
@@ -71,7 +71,7 @@ Er zijn een aantal algemene functies die gelden voor bovenstaande aanvragen:
   
 Je kan een adres zoeken met het endpoint /adressen/. Als zoekingang kan bijvoorbeeld de postcode en huisnummercombinatie worden gebruikt.  
  
-Een volledig overzicht met mogelijke zoekingangen is opgenomen in de tabel [Wat zit in welk endpoint](https://github.com/lvbag/BAG-API/blob/master/Documentatie/Tabel_Wat zit in welk endpoint_.pdf).  
+Een volledig overzicht met mogelijke zoekingangen is opgenomen in de tabel [Wat zit in welk endpoint](https://github.com/lvbag/BAG-API/blob/master/Documentatie/Tabel_Wat%20zit%20in%20welk%20endpoint_.pdf).  
   
 Deze zoekfunctie kan soms veel zoekresultaten opleveren. Daarom wordt hier [paginering](https://github.com/lvbag/BAG-API/blob/master/Features/paginering.feature) toegepast.  
   
