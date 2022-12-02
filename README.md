@@ -15,6 +15,6 @@ Om u als gebruiker op weg te helpen bij de implementatie van de BAG API is het G
 __Documentatie__    
   
 * [Getting started] 
-* Technische specificaties van de API in [Swagger-formaat](./Technische%20specificatie) of in [Redoc-formaat](./Technische%20specificatie)
+* Technische specificaties van de API in [Swagger-formaat](https://lvbag.github.io/BAG-API/Technische%20specificatie/) of in [Redoc-formaat](https://lvbag.github.io/BAG-API/Technische%20specificatie/Redoc/)
 * [Tabel 'wat zit in welk endpoint'](https://github.com/lvbag/BAG-API/blob/master/Documentatie/Tabel_Wat%20zit%20in%20welk%20endpoint_.pdf).
 
