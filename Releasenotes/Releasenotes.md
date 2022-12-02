@@ -5,7 +5,7 @@
 In deze versie van de LV BAG Individuele Bevragingen API is de volgende functionaliteit geïmplementeerd:
 - Hal objecten kunnen één niveau genest worden.
 - De endpoints Adressen en Adressenuitgebreid zijn uitgebreid met de mogelijkheid om een optionele parameter 'inclusiefEindStatus' mee te geven.
-- De endpoints woonplaatse, openbare ruimten, panden, verblijfsobjecten, ligplaaten, standplaatsen en nummeraanduidingen zijn uitgebreid met de mogelijkheid om met zoekingang identificatie de optionele parameter 'huidig' mee te geven.
+- De endpoints woonplaatsen, openbare ruimten, panden, verblijfsobjecten, ligplaaten, standplaatsen en nummeraanduidingen zijn uitgebreid met de mogelijkheid om met zoekingang identificatie de optionele parameter 'huidig' mee te geven.
 - Bij het adressen endpoint is het mogelijk om panden te expanden.
 ------------------------------    
 **Release notes 2.5.0:**  (10 november 2022)  
