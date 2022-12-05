@@ -24,7 +24,6 @@ De functionaliteiten die nodig zijn om de user stories uit te kunnen voeren, zij
 * Als medewerker vergunningen en burgerzaken wil ik net zo’n informatierijke toelichting voor gecontateerd als voor mogelijkOnjuist
 * Als medewerker burgerzaken wil ik een adres raadplegen uit de BRP met de nummeraanduidingidentificatie
 * Als burger wil ik een adres kunnen selecteren
-* Als burger wil ik een adres kunnen selecteren
 * Als burger wil ik mijn nieuwe adres kunnen selecteren
 * Als medewerker van de gemeente wil ik een adres opzoeken
 * Als medewerker vergunningen wil ik weten wat de status is van een pand
