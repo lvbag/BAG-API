@@ -1,5 +1,5 @@
 
-**Release notes 2.6.0:**  (5 december 2022)
+**Release notes 2.6.0:**  (9 december 2022)
 --
 
 In deze versie van de LV BAG Individuele Bevragingen API is de volgende functionaliteit geïmplementeerd:
