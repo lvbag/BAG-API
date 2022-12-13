@@ -1,4 +1,17 @@
-    
+
+**Release notes 2.6.0:**  (9 december 2022)
+--
+
+In deze versie van de LV BAG Individuele Bevragingen API is de volgende functionaliteit geïmplementeerd:
+- Hal objecten kunnen één niveau genest worden.
+- De endpoints Adressen en Adressenuitgebreid zijn uitgebreid met de mogelijkheid om een optionele parameter 'inclusiefEindStatus' mee te geven.
+- De endpoints woonplaatsen, openbare ruimten, panden, verblijfsobjecten, ligplaaten, standplaatsen en nummeraanduidingen zijn uitgebreid met de mogelijkheid om met zoekingang identificatie de optionele parameter 'huidig' mee te geven.
+- Bij het adressen endpoint is het mogelijk om panden te expanden.
+
+### Known issues:
+- Als het `/adressen/zoek` of `/adressen?q=` endpoint wordt bevraagd met een pagina die groter is dan het aantal beschikbare pagina's, dan wordt een http 500 geretourneerd.
+
+------------------------------    
 **Release notes 2.5.0:**  (10 november 2022)  
 --  
   
@@ -11,7 +24,7 @@ In deze versie van de LV BAG Individuele Bevragingen API is de volgende function
 - Het endpoint panden is uitgebreid met de mogelijkheid om te zoeken met een nummeraanduiding identificatie.  
 - Het endpoint adresseerbare objecten is uitgebreid met de zoekingang pandidentificatie. Hierdoor is het mogelijk om op basis van pandidentificatie te zoeken naar alle adresseerbare objecten die gelegen zijn binnen het pand. 
 
-Known issue: Het Inonderzoek en de indicatie geconstateerd wordt bij het adresseerbaar object niet meegeleverd. In de volgende release wordt dit opgelost. 
+------------------------------    
     
 **Release notes 2.4.0:**  (21 september 2022)  
 --  
