@@ -7,26 +7,9 @@ Functionaliteit: Zoeken op een locatie
     Onderstaande scenario's zoeken op locaties bij twee panden.
     Een pand is een rechthoekig vlak, geïllustreerd in afbeelding pand-locatie-zoeken <img src='../../features/media/pand-locatie-zoeken.svg' title='pand-locatie-zoeken'>
     Een pand heeft een uitsnede (bijvoorbeeld een binnenplaats), geïllustreerd in afbeelding pand-uitsnede-locatie-zoeken <img src='../../features/media/pand-uitsnede-locatie-zoeken.svg' title='pand-uitsnede-locatie-zoeken'>
-    In de illustraties staan de testgevallen aangegeven als blauw punt met een nummer. 
+    In de illustraties staan de testgevallen aangegeven als blauwe punten met een nummer. 
     Deze testgevallen zie je in de scenariotitels in rechte haken met respectievelijk V (voor vlak) en U (voor uitsnede) plus het testgeval nummer.
     Bijvoorbeeld [U2] vindt je in de illustratie pand-uitsnede-locatie-zoeken.svg als het blauwe punt met nummer 2.
-
-
-Rule: De standaardwaarde voor het coördinatenstelsel (CRS) voor de locatieparameter is Rijksdriehoekscoördinaten New Nederlands (epsg:28992)
-
-    Scenario: zoek op locatie zonder het coördinatenstelsel aan te geven
-        Gegeven het pand met identificatie "0826100000036343" heeft de volgende geometrie polygoon coördinaten
-        | geometriecoördinaten                                                                                                        |
-        | [ [118315.606,404844.967],[118324.183,404843.509],[118325.179,404849.365],[118316.604,404850.835],[118315.606,404844.967] ] |
-        Als met "GET" "/panden?locatie=118320,404848" wordt gezocht zonder requestheader "Content-Crs"
-        Dan bevat het resultaat het pand met identificatie "0826100000036343"
-
-    Scenario: zoek op locatie met het coördinatenstelsel dat je gebruikt in de locatieparameter
-        Gegeven het pand met identificatie "0826100000036343" heeft de volgende geometrie polygoon coördinaten
-        | geometriecoördinaten                                                                                                        |
-        | [ [118315.606,404844.967],[118324.183,404843.509],[118325.179,404849.365],[118316.604,404850.835],[118315.606,404844.967] ] |
-        Als met "GET" "/panden?locatie=118320,404848" wordt gezocht met requestheader "Content-Crs" met waarde "epsg:28992"
-        Dan bevat het resultaat het pand met identificatie "0826100000036343"
 
 Rule: Pand wordt gevonden wanneer de coördinaat van de locatieparameter binnen de pandgeometrie valt
 

@@ -10,26 +10,10 @@ Functionaliteit: Zoeken met een bounding box
     Een pand is een rechthoekig vlak, geïllustreerd in afbeelding pand-bbox-zoeken <img src='../../features/media/pand-bbox-zoeken.svg' title='pand-bbox-zoeken'>
     Een pand heeft een uitsnede (bijvoorbeeld een binnenplaats), geïllustreerd in afbeelding pand-uitsnede-bbox-zoeken <img src='../../features/media/pand-uitsnede-bbox-zoeken.svg' title='pand-uitsnede-bbox-zoeken'>
     Een verblijfsobject met een puntgeometrie, geïllustreerd in afbeelding verblijfsobject-bbox-zoeken <img src='../../features/media/verblijfsobject-bbox-zoeken.svg' title='verblijfsobject-bbox-zoeken'>
-    In de illustraties staan de testgevallen aangegeven als blauw punt met een nummer. 
+    In de illustraties staan de testgevallen aangegeven als blauwe punten met een nummer. 
     Deze testgevallen zie je in de scenariotitels in rechte haken met respectievelijk V (voor vlak), U (voor uitsnede) en P (voor punt) plus het testgeval nummer.
-    Bijvoorbeeld [U2] vindt je in de illustratie pand-uitsnede-locatie-zoeken.svg als het blauwe punt met nummer 2.
+    Bijvoorbeeld [U2] vind je in de illustratie pand-uitsnede-locatie-zoeken.svg als het blauwe punt met nummer 2.
 
-
-Rule: De standaardwaarde voor het coördinatenstelsel (CRS) voor de bbox-parameter is Rijksdriehoekscoördinaten New Nederlands (epsg:28992)
-
-    Scenario: zoek op bbox zonder het coördinatenstelsel aan te geven
-        Gegeven het pand met identificatie "0826100000036343" heeft de volgende geometrie polygoon coördinaten
-        | geometriecoördinaten                                                                                                        |
-        | [ [118315.606,404844.967],[118324.183,404843.509],[118325.179,404849.365],[118316.604,404850.835],[118315.606,404844.967] ] |
-        Als met "GET" "/panden?bbox=118314,404843,118326,404850" wordt gezocht zonder requestheader "Content-Crs"
-        Dan bevat het resultaat het pand met identificatie "0826100000036343"
-
-    Scenario: zoek op bbox met het coördinatenstelsel dat je gebruikt in de bbox-parameter
-        Gegeven het pand met identificatie "0826100000036343" heeft de volgende geometrie polygoon coördinaten
-        | geometriecoördinaten                                                                                                        |
-        | [ [118315.606,404844.967],[118324.183,404843.509],[118325.179,404849.365],[118316.604,404850.835],[118315.606,404844.967] ] |
-        Als met "GET" "/panden?bbox=118314,404843,118326,404850" wordt gezocht met requestheader "Content-Crs" met waarde "epsg:28992"
-        Dan bevat het resultaat het pand met identificatie "0826100000036343"
 
 Rule: Resource wordt gevonden wanneer de bbox de resourcegeometrie geheel of gedeeltelijk overlapt
 

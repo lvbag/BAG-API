@@ -90,6 +90,47 @@ Scenario: Zoeken met combinatie postcode en huisnummer
   | postcode | huisnummer | huisletter | huisnummertoevoeging |
   | 2391PH   | 1          |            |                      |
 
+Scenario: Zoeken met combinatie postcode, huisnummer en huisletter
+
+  Als er wordt gezocht met
+  | postcode | huisnummer | huisletter | huisnummertoevoeging | exacteMatch |
+  | 1015DT   | 237        | A          |                      | false       |
+  Dan bevat het resultaat de volgende objecten
+  | postcode | huisnummer | huisletter | huisnummertoevoeging |
+  | 1015DT   | 237        | A          | V                    |
+
+  Als er wordt gezocht met
+  | postcode | huisnummer | huisletter | huisnummertoevoeging | exacteMatch |
+  | 1015DT   | 237        | A          |                      | true        |
+  Dan bevat het resultaat geen objecten
+
+  Als er wordt gezocht met
+  | postcode | huisnummer | huisletter | huisnummertoevoeging | exacteMatch |
+  | 2594AN   | 265        | A          |                      | false       |
+  Dan bevat het resultaat de volgende objecten
+  | postcode | huisnummer | huisletter | huisnummertoevoeging |
+  | 2594AN   | 265        | A          |                      |
+  | 2594AN   | 265        | A          | 1                    |
+  | 2594AN   | 265        | A          | 2                    |
+  | 2594AN   | 265        | A          | 3                    |
+
+  Als er wordt gezocht met
+  | postcode | huisnummer | huisletter | huisnummertoevoeging | exacteMatch |
+  | 2594AN   | 265        | A          |                      | true        |
+  Dan bevat het resultaat de volgende objecten
+  | postcode | huisnummer | huisletter | huisnummertoevoeging |
+  | 2594AN   | 265        | A          |                      |
+
+  Als er wordt gezocht met
+  | postcode | huisnummer | huisletter | huisnummertoevoeging | exacteMatch |
+  | 3581KL   | 49         | A          |                      | false       |
+  Dan bevat het resultaat geen objecten
+
+  Als er wordt gezocht met
+  | postcode | huisnummer | huisletter | huisnummertoevoeging | exacteMatch |
+  | 3581KL   | 49         | A          |                      | true        |
+  Dan bevat het resultaat geen objecten
+
 Scenario: zoeken met combinatie postcode, huisnummer en huisnummertoevoeging
 
   Als er wordt gezocht met
@@ -106,58 +147,71 @@ Scenario: zoeken met combinatie postcode, huisnummer en huisnummertoevoeging
   | 2594AN   | 265        |            | 2                    | true        |
   Dan bevat het resultaat geen objecten
 
-Scenario: zoeken met combinatie postcode en huisnummer komt meerdere keren voor en exacteMatch wordt niet toegepast
-
   Als er wordt gezocht met
   | postcode | huisnummer | huisletter | huisnummertoevoeging | exacteMatch |
-  | 7411CC   | 36         |            |                      | false       |
+  | 3581KL   | 49         |            | A                    | false       |
   Dan bevat het resultaat de volgende objecten
-  | postcode | huisnummer | huisletter | huisnummertoevoeging |
-  | 7411CC   | 36         |            |                      |
-  | 7411CC   | 36         |            |                      |
-
-Scenario: zoeken met combinatie postcode en huisnummer komt meerdere keren voor en exacteMatch wordt toegepast
+  | 3581KL   | 49         |            | A                    |
 
   Als er wordt gezocht met
   | postcode | huisnummer | huisletter | huisnummertoevoeging | exacteMatch |
-  | 7411CC   | 36         |            |                      | true        |
+  | 3581KL   | 49         |            | A                    | true        |
   Dan bevat het resultaat de volgende objecten
-  | postcode | huisnummer | huisletter | huisnummertoevoeging |
-  | 7411CC   | 36         |            |                      |
-  | 7411CC   | 36         |            |                      |
-  
-Scenario: zoeken met combinatie van postcode en huisnummer waarbij exacteMatch kan worden toegepast kan niet i.c.m. fuzzy search
-
-  Als er wordt gezocht met
-  | postcode | huisnummer | huisletter | huisnummertoevoeging | exacteMatch |
-  | 2391PH   | 1          |            |                      | false       |
-  Dan bevat het resultaat de volgende objecten
-  | postcode | huisnummer | huisletter | huisnummertoevoeging |
-  | 2391PH   | 1          |            |                      |
-
-Scenario: zoeken met combinatie van postcode, huisnummer en evt. huisletter en/of huisnummertoevoeging en waarbij exacteMatch kan worden toegepast kan niet i.c.m. fuzzy search
-
-  Als er wordt gezocht met
-  | postcode | huisnummer | huisletter | huisnummertoevoeging | exacteMatch |
-  | 7437SZ   | 2          |            | A                    | false       |
-  Dan bevat het resultaat geen objecten
+  | 3581KL   | 49         |            | A                    |
 
   Als er wordt gezocht met
   | postcode | huisnummer | huisletter | huisnummertoevoeging | exacteMatch |
   | 1015DT   | 237        |            | A                    | false       |
   Dan bevat het resultaat de volgende objecten
-  | postcode | huisnummer | huisletter | huisnummertoevoeging |
   | 1015DT   | 237        | C          | A                    |
 
-
   Als er wordt gezocht met
   | postcode | huisnummer | huisletter | huisnummertoevoeging | exacteMatch |
-  | 3581KL   | 49         | A          |                      | false       |
+  | 1015DT   | 237        |            | A                    | true        |
   Dan bevat het resultaat geen objecten
 
+Scenario: zoeken met combinatie van postcode, huisnummer, huisletter en huisnummertoevoeging
+
   Als er wordt gezocht met
   | postcode | huisnummer | huisletter | huisnummertoevoeging | exacteMatch |
-  | 1015DT   | 237        | A          |                      | false       |
+  | 2391PH   | 1          | A          | 7                    | false       |
   Dan bevat het resultaat de volgende objecten
   | postcode | huisnummer | huisletter | huisnummertoevoeging |
-  | 1015DT   | 237        | A          | V                    |
+  | 2391PH   | 1          | A          | 7                    |
+
+  Als er wordt gezocht met
+  | postcode | huisnummer | huisletter | huisnummertoevoeging | exacteMatch |
+  | 2391PH   | 1          | A          | 7                    | true        |
+  Dan bevat het resultaat de volgende objecten
+  | postcode | huisnummer | huisletter | huisnummertoevoeging |
+  | 2391PH   | 1          | A          | 7                    |
+
+Scenario: zoeken met combinatie postcode en huisnummer komt meerdere keren voor
+
+  Als er wordt gezocht met
+  | postcode | huisnummer | huisletter | huisnummertoevoeging | exacteMatch |
+  | 7411CC   | 36         |            |                      | false       |
+  Dan bevat het resultaat de volgende objecten
+  | postcode | huisnummer | huisletter | huisnummertoevoeging | identificatie    |
+  | 7411CC   | 36         |            |                      | 0150200000052413 |
+  | 7411CC   | 36         |            |                      | 0150200000039067 |
+
+  Als er wordt gezocht met
+  | postcode | huisnummer | huisletter | huisnummertoevoeging | exacteMatch |
+  | 7411CC   | 36         |            |                      | true        |
+  Dan bevat het resultaat de volgende objecten
+  | postcode | huisnummer | huisletter | huisnummertoevoeging | identificatie    |
+  | 7411CC   | 36         |            |                      | 0150200000052413 |
+  | 7411CC   | 36         |            |                      | 0150200000039067 |
+
+Scenario: zoeken met combinatie van postcode, huisnummer en exacteMatch i.c.m. fuzzy search wordt niet ondersteund
+
+  Als er wordt gezocht met
+  | q     | postcode | huisnummer | huisletter | huisnummertoevoeging | exacteMatch |
+  | Brink | 2391PH   | 1          |            |                      | false       |
+  Dan bevat de response ten minste de volgende velden
+  | naam   | waarde                                                     |
+  | title  | De combinatie van opgegeven parameters is niet toegestaan. |
+  | status | 400                                                        |
+  | code   | unsupportedCombi                                           |
+  En bevat de response geen veld "invalidParams"
