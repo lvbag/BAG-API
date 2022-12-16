@@ -16,8 +16,8 @@ Daarnaast werd voorheen gekeken naar het aantal berichten dat per minuut binnen 
 Vanaf 1 september 2022 kunt u maximaal 200.000 bevragingen per dag doen met de BAG API Individuele Bevragingen. Op het moment dat u deze limiet overschrijdt, zult u de melding `429 Too Many Requests` ontvangen. U kunt in dit geval de volgende dag (na 00:00 uur) weer gebruik maken van de BAG API. 
 ###   Stap 2)	1 december 2022: quotum van 50.000 berichten per dag  
 Vanaf 1 december 2022 wordt het quotum van maximaal 200.000 berichten per dag verlaagd naar 50.000 berichten per dag. Ook hier geldt dat op het moment dat u deze limiet overschrijdt, u de melding `429 Too Many Requests` zult ontvangen. U kunt in dit geval de volgende dag (na 00:00 uur) weer gebruik maken van de BAG API.
-###   Stap 3)	1 maart 2023: rate limiting 5 berichten per seconde
-Vanaf 1 maart 2023 wordt ter aanvulling op het quotum ook een rate limiet ingesteld. Hierbij wordt gecontroleerd hoeveel berichten per seconde per API key worden ingestuurd. Er mogen maximaal 5 berichten per seconde worden gestuurd. Op het moment dat u deze limiet overschrijdt, zult u de melding `429 Too Many Requests` ontvangen. U mag dan na een seconde weer bevragingen doen, mits u binnen het quotum van 50.000 berichten bent gebleven.  
+###   Stap 3)	1 maart 2023: rate limiting 50 berichten per seconde
+Vanaf 1 maart 2023 wordt ter aanvulling op het quotum ook een rate limiet ingesteld. Hierbij wordt gecontroleerd hoeveel berichten per seconde per API key worden ingestuurd. Er mogen maximaal 50 berichten per seconde worden gestuurd. Op het moment dat u deze limiet overschrijdt, zult u de melding `429 Too Many Requests` ontvangen. U mag dan na een seconde weer bevragingen doen, mits u binnen het quotum van 50.000 berichten bent gebleven.  
 
 ## Headers
 ### Quotum  
