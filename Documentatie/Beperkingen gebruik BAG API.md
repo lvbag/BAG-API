@@ -21,15 +21,20 @@ Vanaf 1 maart 2023 wordt ter aanvulling op het quotum ook een rate limiet ingest
 
 ## Headers
 ### Quotum  
+
+Quotum response headers
   
-De informatie over de header voor het quotum volgt.   
+| Header | Beschrijving |
+|:--- |:--- |
+| Kadaster-RateLimit-DayLimit | Aantal requests per dag |
+| Kadaster-RateLimit-DayLimit-Remaining | Aantal resterende client requests in de huidige tijdsperiode | 
   
 ### Rate limiting 
 
 Rate limiting response headers, comform NL API Strategie:
 
 | Header | Beschrijving |
-|--------|--------------|
+|:--- |:--- |
 | X-Rate-Limit-Limit | Aantal requests per seconde (n) |
 | X-Rate-Limit-Remaining | Aantal resterende client requests in de huidige tijdsperiode: waarbij x het aantal ingediende requests is. |
 | X-Rate-Limit-Reset | Aantal seconden in de tijdsperiode. In dit geval is dit altijd 1 seconde. |
