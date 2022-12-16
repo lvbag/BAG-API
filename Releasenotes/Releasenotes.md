@@ -1,4 +1,13 @@
 
+**Release notes 2.7.0:**  (x december 2022)
+--
+
+In deze versie van de LV BAG Individuele Bevragingen API is de volgende functionaliteit geïmplementeerd:
+- De headers en http status code voor de daglimiet zijn verwerkt in de openapi specificatie.
+
+### Known issues:
+- Als het `/adressen/zoek` of `/adressen?q=` endpoint wordt bevraagd met een pagina die groter is dan het aantal beschikbare pagina's, dan wordt een http 500 geretourneerd.
+
 **Release notes 2.6.0:**  (9 december 2022)
 --
 
