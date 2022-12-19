@@ -441,9 +441,10 @@ Rule: wanneer er geen API key wordt gestuurd wordt een 400 fout gegeven
     Als '/adressen/0599200000193766' request wordt gedaan zonder header 'x-api-key'
     Dan is de http status code van het antwoord 400 Bad Request
     En bevat de response ten minste de volgende velden
-    | naam   | waarde          |
-    | status | 400             |
-    | detail | Missing API Key |
+    | naam             | waarde                                |
+    | error            | Kadaster - Foute aanvraag.            |
+    | errorDescription | Het bericht kan niet worden verwerkt. |
+    | errorDetail      | Missing API Key                       |
     En bevat de response geen attribuut invalidParams
 
 Rule: wanneer een onjuiste API key wordt gestuurd wordt een 401 Unauthorized fout gegeven met html response
@@ -452,9 +453,10 @@ Rule: wanneer een onjuiste API key wordt gestuurd wordt een 401 Unauthorized fou
     Als '/adressen/0599200000193766' request wordt gedaan met header 'x-api-key: onjuist'
     Dan is de http status code van het antwoord 401 Unauthorized
     En bevat de response ten minste de volgende velden
-    | naam   | waarde          |
-    | status | 401             |
-    | detail | Invalid API Key |
+    | naam             | waarde                                |
+    | error            | Kadaster - Foute aanvraag.            |
+    | errorDescription | Het bericht kan niet worden verwerkt. |
+    | errorDetail      | Invalid API Key                       |
     En bevat de response geen attribuut invalidParams
 
 Rule: wanneer de gevraagde resource niet bestaat wordt een 404 Not found fout gegeven
