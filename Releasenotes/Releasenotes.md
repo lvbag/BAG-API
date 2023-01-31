@@ -1,4 +1,13 @@
 
+**Release notes 2.7.0:**  (31 januari 2023)
+--
+
+In deze versie van de LV BAG Individuele Bevragingen API is de volgende functionaliteit geïmplementeerd:
+- Het adressen endpoint is uitgebreid met de zoekingang opebareRuimteIdentificatie. Hierdoor is het mogelijk om op basis van een openbareRuimteIdentificatie te zoeken naar alle adressen die gelegen zijn aan de openbare ruimte.
+
+### Known issues:
+- Als het `/adressen/zoek` of `/adressen?q=` endpoint wordt bevraagd met een pagina die groter is dan het aantal beschikbare pagina's, dan wordt een http 500 geretourneerd.
+
 **Release notes 2.6.0:**  (9 december 2022)
 --
 
