@@ -134,7 +134,7 @@ In onderstaand voorbeeld is gezocht op postcode 2631 CR, huisnummer 15 en huisle
   
 Wanneer je op zoek bent naar alle verblijfsobjecten die gelegen zijn binnen een pand, kan je dit doen door gebruik te maken van het verblijfsobjecten endpoint. Door de pandidentificatie als zoekingang te gebruiken, worden alle verblijfsobjecten binnen het pand geleverd.  
 
-Dit doe je met /verblijfsobjecten?pandIdentificatie={pandIdentificatie}, waarbij {pandIdentificatie} moet worden vervangen door de identificatie van het betreffende pand. Bijvoorbeeld /adressen?pandIdentificatie=0268100000021458:   
+Dit doe je met /verblijfsobjecten?pandIdentificatie={pandIdentificatie}, waarbij {pandIdentificatie} moet worden vervangen door de identificatie van het betreffende pand. Bijvoorbeeld /adressen?pandIdentificatie=0268100000021458:  
   
   
     {
