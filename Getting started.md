@@ -64,6 +64,8 @@ Er zijn een aantal algemene functies die gelden voor bovenstaande aanvragen:
 •	Sommige resources bevatten geometrie. De API ondersteunt op dit moment alleen het RD coördinatenstelsel (epsg:28992). Bij een aanvraag die geometrie teruglevert, moet de request header Accept-Crs worden meegestuurd.
 
 •	Bij het zoeken naar panden en adresseerbare objecten kan gebruik worden gemaakt van een boundingbox.  
+
+Voor alle feature beschrijvingen zie: (https://github.com/lvbag/BAG-API/blob/master/Features/).
   
 ### Uitwerking Use cases  
   
