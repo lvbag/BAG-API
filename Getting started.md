@@ -77,7 +77,7 @@ Deze zoekfunctie kan soms veel zoekresultaten opleveren. Daarom wordt hier [pagi
   
 In onderstaand voorbeeld is gezocht op postcode 2631 CR, huisnummer 15 en huisletter c.  
   
-(code)   
+`  
 {
   "_links": {
     "self": {
@@ -128,7 +128,7 @@ In onderstaand voorbeeld is gezocht op postcode 2631 CR, huisnummer 15 en huisle
     ]
   }
 }  
-(code)  
+`  
   
 #### Zoeken naar alle verblijfsobjecten gelegen binnen een pand  
   
