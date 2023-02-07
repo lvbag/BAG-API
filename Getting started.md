@@ -137,58 +137,58 @@ Wanneer je op zoek bent naar alle verblijfsobjecten die gelegen zijn binnen een 
 Dit doe je met /verblijfsobjecten?pandIdentificatie={pandIdentificatie}, waarbij {pandIdentificatie} moet worden vervangen door de identificatie van het betreffende pand. Bijvoorbeeld /adressen?pandIdentificatie=0268100000021458:  
   
   
-    {
-  "_embedded": {
-    "verblijfsobjecten": [
-      {
-        "verblijfsobject": {
-          "type": "Verblijfsobject",
-          "heeftAlsHoofdAdres": "0268200000041560",
-          "identificatie": "0268010000036826",
-          "domein": "NL.IMBAG.Verblijfsobject",
-          "geometrie": {
-            "punt": {
-              "type": "Point",
-              "coordinates": [
-                183003.794,
-                425425.693,
-                0
+     {
+      "_embedded": {
+        "verblijfsobjecten": [
+          {
+            "verblijfsobject": {
+              "type": "Verblijfsobject",
+              "heeftAlsHoofdAdres": "0268200000041560",
+              "identificatie": "0268010000036826",
+              "domein": "NL.IMBAG.Verblijfsobject",
+              "geometrie": {
+                "punt": {
+                  "type": "Point",
+                  "coordinates": [
+                    183003.794,
+                    425425.693,
+                    0
+                  ]
+                }
+              },
+              "gebruiksdoelen": [
+                "woonfunctie"
+              ],
+              "oppervlakte": 48,
+              "status": "Verblijfsobject in gebruik",
+              "geconstateerd": "N",
+              "documentdatum": "2010-03-16",
+              "documentnummer": "CB 16-03-2010",
+              "voorkomen": {
+                "tijdstipRegistratie": "2010-12-10T02:45:55",
+                "versie": 1,
+                "beginGeldigheid": "2010-03-16",
+                "tijdstipRegistratieLV": "2010-12-10T03:01:55.973"
+              },
+              "maaktDeelUitVan": [
+                "0268100000021458"
+              ]
+            },
+            "_links": {
+              "self": {
+                "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/verblijfsobjecten/0268010000036826"
+              },
+              "heeftAlsHoofdAdres": {
+                "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/nummeraanduidingen/0268200000041560"
+              },
+              "maaktDeelUitVan": [
+                {
+                  "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/panden/0268100000021458"
+                }
               ]
             }
-          },
-          "gebruiksdoelen": [
-            "woonfunctie"
-          ],
-          "oppervlakte": 48,
-          "status": "Verblijfsobject in gebruik",
-          "geconstateerd": "N",
-          "documentdatum": "2010-03-16",
-          "documentnummer": "CB 16-03-2010",
-          "voorkomen": {
-            "tijdstipRegistratie": "2010-12-10T02:45:55",
-            "versie": 1,
-            "beginGeldigheid": "2010-03-16",
-            "tijdstipRegistratieLV": "2010-12-10T03:01:55.973"
-          },
-          "maaktDeelUitVan": [
-            "0268100000021458"
-          ]
-        },
-        "_links": {
-          "self": {
-            "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/verblijfsobjecten/0268010000036826"
-          },
-          "heeftAlsHoofdAdres": {
-            "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/nummeraanduidingen/0268200000041560"
-          },
-          "maaktDeelUitVan": [
-            {
-              "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/panden/0268100000021458"
-            }
-          ]
-        }
-      }  
-   
+          }  
+
  Aangezien dit veel adressen kan opleveren, wordt hier [paginering](https://github.com/lvbag/BAG-API/blob/master/Features/paginering.feature) toegepast.  
    
  #### Zoeken naar adressen binnen een bounding box  
