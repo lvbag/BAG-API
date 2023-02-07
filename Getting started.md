@@ -75,10 +75,60 @@ Een volledig overzicht met mogelijke zoekingangen is opgenomen in de tabel [Wat 
   
 Deze zoekfunctie kan soms veel zoekresultaten opleveren. Daarom wordt hier [paginering](https://github.com/lvbag/BAG-API/blob/master/Features/paginering.feature) toegepast.  
   
-In onderstaand voorbeeld is gezocht op postcode 2631 CR, huisnummer 15 en huisletter c.
+In onderstaand voorbeeld is gezocht op postcode 2631 CR, huisnummer 15 en huisletter c.  
   
-![image](https://user-images.githubusercontent.com/40664681/204531952-466b4e22-5fb0-4fbb-875d-320d22397057.png)
-  
+    
+
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/adressen?postcode=2631CR&huisnummer=15&huisletter=C&exacteMatch=true&page=1&pageSize=20&inclusiefEindStatus=true"
+        }
+      },
+      "_embedded": {
+        "adressen": [
+          {
+            "openbareRuimteNaam": "Dorpsstraat",
+            "korteNaam": "Dorpsstraat",
+            "huisnummer": 15,
+            "huisletter": "c",
+            "postcode": "2631CR",
+            "woonplaatsNaam": "Nootdorp",
+            "nummeraanduidingIdentificatie": "1926200000508011",
+            "openbareRuimteIdentificatie": "1926300000479027",
+            "woonplaatsIdentificatie": "1142",
+            "adresseerbaarObjectIdentificatie": "1926010000508012",
+            "pandIdentificaties": [
+              "1926100000485708"
+            ],
+            "adresregel5": "Dorpsstraat 15 c",
+            "adresregel6": "2631 CR  NOOTDORP",
+            "_links": {
+              "self": {
+                "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/adressen/1926200000508011"
+              },
+              "openbareRuimte": {
+                "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/openbareruimten/1926300000479027"
+              },
+              "nummeraanduiding": {
+                "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/nummeraanduidingen/1926200000508011"
+              },
+              "woonplaats": {
+                "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/woonplaatsen/1142"
+              },
+              "adresseerbaarObject": {
+                "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/verblijfsobjecten/1926010000508012"
+              },
+              "panden": [
+                {
+                  "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/panden/1926100000485708"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }   
   
 #### Zoeken naar alle verblijfsobjecten gelegen binnen een pand  
   
@@ -86,8 +136,59 @@ Wanneer je op zoek bent naar alle verblijfsobjecten die gelegen zijn binnen een 
 
 Dit doe je met /verblijfsobjecten?pandIdentificatie={pandIdentificatie}, waarbij {pandIdentificatie} moet worden vervangen door de identificatie van het betreffende pand. Bijvoorbeeld /adressen?pandIdentificatie=0268100000021458:  
   
- ![image](https://user-images.githubusercontent.com/40664681/204532327-1d1547c3-f876-4cac-83c6-e2c51b2f4263.png)  
-   
+  
+     {
+      "_embedded": {
+        "verblijfsobjecten": [
+          {
+            "verblijfsobject": {
+              "type": "Verblijfsobject",
+              "heeftAlsHoofdAdres": "0268200000041560",
+              "identificatie": "0268010000036826",
+              "domein": "NL.IMBAG.Verblijfsobject",
+              "geometrie": {
+                "punt": {
+                  "type": "Point",
+                  "coordinates": [
+                    183003.794,
+                    425425.693,
+                    0
+                  ]
+                }
+              },
+              "gebruiksdoelen": [
+                "woonfunctie"
+              ],
+              "oppervlakte": 48,
+              "status": "Verblijfsobject in gebruik",
+              "geconstateerd": "N",
+              "documentdatum": "2010-03-16",
+              "documentnummer": "CB 16-03-2010",
+              "voorkomen": {
+                "tijdstipRegistratie": "2010-12-10T02:45:55",
+                "versie": 1,
+                "beginGeldigheid": "2010-03-16",
+                "tijdstipRegistratieLV": "2010-12-10T03:01:55.973"
+              },
+              "maaktDeelUitVan": [
+                "0268100000021458"
+              ]
+            },
+            "_links": {
+              "self": {
+                "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/verblijfsobjecten/0268010000036826"
+              },
+              "heeftAlsHoofdAdres": {
+                "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/nummeraanduidingen/0268200000041560"
+              },
+              "maaktDeelUitVan": [
+                {
+                  "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/panden/0268100000021458"
+                }
+              ]
+            }
+          }  
+
  Aangezien dit veel adressen kan opleveren, wordt hier [paginering](https://github.com/lvbag/BAG-API/blob/master/Features/paginering.feature) toegepast.  
    
  #### Zoeken naar adressen binnen een bounding box  
