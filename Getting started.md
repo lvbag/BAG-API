@@ -136,14 +136,8 @@ Wanneer je op zoek bent naar alle verblijfsobjecten die gelegen zijn binnen een 
 
 Dit doe je met /verblijfsobjecten?pandIdentificatie={pandIdentificatie}, waarbij {pandIdentificatie} moet worden vervangen door de identificatie van het betreffende pand. Bijvoorbeeld /adressen?pandIdentificatie=0268100000021458:   
   
-    
-    pi.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/verblijfsobjecten?pandIdentificatie=0268100000021458&huidig=false&page=1&pageSize=20
-Server response
-Code	Details
-200	
-Response body
-Download
-{
+  
+    {
   "_embedded": {
     "verblijfsobjecten": [
       {
@@ -193,7 +187,7 @@ Download
             }
           ]
         }
-      }   
+      }  
    
  Aangezien dit veel adressen kan opleveren, wordt hier [paginering](https://github.com/lvbag/BAG-API/blob/master/Features/paginering.feature) toegepast.  
    
