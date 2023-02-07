@@ -77,58 +77,58 @@ Deze zoekfunctie kan soms veel zoekresultaten opleveren. Daarom wordt hier [pagi
   
 In onderstaand voorbeeld is gezocht op postcode 2631 CR, huisnummer 15 en huisletter c.  
   
-`  
-{
-  "_links": {
-    "self": {
-      "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/adressen?postcode=2631CR&huisnummer=15&huisletter=C&exacteMatch=true&page=1&pageSize=20&inclusiefEindStatus=true"
-    }
-  },
-  "_embedded": {
-    "adressen": [
-      {
-        "openbareRuimteNaam": "Dorpsstraat",
-        "korteNaam": "Dorpsstraat",
-        "huisnummer": 15,
-        "huisletter": "c",
-        "postcode": "2631CR",
-        "woonplaatsNaam": "Nootdorp",
-        "nummeraanduidingIdentificatie": "1926200000508011",
-        "openbareRuimteIdentificatie": "1926300000479027",
-        "woonplaatsIdentificatie": "1142",
-        "adresseerbaarObjectIdentificatie": "1926010000508012",
-        "pandIdentificaties": [
-          "1926100000485708"
-        ],
-        "adresregel5": "Dorpsstraat 15 c",
-        "adresregel6": "2631 CR  NOOTDORP",
-        "_links": {
-          "self": {
-            "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/adressen/1926200000508011"
-          },
-          "openbareRuimte": {
-            "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/openbareruimten/1926300000479027"
-          },
-          "nummeraanduiding": {
-            "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/nummeraanduidingen/1926200000508011"
-          },
-          "woonplaats": {
-            "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/woonplaatsen/1142"
-          },
-          "adresseerbaarObject": {
-            "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/verblijfsobjecten/1926010000508012"
-          },
-          "panden": [
-            {
-              "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/panden/1926100000485708"
-            }
-          ]
+    
+
+    {
+      "_links": {
+        "self": {
+          "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/adressen?postcode=2631CR&huisnummer=15&huisletter=C&exacteMatch=true&page=1&pageSize=20&inclusiefEindStatus=true"
         }
+      },
+      "_embedded": {
+        "adressen": [
+          {
+            "openbareRuimteNaam": "Dorpsstraat",
+            "korteNaam": "Dorpsstraat",
+            "huisnummer": 15,
+            "huisletter": "c",
+            "postcode": "2631CR",
+            "woonplaatsNaam": "Nootdorp",
+            "nummeraanduidingIdentificatie": "1926200000508011",
+            "openbareRuimteIdentificatie": "1926300000479027",
+            "woonplaatsIdentificatie": "1142",
+            "adresseerbaarObjectIdentificatie": "1926010000508012",
+            "pandIdentificaties": [
+              "1926100000485708"
+            ],
+            "adresregel5": "Dorpsstraat 15 c",
+            "adresregel6": "2631 CR  NOOTDORP",
+            "_links": {
+              "self": {
+                "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/adressen/1926200000508011"
+              },
+              "openbareRuimte": {
+                "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/openbareruimten/1926300000479027"
+              },
+              "nummeraanduiding": {
+                "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/nummeraanduidingen/1926200000508011"
+              },
+              "woonplaats": {
+                "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/woonplaatsen/1142"
+              },
+              "adresseerbaarObject": {
+                "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/verblijfsobjecten/1926010000508012"
+              },
+              "panden": [
+                {
+                  "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/panden/1926100000485708"
+                }
+              ]
+            }
+          }
+        ]
       }
-    ]
-  }
-}  
-`  
+    }   
   
 #### Zoeken naar alle verblijfsobjecten gelegen binnen een pand  
   
