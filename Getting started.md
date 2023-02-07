@@ -101,7 +101,61 @@ Let erop dat bij de bevraging de Content-Crs  epsg:28992 wordt meegegeven.
 De url is als volgt:  
 https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/adresseerbareobjecten?huidig=false&page=1&pageSize=20&bbox=230781.67,582665.17,230956.35,582882.42  
   
-![image](https://user-images.githubusercontent.com/40664681/204532827-624028b3-de6d-4dce-9d89-3137bd283f31.png)  
+
+    {
+      "_embedded": {
+        "adresseerbareObjecten": [
+          {
+            "verblijfsobject": {
+              "verblijfsobject": {
+                "type": "Verblijfsobject",
+                "heeftAlsHoofdAdres": "0014200010900021",
+                "identificatie": "0014010011089620",
+                "domein": "NL.IMBAG.Verblijfsobject",
+                "geometrie": {
+                  "punt": {
+                    "type": "Point",
+                    "coordinates": [
+                      230900.789,
+                      582669.048,
+                      0
+                    ]
+                  }
+                },
+                "gebruiksdoelen": [
+                  "overige gebruiksfunctie"
+                ],
+                "oppervlakte": 19,
+                "status": "Verblijfsobject in gebruik",
+                "geconstateerd": "N",
+                "documentdatum": "2013-02-19",
+                "documentnummer": "3535704",
+                "voorkomen": {
+                  "tijdstipRegistratie": "2013-02-22T09:17:09",
+                  "versie": 2,
+                  "beginGeldigheid": "2013-02-19",
+                  "tijdstipRegistratieLV": "2013-02-22T09:35:31.531"
+                },
+                "maaktDeelUitVan": [
+                  "0014100010923600"
+                ]
+              },
+              "_links": {
+                "self": {
+                  "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/verblijfsobjecten/0014010011089620"
+                },
+                "heeftAlsHoofdAdres": {
+                  "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/nummeraanduidingen/0014200010900021"
+                },
+                "maaktDeelUitVan": [
+                  {
+                    "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/panden/0014100010923600"
+                  }
+                ]
+              }
+            }
+          },
+
   
 ### Beperking gebruik BAG API Individuele Bevragingen
   
