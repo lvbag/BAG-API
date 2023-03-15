@@ -3,9 +3,9 @@
 Functionaliteit: Rate limiting
 Het doel van rate limiting is het beschermen van systemen tegen overbelasting binnen de kaders van de met afnemers gemaakte afspraken.
 
-Wanneer er meer dan het afgesproken aantal requesten binnen een tijdsperiode worden ingediend bij een REST JSON API, dan treedt een foutmelding op met HTTP statuscode 429 en informatie over de overschreden limiet, zoals: het maximum aantal requesten per tijdstperiode, het aantal resterende requesten binnen de tijdsperiode en de duur van de tijdsperiode.
+Wanneer er meer dan het afgesproken aantal requesten binnen een tijdsperiode worden ingediend bij een REST JSON API, dan treedt een foutmelding op met HTTP statuscode 429 en informatie over de overschreden limiet, zoals: het maximum aantal requesten per tijdsperiode, het aantal resterende requesten binnen de tijdsperiode en de duur van de tijdsperiode.
  
-Bij iedere succesvolle request binnen een bepaalde tijdsperiode bevat de response een HTTP statuscode 200 en informatie over de geonfigureerde limieten.
+Bij iedere succesvolle request binnen een bepaalde tijdsperiode bevat de response een HTTP statuscode 200 en informatie over de geconfigureerde limieten.
 
 Er kunnen meerdere limieten gelden over verschillende tijdsperioden, bv. rate limiting per seconde en dag quotum.
 
@@ -24,7 +24,7 @@ Scenario: request binnen het toegestane aantal requesten per seconde (rate limit
   En bevat de response een Content-Type header met waarde application/json of application/hal+json
   En bevat de response een RateLimit-Limit header met het maximum aantal requesten per seconde=20
   En bevat de response een RateLimit-Remaining header met het aantal resterende requesten per seconde
-  En bevat de response een RateLimit-Reset header met het aantal seconden tot wanneer het quotum reset (rate limit kan worden gemeten over een langer periode van bv. een minuut)
+  En bevat de response een RateLimit-Reset header met het aantal seconden tot wanneer het quotum reset (rate limit kan worden gemeten over een langere periode van bv. een minuut)
 
 Scenario: request buiten het toegestane aantal requesten per seconde (rate limiting)
 
@@ -37,7 +37,7 @@ Scenario: request buiten het toegestane aantal requesten per seconde (rate limit
   En bevat de response een Content-Type header met waarde application/problem+json
   En bevat de response een RateLimit-Limit header met het maximum aantal requesten per seconde=20
   En bevat de response een RateLimit-Remaining header met het aantal resterende requesten per seconde=0
-  En bevat de response een RateLimit-Reset header met het aantal seconden tot wanneer het quotum reset (rate limit kan worden gemeten over een langer periode van bv. een minuut)
+  En bevat de response een RateLimit-Reset header met het aantal seconden tot wanneer het quotum reset (rate limit kan worden gemeten over een langere periode van bv. een minuut)
 
 Scenario: request binnen het overeengekomen dag quotum
 
