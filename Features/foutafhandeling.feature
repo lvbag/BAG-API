@@ -23,6 +23,7 @@ We kennen de volgende foutsituaties:
 | Methode niet toegestaan             | 405    | Deze methode is niet toegestaan                                   | methodNotAllowed       |
 | Accept header <> JSON               | 406    | Gevraagde contenttype wordt niet ondersteund.                     | notAcceptable          |
 | Invalide request body               | 422    | Request body bevat een ongeldige waarde.                          | unprocessableEntity    |
+| Teveel verzoeken                    | 429    | Te veel verzoeken.                                                | tooManyRequests        |
 | Technische of interne fout          | 500    | Interne server fout.                                              | serverError            |
 | Bronservice niet beschikbaar        | 503    | Bronservice is niet beschikbaar.                                  | sourceUnavailable      |
 
@@ -542,8 +543,19 @@ Rule: wanneer een bron service niet beschikbaar is wordt een 503 fout gegeven
     Als een endpoint wordt geraadpleegd
     En deze reageert niet of resulteert in een timeout
     Dan bevat de response ten minste de volgende velden
-    | naam   | waarde                           |
-    | status | 503                              |
+    | naam   | waarde |
+    | status | 503    |
+    En bevat de response geen veld "invalidParams"
+
+Rule: wanneer er binnen een bepaalde periode teveel verzoeken worden ingediend, wordt een 429 fout gegeven
+
+  Scenario: Teveel verzoeken
+    Gegeven een maximum aantal toegestane verzoeken binnen een bepaalde tijdsperiode
+    Als binnen deze tijdsperiode een verzoek wordt ingediend
+    En het totaal aantal verzoeken dat binnen de tijdsperiode is ingediend is daarmee hoger dan het maximaal toegestane aantal verzoeken
+    Dan bevat de response tenminste de volgende velden
+    | naam   | waarde |
+    | status | 429    |
     En bevat de response geen veld "invalidParams"
 
 
