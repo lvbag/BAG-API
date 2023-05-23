@@ -1,3 +1,8 @@
+**Release notes 2.8.1:**  (24 mei 2023)
+--
+
+In deze versie van de LV BAG Individuele Bevragingen API is de volgende correctie doorgevoerd:
+- `date` format verwijderd bij input parameter `statusPand`.
 
 **Release notes 2.8.0:**  (21 februari 2023)
 --
