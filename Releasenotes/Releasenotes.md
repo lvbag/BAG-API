@@ -1,3 +1,10 @@
+**Release notes 2.9.0:**  (9 juni 2023)
+--
+
+In deze versie van de LV BAG Individuele Bevragingen API is de volgende functionaliteit geïmplementeerd:
+- Het endpoint Adressenuitgebreid is uitgebreid met de mogelijkheid om te zoeken met een pand identificatie.
+- De response van het endpoint Adressenuitgebreid waarmee gepagineerd gezocht kan worden is voorzien van paginerings headers.
+
 **Release notes 2.8.1:**  (24 mei 2023)
 --
 
