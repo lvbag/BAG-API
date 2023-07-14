@@ -1,3 +1,9 @@
+**Release notes 2.9.1:**  (12 juli 2023)
+--
+
+In deze versie van de LV BAG Individuele Bevragingen API is de volgende functionaliteit geïmplementeerd:
+- Conform API Design Rule 48 wordt er nu een '404' geretourneerd op het moment dat een request eindigt op een '/' 
+  
 **Release notes 2.9.0:**  (9 juni 2023)
 --
 
