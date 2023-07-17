@@ -20,25 +20,25 @@ De (resolved) OAS3 is hier te downloaden: [openapi.yaml](https://api.bag.kadaste
   
 De API kent de volgende endpoints:  
 
-•	*Woonplaatsen*  
-•	*Openbare ruimten*  
-•	*Nummeraanduidingen*  
+•	*Bronhouder*    
+•	*Ligplaats*  
+•	*Nummeraanduiding*  
+•	*Openbare ruimte*  
+•	*Pand*  
+•	*Standplaatsen* 
 •	*Verblijfsobjecten*  
-•	*Standplaatsen*  
-•	*Ligplaatsen*  
-•	*Panden*  
-•	*Bronhouders*  
-  
+•	*Woonplaatsen*  
 
-•	*Adressen*: hierin zijn samenhangende en gerelateerde gegevens samengevoegd uit de nummeraanduiding, openbare ruimte en woonplaats die samen een adres vormen.
 
-•	*Adressen uitgebreid*: deze resource ondersteunt de mogelijkheid om met één bevraging meer informatie over het adres op te halen, zoals het bouwjaar en de gebruiksoppervlakte.   
+•	*Adres*: hierin zijn samenhangende en gerelateerde gegevens samengevoegd uit de nummeraanduiding, openbare ruimte en woonplaats die samen een adres vormen.
+
+•	*Adres uitgebreid*: deze resource ondersteunt de mogelijkheid om met één bevraging meer informatie over het adres op te halen, zoals het bouwjaar en de gebruiksoppervlakte.   
   
-•	*Adresseerbare objecten*: dit kan een verblijfsobject, ligplaats of standplaats zijn.  
+•	*Adresseerbare object*: dit kan een verblijfsobject, ligplaats of standplaats zijn.  
 
 De objecten endpoints leveren één of meer (voorkomens van) object(en), met embedded resources en links. 
 
-De endpoints *Adressen* en *Adressen uitgebreid* en *Adresseerbare objecten* zijn samengestelde (convenience) endpoints waarin de gegevens van verschillende BAG objecten zijn samengevoegd.  
+De endpoints *Adres* en *Adres uitgebreid* en *Adresseerbare object* zijn samengestelde (convenience) endpoints waarin de gegevens van verschillende BAG objecten zijn samengevoegd.  
   
 ### Zoekingangen van de verschillende endpoints  
   
