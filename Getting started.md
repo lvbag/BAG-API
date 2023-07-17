@@ -25,7 +25,7 @@ De API kent de volgende endpoints:
 •	*Nummeraanduiding*  
 •	*Openbare ruimte*  
 •	*Pand*  
-•	*Standplaatsen* 
+•	*Standplaatsen*   
 •	*Verblijfsobjecten*  
 •	*Woonplaatsen*  
 
