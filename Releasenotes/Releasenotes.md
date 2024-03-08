@@ -1,3 +1,10 @@
+**Release notes 2.9.2:**  (8 maart 2024)
+--
+
+In deze versie van de LV BAG Individuele Bevragingen API is de volgende functionaliteit geïmplementeerd:
+- Reguliere expressies met unicode notatie in pattern attributen zijn verwijderd omdat ze mogelijk niet compatibel zijn met code generatoren.
+- De acceptatieomgeving wordt vanaf 1 april 2024 niet meer aangeboden, de url's zijn uit de specificatie verwijderd.
+
 **Release notes 2.9.1:**  (12 juli 2023)
 --
 
