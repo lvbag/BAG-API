@@ -1,7 +1,7 @@
 # Getting Started 
   
 Om aan te sluiten kun je de volgende stappen doorlopen:
-1.	[Aanmelden om toegang te krijgen tot de acceptatie- en productieomgeving](#aanmelden)
+1.	[Aanmelden om toegang te krijgen tot de productieomgeving](#aanmelden)
 2.	[Bekijk de functionaliteit en specificaties](#functionaliteiten-en-specificaties)
 3.	[Implementeer de API Client](#implementeer-de-api-client)
 4.	[Probeer en test de API](#probeer-en-test-de-api)
@@ -84,7 +84,7 @@ In onderstaand voorbeeld is gezocht op postcode 2631 CR, huisnummer 15 en huisle
     {
       "_links": {
         "self": {
-          "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/adressen?postcode=2631CR&huisnummer=15&huisletter=C&exacteMatch=true&page=1&pageSize=20&inclusiefEindStatus=true"
+          "href": "https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/adressen?postcode=2631CR&huisnummer=15&huisletter=C&exacteMatch=true&page=1&pageSize=20&inclusiefEindStatus=true"
         }
       },
       "_embedded": {
@@ -107,23 +107,23 @@ In onderstaand voorbeeld is gezocht op postcode 2631 CR, huisnummer 15 en huisle
             "adresregel6": "2631 CR  NOOTDORP",
             "_links": {
               "self": {
-                "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/adressen/1926200000508011"
+                "href": "https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/adressen/1926200000508011"
               },
               "openbareRuimte": {
-                "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/openbareruimten/1926300000479027"
+                "href": "https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/openbareruimten/1926300000479027"
               },
               "nummeraanduiding": {
-                "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/nummeraanduidingen/1926200000508011"
+                "href": "https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/nummeraanduidingen/1926200000508011"
               },
               "woonplaats": {
-                "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/woonplaatsen/1142"
+                "href": "https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/woonplaatsen/1142"
               },
               "adresseerbaarObject": {
-                "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/verblijfsobjecten/1926010000508012"
+                "href": "https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/verblijfsobjecten/1926010000508012"
               },
               "panden": [
                 {
-                  "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/panden/1926100000485708"
+                  "href": "https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/panden/1926100000485708"
                 }
               ]
             }
@@ -178,14 +178,14 @@ Dit doe je met /verblijfsobjecten?pandIdentificatie={pandIdentificatie}, waarbij
             },
             "_links": {
               "self": {
-                "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/verblijfsobjecten/0268010000036826"
+                "href": "https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/verblijfsobjecten/0268010000036826"
               },
               "heeftAlsHoofdAdres": {
-                "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/nummeraanduidingen/0268200000041560"
+                "href": "https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/nummeraanduidingen/0268200000041560"
               },
               "maaktDeelUitVan": [
                 {
-                  "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/panden/0268100000021458"
+                  "href": "https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/panden/0268100000021458"
                 }
               ]
             }
@@ -202,7 +202,7 @@ Binnen het endpoint adresseerbare objecten kunnen de x en y coördinaten van de 
 Let erop dat bij de bevraging de Content-Crs  epsg:28992 wordt meegegeven. 
   
 De url is als volgt:  
-https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/adresseerbareobjecten?huidig=false&page=1&pageSize=20&bbox=230781.67,582665.17,230956.35,582882.42  
+https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/adresseerbareobjecten?huidig=false&page=1&pageSize=20&bbox=230781.67,582665.17,230956.35,582882.42  
   
 
     {
@@ -245,14 +245,14 @@ https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/adresseer
               },
               "_links": {
                 "self": {
-                  "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/verblijfsobjecten/0014010011089620"
+                  "href": "https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/verblijfsobjecten/0014010011089620"
                 },
                 "heeftAlsHoofdAdres": {
-                  "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/nummeraanduidingen/0014200010900021"
+                  "href": "https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/nummeraanduidingen/0014200010900021"
                 },
                 "maaktDeelUitVan": [
                   {
-                    "href": "https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/panden/0014100010923600"
+                    "href": "https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/panden/0014100010923600"
                   }
                 ]
               }
@@ -301,10 +301,7 @@ Tip: Je kan ook de [BAG Viewer](https://bagviewer.kadaster.nl/lvbag/bag-viewer/i
   
 ### URL  
   
-De API is te benaderen via de volgende url:  
-
-Testomgeving:  
-https://api.bag.acceptatie.kadaster.nl/lvbag/individuelebevragingen/v2/  
+De API is te benaderen via de volgende url:
 
 Productieomgeving:  
 https://api.bag.kadaster.nl/lvbag/individuelebevragingen/v2/  
