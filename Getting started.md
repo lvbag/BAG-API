@@ -8,8 +8,7 @@ Om aan te sluiten kun je de volgende stappen doorlopen:
   
 ## Aanmelden  
   
-[Vraag een API key voor de test- en productieomgeving aan.](https://formulieren.kadaster.nl/aanvraag_bag_api_individuele_bevragingen_productie)
-Testen wordt bij voorkeur gedaan in de testomgeving.  
+[Vraag een API key voor de productieomgeving aan.](https://formulieren.kadaster.nl/aanvraag_bag_api_individuele_bevragingen_productie)  
   
 ## Functionaliteiten en specificaties  
  
