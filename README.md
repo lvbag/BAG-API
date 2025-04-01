@@ -20,4 +20,5 @@ __Documentatie__
 * [Tabel 'wat zit in welk endpoint'](https://github.com/lvbag/BAG-API/blob/master/Documentatie/Tabel_Wat%20zit%20in%20welk%20endpoint_.pdf).
 
 __Bronnen__
+  
 [REST API Design Rules](https://gitdocumentatie.logius.nl/publicatie/api/adr/)
