@@ -11,7 +11,7 @@ Wilt u gebruikmaken van de BAG API, vraag dan door middel van [dit formulier](ht
 Om u als gebruiker op weg te helpen bij de implementatie van de BAG API is het Getting Started bestand beschikbaar gesteld. Hierin is de belangrijkste informatie opgenomen over de BAG API Individuele Bevragingen.  
   
 __Contact__
-* Heeft u vragen over de BAG API of wilt u een bug of verbetering melden, dan kunt u contact met ons opnemen via het [Contactformulier|https://formulieren.kadaster.nl/contact_bag?pk_vid=c1868a0ba15ede9017434992621d83a8].
+* Heeft u vragen over de BAG API of wilt u een bug of verbetering melden, dan kunt u contact met ons opnemen via het [Contactformulier](https://formulieren.kadaster.nl/contact_bag?pk_vid=c1868a0ba15ede9017434992621d83a8).
 
 __Documentatie__    
   
@@ -20,4 +20,4 @@ __Documentatie__
 * [Tabel 'wat zit in welk endpoint'](https://github.com/lvbag/BAG-API/blob/master/Documentatie/Tabel_Wat%20zit%20in%20welk%20endpoint_.pdf).
 
 __Bronnen__
-[REST API Design Rules|https://gitdocumentatie.logius.nl/publicatie/api/adr/]
+[REST API Design Rules](https://gitdocumentatie.logius.nl/publicatie/api/adr/)
